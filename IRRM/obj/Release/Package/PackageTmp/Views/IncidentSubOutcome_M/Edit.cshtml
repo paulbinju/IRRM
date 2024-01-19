@@ -1,0 +1,82 @@
+﻿@model IRRM.Models.IncidentSubOutcome_M
+
+@{
+    Layout = null;
+}
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "editform" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IncidentSubOutcomeID)
+
+        <div class="form-group">
+            <div class="control-label col-md-3"><b>Incident Main Outcome <span class="red">*</span> </b></div>
+            <div class="col-md-9">
+                @Html.DropDownList("IncidentMainOutcomeID", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                @Html.ValidationMessageFor(model => model.IncidentMainOutcomeID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="control-label col-md-3"><b>Incident Sub Outcome <span class="red">*</span> </b></div>
+
+
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.IncidentSubOutcome, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.IncidentSubOutcome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="control-label col-md-3"><b>Answer Type <span class="red">*</span> </b></div>
+            <div class="col-md-9">
+                <select class="form-control" name="AnswerType" required>
+                    <option value="">Select</option>
+                    <option value="1">Textbox</option>
+                    <option value="2">Choice</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <input type="submit" value="Save" class="btn btn-danger" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    $(document).ready(function () {
+        $("#editform").submit(function (e) {
+            e.preventDefault();
+            var formdata = new FormData(this);
+
+          //  alert($("#DFormID").val());
+            $.ajax({
+                method: "POST",
+                url: "@Url.Content("~/IncidentSubOutcome_M/Edit")",
+                data: formdata,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                   // alert('Successfully deleted!');
+                    window.location.href = "@Url.Content("~/IncidentSubOutcome_M")";
+                },
+                error: function () {
+                    alert('Error');
+                }
+            });
+        });
+    });
+</script>

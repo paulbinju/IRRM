@@ -1,0 +1,73 @@
+﻿@model IRRM.Models.TaskIndex_V
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TASK Report</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style>
+        body, table {
+            font-family: Arial;
+            font-size: 14px;
+        }
+
+        .clear {
+            clear: both
+        }
+    </style>
+    <script>
+        function printme() {
+            window.print();
+        }
+    </script>
+</head>
+<body align="center">
+    <div style="text-align:left;margin:0 auto;padding:30px;">
+        <div style="text-align:center"><img style="width:40%;" src="@Url.Content("~/assets/images/MElogo.png")" /></div>
+        <div style="float:right"><i class="fa fa-print" onclick="printme()" style="font-size:18px;color:red;cursor:pointer"></i></div>
+        <br class="clear" />
+        <br class="clear" />
+
+        <div style="border:2px solid #1c8390"></div>
+
+        <br class="clear" />
+        <br class="clear" />
+        <h2>TASK - @Model.TaskNo</h2>
+        <br class="clear" />
+
+        <p><b>Registered On:</b> @Model.Registeredon</p>
+        <p><b>Reference No.:</b> @Model.ReferenceNo</p>
+        <p><b>Category:</b> @Model.TaskCategory</p>
+        <p><b>Sub Category:</b> @Model.SubCategory</p>
+        <p><b>Location:</b> @Model.Location</p>
+        <p><b>Priority:</b> @Model.Priority</p>
+        <p><b>Assigned To:</b> @Model.AssignedTo</p>
+        <p><b>Task Owner:</b> @Model.Owner</p>
+        <p><b>Start Date :</b> @Model.DueDate</p>
+        <p><b>End Date:</b> @Model.DueDate</p>
+        <p><b>Task Cost:</b> @Model.TaskCost</p>
+
+        <br class="clear" />
+        <b>Description</b>
+        <p>@Model.Description</p>
+
+        <br class="clear" />
+        <b>Owner Note</b>
+        <p>
+            @Model.OwnerNote
+        </p>
+
+
+
+        <br class="clear" />
+        <div style="border:2px solid #1c8390"></div>
+        <br class="clear" />
+        
+
+
+    </div>
+</body>
+</html>

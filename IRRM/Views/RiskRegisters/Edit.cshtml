@@ -1,0 +1,844 @@
+﻿@model IRRM.Models.RiskRegister
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+
+
+<style>
+    .form-control {
+        width: 100%;
+    }
+
+    textarea {
+        height: 100px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        color: #888;
+    }
+</style>
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-6">Risk Assessment &nbsp;&nbsp;&nbsp; @Model.RiskRegisterNo</h2>
+                            <a class="btn btn btn-warning pull-right" href="@Url.Content("~/RiskRegisters/Report/"+Model.RiskRegisterID)" target="_blank">Report</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+
+
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.RiskRegisterID)
+                                    @Html.HiddenFor(model => model.RRNo)
+                                    @Html.HiddenFor(model => model.RiskRegisterNo)
+                                    @Html.HiddenFor(model => model.Proactive)
+                                    @Html.HiddenFor(model => model.CreatedUserID)
+                                    @Html.HiddenFor(model => model.CreatedOn)
+                                    @Html.HiddenFor(model => model.ReferenceNo)
+
+
+
+
+
+                                    <div class="form-horizontal">
+
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <input type="hidden" name="IncidentNo" value="@ViewBag.IncidentNo" />
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-4"><b>Risk Category</b></div>
+                                                <div class="col-md-8">
+                                                    <select class="form-control" name="RiskCategoryID" required>
+                                                        <option value="">Select</option>
+                                                        @foreach (var x in ViewBag.RiskCategoryID)
+                                                        {
+                                                            <option @(Model.RiskCategoryID == x.RiskCategoryID ? "selected" : "") value="@x.RiskCategoryID">@x.RiskCategory</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-4"><b>Reference No.</b></div>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="IncidentNo" value="@Model.ReferenceNo" class="form-control" />
+                                                    <input type="hidden" name="IncidentID" value="@Model.IncidentID" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-4"><b>Risk Descriptor</b></div>
+                                                <div class="col-md-8">
+                                                    <select class="form-control" name="RiskDescriptorID" required>
+                                                        <option value="">Select</option>
+                                                        @foreach (var x in ViewBag.RiskDescriptorID)
+                                                        {
+                                                            <option @(Model.RiskDescriptorID == x.RiskDescriptorID ? "selected" : "") value="@x.RiskDescriptorID">@x.RiskDescriptor</option>
+                                                        }
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <br style="clear:both" />
+                                        <br style="clear:both" />
+                                        <div class="col-md-12">
+                                            <b class="col-md-12"><u>Description & Control Measures:</u></b>
+                                        </div>
+                                        <br style="clear:both" />
+                                        <br style="clear:both" />
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2"><b>Description</b></div>
+                                                <div class="col-md-10">
+                                                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2"><b>Control Measures</b></div>
+                                                <div class="col-md-10">
+                                                    @Html.TextAreaFor(model => model.Controlsinplace, new { htmlAttributes = new { @class = "form-control", @rows = "6" } })
+                                                    @Html.ValidationMessageFor(model => model.Controlsinplace, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2"><b>Adequacy</b></div>
+                                                <div class="col-md-10">
+                                                    <select name="Adequacy" class="form-control" required>
+                                                        <option value="">Select</option>
+                                                        <option @(Model.Adequacy == "Adequate" ? "selected" : "") value="Adequate">Adequate</option>
+                                                        <option @(Model.Adequacy == "Inadequate" ? "selected" : "") value="Inadequate">Inadequate</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br style="clear:both" />
+                                        <br style="clear:both" />
+
+                                        <br style="clear:both" />
+
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <h4><u>RISK EVALUATION</u></h4>
+                                                <h4><u>Risk Grading: (Current)</u></h4>
+                                                <br style="clear:both" />
+
+                                                <div class="col-md-12">
+
+                                                    <table class="table table-bordered">
+                                                        <tr>
+                                                            <th colspan="6" class="text-center" style="height:60px;vertical-align:middle">Impact / Consequences</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="height:60px;vertical-align:middle">Likelihood / Frequency</th>
+                                                            <th class="text-center col-md-2" style="height:60px;vertical-align:middle" title="@ViewBag.RiskSeverity[0].Comments">Insignificant</th>
+                                                            <th class="text-center col-md-2" style="height:60px;vertical-align:middle" title="@ViewBag.RiskSeverity[1].Comments">Minor</th>
+                                                            <th class="text-center col-md-2" style="height:60px;vertical-align:middle" title="@ViewBag.RiskSeverity[2].Comments">Moderate</th>
+                                                            <th class="text-center col-md-2" style="height:60px;vertical-align:middle" title="@ViewBag.RiskSeverity[3].Comments">Major</th>
+                                                            <th class="text-center col-md-2" style="height:60px;vertical-align:middle" title="@ViewBag.RiskSeverity[4].Comments">Catastrophic</th>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th style="height:60px;vertical-align:middle" title="@ViewBag.RiskProbability[0].Comments">Almost certain</th>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 1 && Model.RASeverityID == 1 ? "checked" : "")  type="radio" name="Impact" value="5" onclick="calImpact(this.value), setProbSeverity(1,1)" /></td>
+                                                            <td style="background-color:#ffd800;text-align:center"><input @(Model.RARiskProbabilityID == 1 && Model.RASeverityID == 2 ? "checked" : "")  type="radio" name="Impact" value="10" onclick="calImpact(this.value), setProbSeverity(1,2)" /></td>
+                                                            <td style="background-color:#ffd800;text-align:center"><input @(Model.RARiskProbabilityID == 1 && Model.RASeverityID == 3 ? "checked" : "")  type="radio" name="Impact" value="15" onclick="calImpact(this.value), setProbSeverity(1,3)" /></td>
+                                                            <td style="background-color:#dd36b5;text-align:center"><input @(Model.RARiskProbabilityID == 1 && Model.RASeverityID == 4 ? "checked" : "")  type="radio" name="Impact" value="20" onclick="calImpact(this.value), setProbSeverity(1,4)" /></td>
+                                                            <td style="background-color:#ff0000;text-align:center"><input @(Model.RARiskProbabilityID == 1 && Model.RASeverityID == 5 ? "checked" : "")  type="radio" name="Impact" value="25" onclick="calImpact(this.value), setProbSeverity(1,5)" /></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="height:60px;vertical-align:middle" title="@ViewBag.RiskProbability[1].Comments">Likely</th>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 2 && Model.RASeverityID == 1 ? "checked" : "")  type="radio" name="Impact" value="4" onclick="calImpact(this.value), setProbSeverity(2,1)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 2 && Model.RASeverityID == 2 ? "checked" : "")  type="radio" name="Impact" value="8" onclick="calImpact(this.value), setProbSeverity(2,2)" /></td>
+                                                            <td style="background-color:#ffd800;text-align:center"><input @(Model.RARiskProbabilityID == 2 && Model.RASeverityID == 3 ? "checked" : "")  type="radio" name="Impact" value="12" onclick="calImpact(this.value), setProbSeverity(2,3)" /></td>
+                                                            <td style="background-color:#dd36b5;text-align:center"><input @(Model.RARiskProbabilityID == 2 && Model.RASeverityID == 4 ? "checked" : "")  type="radio" name="Impact" value="20" onclick="calImpact(this.value), setProbSeverity(2,4)" /></td>
+                                                            <td style="background-color:#dd36b5;text-align:center"><input @(Model.RARiskProbabilityID == 2 && Model.RASeverityID == 5 ? "checked" : "")  type="radio" name="Impact" value="20" onclick="calImpact(this.value), setProbSeverity(2,5)" /></td>
+
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th style="height:60px;vertical-align:middle" title="@ViewBag.RiskProbability[2].Comments">Possible</th>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 3 && Model.RASeverityID == 1 ? "checked" : "") type="radio" name="Impact" value="3" onclick="calImpact(this.value), setProbSeverity(3,1)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 3 && Model.RASeverityID == 2 ? "checked" : "")  type="radio" name="Impact" value="6" onclick="calImpact(this.value), setProbSeverity(3,2)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 3 && Model.RASeverityID == 3 ? "checked" : "")  type="radio" name="Impact" value="9" onclick="calImpact(this.value), setProbSeverity(3,3)" /></td>
+                                                            <td style="background-color:#ffd800;text-align:center"><input @(Model.RARiskProbabilityID == 3 && Model.RASeverityID == 4 ? "checked" : "")  type="radio" name="Impact" value="12" onclick="calImpact(this.value), setProbSeverity(3,4)" /></td>
+                                                            <td style="background-color:#ffd800;text-align:center"><input @(Model.RARiskProbabilityID == 3 && Model.RASeverityID == 5 ? "checked" : "")  type="radio" name="Impact" value="15" onclick="calImpact(this.value), setProbSeverity(3,5)" /></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="height:60px;vertical-align:middle" title="@ViewBag.RiskProbability[3].Comments">Unlikely</th>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 4 && Model.RASeverityID == 1 ? "checked" : "")  type="radio" name="Impact" value="2" onclick="calImpact(this.value), setProbSeverity(4,1)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 4 && Model.RASeverityID == 2 ? "checked" : "")  type="radio" name="Impact" value="4" onclick="calImpact(this.value), setProbSeverity(4,2)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 4 && Model.RASeverityID == 3 ? "checked" : "")  type="radio" name="Impact" value="6" onclick="calImpact(this.value), setProbSeverity(4,3)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 4 && Model.RASeverityID == 4 ? "checked" : "")  type="radio" name="Impact" value="8" onclick="calImpact(this.value), setProbSeverity(4,4)" /></td>
+                                                            <td style="background-color:#ffd800;text-align:center"><input @(Model.RARiskProbabilityID == 4 && Model.RASeverityID == 5 ? "checked" : "")  type="radio" name="Impact" value="10" onclick="calImpact(this.value), setProbSeverity(4,5)" /></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="height:60px;vertical-align:middle" title="@ViewBag.RiskProbability[4].Comments">Rare</th>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 5 && Model.RASeverityID == 1 ? "checked" : "")  type="radio" name="Impact" value="1" onclick="calImpact(this.value), setProbSeverity(5,1)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 5 && Model.RASeverityID == 2 ? "checked" : "")  type="radio" name="Impact" value="2" onclick="calImpact(this.value), setProbSeverity(5,2)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 5 && Model.RASeverityID == 3 ? "checked" : "")  type="radio" name="Impact" value="3" onclick="calImpact(this.value), setProbSeverity(5,3)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 5 && Model.RASeverityID == 4 ? "checked" : "")  type="radio" name="Impact" value="4" onclick="calImpact(this.value), setProbSeverity(5,4)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RARiskProbabilityID == 5 && Model.RASeverityID == 5 ? "checked" : "")  type="radio" name="Impact" value="5" onclick="calImpact(this.value), setProbSeverity(5,5)" /></td>
+
+                                                        </tr>
+
+
+
+
+
+
+                                                    </table>
+                                                    <link href="@Url.Content("~/assets/css/select2.css")" rel="stylesheet" />
+                                                    <script src="@Url.Content("~/assets/js/select2.js")"></script>
+                                                    <script>
+                                                        jQuery(document).ready(function () {
+                                                            jQuery.noConflict();
+                                                            jQuery('.searchableselect').select2({
+                                                                tags: true
+                                                            });
+                                                        });
+
+                                                        function setProbSeverity(prob, seve) {
+                                                            //  alert(prob + '' + seve);
+                                                            jQuery("#RARiskProbabilityID").val(prob);
+                                                            jQuery("#RASeverityID").val(seve);
+                                                        }
+
+                                                    calImpact(@Model.RARating);
+                                                        function calImpact(Impactval) {
+
+                                                            jQuery("#RARating").val(Impactval);
+
+                                                            if (Impactval <= 9) {
+                                                                jQuery("#RARiskLevel").val('Low Risk');
+                                                                getrisklevel('Low Risk');
+                                                            }
+                                                            else if (Impactval >= 10 && Impactval <= 15) {
+                                                                jQuery("#RARiskLevel").val('Moderate Risk');
+                                                                getrisklevel('Moderate Risk');
+                                                            }
+                                                            else if (Impactval == 20) {
+                                                                jQuery("#RARiskLevel").val('High Risk');
+                                                                getrisklevel('High Risk');
+                                                            }
+                                                            else if (Impactval == 25) {
+                                                                jQuery("#RARiskLevel").val('Extreme Risk');
+                                                                getrisklevel('Extreme Risk');
+                                                            }
+
+                                                        }
+
+
+                                                        function getrisklevel(level) {
+                                                            jQuery.ajax({
+                                                                method: "GET",
+                                                                url: "@Url.Content("~/GetRiskLevel/")" + level,
+                                                                contentType: false,
+                                                                cache: false,
+                                                                processData: false,
+                                                                success: function (data) {
+                                                                    var str = "";
+                                                                    jQuery("#tbllevel1").children().remove();
+                                                                    jQuery.each(data, function (key, value) {
+                                                                        str = "<b>Risk Level:</b>" + data[key].RiskLevel + "&nbsp;&nbsp;&nbsp;<b>Action Time Scale:</b> " + data[key].ActionTimeScale + "&nbsp;&nbsp;&nbsp;<b>Review Time Scale:</b> " + data[key].ReviewTimeScale + "&nbsp;&nbsp;&nbsp;<b>Impact:</b> " + jQuery("#RARating").val() + "<br><b>Description:</b> <span style='font-size:11px;'>" + data[key].Comments + "</span><br><br>";
+                                                                        jQuery("#rvdate").html("Review within " + data[key].ReviewTimeScale + " days from the registered date!");
+
+                                                                    });
+                                                                    if (data == '') {
+                                                                    }
+                                                                    else {
+                                                                        jQuery("#tbllevel1").html(str);
+                                                                    }
+                                                                },
+                                                                error: function () {
+                                                                }
+                                                            });
+                                                        }
+                                                    </script>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="control-label col-md-4"><b>Risk Rating</b></div>
+                                                    <div class="col-md-8">
+                                                        <input type="number" class="form-control" name="RARating" id="RARating" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="control-label col-md-4"><b>Risk Level</b></div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" name="RARiskLevel" id="RARiskLevel" />
+                                                    </div>
+                                                </div>
+                                            </div>*@
+
+                                    <div class="col-md-12">
+                                        <input type="hidden" class="form-control" name="RARiskProbabilityID" id="RARiskProbabilityID" value="@Model.RARiskProbabilityID" />
+                                        <input type="hidden" class="form-control" name="RASeverityID" id="RASeverityID" value="@Model.RASeverityID" />
+                                        <input type="hidden" class="form-control" name="RARating" id="RARating" value="@Model.RARating" />
+                                        <input type="hidden" class="form-control" name="RARiskLevel" id="RARiskLevel" value="@Model.RARiskLevel" />
+                                        <div id="tbllevel1"></div>
+                                    </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-4"><b>Risk Cost</b></div>
+                                                <div class="col-md-8">
+                                                    <select class="form-control" name="RiskCostID" required>
+                                                        <option value="">Select</option>
+                                                        @foreach (var x in ViewBag.RiskCostID)
+                                                        {
+                                                            <option @(Model.RiskCostID == x.RiskCostID ? "selected" : "") value="@x.RiskCostID">@x.RiskCost</option>
+                                                        }
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-4"><b>Risk Strategy</b></div>
+                                                <div class="col-md-8">
+                                                    <select class="form-control" name="RiskStrategyID" required>
+                                                        <option value="">Select</option>
+                                                        @foreach (var x in ViewBag.RiskStrategyID)
+                                                        {
+                                                            <option @(Model.RiskStrategyID == x.RiskStrategyID ? "selected" : "") value="@x.RiskStrategyID">@x.RiskStrategy</option>
+                                                        }
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <br style="clear:both" />
+                                        <br style="clear:both" />
+                                        <br style="clear:both" />
+                                        <h4><u>Risk Grading: (Target)</u></h4>
+                                        <br style="clear:both" />
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2"><b>Future Strategies</b></div>
+                                                <div class="col-md-10">
+                                                    @Html.TextAreaFor(model => model.FutureStrategies, new { htmlAttributes = new { @class = "form-control", @rows = "6" } })
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+
+                                                <div class="col-md-12">
+
+                                                    <table class="table table-bordered">
+                                                        <tr>
+                                                            <th colspan="6" class="text-center" style="height:60px;vertical-align:middle">Impact / Consequences</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="height:60px;vertical-align:middle">Likelihood / Frequency</th>
+                                                            <th class="text-center col-md-2" style="height:60px;vertical-align:middle" title="@ViewBag.RiskSeverity[0].Comments">Insignificant</th>
+                                                            <th class="text-center col-md-2" style="height:60px;vertical-align:middle" title="@ViewBag.RiskSeverity[1].Comments">Minor</th>
+                                                            <th class="text-center col-md-2" style="height:60px;vertical-align:middle" title="@ViewBag.RiskSeverity[2].Comments">Moderate</th>
+                                                            <th class="text-center col-md-2" style="height:60px;vertical-align:middle" title="@ViewBag.RiskSeverity[3].Comments">Major</th>
+                                                            <th class="text-center col-md-2" style="height:60px;vertical-align:middle" title="@ViewBag.RiskSeverity[4].Comments">Catastrophic</th>
+                                                        </tr>
+                                                       
+
+
+                                                        <tr>
+                                                            <th style="height:60px;vertical-align:middle" title="@ViewBag.RiskProbability[0].Comments">Almost certain</th>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 1 && Model.RRSeverityID == 1 ? "checked" : "")  type="radio" name="Impact2" value="5" onclick="calImpactResponse(this.value), setProbSeverity2(1,1)" /></td>
+                                                            <td style="background-color:#ffd800;text-align:center"><input @(Model.RRRiskProbabilityID == 1 && Model.RRSeverityID == 2 ? "checked" : "")  type="radio" name="Impact2" value="10" onclick="calImpactResponse(this.value), setProbSeverity2(1,2)" /></td>
+                                                            <td style="background-color:#ffd800;text-align:center"><input @(Model.RRRiskProbabilityID == 1 && Model.RRSeverityID == 3 ? "checked" : "")  type="radio" name="Impact2" value="15" onclick="calImpactResponse(this.value), setProbSeverity2(1,3)" /></td>
+                                                            <td style="background-color:#dd36b5;text-align:center"><input @(Model.RRRiskProbabilityID == 1 && Model.RRSeverityID == 4 ? "checked" : "")  type="radio" name="Impact2" value="20" onclick="calImpactResponse(this.value), setProbSeverity2(1,4)" /></td>
+                                                            <td style="background-color:#ff0000;text-align:center"><input @(Model.RRRiskProbabilityID == 1 && Model.RRSeverityID == 5 ? "checked" : "")  type="radio" name="Impact2" value="25" onclick="calImpactResponse(this.value), setProbSeverity2(1,5)" /></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="height:60px;vertical-align:middle" title="@ViewBag.RiskProbability[1].Comments">Likely</th>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 2 && Model.RRSeverityID == 1 ? "checked" : "")  type="radio" name="Impact2" value="4" onclick="calImpactResponse(this.value), setProbSeverity2(2,1)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 2 && Model.RRSeverityID == 2 ? "checked" : "")  type="radio" name="Impact2" value="8" onclick="calImpactResponse(this.value), setProbSeverity2(2,2)" /></td>
+                                                            <td style="background-color:#ffd800;text-align:center"><input @(Model.RRRiskProbabilityID == 2 && Model.RRSeverityID == 3 ? "checked" : "")  type="radio" name="Impact2" value="12" onclick="calImpactResponse(this.value), setProbSeverity2(2,3)" /></td>
+                                                            <td style="background-color:#dd36b5;text-align:center"><input @(Model.RRRiskProbabilityID == 2 && Model.RRSeverityID == 4 ? "checked" : "")  type="radio" name="Impact2" value="20" onclick="calImpactResponse(this.value), setProbSeverity2(2,4)" /></td>
+                                                            <td style="background-color:#dd36b5;text-align:center"><input @(Model.RRRiskProbabilityID == 2 && Model.RRSeverityID == 5 ? "checked" : "")  type="radio" name="Impact2" value="20" onclick="calImpactResponse(this.value), setProbSeverity2(2,5)" /></td>
+
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th style="height:60px;vertical-align:middle" title="@ViewBag.RiskProbability[2].Comments">Possible</th>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 3 && Model.RRSeverityID == 1 ? "checked" : "")  type="radio" name="Impact2" value="3" onclick="calImpactResponse(this.value), setProbSeverity2(3,1)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 3 && Model.RRSeverityID == 2 ? "checked" : "")  type="radio" name="Impact2" value="6" onclick="calImpactResponse(this.value), setProbSeverity2(3,2)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 3 && Model.RRSeverityID == 3 ? "checked" : "")  type="radio" name="Impact2" value="9" onclick="calImpactResponse(this.value), setProbSeverity2(3,3)" /></td>
+                                                            <td style="background-color:#ffd800;text-align:center"><input @(Model.RRRiskProbabilityID == 3 && Model.RRSeverityID == 4 ? "checked" : "")  type="radio" name="Impact2" value="12" onclick="calImpactResponse(this.value), setProbSeverity2(3,4)" /></td>
+                                                            <td style="background-color:#ffd800;text-align:center"><input @(Model.RRRiskProbabilityID == 3 && Model.RRSeverityID == 5 ? "checked" : "")  type="radio" name="Impact2" value="15" onclick="calImpactResponse(this.value), setProbSeverity2(3,5)" /></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="height:60px;vertical-align:middle" title="@ViewBag.RiskProbability[3].Comments">Unlikely</th>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 4 && Model.RRSeverityID == 1 ? "checked" : "")  type="radio" name="Impact2" value="2" onclick="calImpactResponse(this.value), setProbSeverity2(4,1)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 4 && Model.RRSeverityID == 2 ? "checked" : "")  type="radio" name="Impact2" value="4" onclick="calImpactResponse(this.value), setProbSeverity2(4,2)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 4 && Model.RRSeverityID == 3 ? "checked" : "")  type="radio" name="Impact2" value="6" onclick="calImpactResponse(this.value), setProbSeverity2(4,3)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 4 && Model.RRSeverityID == 4 ? "checked" : "")  type="radio" name="Impact2" value="8" onclick="calImpactResponse(this.value), setProbSeverity2(4,4)" /></td>
+                                                            <td style="background-color:#ffd800;text-align:center"><input @(Model.RRRiskProbabilityID == 4 && Model.RRSeverityID == 5 ? "checked" : "")  type="radio" name="Impact2" value="10" onclick="calImpactResponse(this.value), setProbSeverity2(4,5)" /></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="height:60px;vertical-align:middle" title="@ViewBag.RiskProbability[4].Comments">Rare</th>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 5 && Model.RRSeverityID == 1 ? "checked" : "")  type="radio" name="Impact2" value="1" onclick="calImpactResponse(this.value), setProbSeverity2(5,1)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 5 && Model.RRSeverityID == 2 ? "checked" : "")  type="radio" name="Impact2" value="2" onclick="calImpactResponse(this.value), setProbSeverity2(5,2)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 5 && Model.RRSeverityID == 3 ? "checked" : "")  type="radio" name="Impact2" value="3" onclick="calImpactResponse(this.value), setProbSeverity2(5,3)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 5 && Model.RRSeverityID == 4 ? "checked" : "")  type="radio" name="Impact2" value="4" onclick="calImpactResponse(this.value), setProbSeverity2(5,4)" /></td>
+                                                            <td style="background-color:#34d024;text-align:center"><input @(Model.RRRiskProbabilityID == 5 && Model.RRSeverityID == 5 ? "checked" : "")  type="radio" name="Impact2" value="5" onclick="calImpactResponse(this.value), setProbSeverity2(5,5)" /></td>
+
+                                                        </tr>
+                                                    </table>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <script>
+                                            
+                                        function setProbSeverity2(prob, seve) {
+                                            // alert(prob + '' + seve);
+                                            jQuery("#RRRiskProbabilityID").val(prob);
+                                            jQuery("#RRSeverityID").val(seve);
+                                            }
+
+
+                                        calImpactResponse(@Model.RRRating);
+
+                                         function calImpactResponse(impact2val) {
+
+                                                jQuery("#RRRating").val(impact2val);
+
+                                                if (impact2val <= 9) {
+                                                    jQuery("#RRRiskLevel").val('Low Risk');
+                                                    getrisklevel2('Low Risk');
+                                                }
+                                                else if (impact2val >= 10 && impact2val <= 15) {
+                                                    jQuery("#RRRiskLevel").val('Moderate Risk');
+                                                    getrisklevel2('Moderate Risk');
+                                                }
+                                                else if (impact2val == 20) {
+                                                    jQuery("#RRRiskLevel").val('High Risk');
+                                                    getrisklevel2('High Risk');
+                                                }
+                                                else if (impact2val == 25) {
+                                                    jQuery("#RRRiskLevel").val('Extreme Risk');
+                                                    getrisklevel2('Extreme Risk');
+                                                }
+
+
+                                            }
+
+                                        function getrisklevel2(level) {
+
+                                                jQuery.ajax({
+                                                    method: "GET",
+                                                    url: "@Url.Content("~/GetRiskLevel/")" + level,
+                                                    contentType: false,
+                                                    cache: false,
+                                                    processData: false,
+                                                    success: function (data) {
+                                                        var str2 = "";
+                                                        jQuery("#tbllevel2").children().remove();
+                                                        jQuery.each(data, function (key, value) {
+                                                            str2 = "<b>Risk Level:</b>" + data[key].RiskLevel + "&nbsp;&nbsp;&nbsp;<b>Action Time Scale:</b> " + data[key].ActionTimeScale + "&nbsp;&nbsp;&nbsp;<b>Review Time Scale:</b> " + data[key].ReviewTimeScale+ "&nbsp;&nbsp;&nbsp;<b>Impact:</b> " + jQuery("#RRRating").val() + "<br><b>Description:</b> <span style='font-size:11px;'>" + data[key].Comments + "<br></span><br>";
+                                                        });
+                                                        if (data == '') {
+                                                        }
+                                                        else {
+                                                            jQuery("#tbllevel2").html(str2);
+                                                        }
+                                                    },
+                                                    error: function () {
+                                                        alert('no');
+                                                    }
+                                                });
+                                            }
+                                        </script>
+                                        @*<div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="control-label col-md-4"><b>Risk Rating</b></div>
+                                                    <div class="col-md-8">
+                                                        <input type="number" class="form-control" name="RRRating" id="RRRating" value="@Model.RRRating" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="control-label col-md-4"><b>Risk Level</b></div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" name="RRRiskLevel" id="RRLevel" value="@Model.RRRiskLevel" />
+                                                    </div>
+                                                </div>
+                                            </div>*@
+
+
+                                    <div class="col-md-12">
+                                        <input type="hidden" class="form-control" name="RRRiskProbabilityID" id="RRRiskProbabilityID" value="@Model.RRRiskProbabilityID" />
+                                        <input type="hidden" class="form-control" name="RRSeverityID" id="RRSeverityID" value="@Model.RRSeverityID" />
+                                        <input type="hidden" class="form-control" name="RRRating" id="RRRating" value="@Model.RRRating" />
+                                        <input type="hidden" class="form-control" name="RRRiskLevel" id="RRLevel" value="@Model.RRRiskLevel" />
+                                        <div id="tbllevel2"></div>
+                                    </div>
+
+
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2"><b>Potential Risk Factors</b></div>
+                                                <div class="col-md-10">
+                                                    @Html.TextAreaFor(model => model.PotentialRiskFactors, new { htmlAttributes = new { @class = "form-control", @rows = "6" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-4"><b>Risk Location</b></div>
+                                                <div class="col-md-8">
+                                                    <select class="form-control" name="RiskStatusID" required>
+                                                        <option value="">Select</option>
+                                                        @foreach (var x in ViewBag.Location)
+                                                        {
+                                                            <option @(Model.RiskStatusID == x.LocationID ? "selected" : "") value="@x.LocationID">@x.Location</option>
+                                                        }
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2"><b>Comments</b></div>
+                                                <div class="col-md-10">
+                                                    @Html.TextAreaFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control", @rows = "6" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-4"><b>Task</b></div>
+                                                <div class="col-md-8">
+                                                    <a href="@Url.Content("~/Tasks/Create/" + Model.RiskRegisterID + "/" + Model.RiskRegisterNo)" class="btn btn-warning pull-right">Add  Task</a>
+
+                                                    <div id="tblTaskddd" style="margin-top:8px;"></div>
+
+                                                    <script>
+                                                            var recos = '';
+
+                                                            jQuery.ajax({
+                                                                method: "GET",
+                                                                url: "@Url.Content("~/GetTasks/"+ Model.RiskRegisterID)",
+                                                                contentType: false,
+                                                                cache: false,
+                                                                processData: false,
+                                                                success: function (data) {
+                                                                    jQuery.each(data, function (key, value) {
+                                                                        recos += '' + data[key].Task + ', ';
+                                                                    });
+                                                                    jQuery("#tblTaskddd").html(recos);
+
+
+                                                                },
+                                                                error: function () {
+
+                                                                }
+                                                            });
+
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-4"><b>Risk Assessed by</b></div>
+
+                                                <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#AddAssessor">Add Assessor</button><br /><br />
+
+                                                <div class="col-md-8 pull-right">
+
+                                                    <table class="table table-bordered">
+
+                                                        @foreach (var usr in ViewBag.Assessors)
+                                                        {
+                                                            <tr><td>@usr.Name - @usr.Designation</td></tr>
+                                                        }
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+
+
+
+                                            <div class="col-md-2"><b>Status : </b></div>
+                                            @if (Model.RiskKeyStatusID < 3)
+                                            {
+                                                <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#AddReview">Review</button>
+                                                <button type="button" class="btn btn-danger pull-right" style="margin-right:10px;" onclick="setstatusreassessment()">Close</button>
+                                            }
+                                            <br style="clear:both" />
+                                            <br style="clear:both" />
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                                @foreach (var s in @ViewBag.RiskKeyDates)
+                                                {
+                                                    <tr>
+                                                        <td>@s.RiskKeyStatus</td>
+                                                        <td>@s.StatusDate</td>
+                                                    </tr>
+                                                }
+                                            </table>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="control-label col-md-4"><b>Risk Owner</b></div>
+                                                <div class="col-md-8">
+
+                                                    <select class="searchableselect form-control" style="width:100%;font-family:Arial" name="RiskOwnerID" required>
+                                                        @foreach (var urs in ViewBag.Users)
+                                                        {
+                                                            <option @(Convert.ToString(Model.RiskOwnerID) == urs.UserID2 ? "selected" : "") value="@urs.UserID2">@urs.Name</option>
+                                                        }
+                                                    </select>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <br style="clear:both" />
+                                        <br style="clear:both" />    <br style="clear:both" />
+                                        <br style="clear:both" />
+
+                                        @if (Model.RiskKeyStatusID < 3)
+                                        {
+                                            <div class="pull-right">
+
+                                                <input type="hidden" name="RiskKeyStatusID" value="@Model.RiskKeyStatusID" />
+                                                <input type="hidden" name="ReferenceNo" value="@Model.ReferenceNo" />
+                                                <input type="hidden" name="RiskRegisteredDate" value="@Model.RiskRegisteredDate" />
+                                                <input type="submit" value="SAVE" class="btn btn-success" />
+                                            </div>
+                                        }
+
+                                    </div>
+                                }
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function addreview() {
+
+        jQuery.ajax({
+            method: "POST",
+            url: "@Url.Content("~/RiskRegisters/ReviewStatus")",
+            data: { ReviewDate: jQuery("#reviewdate").val(), RiskRegisterID: @Model.RiskRegisterID },
+            success: function (data) {
+                jQuery.each(data, function (key, value) {
+                    window.location.href = "@Url.Content("~/RiskRegisters/Edit/"+Model.RiskRegisterID)";
+                });
+            },
+            error: function () {
+
+            }
+        });
+        window.location.reload();
+    }
+
+
+    function setstatusreassessment() {
+
+        jQuery.ajax({
+            method: "POST",
+            url: "@Url.Content("~/RiskRegisters/CloseStatus")",
+            data: { RiskRegisterID: @Model.RiskRegisterID },
+            success: function (data) {
+                jQuery.each(data, function (key, value) {
+                    window.location.href = "@Url.Content("~/RiskRegisters/Edit/"+Model.RiskRegisterID)";
+                });
+            },
+            error: function () {
+
+            }
+        });
+        window.location.reload();
+
+
+    }
+</script>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddReview">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <h4 class="modal-title">Add Review</h4>
+
+                <br />
+                <div class="col-md-12" id="rvdate" style="color:red"></div>
+                <br /> <br />
+                <div class="col-md-6">
+                    <div class="control-label "><b>Date of Review <span class="red">*</span> </b></div>
+                    <input type="date" id="reviewdate" class="form-control" value="@ViewBag.ReviewDate" />
+
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <div class="control-label "><b>&nbsp;</b></div>
+                    <button type="button" class="btn btn-success" onclick="addreview()">Add Review</button>
+
+                </div>
+                <br /> <br />
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddAssessor">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <h4 class="modal-title">Add Assessor</h4>
+
+                <br />
+                <form method="post" action="@Url.Content("~/RiskAssessors_T/Create")">
+                    <select class="searchableselect form-control" style="width:100%;font-family:Arial" name="UserID" required>
+                        @foreach (var urs in ViewBag.Users)
+                        {
+                            <option @(Convert.ToString(Model.RiskAssessedByID) == urs.UserID2 ? "selected" : "") value="@urs.UserID2">@urs.Name</option>
+                        }
+                    </select>
+                    <input type="hidden" name="RiskID" value="@Model.RiskRegisterID" />
+
+
+                    <div class="col-md-6">
+                        <div class="control-label "><b>&nbsp;</b></div>
+                        <button type="submit" class="btn btn-success">Add Assessor</button>
+
+                    </div>
+                </form>
+
+
+
+
+                <br /> <br />
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>

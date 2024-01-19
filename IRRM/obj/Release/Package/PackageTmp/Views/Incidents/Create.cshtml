@@ -1,0 +1,1022 @@
+﻿
+
+@{
+    ViewBag.Title = "Create";
+   // Layout = null;
+}
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-6">Event Report Form</h2>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+               @using (Html.BeginForm("Create", "Incidents"))
+               {
+                    @Html.AntiForgeryToken()
+
+
+                    <div class="row">
+
+                       
+                     <script>
+                         
+                         function showcuruser() {
+                             $("#behalfform").show();
+                         }
+                         function hidecuruser() {
+                             $("#behalfform").hide();
+                         }
+                         function onbques(){
+                             
+                             $("#onbehalfques").hide();
+                             $("#behalfform").hide();
+                             $("#onbehlfoff").prop("checked", true);
+
+                         }
+                         function onbqueshow() {
+
+                             $("#onbehalfques").show();
+
+                         }
+                         
+                     </script>
+
+
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+
+
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                                            <div class="control-label "><b>Remain anonymous?</b></div><br style="clear:both" />
+                                            <input type="radio" name="Confidential" value="false" checked   onclick="onbqueshow()" /> No &nbsp;&nbsp;<input  type="radio" name="Confidential" value="true"  onclick="onbques()"  /> Yes
+                                        </div>
+                                        <div id="onbehalfques">
+                                            
+                                            <div class="col-md-4  col-lg-4 col-sm-6  col-xs-12">
+                                                <div class="control-label "><b>Reporting</b></div>
+                                                <br style="clear:both" />
+                                                <input onclick="hidecuruser()" type="radio" name="OnBehalfReporting" value="false" id="onbehlfoff" checked />&nbsp;for self&nbsp;&nbsp;&nbsp;&nbsp;<input onclick="showcuruser()"  id="onbehlfon" type="radio" name="OnBehalfReporting" value="true" />&nbsp;on behalf of
+
+                                            </div>
+
+                                        </div>
+                                     
+            <div id="behalfform" style="display:none">
+                <br style="clear:both" />
+                <br style="clear:both" />
+
+                <div class="col-md-2">
+                    <div class="control-label "><b>Name</b></div>
+                    <input type="text" name="ReporterName" id="ReporterName" class="form-control" />
+
+
+                </div>
+
+                <div class="col-md-2">
+                    <div class="control-label"><b>Designation</b></div>
+                    <input type="text" name="ReporterDesignation" id="ReporterDesignation" class="form-control" />
+
+
+                </div>
+                @*<div class="col-md-2">
+                    <div class="control-label"><b>Branch</b></div>
+                    <input type="text" name="ReporterBranch" id="ReporterBranch" class="form-control" />
+
+
+
+                </div>*@
+                <div class="col-md-2">
+                    <div class="control-label"><b>Email</b></div>
+                    <input type="text" name="ReporterEmail" id="ReporterEmail" class="form-control" />
+
+
+                </div>
+                <div class="col-md-2">
+                    <div class="control-label"><b>Phone</b></div>
+                    <input type="text" name="ReporterPhone" id="ReporterPhone" class="form-control" />
+
+
+                </div>
+            </div>
+                                         
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+
+
+                                    <div class="form-group">
+
+
+                                        <div class="col-md-4">
+                                             <div class="control-label "><b>Event Type <span class="red">*</span> </b>&nbsp;&nbsp;&nbsp;
+                                                 <a data-toggle="modal" data-target="#eventtypedef" style="cursor:pointer"><i title="Click to view definition" class="fa fa-question red" ></i></a>
+                                            </div>
+                                            <select name="EventTypeID" class="form-control" required>
+                                                <option value="">Select</option>
+                                                @foreach (var et in ViewBag.EventTypeID)
+                                                {
+                                                    <option value="@et.EventTypeID">@et.EventType</option>
+                                                }
+                                            </select>
+
+                                        </div>
+
+
+
+                                        <div class="col-md-2">
+                                            <div class="control-label"><b>Incident Date <span class="red">*</span> </b></div>
+                                            <input type="date" name="IncidentDate" class="form-control" required value="" />
+
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div class="control-label"><b>Incident Time</b></div>
+                                            <input type="time" name="IncidentDate" class="form-control" />
+
+                                        </div>
+
+                                        @*<div class="col-md-2">
+                                            <div class="control-label"><b>Branch <span class="red">*</span> </b></div>
+                                                                                     
+                                            <select name="BranchID" id="BranchID" class="form-control" onchange="loadlocations()" required>
+                                                <option value="">Select</option>
+
+                                                @foreach (var b in ViewBag.BranchID)
+                                                {
+                                                    foreach (var userx in ViewBag.Userx)
+                                                    {
+                                                    <option @(userx.BranchID == b.BranchID ? "selected" : "") value="@b.BranchID">@b.Branch</option>
+                                                    }
+                                                }
+                                            </select>
+
+                                        </div>*@
+                                        <input type="hidden"   name="BranchID" id="BranchID" value="1" />
+
+
+
+                                        <div class="col-md-2">
+                                            <div class="control-label"><b>Location <span class="red">*</span> </b></div>
+                                        <select name="LocationID" id="LocationID" class="form-control" required>
+                                                <option value="">Select</option>
+
+
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+
+
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-6">
+                                            <div class="control-label"><b>Incident Type</b></div>
+                                            <select id="IncidentTypeID" name="IncidentTypeID" class="form-control"   onchange="getincidentsubtypes()">
+
+                                                <option value="">Select</option>
+                                                @foreach (var itp in ViewBag.IncidentTypeID)
+                                                {
+                                                    <option value="@itp.IncidentTypeID">@itp.IncidentType</option>
+                                                }
+                                            </select>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="control-label"><b>Incident Sub Type</b></div>
+                                            <select name="IncidentSubTypeID" id="IncidentSubTypeID" class="form-control" >
+                                                <option value="">Select</option>
+                                            </select>
+
+                                        </div>
+                                        <br style="clear:both" />
+                                        <br />
+                                        <div class="col-md-12">
+                                            <div class="control-label"><b>Description <span class="red">*</span> </b></div>
+                                            <textarea class="form-control" name="Description" placeholder="Enter facts, not opinions" required></textarea>
+
+                                        </div>
+                                        <br style="clear:both" />
+
+                                        <br />
+
+                                        <div class="col-md-12">
+                                            <div class="control-label"><b>Action Taken</b></div>
+                                            <textarea class="form-control" name="ActionTaken" placeholder="Action taken at the time of incident"></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <script>
+
+                                        function hidepatient() {
+                                            $("#patientblock").hide();
+                                        }
+                                        function showpatient() {
+                                            $("#patientblock").show();
+                                        }
+                                    </script>
+
+
+                                    <div class="form-group">
+
+
+                                        <div class="col-md-8">
+                                            <div class="control-label ">
+                                                <b> Is any patient involved?&nbsp;&nbsp;</b>
+                                                <input onclick="hidepatient()" type="radio" name="patient" value="false" checked />&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="patient" value="true" onclick="showpatient()" />&nbsp;Yes
+                                            </div>
+                                        </div>
+
+
+                                        <div id="patientblock" style="display:none;">
+                                            <div class=" pull-right">
+                                                <a href="#" data-toggle="modal" data-target="#AddPatient" class="btn btn-success">Add patient</a>
+                                            </div>
+
+                                            <br style="clear:both" />
+                                            <br style="clear:both" />
+                                        </div>
+                                        
+                                        <div id="tblpatient"></div>
+
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <script>
+                                        
+                                        function hidewitness() {
+                                            $("#witnessblock").hide();
+                                        }
+                                        function showwitness() {
+                                            $("#witnessblock").show();
+                                        }
+                                    </script>
+
+
+                                    <div class="form-group" >
+
+                                
+                                        <div class="col-md-8">
+                                            <div class="control-label ">
+                                                <b> Were there any witness to the incident?&nbsp;&nbsp;</b>
+                                                <input onclick="hidewitness()" type="radio" name="witness" value="false" checked />&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="witness" value="true" onclick="showwitness()" />&nbsp;Yes
+                                            </div>
+                                        </div>
+
+                                     
+                                        <div id="witnessblock" style="display:none;">
+                                            <div class=" pull-right">
+                                                <a href="#" data-toggle="modal" data-target="#AddWitness" class="btn btn-success">Add Witness</a>
+                                            </div>
+                                            <br style="clear:both" />
+                                            <br style="clear:both" />
+                                            <div id="tblwitness"></div>
+                                        </div>
+                                        
+                                        
+
+                                    </div>
+
+
+                                 
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <script>
+
+                                        function hideattach() {
+                                            $("#attachblock").hide();
+                                        }
+                                        function showattach() {
+                                            $("#attachblock").show();
+                                        }
+                                    </script>
+
+
+                             
+
+
+                                    <div class="form-group" >
+
+
+                                        <div class="col-md-8">
+                                            <div class="control-label ">
+                                                <b>Are there any documents to be attached?</b>&nbsp;&nbsp;
+                                                <input onclick="hideattach()" type="radio" name="attachmts" value="false" checked />&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="attachmts" value="true" onclick="showattach()" />&nbsp;Yes
+                                            </div>
+                                        </div>
+
+
+                                        <div id="attachblock" style="display:none;">
+                  
+                                            <div class=" pull-right">
+                                                <a href="#" data-toggle="modal" data-target="#AddAttachments" class="btn btn-success">Add Attachments</a>
+                                            </div>
+                                            <br style="clear:both" />
+                                            <br style="clear:both" />
+                                        </div>
+
+                                       
+                                        <div id="tblAttachments"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+
+
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-6">
+                                            <input type="submit" class="btn-success btn" value="SUBMIT" />
+                                            <button type="button" onclick="window.location.href='@Url.Content("~/Incidents/Create")'" class="btn-warning btn ">CLEAR ALL</button>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddAttachments">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <h4 class="modal-title">Add Attachments</h4>
+
+                <br />
+
+                <form id="frmattachment">
+
+
+
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Document Type</b></div>
+                        <select name="DocumentTypeID" id="DocumentTypeID" class="form-control">
+                            <option value="">Select</option>
+
+                            @foreach (var b in ViewBag.DocumentType)
+                            {
+                                <option value="@b.DocumentTypeID">@b.DocumentType</option>
+                            }
+                        </select>
+
+                    </div>
+                    <br style="clear:both" /><br />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Description</b></div>
+                        <input type="text" name="Description" id="Description" class="form-control" />
+
+
+                    </div>
+                    <br style="clear:both" /><br />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Select</b></div>
+                        <input type="file" name="UploadMedia" id="UploadMedia" class="form-control" />
+
+                    </div>
+                    <br style="clear:both" /><br />
+                    <div class="col-md-12">
+
+                        <div class="control-label "><b>&nbsp;</b></div>
+                        <button type="submit" class="btn btn-success">SAVE</button>
+
+                    </div>
+                </form>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddWitness">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <h4 class="modal-title">Add Witness</h4>
+
+                <br />
+
+                <div class="col-md-12">
+
+
+                    <div class="control-label"><b>People Involved <span class="red">*</span> </b></div>
+                    <div>
+                        @Html.DropDownList("IncidentPeopleInvolvedID", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                        <input type="hidden" id="IncidentRelationID" value="4" />
+                    </div>
+                </div>
+
+                <br style="clear:both" /><br />
+
+
+                <div class="col-md-12">
+                    <div class="control-label "><b>Name <span class="red">*</span> </b></div>
+                    <input type="text" id="witnessname" class="form-control" />
+
+                </div>
+       
+                <br style="clear:both" /><br />
+                <div class="col-md-12">
+                    <div class="control-label"><b>Phone <span class="red">*</span> </b></div>
+                    <input type="number" id="witnessphone" class="form-control" />
+
+                </div>
+                <br style="clear:both" /><br />
+                <div class="col-md-12">
+                    <div class="control-label "><b>&nbsp;</b></div>
+                    <button type="button" class="btn btn-success" id="btnWitness">Add Witness</button>
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddPatient">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add Patient</h4>
+                <br />
+                <input type="hidden" id="IncidentPeopleInvolvedID2" value="1" />
+                <input type="hidden" id="IncidentRelationID2" value="8" />
+
+
+
+                <div class="col-md-12">
+                    <div class="control-label "><b>Name <span class="red">*</span> </b></div>
+                    <input type="text" id="patientname" class="form-control" />
+
+                </div>
+
+                <br style="clear:both" />
+                <br style="clear:both" />
+                <div class="col-md-12">
+                    <div class="control-label "><b>Identity No. </b></div>
+                    <input type="text" id="patientid" class="form-control" />
+
+                </div>
+                <br style="clear:both" />
+                <br style="clear:both" />
+                <div class="col-md-6">
+                    <div class="control-label "><b>Registration No.</b></div>
+                    <input type="text" id="RegNo" class="form-control" />
+
+                </div>
+                <div class="col-md-6">
+                    <div class="control-label "><b>CVR No.</b></div>
+                    <input type="text" id="CVRNo" class="form-control" />
+
+                </div>
+                <br style="clear:both" /><br />
+                <div class="col-md-12">
+                    <div class="control-label"><b>Phone </b></div>
+                    <input type="number" id="patientphone" class="form-control" />
+
+                </div>
+                <br style="clear:both" /><br />
+                <div class="col-md-12">
+                    <div class="control-label"><b>Gender <span class="red">*</span> </b></div>
+                    <select class="form-control" id="Gender">
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+
+                </div>
+                <br style="clear:both" /><br />
+                <div class="col-md-12">
+                    <div class="control-label"><b>Date of Birth   </b></div>
+                    <input type="date" id="Dateofbirth" class="form-control" value="" />
+
+                </div>
+                <br style="clear:both" /><br />
+                <div class="col-md-12">
+                    <div class="control-label"><b>Is the patient injured? </b></div>
+                    <input type="checkbox" value="true" id="PatientInjured" />
+
+                </div>
+                <br style="clear:both" /><br />
+                <div class="col-md-12">
+                    <div class="control-label "><b>&nbsp;</b></div>
+                    <button type="button" class="btn btn-success" id="btnPatient">Add Patient</button>
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="eventtypedef">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLongTitle">EVENT TYPE DEFINITIONS:</h4>
+      
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li><strong>Patient Complaint: </strong>a written statement or verbal expression of dissatisfaction by the patient / family with some aspects of care or services that has not been resolved to the patient/family’s satisfaction at the point of service.</li>
+                    <li><b>Staff Complaint:</b> A complaint from a staff member concerning treatment in the workplace that is inequitable or procedurally unfair; or a complaint that arises from perceived personal concerns relating to one or more work-related interpersonal relationships.</li>
+                    <li>
+                        <b>Incident:</b> An event that are not part of routine medical care. Following are the types of incidents.
+                        <ul>
+                            <li><b>Unsafe Conditions:</b> circumstances that increase the probability of a patient safety event occurring.</li>
+                            <li><b>Near Misses :</b> are the incidences which are resolved before they lead to negative occurrences or outcomes</li>
+                            <li><b>Adverse Event:</b> An unanticipated, undesirable, or potentially dangerous occurrence in a healthcare organization that reached patient, whether or not there was harm involved.</li>
+                            <li><b>Sentinel Event:</b> An unexpected occurrence involving death or psychological injury or any other serious injury resulting in adverse outcome.</li>
+                            <li><b>Others:</b> Any kind of unanticipated, undesirable or unusual event that occours at the facility.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+
+        $("#frmattachment").submit(function (e) {
+
+            e.preventDefault();
+            var athdata = new FormData(this);
+
+            if ($("#DocumentTypeID").val() == '' || $("#attachdescription").val() == '' || $("#attachfile").val() == '') {
+                alert('Document Type / Description / File name are mandatory!');
+            }
+            else {
+
+
+                $.ajax({
+                    method: "POST",
+                    url: "@Url.Content("~/AddAttachment")",
+                    data: athdata,
+                    mimeTypes: "multipart/form-data",
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        $('#DocumentTypeID').val('');
+                        $('#Description').val('');
+                        $('#UploadMedia').val('');
+                        $.each(data, function (key, value) {
+                            loadAttachment(data[key].IncidentID);
+
+                        });
+                        $('#AddAttachments').modal('toggle');
+                    },
+                    error: function () {
+                        alert("Couldn't Save, check the input values!");
+                    }
+                });
+            }
+        });
+
+
+
+        $("#btnWitness").click(function () {
+
+            if ($("#witnessname").val() == '' || $("#witnessphone").val() == '' || $("#IncidentPeopleInvolvedID").val() == '') {
+                alert('Name / Phone / People Involved are mandatory!');
+            }
+            else {
+
+                $.ajax({
+                    method: "POST",
+                    url: "@Url.Content("~/Incident_People_T/CreateRegister")",
+                    data: {
+                        Name: $('#witnessname').val(), Mobile: $('#witnessphone').val(), IncidentPeopleInvolvedID: $('#IncidentPeopleInvolvedID').val(), IncidentRelationID: $('#IncidentRelationID').val()
+                    },
+                    success: function (data) {
+                        $('#witnessname').val('');
+                        $('#witnessphone').val('');
+                        $('#IncidentPeopleInvolvedID').val('');
+                        $.each(data, function (key, value) {
+                            loadwitness(data[key].IncidentID);
+                        });
+                        $('#AddWitness').modal('toggle');
+
+                    },
+                    error: function () {
+                        alert("Couldn't Save, check the input values!");
+                    }
+                });
+            }
+        });
+
+
+        $("#btnPatient").click(function () {
+
+            if ($("#patientname").val() == '' || $("#Gender").val() == '') {
+                alert('Name / Gender are mandatory!');
+            }
+            else {
+                var PatientInjured = "false";
+                if ($('#PatientInjured').prop('checked')) {
+                    PatientInjured = "true";
+
+                } else {
+                    PatientInjured = "false";
+                }
+
+                $.ajax({
+                    method: "POST",
+                    url: "@Url.Content("~/Incident_People_T/CreateRegister")",
+                    data: {
+                        Name: $('#patientname').val(), Mobile: $('#patientphone').val(), IncidentPeopleInvolvedID: $('#IncidentPeopleInvolvedID2').val(), IncidentRelationID: 8, PatientID: $('#patientid').val(), Gender: $('#Gender').val(), Dateofbirth: $('#Dateofbirth').val(), PatientInjured: PatientInjured, RegNo : $('#RegNo').val(), CVRNo : $('#CVRNo').val()
+                    },
+                    success: function (data) {
+                        $('#patientname').val('');
+                        $('#patientphone').val('');
+                        $('#patientid,#Gender,#Dateofbirth,#RegNo,#CVRNo').val('');
+                        $.each(data, function (key, value) {
+                            loadwitness(data[key].IncidentID);
+                        });
+                        $('#AddPatient').modal('toggle');
+
+                    },
+                    error: function () {
+                        alert("Couldn't Save, check the input values!");
+                    }
+                });
+            }
+
+            @*if ($("#patientname").val() == '' || $("#patientidn").val() == '' || $("#patientphone").val() == '') {
+                alert('Name / Phone / DOB / Patient ID are mandatory!');
+            }
+            else {
+
+                $.ajax({
+                    method: "POST",
+                    url: "@Url.Content("~/Incidents/AddPatient")",
+                    data: {
+                        patientname: $('#patientname').val(), patientphone: $('#patientphone').val(), patientidn: $('#patientidn').val()
+                        , patientgender: $('#patientgender').val(), patientdob: $('#patientdob').val()
+                    },
+                    success: function (data) {
+                        $('#patientname').val('');
+                        $('#patientphone').val('');
+                        $('#patientdob,#patientidn').val('');
+                        $.each(data, function (key, value) {
+                           loadpatient(data[key].IncidentID);
+                        });
+                        $('#Addpatient').modal('toggle');
+
+                    },
+                    error: function () {
+                        alert("Couldn't Save, check the input values!");
+                    }
+                });
+            }*@
+        });
+
+
+
+
+    });
+
+
+            function delattachment(IncidentAttachmentID, IncidentID) {
+                $.ajax({
+                    method: "GET",
+                    url: "@Url.Content("~/DeleteAttachment/")" + IncidentAttachmentID + "/" + IncidentID,
+                    success: function (data) {
+
+                        loadAttachment(IncidentID);
+
+                    },
+                    error: function () {
+                    }
+                });
+
+            }
+
+
+
+            function loadAttachment(IncidentID) {
+                $.ajax({
+                    method: "GET",
+                    url: "@Url.Content("~/ViewAttachment/")" + IncidentID,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        $("#tblAttachments").children().remove();
+
+                        var str = "<table  class='table table-bordered col-md-12' >";
+                        str += "<tr><th  class='col-md-2'>Document Type</th><th>Description</th><th>File Name</th><th  class='col-md-1'>Action</th></tr>";
+                        $.each(data, function (key, value) {
+                            str += "<tr>" + "<td>" + data[key].DocumentType + "</td><td>" + data[key].Description + "</td><td><a href='@Url.Content("~/Documents/Incidents/")" + data[key].IncidentID + "/" + data[key].ActualFileName + "' target='_blank'>" + data[key].FileName + "</a></td><td ><i class='fa fa-trash' style='color:red;cursor:pointer' onclick=delattachment(" + data[key].IncidentDocumentID + "," + data[key].IncidentID + ")></i></td></tr>";
+                        });
+                        str += "</table>"
+                        if (data == '') {
+                        }
+                        else {
+                            $("#tblAttachments").append(str);
+                        }
+
+                    },
+                    error: function () {
+                    }
+                });
+            }
+
+
+
+
+
+
+
+
+    function delwitness(IncidentWitnessID, IncidentID) {
+        $.ajax({
+            method: "GET",
+            url: "@Url.Content("~/DeleteWitness/")" + IncidentWitnessID + "/" + IncidentID,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+
+                loadwitness(IncidentID);
+
+            },
+            error: function () {
+            }
+        });
+
+    }
+
+
+    loadwitness(@Convert.ToInt32(Session["IncidentID"]));
+    function loadwitness(IncidentID) {
+        $.ajax({
+            method: "GET",
+            url: "@Url.Content("~/ViewPeople/")" + IncidentID,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                $("#tblwitness,#tblpatient").children().remove();
+                var flagP = "";
+                var flagW = "";
+
+                var str = "<table   class='table table-bordered col-md-12'  >";
+                var str2 = "<table   class='table table-bordered col-md-12'  >";
+
+                str += "<tr><th>Incident Relation</th><th>People Involved</th><th>Name</th><th>Mobile</th></tr>";
+                str2 += "<tr><th>Incident Relation</th><th>People Involved</th><th>Name</th><th>Mobile</th></tr>";
+
+                $.each(data, function (key, value) {
+
+                    if (data[key].IncidentRelationID == 4) {
+                        flagW = "W";
+                        str += "<tr><td>" + data[key].IncidentRelation + "</td><td>" + data[key].IncidentPeopleInvolved + "</td><td>" + data[key].Name + "</td><td>" + data[key].Mobile + "</td></tr>";
+                    }
+                    else if (data[key].IncidentRelationID == 8) {
+                        flagP = "P";
+                        str2 += "<tr><td>" + data[key].IncidentRelation + "</td><td>" + data[key].IncidentPeopleInvolved + "</td><td>" + data[key].Name + "</td><td>" + data[key].Mobile + "</td></tr>";
+                    }
+                });
+                str += "</table>"
+                str2 += "</table>"
+
+                if (data == '') {
+                }
+                else {
+                    if (flagW != "") {
+                        $("#tblwitness").html(str);
+                    }
+                    if (flagP != "") {
+                        $("#tblpatient").html(str2);
+                    }
+
+                }
+            },
+            error: function () {
+            }
+        });
+    }
+
+
+
+     loadpatient(@Convert.ToInt32(Session["IncidentID"]));
+
+     function loadpatient(IncidentID) {
+
+
+         $.ajax({
+             method: "GET",
+             url: "@Url.Content("~/ViewPatients/")" + IncidentID,
+             contentType: false,
+             cache: false,
+             processData: false,
+             success: function (data) {
+                 $("#tblpatient").children().remove();
+                 var str = "<table   class='table table-bordered col-md-12'  >";
+                 str += "<tr><th>Name</th><th>Patient ID</th><th>Gender</th><th>DOB</th><th>Phone</th></tr>";
+                 $.each(data, function (key, value) {
+                     str += "<tr><td>" + data[key].Name + "</td><td>" + data[key].PatientIdn + "</td><td>" + data[key].Gender + "</td><td>" + ParseJsonDate(data[key].DOB) + "</td><td>" + data[key].Phone + "</td></tr>";
+                 });
+                 str += "</table>"
+                 if (data == '') {
+                 }
+                 else {
+                     $("#tblpatient").append(str);
+                 }
+             },
+             error: function () {
+             }
+         });
+     }
+
+
+
+
+    loadlocations();
+
+    function loadlocations() {
+        $.ajax({
+            method: "GET",
+            url: "@Url.Content("~/GetLocations/")" + $('#BranchID').val(),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                $("#LocationID").children('option:not(:first)').remove();
+              //  $("#LocationID").append("<option value='' >Select</option>");
+                $.each(data, function (key, value) {
+                    $("#LocationID").append("<option value='" + data[key].LocationID + "' >" + data[key].Location + "</option>");
+                });
+
+            },
+            error: function () {
+            }
+        });
+    }
+
+    function getincidentsubtypes() {
+         $.ajax({
+            method: "GET",
+            url: "@Url.Content("~/GetIncidentSubTypes/")" + $('#IncidentTypeID').val(),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                $("#IncidentSubTypeID").children('option:not(:first)').remove();
+              //  $("#LocationID").append("<option value='' >Select</option>");
+                $.each(data, function (key, value) {
+                    $("#IncidentSubTypeID").append("<option value='" + data[key].IncidentSubTypeID + "' >" + data[key].IncidentSubType + "</option>");
+                });
+
+            },
+            error: function () {
+            }
+        });
+    }
+
+    function ParseJsonDate(dateString) {
+        var milli = dateString.replace(/\/Date\((-?\d+)\)\//, '$1');
+        var date = new Date(parseInt(milli));
+        var date2 = String(date).substring(3, 24);
+        return date2;
+    }
+
+</script>
+

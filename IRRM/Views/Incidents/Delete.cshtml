@@ -1,0 +1,240 @@
+﻿@model IRRM.Models.Incident
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Incident</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OnBehalfReporting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OnBehalfReporting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReporterName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReporterName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReporterEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReporterEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReporterDesignation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReporterDesignation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReporterBranch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReporterBranch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReporterPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReporterPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActionTaken)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActionTaken)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Confidential)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Confidential)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvestigationComments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvestigationComments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvestigatorReport)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvestigatorReport)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FeedbackComments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FeedbackComments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentGUID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentGUID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Registered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Registered)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisteredOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisteredOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentCreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentCreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventSubType_T.EventSubtype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventSubType_T.EventSubtype)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventType_T.Prefix)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventType_T.Prefix)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentFeedbackType_M.IncidentFeedbackType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentFeedbackType_M.IncidentFeedbackType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentStatus_M.IncidentStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentStatus_M.IncidentStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentSubTypes_M.IncidentSubType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentSubTypes_M.IncidentSubType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentTypes_M.IncidentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentTypes_M.IncidentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location_M.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location_M.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users_M.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users_M.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Branch_M.Branch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Branch_M.Branch)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

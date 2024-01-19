@@ -1,0 +1,185 @@
+﻿@model IEnumerable<IRRM.Models.Incident>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IncidentNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OnBehalfReporting)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReporterName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReporterEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReporterDesignation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReporterBranch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReporterPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncidentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActionTaken)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Confidential)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvestigationComments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvestigatorReport)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeedbackComments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncidentGUID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registered)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegisteredOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncidentCreatedDate)
+        </th>
+    
+        <th>
+            @Html.DisplayNameFor(model => model.EventType_T.Prefix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncidentFeedbackType_M.IncidentFeedbackType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncidentStatus_M.IncidentStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncidentSubTypes_M.IncidentSubType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncidentTypes_M.IncidentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location_M.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Users_M.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Branch_M.Branch)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncidentNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OnBehalfReporting)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReporterName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReporterEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReporterDesignation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReporterBranch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReporterPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncidentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActionTaken)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Confidential)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvestigationComments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvestigatorReport)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeedbackComments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncidentGUID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Registered)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegisteredOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncidentCreatedDate)
+        </td>
+   
+        <td>
+            @Html.DisplayFor(modelItem => item.EventType_T.Prefix)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncidentFeedbackType_M.IncidentFeedbackType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncidentStatus_M.IncidentStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncidentSubTypes_M.IncidentSubType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncidentTypes_M.IncidentType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location_M.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Users_M.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Branch_M.Branch)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IncidentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IncidentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IncidentID })
+        </td>
+    </tr>
+}
+
+</table>

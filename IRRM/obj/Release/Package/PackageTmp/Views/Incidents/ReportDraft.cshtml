@@ -1,0 +1,421 @@
+﻿@model IRRM.Models.Incident
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Incident Report</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style>
+        body, table {
+            font-family: Arial;
+            font-size: 16px;
+        }
+
+        .clear {
+            clear: both
+        }
+    </style>
+    <script>
+        function printme() {
+            window.print();
+        }
+    </script>
+</head>
+<body align="center">
+    <div style="width:80%;text-align:left;margin:0 auto;padding:30px;">
+        <div style="text-align:center"><img style="width:50%;" src="@Url.Content("~/assets/images/MElogo.png")" /></div>
+        <div style="float:right"><i class="fa fa-print" onclick="printme()" style="font-size:18px;color:red;cursor:pointer"></i></div>
+        <br class="clear" />
+        <br class="clear" />
+
+        <div style="border:2px solid #1c8390"></div>
+         
+        <br class="clear" />
+        <div style="text-align:center"><h1 style="text-transform:uppercase;text-decoration:underline">EVENT # @Model.IncidentNo</h1></div>
+
+
+        <table>
+            <tr>
+                <td style="font-weight:bold;text-decoration:underline;"><h3>EVENT DETAILS (DRAFT REPORT)</h3></td>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li>
+                            <table>
+                                <tr>
+                                    <td><b>Incident Type:</b></td>
+                                    <td>@Model.IncidentTypes_M.IncidentType</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>
+                            <table>
+                                <tr>
+                                    <td><b>Incident Sub Type:</b></td>
+                                    <td>@Model.IncidentSubTypes_M.IncidentSubType</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>
+                            <table>
+                                <tr>
+                                    <td><b>Type of Event:</b></td>
+                                    <td>@Model.EventType_SM.EventType</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>
+                            <table>
+                                <tr>
+                                    <td><b>Date of Event :</b></td>
+                                    <td>@Model.IncidentDate</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>
+                            <table>
+                                <tr>
+                                    <td><b>Exact Location of Event :</b></td>
+                                    <td>@Model.Location_M.Location</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>
+                            <table>
+                                <tr>
+                                    <td><b>Harm Score :</b> </td>
+                                    <td>
+                                        @Model.IncidentHarmScore_M.IncidentHarmScore
+                                    </td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>
+                            <table>
+                                <tr>
+                                    <td><b>Event Registered On :</b></td>
+                                    <td>@Convert.ToDateTime(Model.RegisteredOn).ToString("dd-MM-yyyy")</td>
+                                </tr>
+                            </table>
+                        </li>
+
+                    </ul>
+                </td>
+            </tr>
+
+
+
+
+
+
+
+        </table>
+
+
+
+        @if (ViewBag.IncPatients.Count != 0)
+        {
+            
+            <br class="clear" />
+            <h3>PATIENT INFOMATION </h3>
+        }
+        @foreach (var pat in ViewBag.IncPatients)
+        {
+            <ul>
+
+                <li>
+                    <table>
+                        <tr>
+                            <td colspan="2"><b>Name : </b>@pat.Name</td>
+                        </tr>
+                    </table>
+                </li>
+                <li>
+                    <table>
+                        <tr>
+                            <td><b>Identity No. :</b> @pat.PatientIdn</td>
+                            <td><b>Gender :</b> @pat.Gender</td>
+                        </tr>
+                    </table>
+                </li>
+                <li>
+                    <table>
+                        <tr>
+                            <td><b>Phone :</b> @pat.Phone</td>
+                            <td><b>Date of Birth :</b> @Convert.ToDateTime(pat.DOB).ToString("dd-MM-yyyy")</td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+
+        }
+       
+        <br class="clear" />
+
+        <h3>PEOPLE INVOLVED </h3>
+
+        @foreach (var incpeo in ViewBag.IncidentPeople)
+        {
+            <ul>
+                @if (incpeo.IncidentRelation.Trim() == "Lead Investigator")
+                {
+
+                    <li>
+                        <b>Lead Investigator :</b> @incpeo.Name - @incpeo.Designation
+                    </li>
+
+                }
+                @if (incpeo.IncidentRelation.Trim() == "Additional Investigator")
+                {
+
+                    <li>
+                        <b>Additional Investigator :</b> @incpeo.Name - @incpeo.Designation
+                    </li>
+
+                }
+                @if (incpeo.IncidentRelation.Trim() == "Witness")
+                {
+                    <li>
+                        <b>Witness :</b> @incpeo.Name
+                    </li>
+
+                }
+                @if (incpeo.IncidentRelation.Trim() == "Complainant")
+                {
+
+                    <li>
+                        <b>Complainant  :</b> @incpeo.Name
+                    </li>
+
+                }
+                @if (incpeo.IncidentRelation.Trim() == "Defendant")
+                {
+
+                    <li>
+                        <b>Defendant :</b> @incpeo.Name
+                    </li>
+
+                }
+            </ul>
+        }
+
+
+        <br class="clear" />
+
+        <h3>EVENT DESCRIPTION </h3>
+        <ul>
+            <li>
+                @Model.InvestigatorReport
+            </li>
+        </ul>
+        <br class="clear" />
+
+
+        <h3>OUTCOME </h3>
+        <div class="col-md-12">
+
+            @{
+                int IncidentMainOutcomeID = 0;
+                int IncidentSubOutcomeID = 0;
+            }
+            @foreach (var imrcqpM in ViewBag._IncidentOutcomeAnwser)
+            {
+                if (IncidentMainOutcomeID != imrcqpM.IncidentMainOutcomeID)
+                {
+                    IncidentMainOutcomeID = imrcqpM.IncidentMainOutcomeID;
+                    <div class="table-bordered col-md-8" style="margin-bottom:20px;">
+                        <div class="col-md-12">
+                            <br style="clear:both" />
+                            <b style="font-size:18px;">@imrcqpM.IncidentMainOutcome</b>
+                            @if (ViewBag.roleflag == 0)
+                            {
+                                <i class='fa fa-trash pull-right' style='color:red;cursor:pointer' onclick='DeleteMainOutcomeAns(@imrcqpM.IncidentMainOutcomeID,@Model.IncidentID)'></i>
+                            }
+                            @foreach (var imrcqp in ViewBag._IncidentOutcomeAnwser)
+                            {
+                                if (imrcqpM.IncidentMainOutcomeID == imrcqp.IncidentMainOutcomeID)
+                                {
+                                    if (IncidentSubOutcomeID != imrcqp.IncidentSubOutcomeID)
+                                    {
+                                        <br style="clear:both" />
+                                        <br style="clear:both" />
+                                        <b>@imrcqp.IncidentSubOutcome</b>
+                                        IncidentSubOutcomeID = imrcqp.IncidentSubOutcomeID;
+                                    }
+                                    if (imrcqp.AnswerType == 1)
+                                    {
+                                        <br style="clear:both" />
+                                        <div class="col-md-8">
+                                            <p>@imrcqp.Answer</p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <br style="clear:both" />
+                                        <div class="col-md-8">
+                                            <p><i class="fa fa-check-square"></i>&nbsp;&nbsp;@Html.Raw(imrcqp.Answer.Replace(",", "<br><i class='fa fa-check-square'></i>&nbsp;&nbsp;"))</p>
+                                        </div>
+                                    }
+
+
+                                }
+                            }
+
+
+                        </div>
+                    </div>
+                }
+
+
+            }
+
+
+            @Model.Outcome
+
+        </div>
+        <br class="clear" />
+
+
+        <h3>ROOT CAUSE ANALYSIS </h3>
+
+        <div class="col-md-12">
+
+            @{
+                int IncidentMainRootCauseID = 0;
+                int IncidentSubRootCauseID = 0;
+            }
+            @foreach (var imrcqpM in ViewBag._IncidentRootCauseAnwser)
+            {
+                if (IncidentMainRootCauseID != imrcqpM.IncidentMainRootCauseID)
+                {
+                    IncidentMainRootCauseID = imrcqpM.IncidentMainRootCauseID;
+                    <div class="table-bordered col-md-8" style="margin-bottom:20px;">
+                        <div class="col-md-12">
+                            <br style="clear:both" />
+                            <b style="font-size:18px;">@imrcqpM.IncidentMainRootCause</b>
+                            @if (ViewBag.roleflag == 0)
+                            {
+                                <i class='fa fa-trash pull-right' style='color:red;cursor:pointer' onclick='DeleteMainRootCauseAns(@imrcqpM.IncidentMainRootCauseID,@Model.IncidentID)'></i>
+                            }
+                            @foreach (var imrcqp in ViewBag._IncidentRootCauseAnwser)
+                            {
+                                if (imrcqpM.IncidentMainRootCauseID == imrcqp.IncidentMainRootCauseID)
+                                {
+                                    if (IncidentSubRootCauseID != imrcqp.IncidentSubRootCauseID)
+                                    {
+                                        <br style="clear:both" />
+                                        <br style="clear:both" />
+                                        <b>@imrcqp.IncidentSubRootCause</b>
+                                        IncidentSubRootCauseID = imrcqp.IncidentSubRootCauseID;
+                                    }
+                                    if (imrcqp.AnswerType == 1)
+                                    {
+                                        <br style="clear:both" />
+                                        <div class="col-md-8">
+                                            <p>@imrcqp.Answer</p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <br style="clear:both" />
+                                        <div class="col-md-8">
+                                            <p><i class="fa fa-check-square"></i>&nbsp;&nbsp;@Html.Raw(imrcqp.Answer.Replace(",", "<br><i class='fa fa-check-square'></i>&nbsp;&nbsp;"))</p>
+                                        </div>
+                                    }
+
+
+                                }
+                            }
+
+
+                        </div>
+                    </div>
+                }
+
+
+            }
+
+
+
+
+        </div>
+        <br class="clear" />
+
+        <h3>REMEDIAL ACTION </h3>
+        <ul>
+            <li>
+                @Model.RemedialAction
+            </li>
+        </ul>
+
+        <br class="clear" />
+        <h3>CONCLUSIONS</h3>
+        <ul>
+            <li>
+                @Model.InvestigationConclusion
+            </li>
+        </ul>
+
+        <br class="clear" />
+        <h3>RECOMMENDATIONS </h3>
+        <ul>
+            @foreach (var ir in ViewBag.IncidentRecommendations)
+            {
+                <li>
+                    @ir.Recommendation
+                </li>
+            }
+        </ul>
+
+
+
+        <br class="clear" />
+
+        <br class="clear" />
+        @*<table style="width:100%">
+                <tr>
+                    <td>
+                        <h4>Lead Investigator Signature</h4>
+                        @foreach (var incpeo in ViewBag.IncidentPeople)
+                        {
+                            if (incpeo.IncidentRelation == "Lead Investigator")
+                            {
+                                <span>@incpeo.Name</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <h4>Additional Investigator Signature</h4>
+                        @foreach (var incpeo in ViewBag.IncidentPeople)
+                        {
+
+
+                            if (incpeo.IncidentRelation == "Additional Investigator")
+                            {
+                                <span>@incpeo.Name</span>
+                            }
+                        }
+                    </td>
+                </tr>
+            </table>*@
+
+
+        <br class="clear" />
+        <br class="clear" /><br class="clear" />
+        <br class="clear" />
+        <div style="border:2px solid #1c8390"></div>
+        @*<br class="clear" />
+            <img src="@Url.Content("~/assets/images/MElogo.png")" width="100" align="middle" />
+
+            <br class="clear" />*@
+
+
+    </div>
+</body>
+</html>

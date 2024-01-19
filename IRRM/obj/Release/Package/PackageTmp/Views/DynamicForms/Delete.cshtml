@@ -1,0 +1,50 @@
+﻿@model IRRM.Models.DynamicForm
+
+@{ 
+    Layout = null;
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<h4>@Html.DisplayFor(model => model.DFormName)</h4>
+<div>
+ 
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "delform" })) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            
+        </div>
+    }
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#delform").submit(function (e) {
+            e.preventDefault();
+            var formdata = new FormData(this);
+
+          //  alert($("#DFormID").val());
+            $.ajax({
+                method: "POST",
+                url: "@Url.Content("~/DynamicForms/DeleteConfirmed")",
+                data: formdata,
+                mimeTypes: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                   // alert('Successfully deleted!');
+                    window.location.href = "@Url.Content("~/DynamicForms")";
+                },
+                error: function () {
+                    alert('Error');
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,82 @@
+﻿@model IRRM.Models.TaskRelation_M
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>TaskRelation_M</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TaskRelation)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TaskRelation)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SendEmail)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SendEmail)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.EmailSubject)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.EmailSubject)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.EmailHeader)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.EmailHeader)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.EmailFooter)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.EmailFooter)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Active)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Active)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.TaskRelationID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

@@ -1,0 +1,170 @@
+﻿@model IRRM.Models.RiskRegister
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RiskRegister</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RRNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RRNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RiskRegisterNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiskRegisterNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Proactive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Proactive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RiskDescriptorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiskDescriptorID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Controlsinplace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Controlsinplace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adequacy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adequacy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RARating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RARating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RARiskLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RARiskLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RRRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RRRating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RRRiskLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RRRiskLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Incident.IncidentNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Incident.IncidentNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RiskCategory_M.RiskCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiskCategory_M.RiskCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RiskCost_M.RiskCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiskCost_M.RiskCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RiskStatus_M.RiskStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiskStatus_M.RiskStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RiskStrategy_M.RiskStrategy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiskStrategy_M.RiskStrategy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RiskRegisterID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

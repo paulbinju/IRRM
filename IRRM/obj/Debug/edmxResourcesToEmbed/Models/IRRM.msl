@@ -1,0 +1,1197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IRRMModelStoreContainer" CdmEntityContainer="IRRMEntities">
+    <EntitySetMapping Name="AnswerType_SM">
+      <EntityTypeMapping TypeName="IRRMModel.AnswerType_SM">
+        <MappingFragment StoreEntitySet="AnswerType_SM">
+          <ScalarProperty Name="AnswerTypeID" ColumnName="AnswerTypeID" />
+          <ScalarProperty Name="AnswerType" ColumnName="AnswerType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Branch_M">
+      <EntityTypeMapping TypeName="IRRMModel.Branch_M">
+        <MappingFragment StoreEntitySet="Branch_M">
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Department_M">
+      <EntityTypeMapping TypeName="IRRMModel.Department_M">
+        <MappingFragment StoreEntitySet="Department_M">
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Department_M2">
+      <EntityTypeMapping TypeName="IRRMModel.Department_M2">
+        <MappingFragment StoreEntitySet="Department_M2">
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentAccessGroup_M">
+      <EntityTypeMapping TypeName="IRRMModel.DocumentAccessGroup_M">
+        <MappingFragment StoreEntitySet="DocumentAccessGroup_M">
+          <ScalarProperty Name="DocAccessGroupID" ColumnName="DocAccessGroupID" />
+          <ScalarProperty Name="AccessGroup" ColumnName="AccessGroup" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentCategory_M">
+      <EntityTypeMapping TypeName="IRRMModel.DocumentCategory_M">
+        <MappingFragment StoreEntitySet="DocumentCategory_M">
+          <ScalarProperty Name="DocCategoryID" ColumnName="DocCategoryID" />
+          <ScalarProperty Name="DocCode" ColumnName="DocCode" />
+          <ScalarProperty Name="DocCategory" ColumnName="DocCategory" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentStakeholder_M">
+      <EntityTypeMapping TypeName="IRRMModel.DocumentStakeholder_M">
+        <MappingFragment StoreEntitySet="DocumentStakeholder_M">
+          <ScalarProperty Name="StakeholderID" ColumnName="StakeholderID" />
+          <ScalarProperty Name="Stakeholder" ColumnName="Stakeholder" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentStatus_SM">
+      <EntityTypeMapping TypeName="IRRMModel.DocumentStatus_SM">
+        <MappingFragment StoreEntitySet="DocumentStatus_SM">
+          <ScalarProperty Name="DocStatusID" ColumnName="DocStatusID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentStatus_T">
+      <EntityTypeMapping TypeName="IRRMModel.DocumentStatus_T">
+        <MappingFragment StoreEntitySet="DocumentStatus_T">
+          <ScalarProperty Name="DocumentStatusID" ColumnName="DocumentStatusID" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentSubCategory_M">
+      <EntityTypeMapping TypeName="IRRMModel.DocumentSubCategory_M">
+        <MappingFragment StoreEntitySet="DocumentSubCategory_M">
+          <ScalarProperty Name="DocSubCategoryID" ColumnName="DocSubCategoryID" />
+          <ScalarProperty Name="DocCategoryID" ColumnName="DocCategoryID" />
+          <ScalarProperty Name="DocSubCategory" ColumnName="DocSubCategory" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DynamicControls">
+      <EntityTypeMapping TypeName="IRRMModel.DynamicControl">
+        <MappingFragment StoreEntitySet="DynamicControls">
+          <ScalarProperty Name="ControlID" ColumnName="ControlID" />
+          <ScalarProperty Name="ControlTypeID" ColumnName="ControlTypeID" />
+          <ScalarProperty Name="ControlName" ColumnName="ControlName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DynamicControlTypes">
+      <EntityTypeMapping TypeName="IRRMModel.DynamicControlType">
+        <MappingFragment StoreEntitySet="DynamicControlType">
+          <ScalarProperty Name="DControlID" ColumnName="DControlID" />
+          <ScalarProperty Name="DControlType" ColumnName="DControlType" />
+          <ScalarProperty Name="HasValues" ColumnName="HasValues" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DynamicControlValues">
+      <EntityTypeMapping TypeName="IRRMModel.DynamicControlValue">
+        <MappingFragment StoreEntitySet="DynamicControlValues">
+          <ScalarProperty Name="ControlValueID" ColumnName="ControlValueID" />
+          <ScalarProperty Name="ControlTypeID" ColumnName="ControlTypeID" />
+          <ScalarProperty Name="ControlID" ColumnName="ControlID" />
+          <ScalarProperty Name="ControlValue" ColumnName="ControlValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DynamicForms">
+      <EntityTypeMapping TypeName="IRRMModel.DynamicForm">
+        <MappingFragment StoreEntitySet="DynamicForm">
+          <ScalarProperty Name="DFormID" ColumnName="DFormID" />
+          <ScalarProperty Name="DFormName" ColumnName="DFormName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DynamicForm_Control">
+      <EntityTypeMapping TypeName="IRRMModel.DynamicForm_Control">
+        <MappingFragment StoreEntitySet="DynamicForm-Control">
+          <ScalarProperty Name="DFormControlID" ColumnName="DFormControlID" />
+          <ScalarProperty Name="DFormID" ColumnName="DFormID" />
+          <ScalarProperty Name="DControlID" ColumnName="DControlID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DynamicReports_M">
+      <EntityTypeMapping TypeName="IRRMModel.DynamicReports_M">
+        <MappingFragment StoreEntitySet="DynamicReports_M">
+          <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+          <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventType_SM">
+      <EntityTypeMapping TypeName="IRRMModel.EventType_SM">
+        <MappingFragment StoreEntitySet="EventType_SM">
+          <ScalarProperty Name="EventTypeID" ColumnName="EventTypeID" />
+          <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+          <ScalarProperty Name="EventType" ColumnName="EventType" />
+          <ScalarProperty Name="RegistryNo" ColumnName="RegistryNo" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Incident_Comments">
+      <EntityTypeMapping TypeName="IRRMModel.Incident_Comments">
+        <MappingFragment StoreEntitySet="Incident_Comments">
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CommentDateTime" ColumnName="CommentDateTime" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Incident_Status_T">
+      <EntityTypeMapping TypeName="IRRMModel.Incident_Status_T">
+        <MappingFragment StoreEntitySet="Incident_Status_T">
+          <ScalarProperty Name="Incident_StatusID" ColumnName="Incident_StatusID" />
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="IncidentStatusID" ColumnName="IncidentStatusID" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentDocument_T">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentDocument_T">
+        <MappingFragment StoreEntitySet="IncidentDocument_T">
+          <ScalarProperty Name="IncidentDocumentID" ColumnName="IncidentDocumentID" />
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="DocumentTypeID" ColumnName="DocumentTypeID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="DocGUID" ColumnName="DocGUID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentFeedbackType_M">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentFeedbackType_M">
+        <MappingFragment StoreEntitySet="IncidentFeedbackType_M">
+          <ScalarProperty Name="IncidentFeedbackTypeID" ColumnName="IncidentFeedbackTypeID" />
+          <ScalarProperty Name="IncidentFeedbackType" ColumnName="IncidentFeedbackType" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentHarmGroup_M">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentHarmGroup_M">
+        <MappingFragment StoreEntitySet="IncidentHarmGroup_M">
+          <ScalarProperty Name="IncidentHarmGroupID" ColumnName="IncidentHarmGroupID" />
+          <ScalarProperty Name="IncidentHarmGroup" ColumnName="IncidentHarmGroup" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentHarmScore_M">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentHarmScore_M">
+        <MappingFragment StoreEntitySet="IncidentHarmScore_M">
+          <ScalarProperty Name="IncidentHarmScoreID" ColumnName="IncidentHarmScoreID" />
+          <ScalarProperty Name="IncidentHarmGroupID" ColumnName="IncidentHarmGroupID" />
+          <ScalarProperty Name="IncidentHarmScoreCode" ColumnName="IncidentHarmScoreCode" />
+          <ScalarProperty Name="IncidentHarmScore" ColumnName="IncidentHarmScore" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentHistories">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentHistory">
+        <MappingFragment StoreEntitySet="IncidentHistory">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="HistoryDate" ColumnName="HistoryDate" />
+          <ScalarProperty Name="PageContent" ColumnName="PageContent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Incident_Interview_T">
+      <EntityTypeMapping TypeName="IRRMModel.Incident_Interview_T">
+        <MappingFragment StoreEntitySet="Incident-Interview_T">
+          <ScalarProperty Name="IncidentInterviewID" ColumnName="IncidentInterviewID" />
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="InterviewerID" ColumnName="InterviewerID" />
+          <ScalarProperty Name="IncidentPeopleID" ColumnName="IncidentPeopleID" />
+          <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentMainOutcome_M">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentMainOutcome_M">
+        <MappingFragment StoreEntitySet="IncidentMainOutcome_M">
+          <ScalarProperty Name="IncidentMainOutcomeID" ColumnName="IncidentMainOutcomeID" />
+          <ScalarProperty Name="IncidentMainOutcome" ColumnName="IncidentMainOutcome" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentMainRootCause_M">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentMainRootCause_M">
+        <MappingFragment StoreEntitySet="IncidentMainRootCause_M">
+          <ScalarProperty Name="IncidentMainRootCauseID" ColumnName="IncidentMainRootCauseID" />
+          <ScalarProperty Name="IncidentMainRootCause" ColumnName="IncidentMainRootCause" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Incident_People_T">
+      <EntityTypeMapping TypeName="IRRMModel.Incident_People_T">
+        <MappingFragment StoreEntitySet="Incident-People_T">
+          <ScalarProperty Name="IncidentPeopleID" ColumnName="IncidentPeopleID" />
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="IncidentPeopleInvolvedID" ColumnName="IncidentPeopleInvolvedID" />
+          <ScalarProperty Name="IncidentRelationID" ColumnName="IncidentRelationID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+          <ScalarProperty Name="IdentityNo" ColumnName="IdentityNo" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IsPatientInjured" ColumnName="IsPatientInjured" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="RegNo" ColumnName="RegNo" />
+          <ScalarProperty Name="CVRNo" ColumnName="CVRNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentPeopleInvolved_M">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentPeopleInvolved_M">
+        <MappingFragment StoreEntitySet="IncidentPeopleInvolved_M">
+          <ScalarProperty Name="IncidentPeopleInvolvedID" ColumnName="IncidentPeopleInvolvedID" />
+          <ScalarProperty Name="IncidentPeopleInvolved" ColumnName="IncidentPeopleInvolved" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentPriorities_M">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentPriorities_M">
+        <MappingFragment StoreEntitySet="IncidentPriorities_M">
+          <ScalarProperty Name="IncidentPriorityID" ColumnName="IncidentPriorityID" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="InvestigationDays" ColumnName="InvestigationDays" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Incident_Recommendation_T">
+      <EntityTypeMapping TypeName="IRRMModel.Incident_Recommendation_T">
+        <MappingFragment StoreEntitySet="Incident-Recommendation_T">
+          <ScalarProperty Name="RecommendationID" ColumnName="RecommendationID" />
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="Recommendation" ColumnName="Recommendation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentRegistery_T">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentRegistery_T">
+        <MappingFragment StoreEntitySet="IncidentRegistery_T">
+          <ScalarProperty Name="IncidentRegisteryID" ColumnName="IncidentRegisteryID" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentRelation_M">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentRelation_M">
+        <MappingFragment StoreEntitySet="IncidentRelation_M">
+          <ScalarProperty Name="IncidentRelationID" ColumnName="IncidentRelationID" />
+          <ScalarProperty Name="IncidentRelation" ColumnName="IncidentRelation" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="SendEmail" ColumnName="SendEmail" />
+          <ScalarProperty Name="EmailSubject" ColumnName="EmailSubject" />
+          <ScalarProperty Name="EmailHeader" ColumnName="EmailHeader" />
+          <ScalarProperty Name="EmailFooter" ColumnName="EmailFooter" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Incidents">
+      <EntityTypeMapping TypeName="IRRMModel.Incident">
+        <MappingFragment StoreEntitySet="Incidents">
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="EventTypeID" ColumnName="EventTypeID" />
+          <ScalarProperty Name="IncidentNo" ColumnName="IncidentNo" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="OnBehalfReporting" ColumnName="OnBehalfReporting" />
+          <ScalarProperty Name="ReporterName" ColumnName="ReporterName" />
+          <ScalarProperty Name="ReporterEmail" ColumnName="ReporterEmail" />
+          <ScalarProperty Name="ReporterDesignation" ColumnName="ReporterDesignation" />
+          <ScalarProperty Name="ReporterBranch" ColumnName="ReporterBranch" />
+          <ScalarProperty Name="ReporterPhone" ColumnName="ReporterPhone" />
+          <ScalarProperty Name="IncidentDate" ColumnName="IncidentDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ActionTaken" ColumnName="ActionTaken" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="IncidentTypeID" ColumnName="IncidentTypeID" />
+          <ScalarProperty Name="IncidentSubTypeID" ColumnName="IncidentSubTypeID" />
+          <ScalarProperty Name="Confidential" ColumnName="Confidential" />
+          <ScalarProperty Name="InvestigationComments" ColumnName="InvestigationComments" />
+          <ScalarProperty Name="InvestigatorReport" ColumnName="InvestigatorReport" />
+          <ScalarProperty Name="InvestigationConclusion" ColumnName="InvestigationConclusion" />
+          <ScalarProperty Name="IncidentFeedbackTypeID" ColumnName="IncidentFeedbackTypeID" />
+          <ScalarProperty Name="FeedbackComments" ColumnName="FeedbackComments" />
+          <ScalarProperty Name="IncidentGUID" ColumnName="IncidentGUID" />
+          <ScalarProperty Name="Registered" ColumnName="Registered" />
+          <ScalarProperty Name="RegisteredOn" ColumnName="RegisteredOn" />
+          <ScalarProperty Name="IncidentCreatedDate" ColumnName="IncidentCreatedDate" />
+          <ScalarProperty Name="Outcome" ColumnName="Outcome" />
+          <ScalarProperty Name="RemedialAction" ColumnName="RemedialAction" />
+          <ScalarProperty Name="IncidentStatusID" ColumnName="IncidentStatusID" />
+          <ScalarProperty Name="PriorityID" ColumnName="PriorityID" />
+          <ScalarProperty Name="CreatorCanComment" ColumnName="CreatorCanComment" />
+          <ScalarProperty Name="HarmScoreID" ColumnName="HarmScoreID" />
+          <ScalarProperty Name="RootCauseAnalysis" ColumnName="RootCauseAnalysis" />
+          <ScalarProperty Name="RiskAnalysisRequired" ColumnName="RiskAnalysisRequired" />
+          <ScalarProperty Name="RiskAnalysisCompleted" ColumnName="RiskAnalysisCompleted" />
+          <ScalarProperty Name="ReOpened" ColumnName="ReOpened" />
+          <ScalarProperty Name="ReOpenRemarks" ColumnName="ReOpenRemarks" />
+          <ScalarProperty Name="FeedbackTypeID" ColumnName="FeedbackTypeID" />
+          <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+          <ScalarProperty Name="InvestigationDueDate" ColumnName="InvestigationDueDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Incidents_MainOutcome_T">
+      <EntityTypeMapping TypeName="IRRMModel.Incidents_MainOutcome_T">
+        <MappingFragment StoreEntitySet="Incidents_MainOutcome_T">
+          <ScalarProperty Name="IncidentMRCID" ColumnName="IncidentMRCID" />
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="IncidentMainOutcomeID" ColumnName="IncidentMainOutcomeID" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Answered" ColumnName="Answered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Incidents_MainRootCause_T">
+      <EntityTypeMapping TypeName="IRRMModel.Incidents_MainRootCause_T">
+        <MappingFragment StoreEntitySet="Incidents_MainRootCause_T">
+          <ScalarProperty Name="IncidentMRCID" ColumnName="IncidentMRCID" />
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="IncidentMainRootCauseID" ColumnName="IncidentMainRootCauseID" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Answered" ColumnName="Answered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentStatus_M">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentStatus_M">
+        <MappingFragment StoreEntitySet="IncidentStatus_M">
+          <ScalarProperty Name="IncidentStatusID" ColumnName="IncidentStatusID" />
+          <ScalarProperty Name="IncidentStatus" ColumnName="IncidentStatus" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentSubOutcome_M">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentSubOutcome_M">
+        <MappingFragment StoreEntitySet="IncidentSubOutcome_M">
+          <ScalarProperty Name="IncidentSubOutcomeID" ColumnName="IncidentSubOutcomeID" />
+          <ScalarProperty Name="IncidentMainOutcomeID" ColumnName="IncidentMainOutcomeID" />
+          <ScalarProperty Name="IncidentSubOutcome" ColumnName="IncidentSubOutcome" />
+          <ScalarProperty Name="AnswerType" ColumnName="AnswerType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentSubOutcomeAnswer_T">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentSubOutcomeAnswer_T">
+        <MappingFragment StoreEntitySet="IncidentSubOutcomeAnswer_T">
+          <ScalarProperty Name="SubOutcomeAnswerID" ColumnName="SubOutcomeAnswerID" />
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="IncidentSubOutcomeID" ColumnName="IncidentSubOutcomeID" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="AnswerTypeID" ColumnName="AnswerTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentSubOutcomeAnswerChoice_T">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentSubOutcomeAnswerChoice_T">
+        <MappingFragment StoreEntitySet="IncidentSubOutcomeAnswerChoice_T">
+          <ScalarProperty Name="AnswerChoiceID" ColumnName="AnswerChoiceID" />
+          <ScalarProperty Name="IncidentSubOutcomeID" ColumnName="IncidentSubOutcomeID" />
+          <ScalarProperty Name="ChoiceAnswer" ColumnName="ChoiceAnswer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentSubRootCause_M">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentSubRootCause_M">
+        <MappingFragment StoreEntitySet="IncidentSubRootCause_M">
+          <ScalarProperty Name="IncidentSubRootCauseID" ColumnName="IncidentSubRootCauseID" />
+          <ScalarProperty Name="IncidentMainRootCauseID" ColumnName="IncidentMainRootCauseID" />
+          <ScalarProperty Name="IncidentSubRootCause" ColumnName="IncidentSubRootCause" />
+          <ScalarProperty Name="AnswerType" ColumnName="AnswerType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentSubRootCauseAnswer_T">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentSubRootCauseAnswer_T">
+        <MappingFragment StoreEntitySet="IncidentSubRootCauseAnswer_T">
+          <ScalarProperty Name="SubRootCauseAnswerID" ColumnName="SubRootCauseAnswerID" />
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="IncidentSubRootCauseID" ColumnName="IncidentSubRootCauseID" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="AnswerTypeID" ColumnName="AnswerTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentSubRootCauseAnswerChoice_T">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentSubRootCauseAnswerChoice_T">
+        <MappingFragment StoreEntitySet="IncidentSubRootCauseAnswerChoice_T">
+          <ScalarProperty Name="AnswerChoiceID" ColumnName="AnswerChoiceID" />
+          <ScalarProperty Name="IncidentSubRootCauseID" ColumnName="IncidentSubRootCauseID" />
+          <ScalarProperty Name="ChoiceAnswer" ColumnName="ChoiceAnswer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentSubTypes_M">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentSubTypes_M">
+        <MappingFragment StoreEntitySet="IncidentSubTypes_M">
+          <ScalarProperty Name="IncidentSubTypeID" ColumnName="IncidentSubTypeID" />
+          <ScalarProperty Name="IncidentTypeID" ColumnName="IncidentTypeID" />
+          <ScalarProperty Name="IncidentPriorityID" ColumnName="IncidentPriorityID" />
+          <ScalarProperty Name="IncidentSubType" ColumnName="IncidentSubType" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="RiskAssessment" ColumnName="RiskAssessment" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncidentTypes_M">
+      <EntityTypeMapping TypeName="IRRMModel.IncidentTypes_M">
+        <MappingFragment StoreEntitySet="IncidentTypes_M">
+          <ScalarProperty Name="IncidentTypeID" ColumnName="IncidentTypeID" />
+          <ScalarProperty Name="IncidentPriorityID" ColumnName="IncidentPriorityID" />
+          <ScalarProperty Name="IncidentType" ColumnName="IncidentType" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Location_M">
+      <EntityTypeMapping TypeName="IRRMModel.Location_M">
+        <MappingFragment StoreEntitySet="Location_M">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Logs">
+      <EntityTypeMapping TypeName="IRRMModel.Log">
+        <MappingFragment StoreEntitySet="Logs">
+          <ScalarProperty Name="LogID" ColumnName="LogID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ActivityDateTime" ColumnName="ActivityDateTime" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskCategory_M">
+      <EntityTypeMapping TypeName="IRRMModel.RiskCategory_M">
+        <MappingFragment StoreEntitySet="RiskCategory_M">
+          <ScalarProperty Name="RiskCategoryID" ColumnName="RiskCategoryID" />
+          <ScalarProperty Name="RiskCategory" ColumnName="RiskCategory" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskCost_M">
+      <EntityTypeMapping TypeName="IRRMModel.RiskCost_M">
+        <MappingFragment StoreEntitySet="RiskCost_M">
+          <ScalarProperty Name="RiskCostID" ColumnName="RiskCostID" />
+          <ScalarProperty Name="RiskCost" ColumnName="RiskCost" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskDescriptor_M">
+      <EntityTypeMapping TypeName="IRRMModel.RiskDescriptor_M">
+        <MappingFragment StoreEntitySet="RiskDescriptor_M">
+          <ScalarProperty Name="RiskDescriptorID" ColumnName="RiskDescriptorID" />
+          <ScalarProperty Name="RiskDescriptor" ColumnName="RiskDescriptor" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskFrequencyScore_M">
+      <EntityTypeMapping TypeName="IRRMModel.RiskFrequencyScore_M">
+        <MappingFragment StoreEntitySet="RiskFrequencyScore_M">
+          <ScalarProperty Name="RiskFrequencyScoreID" ColumnName="RiskFrequencyScoreID" />
+          <ScalarProperty Name="RiskFrequencyScore" ColumnName="RiskFrequencyScore" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskKeyStatus_T">
+      <EntityTypeMapping TypeName="IRRMModel.RiskKeyStatus_T">
+        <MappingFragment StoreEntitySet="RiskKeyStatus_T">
+          <ScalarProperty Name="RiskKeyStatusID" ColumnName="RiskKeyStatusID" />
+          <ScalarProperty Name="RiskKeyStatus" ColumnName="RiskKeyStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskKeyStatusDates_T">
+      <EntityTypeMapping TypeName="IRRMModel.RiskKeyStatusDates_T">
+        <MappingFragment StoreEntitySet="RiskKeyStatusDates_T">
+          <ScalarProperty Name="RiskKeyStatusDateID" ColumnName="RiskKeyStatusDateID" />
+          <ScalarProperty Name="RiskRegisterID" ColumnName="RiskRegisterID" />
+          <ScalarProperty Name="RiskKeyStatusID" ColumnName="RiskKeyStatusID" />
+          <ScalarProperty Name="StatusDate" ColumnName="StatusDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskLevel_M">
+      <EntityTypeMapping TypeName="IRRMModel.RiskLevel_M">
+        <MappingFragment StoreEntitySet="RiskLevel_M">
+          <ScalarProperty Name="RiskLevelID" ColumnName="RiskLevelID" />
+          <ScalarProperty Name="RiskLevel" ColumnName="RiskLevel" />
+          <ScalarProperty Name="ActionTimeScale" ColumnName="ActionTimeScale" />
+          <ScalarProperty Name="ReviewTimeScale" ColumnName="ReviewTimeScale" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskLevel_M2">
+      <EntityTypeMapping TypeName="IRRMModel.RiskLevel_M2">
+        <MappingFragment StoreEntitySet="RiskLevel_M2">
+          <ScalarProperty Name="RiskLevelID" ColumnName="RiskLevelID" />
+          <ScalarProperty Name="RiskLevel" ColumnName="RiskLevel" />
+          <ScalarProperty Name="ActionTimeScale" ColumnName="ActionTimeScale" />
+          <ScalarProperty Name="ReviewTimeScale" ColumnName="ReviewTimeScale" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskProbability_M">
+      <EntityTypeMapping TypeName="IRRMModel.RiskProbability_M">
+        <MappingFragment StoreEntitySet="RiskProbability_M">
+          <ScalarProperty Name="RiskProbabilityID" ColumnName="RiskProbabilityID" />
+          <ScalarProperty Name="RiskFrequencyScoreID" ColumnName="RiskFrequencyScoreID" />
+          <ScalarProperty Name="RiskProbability" ColumnName="RiskProbability" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskScore_M">
+      <EntityTypeMapping TypeName="IRRMModel.RiskScore_M">
+        <MappingFragment StoreEntitySet="RiskScore_M">
+          <ScalarProperty Name="RiskScoreID" ColumnName="RiskScoreID" />
+          <ScalarProperty Name="RiskScore" ColumnName="RiskScore" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskSeverity_M">
+      <EntityTypeMapping TypeName="IRRMModel.RiskSeverity_M">
+        <MappingFragment StoreEntitySet="RiskSeverity_M">
+          <ScalarProperty Name="RiskSeverityID" ColumnName="RiskSeverityID" />
+          <ScalarProperty Name="RiskScoreID" ColumnName="RiskScoreID" />
+          <ScalarProperty Name="RiskDescriptorID" ColumnName="RiskDescriptorID" />
+          <ScalarProperty Name="RiskSeverity" ColumnName="RiskSeverity" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskStatus_M">
+      <EntityTypeMapping TypeName="IRRMModel.RiskStatus_M">
+        <MappingFragment StoreEntitySet="RiskStatus_M">
+          <ScalarProperty Name="RiskStatusID" ColumnName="RiskStatusID" />
+          <ScalarProperty Name="RiskStatus" ColumnName="RiskStatus" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskStrategy_M">
+      <EntityTypeMapping TypeName="IRRMModel.RiskStrategy_M">
+        <MappingFragment StoreEntitySet="RiskStrategy_M">
+          <ScalarProperty Name="RiskStrategyID" ColumnName="RiskStrategyID" />
+          <ScalarProperty Name="RiskStrategy" ColumnName="RiskStrategy" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskTemplate_M">
+      <EntityTypeMapping TypeName="IRRMModel.RiskTemplate_M">
+        <MappingFragment StoreEntitySet="RiskTemplate_M">
+          <ScalarProperty Name="RiskTemplateID" ColumnName="RiskTemplateID" />
+          <ScalarProperty Name="RiskTemplate" ColumnName="RiskTemplate" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Task_Comments">
+      <EntityTypeMapping TypeName="IRRMModel.Task_Comments">
+        <MappingFragment StoreEntitySet="Task_Comments">
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CommentDateTime" ColumnName="CommentDateTime" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Task_T">
+      <EntityTypeMapping TypeName="IRRMModel.Task_T">
+        <MappingFragment StoreEntitySet="Task_T">
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskCategory_M">
+      <EntityTypeMapping TypeName="IRRMModel.TaskCategory_M">
+        <MappingFragment StoreEntitySet="TaskCategory_M">
+          <ScalarProperty Name="TaskCategoryID" ColumnName="TaskCategoryID" />
+          <ScalarProperty Name="TaskCategory" ColumnName="TaskCategory" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Task_People_T">
+      <EntityTypeMapping TypeName="IRRMModel.Task_People_T">
+        <MappingFragment StoreEntitySet="Task-People_T">
+          <ScalarProperty Name="TaskPeopleID" ColumnName="TaskPeopleID" />
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="TaskPeopleInvolvedID" ColumnName="TaskPeopleInvolvedID" />
+          <ScalarProperty Name="TaskRelationID" ColumnName="TaskRelationID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="IdentityNo" ColumnName="IdentityNo" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="RegNo" ColumnName="RegNo" />
+          <ScalarProperty Name="CVRNo" ColumnName="CVRNo" />
+          <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskPeopleInvolved_M">
+      <EntityTypeMapping TypeName="IRRMModel.TaskPeopleInvolved_M">
+        <MappingFragment StoreEntitySet="TaskPeopleInvolved_M">
+          <ScalarProperty Name="TaskPeopleInvolvedID" ColumnName="TaskPeopleInvolvedID" />
+          <ScalarProperty Name="TaskPeopleInvolved" ColumnName="TaskPeopleInvolved" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskPriorities_M">
+      <EntityTypeMapping TypeName="IRRMModel.TaskPriorities_M">
+        <MappingFragment StoreEntitySet="TaskPriorities_M">
+          <ScalarProperty Name="TaskPriorityID" ColumnName="TaskPriorityID" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="InvestigationDays" ColumnName="InvestigationDays" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskRelation_M">
+      <EntityTypeMapping TypeName="IRRMModel.TaskRelation_M">
+        <MappingFragment StoreEntitySet="TaskRelation_M">
+          <ScalarProperty Name="TaskRelationID" ColumnName="TaskRelationID" />
+          <ScalarProperty Name="TaskRelation" ColumnName="TaskRelation" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="SendEmail" ColumnName="SendEmail" />
+          <ScalarProperty Name="EmailSubject" ColumnName="EmailSubject" />
+          <ScalarProperty Name="EmailHeader" ColumnName="EmailHeader" />
+          <ScalarProperty Name="EmailFooter" ColumnName="EmailFooter" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="IRRMModel.Task">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="TaskDueDate" ColumnName="TaskDueDate" />
+          <ScalarProperty Name="FeedbackType" ColumnName="FeedbackType" />
+          <ScalarProperty Name="Progress" ColumnName="Progress" />
+          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="Registered" ColumnName="Registered" />
+          <ScalarProperty Name="Registeredon" ColumnName="Registeredon" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+          <ScalarProperty Name="TaskNo" ColumnName="TaskNo" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="PriorityID" ColumnName="PriorityID" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+          <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+          <ScalarProperty Name="TaskCost" ColumnName="TaskCost" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="TaskStatusID" ColumnName="TaskStatusID" />
+          <ScalarProperty Name="OwnerNote" ColumnName="OwnerNote" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskStatus_M">
+      <EntityTypeMapping TypeName="IRRMModel.TaskStatus_M">
+        <MappingFragment StoreEntitySet="TaskStatus_M">
+          <ScalarProperty Name="TaskStatusID" ColumnName="TaskStatusID" />
+          <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Task_Status_T">
+      <EntityTypeMapping TypeName="IRRMModel.Task_Status_T">
+        <MappingFragment StoreEntitySet="Task-Status_T">
+          <ScalarProperty Name="Task_StatusID" ColumnName="Task_StatusID" />
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="TaskStatusID" ColumnName="TaskStatusID" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TemplateCategory_M">
+      <EntityTypeMapping TypeName="IRRMModel.TemplateCategory_M">
+        <MappingFragment StoreEntitySet="TemplateCategory_M">
+          <ScalarProperty Name="TemplateCategoryID" ColumnName="TemplateCategoryID" />
+          <ScalarProperty Name="TemplateCategory" ColumnName="TemplateCategory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRole_SM">
+      <EntityTypeMapping TypeName="IRRMModel.UserRole_SM">
+        <MappingFragment StoreEntitySet="UserRole_SM">
+          <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users_M">
+      <EntityTypeMapping TypeName="IRRMModel.Users_M">
+        <MappingFragment StoreEntitySet="Users_M">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="LicenseNo" ColumnName="LicenseNo" />
+          <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PeopleUser_V">
+      <EntityTypeMapping TypeName="IRRMModel.PeopleUser_V">
+        <MappingFragment StoreEntitySet="PeopleUser_V">
+          <ScalarProperty Name="TaskPeopleID" ColumnName="TaskPeopleID" />
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="IdentityNo" ColumnName="IdentityNo" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="RegNo" ColumnName="RegNo" />
+          <ScalarProperty Name="CVRNo" ColumnName="CVRNo" />
+          <ScalarProperty Name="Name2" ColumnName="Name2" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="TaskRelation" ColumnName="TaskRelation" />
+          <ScalarProperty Name="TaskPeopleInvolved" ColumnName="TaskPeopleInvolved" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskComment_V">
+      <EntityTypeMapping TypeName="IRRMModel.TaskComment_V">
+        <MappingFragment StoreEntitySet="TaskComment_V">
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CommentDateTime" ColumnName="CommentDateTime" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskIndex_V">
+      <EntityTypeMapping TypeName="IRRMModel.TaskIndex_V">
+        <MappingFragment StoreEntitySet="TaskIndex_V">
+          <ScalarProperty Name="TaskDueDate" ColumnName="TaskDueDate" />
+          <ScalarProperty Name="FeedbackType" ColumnName="FeedbackType" />
+          <ScalarProperty Name="Progress" ColumnName="Progress" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="TaskCategory" ColumnName="TaskCategory" />
+          <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+          <ScalarProperty Name="Expr3" ColumnName="Expr3" />
+          <ScalarProperty Name="Expr4" ColumnName="Expr4" />
+          <ScalarProperty Name="Expr5" ColumnName="Expr5" />
+          <ScalarProperty Name="Expr6" ColumnName="Expr6" />
+          <ScalarProperty Name="Expr7" ColumnName="Expr7" />
+          <ScalarProperty Name="Expr8" ColumnName="Expr8" />
+          <ScalarProperty Name="Expr9" ColumnName="Expr9" />
+          <ScalarProperty Name="Expr10" ColumnName="Expr10" />
+          <ScalarProperty Name="Expr11" ColumnName="Expr11" />
+          <ScalarProperty Name="Expr12" ColumnName="Expr12" />
+          <ScalarProperty Name="Expr13" ColumnName="Expr13" />
+          <ScalarProperty Name="Expr14" ColumnName="Expr14" />
+          <ScalarProperty Name="Expr15" ColumnName="Expr15" />
+          <ScalarProperty Name="Expr16" ColumnName="Expr16" />
+          <ScalarProperty Name="Expr17" ColumnName="Expr17" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="TriggeredBy" ColumnName="TriggeredBy" />
+          <ScalarProperty Name="Expr18" ColumnName="Expr18" />
+          <ScalarProperty Name="Expr19" ColumnName="Expr19" />
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="Registered" ColumnName="Registered" />
+          <ScalarProperty Name="Registeredon" ColumnName="Registeredon" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+          <ScalarProperty Name="TaskNo" ColumnName="TaskNo" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="PriorityID" ColumnName="PriorityID" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+          <ScalarProperty Name="TaskCost" ColumnName="TaskCost" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="TaskStatusID" ColumnName="TaskStatusID" />
+          <ScalarProperty Name="OwnerNote" ColumnName="OwnerNote" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+          <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskStatusUser_V">
+      <EntityTypeMapping TypeName="IRRMModel.TaskStatusUser_V">
+        <MappingFragment StoreEntitySet="TaskStatusUser_V">
+          <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
+          <ScalarProperty Name="TaskStatusID" ColumnName="TaskStatusID" />
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Task_StatusID" ColumnName="Task_StatusID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="RegistryNo" FunctionName="IRRMModel.Store.RegistryNo" />
+    <FunctionImportMapping FunctionImportName="spEventIncidentCountreport" FunctionName="IRRMModel.Store.spEventIncidentCountreport" />
+    <EntitySetMapping Name="DocumentType_SM">
+      <EntityTypeMapping TypeName="IRRMModel.DocumentType_SM">
+        <MappingFragment StoreEntitySet="DocumentType_SM">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+          <ScalarProperty Name="DocumentTypeID" ColumnName="DocumentTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskAssessors_T">
+      <EntityTypeMapping TypeName="IRRMModel.RiskAssessors_T">
+        <MappingFragment StoreEntitySet="RiskAssessors_T">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RiskID" ColumnName="RiskID" />
+          <ScalarProperty Name="RiskAssessorID" ColumnName="RiskAssessorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskAssessorUser_V">
+      <EntityTypeMapping TypeName="IRRMModel.RiskAssessorUser_V">
+        <MappingFragment StoreEntitySet="RiskAssessorUser_V">
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RiskID" ColumnName="RiskID" />
+          <ScalarProperty Name="RiskAssessorID" ColumnName="RiskAssessorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IRRMModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentCopyLocation_T">
+      <EntityTypeMapping TypeName="IRRMModel.DocumentCopyLocation_T">
+        <MappingFragment StoreEntitySet="DocumentCopyLocation_T">
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="DocCopyLocationID" ColumnName="DocCopyLocationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="IRRMModel.Document">
+        <MappingFragment StoreEntitySet="Documents">
+          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="SpecifyLocation" ColumnName="SpecifyLocation" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="DocumentManager" ColumnName="DocumentManager" />
+          <ScalarProperty Name="ValidUpto" ColumnName="ValidUpto" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="FileAttached" ColumnName="FileAttached" />
+          <ScalarProperty Name="StakeholderID" ColumnName="StakeholderID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DocSubCategoryID" ColumnName="DocSubCategoryID" />
+          <ScalarProperty Name="DocCategoryID" ColumnName="DocCategoryID" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+          <ScalarProperty Name="DocumentRefID" ColumnName="DocumentRefID" />
+          <ScalarProperty Name="RegisteredOn" ColumnName="RegisteredOn" />
+          <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="IRRMModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="IRRMModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="IRRMModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="IRRMModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IRRMModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="IRRMModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IRRMModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="IRRMModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="IRRMModel.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="DocumentCopyDept_V">
+      <EntityTypeMapping TypeName="IRRMModel.DocumentCopyDept_V">
+        <MappingFragment StoreEntitySet="DocumentCopyDept_V">
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="DocCopyLocationID" ColumnName="DocCopyLocationID" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentAccess_T">
+      <EntityTypeMapping TypeName="IRRMModel.DocumentAccess_T">
+        <MappingFragment StoreEntitySet="DocumentAccess_T">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DocAccessGroupID" ColumnName="DocAccessGroupID" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="DocAccessID" ColumnName="DocAccessID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentViewers_V">
+      <EntityTypeMapping TypeName="IRRMModel.DocumentViewers_V">
+        <MappingFragment StoreEntitySet="DocumentViewers_V">
+          <ScalarProperty Name="DocViewersID" ColumnName="DocViewersID" />
+          <ScalarProperty Name="ViewedOn" ColumnName="ViewedOn" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentViewers_T">
+      <EntityTypeMapping TypeName="IRRMModel.DocumentViewers_T">
+        <MappingFragment StoreEntitySet="DocumentViewers_T">
+          <ScalarProperty Name="ViewedOn" ColumnName="ViewedOn" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="DocViewersID" ColumnName="DocViewersID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentAccessGroupUsers_V">
+      <EntityTypeMapping TypeName="IRRMModel.DocumentAccessGroupUsers_V">
+        <MappingFragment StoreEntitySet="DocumentAccessGroupUsers_V">
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AccessGroup" ColumnName="AccessGroup" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="DocAccessID" ColumnName="DocAccessID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Documents_V">
+      <EntityTypeMapping TypeName="IRRMModel.Documents_V">
+        <MappingFragment StoreEntitySet="Documents_V">
+          <ScalarProperty Name="DocSubCategoryID" ColumnName="DocSubCategoryID" />
+          <ScalarProperty Name="DocCategoryID" ColumnName="DocCategoryID" />
+          <ScalarProperty Name="DocumentManager" ColumnName="DocumentManager" />
+          <ScalarProperty Name="RegisteredOn" ColumnName="RegisteredOn" />
+          <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+          <ScalarProperty Name="ValidUpto" ColumnName="ValidUpto" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="FileAttached" ColumnName="FileAttached" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+          <ScalarProperty Name="Stakeholder" ColumnName="Stakeholder" />
+          <ScalarProperty Name="DocSubCategory" ColumnName="DocSubCategory" />
+          <ScalarProperty Name="DocCategory" ColumnName="DocCategory" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskSubCategory_M">
+      <EntityTypeMapping TypeName="IRRMModel.TaskSubCategory_M">
+        <MappingFragment StoreEntitySet="TaskSubCategory_M">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+          <ScalarProperty Name="TaskCategoryID" ColumnName="TaskCategoryID" />
+          <ScalarProperty Name="TaskSubCategoryID" ColumnName="TaskSubCategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskDocument_T">
+      <EntityTypeMapping TypeName="IRRMModel.TaskDocument_T">
+        <MappingFragment StoreEntitySet="TaskDocument_T">
+          <ScalarProperty Name="DocGUID" ColumnName="DocGUID" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DocumentTypeID" ColumnName="DocumentTypeID" />
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="TaskDocumentID" ColumnName="TaskDocumentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RiskRegisters">
+      <EntityTypeMapping TypeName="IRRMModel.RiskRegister">
+        <MappingFragment StoreEntitySet="RiskRegister">
+          <ScalarProperty Name="RiskRegisteredDate" ColumnName="RiskRegisteredDate" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+          <ScalarProperty Name="RiskKeyStatusID" ColumnName="RiskKeyStatusID" />
+          <ScalarProperty Name="TaskNo" ColumnName="TaskNo" />
+          <ScalarProperty Name="RiskOwnerID" ColumnName="RiskOwnerID" />
+          <ScalarProperty Name="RiskAssessedByID" ColumnName="RiskAssessedByID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="PotentialRiskFactors" ColumnName="PotentialRiskFactors" />
+          <ScalarProperty Name="FutureStrategies" ColumnName="FutureStrategies" />
+          <ScalarProperty Name="RRSeverityID" ColumnName="RRSeverityID" />
+          <ScalarProperty Name="RRRiskProbabilityID" ColumnName="RRRiskProbabilityID" />
+          <ScalarProperty Name="RRRiskLevel" ColumnName="RRRiskLevel" />
+          <ScalarProperty Name="RRRating" ColumnName="RRRating" />
+          <ScalarProperty Name="RASeverityID" ColumnName="RASeverityID" />
+          <ScalarProperty Name="RARiskProbabilityID" ColumnName="RARiskProbabilityID" />
+          <ScalarProperty Name="RARiskLevel" ColumnName="RARiskLevel" />
+          <ScalarProperty Name="RARating" ColumnName="RARating" />
+          <ScalarProperty Name="Adequacy" ColumnName="Adequacy" />
+          <ScalarProperty Name="Controlsinplace" ColumnName="Controlsinplace" />
+          <ScalarProperty Name="RiskStrategyID" ColumnName="RiskStrategyID" />
+          <ScalarProperty Name="RiskStatusID" ColumnName="RiskStatusID" />
+          <ScalarProperty Name="RiskDescriptorID" ColumnName="RiskDescriptorID" />
+          <ScalarProperty Name="RiskCostID" ColumnName="RiskCostID" />
+          <ScalarProperty Name="RiskCategoryID" ColumnName="RiskCategoryID" />
+          <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+          <ScalarProperty Name="Proactive" ColumnName="Proactive" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedUserID" ColumnName="CreatedUserID" />
+          <ScalarProperty Name="RiskRegisterNo" ColumnName="RiskRegisterNo" />
+          <ScalarProperty Name="RRNo" ColumnName="RRNo" />
+          <ScalarProperty Name="RiskRegisterID" ColumnName="RiskRegisterID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

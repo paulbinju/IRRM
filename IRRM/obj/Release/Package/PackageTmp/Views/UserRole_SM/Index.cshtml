@@ -1,0 +1,69 @@
+﻿@model IEnumerable<IRRM.Models.UserRole_SM>
+
+
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-6">User Role</h2>
+                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <table id="datatable-buttons" class="table table-striped table-bordered">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Role)
+                                        </th>
+                                
+                                    </tr>
+
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Role)
+                                        </td>
+                                         
+                                    </tr>
+                                    }
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

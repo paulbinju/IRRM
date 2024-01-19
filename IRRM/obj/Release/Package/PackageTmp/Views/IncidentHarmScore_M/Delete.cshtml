@@ -1,0 +1,99 @@
+﻿@model IRRM.Models.IncidentHarmScore_M
+
+@{
+    Layout = null;
+}
+ <style>
+    .dl-horizontal dt {
+        width: 250px;
+        margin-right: 15px;
+    }
+</style>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentHarmGroup_M.IncidentHarmGroup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentHarmGroup_M.IncidentHarmGroup)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentHarmScoreCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentHarmScoreCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentHarmScore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentHarmScore)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+
+
+    </dl>
+
+
+
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "delform-" + Html.DisplayFor(model => model.IncidentHarmScoreID) }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    }
+
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#delform-"+@Html.DisplayFor(model => model.IncidentHarmScoreID)).submit(function (e) {
+            e.preventDefault();
+            var formdata = new FormData(this);
+
+          //  alert($("#DFormID").val());
+            $.ajax({
+                method: "POST",
+                url: "@Url.Content("~/IncidentHarmScore_M/Delete/" + Html.DisplayFor(model => model.IncidentHarmScoreID))",
+                data: formdata,
+                mimeTypes: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                   // alert('Successfully deleted!');
+                    window.location.href = "@Url.Content("~/IncidentHarmScore_M")";
+                },
+                error: function () {
+                    alert('Unable to delete, try editing instead! could be referred in Sub Cause');
+                }
+            });
+        });
+    });
+</script>

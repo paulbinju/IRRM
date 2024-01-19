@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="08d5ac0bf4c84d15815e57cd8b953a09" Name="Diagram1">
+        <EntityTypeShape EntityType="IRRMModel.AnswerType_SM" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Branch_M" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Department_M" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Department_M2" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.DocumentAccessGroup_M" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.DocumentCategory_M" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.DocumentStakeholder_M" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.DocumentStatus_SM" Width="1.5" PointX="10.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.DocumentStatus_T" Width="1.5" PointX="2.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.DocumentSubCategory_M" Width="1.5" PointX="4.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.DynamicControl" Width="1.5" PointX="20" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.DynamicControlType" Width="1.5" PointX="17.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.DynamicControlValue" Width="1.5" PointX="22.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.DynamicForm" Width="1.5" PointX="17.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.DynamicForm_Control" Width="1.5" PointX="19.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.DynamicReports_M" Width="1.5" PointX="2.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.EventType_SM" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Incident_Comments" Width="1.5" PointX="4.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Incident_Status_T" Width="1.5" PointX="17.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentDocument_T" Width="1.5" PointX="21.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentFeedbackType_M" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentHarmGroup_M" Width="1.5" PointX="6" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentHarmScore_M" Width="1.5" PointX="8.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentHistory" Width="1.5" PointX="19.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Incident_Interview_T" Width="1.5" PointX="7.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentMainOutcome_M" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentMainRootCause_M" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Incident_People_T" Width="1.5" PointX="12.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentPeopleInvolved_M" Width="1.5" PointX="10.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentPriorities_M" Width="1.5" PointX="8.25" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Incident_Recommendation_T" Width="1.5" PointX="21.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentRegistery_T" Width="1.5" PointX="22.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentRelation_M" Width="1.5" PointX="10.5" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Incident" Width="1.5" PointX="10.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Incidents_MainOutcome_T" Width="1.5" PointX="22.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Incidents_MainRootCause_T" Width="1.5" PointX="23.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentStatus_M" Width="1.5" PointX="8.25" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentSubOutcome_M" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentSubOutcomeAnswer_T" Width="1.5" PointX="23.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentSubOutcomeAnswerChoice_T" Width="1.5" PointX="24.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentSubRootCause_M" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentSubRootCauseAnswer_T" Width="1.5" PointX="0.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentSubRootCauseAnswerChoice_T" Width="1.5" PointX="2.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentSubTypes_M" Width="1.5" PointX="15.75" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.IncidentTypes_M" Width="1.5" PointX="10.5" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Location_M" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Log" Width="1.5" PointX="24.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskCategory_M" Width="1.5" PointX="13.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskCost_M" Width="1.5" PointX="13.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskDescriptor_M" Width="1.5" PointX="13.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskFrequencyScore_M" Width="1.5" PointX="11.25" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskKeyStatus_T" Width="1.5" PointX="13.5" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskKeyStatusDates_T" Width="1.5" PointX="4.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskLevel_M" Width="1.5" PointX="24.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskLevel_M2" Width="1.5" PointX="24.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskProbability_M" Width="1.5" PointX="13.5" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskScore_M" Width="1.5" PointX="13.5" PointY="31.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskSeverity_M" Width="1.5" PointX="15.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskStatus_M" Width="1.5" PointX="13.5" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskStrategy_M" Width="1.5" PointX="13.5" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.RiskTemplate_M" Width="1.5" PointX="24.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Task_Comments" Width="1.5" PointX="17.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Task_T" Width="1.5" PointX="19.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.TaskCategory_M" Width="1.5" PointX="17.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Task_People_T" Width="1.5" PointX="22.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.TaskPeopleInvolved_M" Width="1.5" PointX="20" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.TaskPriorities_M" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.TaskRelation_M" Width="1.5" PointX="20" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Task" Width="1.5" PointX="20" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.TaskStatus_M" Width="1.5" PointX="21.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Task_Status_T" Width="1.5" PointX="23.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.TemplateCategory_M" Width="1.5" PointX="6.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.UserRole_SM" Width="1.5" PointX="25.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.Users_M" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.PeopleUser_V" Width="1.5" PointX="25.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.TaskComment_V" Width="1.5" PointX="26.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.TaskIndex_V" Width="1.5" PointX="26.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IRRMModel.TaskStatusUser_V" Width="1.5" PointX="25.75" PointY="27.75" IsExpanded="true" />
+        <AssociationConnector Association="IRRMModel.FK_Department_M_Branch_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Incidents_Branch_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Location_M_Branch_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Users_M_Branch_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Users_M_Department_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_DynamicControls_DynamicControlType" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_DynamicControlValues_DynamicControls" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_DynamicControlValues_DynamicControlType" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Incidents_EventType_T" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Incidents_IncidentFeedbackType_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_IncidentHarmScore_M_IncidentHarmGroup_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Incidents_IncidentHarmScore_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Incident_Interview_T_Users_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_IncidentSubOutcome_M_IncidentMainOutcome_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_IncidentSubRootCause_M_IncidentMainRootCause_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Incident_People_T_IncidentPeopleInvolved_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Incident_People_T_IncidentRelation_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Incident_People_T_Incidents" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Incidents_IncidentPriorities_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_IncidentSubTypes_M_IncidentPriorities_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_IncidentTypes_M_IncidentPriorities_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Incidents_IncidentStatus_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Incidents_Location_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Incidents_Users_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_IncidentSubTypes_M_IncidentTypes_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_RiskSeverity_M_RiskDescriptor_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_RiskProbability_M_RiskFrequencyScore_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_RiskSeverity_M_RiskScore_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Tasks_TaskCategory_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Task_People_T_TaskPeopleInvolved_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Task_People_T_TaskRelation_M" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Task_People_T_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="IRRMModel.FK_Tasks_TaskPriorities_M" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="IRRMModel.DocumentType_SM" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="IRRMModel.FK_DocumentSubCategory_M_DocumentCategory_M" />
+        <EntityTypeShape EntityType="IRRMModel.RiskAssessors_T" Width="1.5" PointX="13.375" PointY="0.75" />
+        <AssociationConnector Association="IRRMModel.FK_RiskAssessors_T_Users_M" />
+        <EntityTypeShape EntityType="IRRMModel.RiskAssessorUser_V" Width="1.5" PointX="27.375" PointY="16.75" />
+        <AssociationConnector Association="IRRMModel.FK_Incidents_IncidentSubTypes_M" />
+        <AssociationConnector Association="IRRMModel.FK_Incidents_IncidentTypes_M" />
+        <AssociationConnector Association="IRRMModel.FK_Users_M_UserRole_SM" />
+        <EntityTypeShape EntityType="IRRMModel.sysdiagram" Width="1.5" PointX="2.75" PointY="28.75" />
+        <EntityTypeShape EntityType="IRRMModel.DocumentCopyLocation_T" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="IRRMModel.Document" Width="1.5" PointX="16.375" PointY="28.75" />
+        <EntityTypeShape EntityType="IRRMModel.DocumentCopyDept_V" Width="1.5" PointX="28.375" PointY="19.75" />
+        <EntityTypeShape EntityType="IRRMModel.DocumentAccess_T" Width="1.5" PointX="20.375" PointY="28.75" />
+        <EntityTypeShape EntityType="IRRMModel.DocumentViewers_V" Width="1.5" PointX="22.375" PointY="28.75" />
+        <EntityTypeShape EntityType="IRRMModel.DocumentViewers_T" Width="1.5" PointX="28.375" PointY="22.75" />
+        <EntityTypeShape EntityType="IRRMModel.DocumentAccessGroupUsers_V" Width="1.5" PointX="28.375" PointY="25.75" />
+        <EntityTypeShape EntityType="IRRMModel.Documents_V" Width="1.5" PointX="29.375" PointY="0.75" />
+        <EntityTypeShape EntityType="IRRMModel.TaskSubCategory_M" Width="1.5" PointX="29.375" PointY="5.75" />
+        <AssociationConnector Association="IRRMModel.FK_TaskSubCategory_M_TaskCategory_M" />
+        <EntityTypeShape EntityType="IRRMModel.TaskDocument_T" Width="1.5" PointX="5.375" PointY="29.75" />
+        <EntityTypeShape EntityType="IRRMModel.RiskRegister" Width="1.5" PointX="29.75" PointY="9.125" />
+        <AssociationConnector Association="IRRMModel.FK_RiskRegister_Incidents" />
+        <AssociationConnector Association="IRRMModel.FK_RiskRegister_RiskCategory_M" />
+        <AssociationConnector Association="IRRMModel.FK_RiskRegister_RiskCost_M" />
+        <AssociationConnector Association="IRRMModel.FK_RiskRegister_RiskDescriptor_M" />
+        <AssociationConnector Association="IRRMModel.FK_RiskKeyStatus_T" />
+        <AssociationConnector Association="IRRMModel.FK_RiskRegister_RiskProbability_M" />
+        <AssociationConnector Association="IRRMModel.FK_RiskRegister_RiskProbability_M1" />
+        <AssociationConnector Association="IRRMModel.FK_RiskRegister_RiskStatus_M" />
+        <AssociationConnector Association="IRRMModel.FK_RiskRegister_RiskStrategy_M" />
+        <AssociationConnector Association="IRRMModel.FK_RiskRegister_Users_M" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

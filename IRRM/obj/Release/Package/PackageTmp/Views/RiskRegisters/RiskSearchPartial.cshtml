@@ -1,0 +1,192 @@
+﻿@using (Html.BeginForm("Index", "RiskRegisters"))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Risk Registered Date From</b></div>
+                        <input type="date" name="RRDateFrom" class="form-control" value="@Request["RRDateFrom"]" />
+                    </div>
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Risk Registered Date To  </b></div>
+                        <input type="date" name="RRDateTo" class="form-control" value="@Request["RRDateTo"]" />
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Risk Register Type</b></div>
+                        <select name="Proactive" class="form-control">
+                            <option value="-1">Select</option>
+                            <option value="1" @(Request["Proactive"] == "1" ? "selected" : "")>Proactive</option>
+                            <option value="0" @(Request["Proactive"] == "0" ? "selected" : "")>Reactive</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Risk Category</b></div>
+                        <select name="RiskCategoryID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.RiskCategoryID)
+                            {
+                                <option @(itp.RiskCategoryID == Convert.ToInt32(Request["RiskCategoryID"]) ? "selected" : "") value="@itp.RiskCategoryID">@itp.RiskCategory</option>
+                            }
+                        </select>
+
+                    </div>
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Risk Cost</b></div>
+                        <select name="RiskCostID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.RiskCostID)
+                            {
+                                <option @(itp.RiskCostID == Convert.ToInt32(Request["RiskCostID"]) ? "selected" : "") value="@itp.RiskCostID">@itp.RiskCost</option>
+                            }
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Risk Descriptor</b></div>
+                        <select name="RiskDescriptorID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.RiskDescriptorID)
+                            {
+                                <option @(itp.RiskDescriptorID == Convert.ToInt32(Request["RiskDescriptorID"]) ? "selected" : "") value="@itp.RiskDescriptorID">@itp.RiskDescriptor</option>
+                            }
+
+                        </select>
+
+                    </div>
+                    <br style="clear:both" />
+                    <br />
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Risk Location</b></div>
+                        <select name="RiskStatusID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.RiskStatusID)
+                            {
+                                <option @(itp.RiskStatusID == Convert.ToInt32(Request["RiskStatusID"]) ? "selected" : "") value="@itp.RiskStatusID">@itp.RiskStatus</option>
+                            }
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Risk Strategy</b></div>
+                        <select name="RiskStrategyID" class="form-control">
+                            <option value="0">Select</option>
+
+                            @foreach (var itp in ViewBag.RiskStrategyID)
+                            {
+                                <option @(itp.RiskStrategyID == Convert.ToInt32(Request["RiskStrategyID"]) ? "selected" : "") value="@itp.RiskStrategyID">@itp.RiskStrategy</option>
+                            }
+                        </select>
+
+                    </div>
+                    <div class="col-md-2">
+                        <div class="control-label"><b>RA Rating</b></div>
+                        <select name="RARating" class="form-control">
+                            <option value="0">Select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                        </select>
+
+
+                    </div>
+
+
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Risk Level</b></div>
+                        <select name="RARiskLevel" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.RARiskLevel)
+                            {
+                                <option @(itp.RARiskLevel == Convert.ToString(Request["RARiskLevel"]) ? "selected" : "") value="@itp.RARiskLevel">@itp.RARiskLevel</option>
+                            }
+                        </select>
+                    </div>
+
+
+
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div class="control-label"><b>Risk Owner</b></div>
+
+                            <select class="searchableselect form-control" style="width:100%;font-family:Arial" name="RiskOwnerID" required>
+                                <option value="0">Select</option>
+
+                                @foreach (var urs in ViewBag.Users)
+                                {
+                                    <option @(urs.UserID == Convert.ToInt32(Request["RiskOwnerID"]) ? "selected" : "") value="@urs.UserID">@urs.Name</option>
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div class="control-label"><b>Risk Assessed By</b></div>
+
+                            <select class="searchableselect form-control" style="width:100%;font-family:Arial" name="RiskAssessedByID" required>
+                                <option value="0">Select</option>
+
+                                @foreach (var urs in ViewBag.Users)
+                                {
+                                    <option @(urs.UserID == Convert.ToInt32(Request["RiskAssessedByID"]) ? "selected" : "") value="@urs.UserID">@urs.Name</option>
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Current Status</b></div>
+                        <select name="RiskKeyStatusID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.RiskKeyStatusID)
+                            {
+                                <option @(itp.RiskKeyStatusID == Convert.ToInt32(Request["RiskKeyStatusID"]) ? "selected" : "") value="@itp.RiskKeyStatusID">@itp.RiskKeyStatus</option>
+                            }
+                        </select>
+
+                    </div>
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Adequacy</b></div>
+                        <select name="Adequacy" class="form-control">
+                            <option value="-1">Select</option>
+                            <option value="Adequate" @(Request["Adequacy"] == "Adequate" ? "selected" : "")>Adequate</option>
+                            <option value="Inadequate" @(Request["Adequacy"] == "Inadequate" ? "selected" : "")>Inadequate</option>
+                        </select>
+                    </div>
+
+                    <div class="control-label"><b>&nbsp;&nbsp;</b></div>
+                    <div class="col-md-1">
+                        <input type="submit" class="btn btn-danger" value="SEARCH" />
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-warning" href="@Url.Content("~/RiskRegisters")">CLEAR</a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

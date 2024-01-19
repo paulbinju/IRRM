@@ -1,0 +1,2107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IRRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AnswerType_SM">
+    <Key>
+      <PropertyRef Name="AnswerTypeID" />
+    </Key>
+    <Property Name="AnswerTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AnswerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Branch_M">
+    <Key>
+      <PropertyRef Name="BranchID" />
+    </Key>
+    <Property Name="BranchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Department_M" Relationship="Self.FK_Department_M_Branch_M" FromRole="Branch_M" ToRole="Department_M" />
+    <NavigationProperty Name="Incidents" Relationship="Self.FK_Incidents_Branch_M" FromRole="Branch_M" ToRole="Incidents" />
+    <NavigationProperty Name="Location_M" Relationship="Self.FK_Location_M_Branch_M" FromRole="Branch_M" ToRole="Location_M" />
+    <NavigationProperty Name="Users_M" Relationship="Self.FK_Users_M_Branch_M" FromRole="Branch_M" ToRole="Users_M" />
+  </EntityType>
+  <EntityType Name="Department_M">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Branch_M" Relationship="Self.FK_Department_M_Branch_M" FromRole="Department_M" ToRole="Branch_M" />
+    <NavigationProperty Name="Users_M" Relationship="Self.FK_Users_M_Department_M" FromRole="Department_M" ToRole="Users_M" />
+  </EntityType>
+  <EntityType Name="Department_M2">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentAccessGroup_M">
+    <Key>
+      <PropertyRef Name="DocAccessGroupID" />
+    </Key>
+    <Property Name="DocAccessGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccessGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentCategory_M">
+    <Key>
+      <PropertyRef Name="DocCategoryID" />
+    </Key>
+    <Property Name="DocCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="DocCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="DocumentSubCategory_M" Relationship="IRRMModel.FK_DocumentSubCategory_M_DocumentCategory_M" FromRole="DocumentCategory_M" ToRole="DocumentSubCategory_M" />
+  </EntityType>
+  <EntityType Name="DocumentStakeholder_M">
+    <Key>
+      <PropertyRef Name="StakeholderID" />
+    </Key>
+    <Property Name="StakeholderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Stakeholder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentStatus_SM">
+    <Key>
+      <PropertyRef Name="DocStatusID" />
+    </Key>
+    <Property Name="DocStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DocumentStatus_T">
+    <Key>
+      <PropertyRef Name="DocumentStatusID" />
+    </Key>
+    <Property Name="DocumentStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentID" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="DocumentSubCategory_M">
+    <Key>
+      <PropertyRef Name="DocSubCategoryID" />
+    </Key>
+    <Property Name="DocSubCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocCategoryID" Type="Int32" />
+    <Property Name="DocSubCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="DocumentCategory_M" Relationship="IRRMModel.FK_DocumentSubCategory_M_DocumentCategory_M" FromRole="DocumentSubCategory_M" ToRole="DocumentCategory_M" />
+  </EntityType>
+  <EntityType Name="DynamicControl">
+    <Key>
+      <PropertyRef Name="ControlID" />
+    </Key>
+    <Property Name="ControlID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ControlTypeID" Type="Int32" />
+    <Property Name="ControlName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DynamicControlType" Relationship="Self.FK_DynamicControls_DynamicControlType" FromRole="DynamicControls" ToRole="DynamicControlType" />
+    <NavigationProperty Name="DynamicControlValues" Relationship="Self.FK_DynamicControlValues_DynamicControls" FromRole="DynamicControls" ToRole="DynamicControlValues" />
+  </EntityType>
+  <EntityType Name="DynamicControlType">
+    <Key>
+      <PropertyRef Name="DControlID" />
+    </Key>
+    <Property Name="DControlID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DControlType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HasValues" Type="Boolean" />
+    <NavigationProperty Name="DynamicControls" Relationship="Self.FK_DynamicControls_DynamicControlType" FromRole="DynamicControlType" ToRole="DynamicControls" />
+    <NavigationProperty Name="DynamicControlValues" Relationship="Self.FK_DynamicControlValues_DynamicControlType" FromRole="DynamicControlType" ToRole="DynamicControlValues" />
+  </EntityType>
+  <EntityType Name="DynamicControlValue">
+    <Key>
+      <PropertyRef Name="ControlValueID" />
+    </Key>
+    <Property Name="ControlValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ControlTypeID" Type="Int32" />
+    <Property Name="ControlID" Type="Int32" />
+    <Property Name="ControlValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DynamicControl" Relationship="Self.FK_DynamicControlValues_DynamicControls" FromRole="DynamicControlValues" ToRole="DynamicControls" />
+    <NavigationProperty Name="DynamicControlType" Relationship="Self.FK_DynamicControlValues_DynamicControlType" FromRole="DynamicControlValues" ToRole="DynamicControlType" />
+  </EntityType>
+  <EntityType Name="DynamicForm">
+    <Key>
+      <PropertyRef Name="DFormID" />
+    </Key>
+    <Property Name="DFormID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DFormName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DynamicForm_Control">
+    <Key>
+      <PropertyRef Name="DFormControlID" />
+    </Key>
+    <Property Name="DFormControlID" Type="Int32" Nullable="false" />
+    <Property Name="DFormID" Type="Int32" />
+    <Property Name="DControlID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="DynamicReports_M">
+    <Key>
+      <PropertyRef Name="ReportID" />
+    </Key>
+    <Property Name="ReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReportName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="EventType_SM">
+    <Key>
+      <PropertyRef Name="EventTypeID" />
+    </Key>
+    <Property Name="EventTypeID" Type="Int32" Nullable="false" />
+    <Property Name="Prefix" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="EventType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RegistryNo" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Incidents" Relationship="Self.FK_Incidents_EventType_T" FromRole="EventType_SM" ToRole="Incidents" />
+  </EntityType>
+  <EntityType Name="Incident_Comments">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="CommentDateTime" Type="DateTime" Precision="0" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Incident_Status_T">
+    <Key>
+      <PropertyRef Name="Incident_StatusID" />
+    </Key>
+    <Property Name="Incident_StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="IncidentStatusID" Type="Int32" />
+    <Property Name="CreatedUserID" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="IncidentDocument_T">
+    <Key>
+      <PropertyRef Name="IncidentDocumentID" />
+    </Key>
+    <Property Name="IncidentDocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="DocumentTypeID" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DocGUID" Type="Guid" />
+  </EntityType>
+  <EntityType Name="IncidentFeedbackType_M">
+    <Key>
+      <PropertyRef Name="IncidentFeedbackTypeID" />
+    </Key>
+    <Property Name="IncidentFeedbackTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentFeedbackType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Incidents" Relationship="Self.FK_Incidents_IncidentFeedbackType_M" FromRole="IncidentFeedbackType_M" ToRole="Incidents" />
+  </EntityType>
+  <EntityType Name="IncidentHarmGroup_M">
+    <Key>
+      <PropertyRef Name="IncidentHarmGroupID" />
+    </Key>
+    <Property Name="IncidentHarmGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentHarmGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="IncidentHarmScore_M" Relationship="Self.FK_IncidentHarmScore_M_IncidentHarmGroup_M" FromRole="IncidentHarmGroup_M" ToRole="IncidentHarmScore_M" />
+  </EntityType>
+  <EntityType Name="IncidentHarmScore_M">
+    <Key>
+      <PropertyRef Name="IncidentHarmScoreID" />
+    </Key>
+    <Property Name="IncidentHarmScoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentHarmGroupID" Type="Int32" />
+    <Property Name="IncidentHarmScoreCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="IncidentHarmScore" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="IncidentHarmGroup_M" Relationship="Self.FK_IncidentHarmScore_M_IncidentHarmGroup_M" FromRole="IncidentHarmScore_M" ToRole="IncidentHarmGroup_M" />
+    <NavigationProperty Name="Incidents" Relationship="Self.FK_Incidents_IncidentHarmScore_M" FromRole="IncidentHarmScore_M" ToRole="Incidents" />
+  </EntityType>
+  <EntityType Name="IncidentHistory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="HistoryDate" Type="DateTime" Precision="0" />
+    <Property Name="PageContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Incident_Interview_T">
+    <Key>
+      <PropertyRef Name="IncidentInterviewID" />
+    </Key>
+    <Property Name="IncidentInterviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="InterviewerID" Type="Int32" />
+    <Property Name="IncidentPeopleID" Type="Int32" />
+    <Property Name="InterviewDate" Type="DateTime" Precision="0" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users_M" Relationship="Self.FK_Incident_Interview_T_Users_M" FromRole="Incident_Interview_T" ToRole="Users_M" />
+  </EntityType>
+  <EntityType Name="IncidentMainOutcome_M">
+    <Key>
+      <PropertyRef Name="IncidentMainOutcomeID" />
+    </Key>
+    <Property Name="IncidentMainOutcomeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentMainOutcome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="IncidentSubOutcome_M" Relationship="Self.FK_IncidentSubOutcome_M_IncidentMainOutcome_M" FromRole="IncidentMainOutcome_M" ToRole="IncidentSubOutcome_M" />
+  </EntityType>
+  <EntityType Name="IncidentMainRootCause_M">
+    <Key>
+      <PropertyRef Name="IncidentMainRootCauseID" />
+    </Key>
+    <Property Name="IncidentMainRootCauseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentMainRootCause" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="IncidentSubRootCause_M" Relationship="Self.FK_IncidentSubRootCause_M_IncidentMainRootCause_M" FromRole="IncidentMainRootCause_M" ToRole="IncidentSubRootCause_M" />
+  </EntityType>
+  <EntityType Name="Incident_People_T">
+    <Key>
+      <PropertyRef Name="IncidentPeopleID" />
+    </Key>
+    <Property Name="IncidentPeopleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="IncidentPeopleInvolvedID" Type="Int32" />
+    <Property Name="IncidentRelationID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateUserID" Type="Int32" />
+    <Property Name="IdentityNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="IsPatientInjured" Type="Boolean" Nullable="false" />
+    <Property Name="Nationality" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CVRNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="IncidentPeopleInvolved_M" Relationship="Self.FK_Incident_People_T_IncidentPeopleInvolved_M" FromRole="Incident_People_T" ToRole="IncidentPeopleInvolved_M" />
+    <NavigationProperty Name="IncidentRelation_M" Relationship="Self.FK_Incident_People_T_IncidentRelation_M" FromRole="Incident_People_T" ToRole="IncidentRelation_M" />
+    <NavigationProperty Name="Incident" Relationship="Self.FK_Incident_People_T_Incidents" FromRole="Incident_People_T" ToRole="Incidents" />
+  </EntityType>
+  <EntityType Name="IncidentPeopleInvolved_M">
+    <Key>
+      <PropertyRef Name="IncidentPeopleInvolvedID" />
+    </Key>
+    <Property Name="IncidentPeopleInvolvedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentPeopleInvolved" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Incident_People_T" Relationship="Self.FK_Incident_People_T_IncidentPeopleInvolved_M" FromRole="IncidentPeopleInvolved_M" ToRole="Incident_People_T" />
+  </EntityType>
+  <EntityType Name="IncidentPriorities_M">
+    <Key>
+      <PropertyRef Name="IncidentPriorityID" />
+    </Key>
+    <Property Name="IncidentPriorityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Priority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InvestigationDays" Type="Int32" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Incidents" Relationship="Self.FK_Incidents_IncidentPriorities_M" FromRole="IncidentPriorities_M" ToRole="Incidents" />
+    <NavigationProperty Name="IncidentSubTypes_M" Relationship="Self.FK_IncidentSubTypes_M_IncidentPriorities_M" FromRole="IncidentPriorities_M" ToRole="IncidentSubTypes_M" />
+    <NavigationProperty Name="IncidentTypes_M" Relationship="Self.FK_IncidentTypes_M_IncidentPriorities_M" FromRole="IncidentPriorities_M" ToRole="IncidentTypes_M" />
+  </EntityType>
+  <EntityType Name="Incident_Recommendation_T">
+    <Key>
+      <PropertyRef Name="RecommendationID" />
+    </Key>
+    <Property Name="RecommendationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="CreatedUserID" Type="Int32" />
+    <Property Name="Recommendation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="IncidentRegistery_T">
+    <Key>
+      <PropertyRef Name="IncidentRegisteryID" />
+    </Key>
+    <Property Name="IncidentRegisteryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="IncidentRelation_M">
+    <Key>
+      <PropertyRef Name="IncidentRelationID" />
+    </Key>
+    <Property Name="IncidentRelationID" Type="Int32" Nullable="false" />
+    <Property Name="IncidentRelation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SendEmail" Type="Boolean" Nullable="false" />
+    <Property Name="EmailSubject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailHeader" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailFooter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Incident_People_T" Relationship="Self.FK_Incident_People_T_IncidentRelation_M" FromRole="IncidentRelation_M" ToRole="Incident_People_T" />
+  </EntityType>
+  <EntityType Name="Incident">
+    <Key>
+      <PropertyRef Name="IncidentID" />
+    </Key>
+    <Property Name="IncidentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventTypeID" Type="Int32" />
+    <Property Name="IncidentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedUserID" Type="Int32" />
+    <Property Name="OnBehalfReporting" Type="Boolean" Nullable="false" />
+    <Property Name="ReporterName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReporterEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReporterDesignation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReporterBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReporterPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IncidentDate" Type="DateTime" Precision="0" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ActionTaken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="LocationID" Type="Int32" />
+    <Property Name="IncidentTypeID" Type="Int32" />
+    <Property Name="IncidentSubTypeID" Type="Int32" />
+    <Property Name="Confidential" Type="Boolean" Nullable="false" />
+    <Property Name="InvestigationComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="InvestigatorReport" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="InvestigationConclusion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IncidentFeedbackTypeID" Type="Int32" />
+    <Property Name="FeedbackComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IncidentGUID" Type="Guid" />
+    <Property Name="Registered" Type="Boolean" Nullable="false" />
+    <Property Name="RegisteredOn" Type="DateTime" Precision="0" />
+    <Property Name="IncidentCreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="Outcome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RemedialAction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IncidentStatusID" Type="Int32" />
+    <Property Name="PriorityID" Type="Int32" />
+    <Property Name="CreatorCanComment" Type="Boolean" Nullable="false" />
+    <Property Name="HarmScoreID" Type="Int32" />
+    <Property Name="RootCauseAnalysis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RiskAnalysisRequired" Type="Boolean" Nullable="false" />
+    <Property Name="RiskAnalysisCompleted" Type="Boolean" />
+    <Property Name="ReOpened" Type="Boolean" />
+    <Property Name="ReOpenRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FeedbackTypeID" Type="Int32" />
+    <Property Name="Feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="InvestigationDueDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Branch_M" Relationship="Self.FK_Incidents_Branch_M" FromRole="Incidents" ToRole="Branch_M" />
+    <NavigationProperty Name="EventType_SM" Relationship="Self.FK_Incidents_EventType_T" FromRole="Incidents" ToRole="EventType_SM" />
+    <NavigationProperty Name="IncidentFeedbackType_M" Relationship="Self.FK_Incidents_IncidentFeedbackType_M" FromRole="Incidents" ToRole="IncidentFeedbackType_M" />
+    <NavigationProperty Name="IncidentHarmScore_M" Relationship="Self.FK_Incidents_IncidentHarmScore_M" FromRole="Incidents" ToRole="IncidentHarmScore_M" />
+    <NavigationProperty Name="Incident_People_T" Relationship="Self.FK_Incident_People_T_Incidents" FromRole="Incidents" ToRole="Incident_People_T" />
+    <NavigationProperty Name="IncidentPriorities_M" Relationship="Self.FK_Incidents_IncidentPriorities_M" FromRole="Incidents" ToRole="IncidentPriorities_M" />
+    <NavigationProperty Name="IncidentStatus_M" Relationship="Self.FK_Incidents_IncidentStatus_M" FromRole="Incidents" ToRole="IncidentStatus_M" />
+    <NavigationProperty Name="Location_M" Relationship="Self.FK_Incidents_Location_M" FromRole="Incidents" ToRole="Location_M" />
+    <NavigationProperty Name="Users_M" Relationship="Self.FK_Incidents_Users_M" FromRole="Incidents" ToRole="Users_M" />
+    <NavigationProperty Name="IncidentSubTypes_M" Relationship="IRRMModel.FK_Incidents_IncidentSubTypes_M" FromRole="Incident" ToRole="IncidentSubTypes_M" />
+    <NavigationProperty Name="IncidentTypes_M" Relationship="IRRMModel.FK_Incidents_IncidentTypes_M" FromRole="Incident" ToRole="IncidentTypes_M" />
+    <NavigationProperty Name="RiskRegisters" Relationship="IRRMModel.FK_RiskRegister_Incidents" FromRole="Incident" ToRole="RiskRegister" />
+  </EntityType>
+  <EntityType Name="Incidents_MainOutcome_T">
+    <Key>
+      <PropertyRef Name="IncidentMRCID" />
+    </Key>
+    <Property Name="IncidentMRCID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="IncidentMainOutcomeID" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="Answered" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Incidents_MainRootCause_T">
+    <Key>
+      <PropertyRef Name="IncidentMRCID" />
+    </Key>
+    <Property Name="IncidentMRCID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="IncidentMainRootCauseID" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="Answered" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="IncidentStatus_M">
+    <Key>
+      <PropertyRef Name="IncidentStatusID" />
+    </Key>
+    <Property Name="IncidentStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Incidents" Relationship="Self.FK_Incidents_IncidentStatus_M" FromRole="IncidentStatus_M" ToRole="Incidents" />
+  </EntityType>
+  <EntityType Name="IncidentSubOutcome_M">
+    <Key>
+      <PropertyRef Name="IncidentSubOutcomeID" />
+    </Key>
+    <Property Name="IncidentSubOutcomeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentMainOutcomeID" Type="Int32" />
+    <Property Name="IncidentSubOutcome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AnswerType" Type="Int32" />
+    <NavigationProperty Name="IncidentMainOutcome_M" Relationship="Self.FK_IncidentSubOutcome_M_IncidentMainOutcome_M" FromRole="IncidentSubOutcome_M" ToRole="IncidentMainOutcome_M" />
+  </EntityType>
+  <EntityType Name="IncidentSubOutcomeAnswer_T">
+    <Key>
+      <PropertyRef Name="SubOutcomeAnswerID" />
+    </Key>
+    <Property Name="SubOutcomeAnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="IncidentSubOutcomeID" Type="Int32" />
+    <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AnswerTypeID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="IncidentSubOutcomeAnswerChoice_T">
+    <Key>
+      <PropertyRef Name="AnswerChoiceID" />
+    </Key>
+    <Property Name="AnswerChoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentSubOutcomeID" Type="Int32" />
+    <Property Name="ChoiceAnswer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="IncidentSubRootCause_M">
+    <Key>
+      <PropertyRef Name="IncidentSubRootCauseID" />
+    </Key>
+    <Property Name="IncidentSubRootCauseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentMainRootCauseID" Type="Int32" />
+    <Property Name="IncidentSubRootCause" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AnswerType" Type="Int32" />
+    <NavigationProperty Name="IncidentMainRootCause_M" Relationship="Self.FK_IncidentSubRootCause_M_IncidentMainRootCause_M" FromRole="IncidentSubRootCause_M" ToRole="IncidentMainRootCause_M" />
+  </EntityType>
+  <EntityType Name="IncidentSubRootCauseAnswer_T">
+    <Key>
+      <PropertyRef Name="SubRootCauseAnswerID" />
+    </Key>
+    <Property Name="SubRootCauseAnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="IncidentSubRootCauseID" Type="Int32" />
+    <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AnswerTypeID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="IncidentSubRootCauseAnswerChoice_T">
+    <Key>
+      <PropertyRef Name="AnswerChoiceID" />
+    </Key>
+    <Property Name="AnswerChoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentSubRootCauseID" Type="Int32" />
+    <Property Name="ChoiceAnswer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="IncidentSubTypes_M">
+    <Key>
+      <PropertyRef Name="IncidentSubTypeID" />
+    </Key>
+    <Property Name="IncidentSubTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentTypeID" Type="Int32" />
+    <Property Name="IncidentPriorityID" Type="Int32" />
+    <Property Name="IncidentSubType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="RiskAssessment" Type="Boolean" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="IncidentPriorities_M" Relationship="Self.FK_IncidentSubTypes_M_IncidentPriorities_M" FromRole="IncidentSubTypes_M" ToRole="IncidentPriorities_M" />
+    <NavigationProperty Name="IncidentTypes_M" Relationship="Self.FK_IncidentSubTypes_M_IncidentTypes_M" FromRole="IncidentSubTypes_M" ToRole="IncidentTypes_M" />
+    <NavigationProperty Name="Incidents" Relationship="IRRMModel.FK_Incidents_IncidentSubTypes_M" FromRole="IncidentSubTypes_M" ToRole="Incident" />
+  </EntityType>
+  <EntityType Name="IncidentTypes_M">
+    <Key>
+      <PropertyRef Name="IncidentTypeID" />
+    </Key>
+    <Property Name="IncidentTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentPriorityID" Type="Int32" />
+    <Property Name="IncidentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="IncidentPriorities_M" Relationship="Self.FK_IncidentTypes_M_IncidentPriorities_M" FromRole="IncidentTypes_M" ToRole="IncidentPriorities_M" />
+    <NavigationProperty Name="IncidentSubTypes_M" Relationship="Self.FK_IncidentSubTypes_M_IncidentTypes_M" FromRole="IncidentTypes_M" ToRole="IncidentSubTypes_M" />
+    <NavigationProperty Name="Incidents" Relationship="IRRMModel.FK_Incidents_IncidentTypes_M" FromRole="IncidentTypes_M" ToRole="Incident" />
+  </EntityType>
+  <EntityType Name="Location_M">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Branch_M" Relationship="Self.FK_Location_M_Branch_M" FromRole="Location_M" ToRole="Branch_M" />
+    <NavigationProperty Name="Incidents" Relationship="Self.FK_Incidents_Location_M" FromRole="Location_M" ToRole="Incidents" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="ActivityDateTime" Type="DateTime" Precision="0" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="RiskCategory_M">
+    <Key>
+      <PropertyRef Name="RiskCategoryID" />
+    </Key>
+    <Property Name="RiskCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskCategory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RiskRegisters" Relationship="IRRMModel.FK_RiskRegister_RiskCategory_M" FromRole="RiskCategory_M" ToRole="RiskRegister" />
+  </EntityType>
+  <EntityType Name="RiskCost_M">
+    <Key>
+      <PropertyRef Name="RiskCostID" />
+    </Key>
+    <Property Name="RiskCostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskCost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RiskRegisters" Relationship="IRRMModel.FK_RiskRegister_RiskCost_M" FromRole="RiskCost_M" ToRole="RiskRegister" />
+  </EntityType>
+  <EntityType Name="RiskDescriptor_M">
+    <Key>
+      <PropertyRef Name="RiskDescriptorID" />
+    </Key>
+    <Property Name="RiskDescriptorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskDescriptor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RiskSeverity_M" Relationship="Self.FK_RiskSeverity_M_RiskDescriptor_M" FromRole="RiskDescriptor_M" ToRole="RiskSeverity_M" />
+    <NavigationProperty Name="RiskRegisters" Relationship="IRRMModel.FK_RiskRegister_RiskDescriptor_M" FromRole="RiskDescriptor_M" ToRole="RiskRegister" />
+  </EntityType>
+  <EntityType Name="RiskFrequencyScore_M">
+    <Key>
+      <PropertyRef Name="RiskFrequencyScoreID" />
+    </Key>
+    <Property Name="RiskFrequencyScoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskFrequencyScore" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="RiskProbability_M" Relationship="Self.FK_RiskProbability_M_RiskFrequencyScore_M" FromRole="RiskFrequencyScore_M" ToRole="RiskProbability_M" />
+  </EntityType>
+  <EntityType Name="RiskKeyStatus_T">
+    <Key>
+      <PropertyRef Name="RiskKeyStatusID" />
+    </Key>
+    <Property Name="RiskKeyStatusID" Type="Int32" Nullable="false" />
+    <Property Name="RiskKeyStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="RiskRegisters" Relationship="IRRMModel.FK_RiskKeyStatus_T" FromRole="RiskKeyStatus_T" ToRole="RiskRegister" />
+  </EntityType>
+  <EntityType Name="RiskKeyStatusDates_T">
+    <Key>
+      <PropertyRef Name="RiskKeyStatusDateID" />
+    </Key>
+    <Property Name="RiskKeyStatusDateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskRegisterID" Type="Int32" />
+    <Property Name="RiskKeyStatusID" Type="Int32" />
+    <Property Name="StatusDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="RiskLevel_M">
+    <Key>
+      <PropertyRef Name="RiskLevelID" />
+    </Key>
+    <Property Name="RiskLevelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskLevel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ActionTimeScale" Type="Int32" />
+    <Property Name="ReviewTimeScale" Type="Int32" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RiskLevel_M2">
+    <Key>
+      <PropertyRef Name="RiskLevelID" />
+    </Key>
+    <Property Name="RiskLevelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskLevel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ActionTimeScale" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReviewTimeScale" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RiskProbability_M">
+    <Key>
+      <PropertyRef Name="RiskProbabilityID" />
+    </Key>
+    <Property Name="RiskProbabilityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskFrequencyScoreID" Type="Int32" />
+    <Property Name="RiskProbability" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RiskFrequencyScore_M" Relationship="Self.FK_RiskProbability_M_RiskFrequencyScore_M" FromRole="RiskProbability_M" ToRole="RiskFrequencyScore_M" />
+    <NavigationProperty Name="RiskRegisters" Relationship="IRRMModel.FK_RiskRegister_RiskProbability_M" FromRole="RiskProbability_M" ToRole="RiskRegister" />
+    <NavigationProperty Name="RiskRegisters1" Relationship="IRRMModel.FK_RiskRegister_RiskProbability_M1" FromRole="RiskProbability_M" ToRole="RiskRegister" />
+  </EntityType>
+  <EntityType Name="RiskScore_M">
+    <Key>
+      <PropertyRef Name="RiskScoreID" />
+    </Key>
+    <Property Name="RiskScoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskScore" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RiskSeverity_M" Relationship="Self.FK_RiskSeverity_M_RiskScore_M" FromRole="RiskScore_M" ToRole="RiskSeverity_M" />
+  </EntityType>
+  <EntityType Name="RiskSeverity_M">
+    <Key>
+      <PropertyRef Name="RiskSeverityID" />
+    </Key>
+    <Property Name="RiskSeverityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskScoreID" Type="Int32" />
+    <Property Name="RiskDescriptorID" Type="Int32" />
+    <Property Name="RiskSeverity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RiskDescriptor_M" Relationship="Self.FK_RiskSeverity_M_RiskDescriptor_M" FromRole="RiskSeverity_M" ToRole="RiskDescriptor_M" />
+    <NavigationProperty Name="RiskScore_M" Relationship="Self.FK_RiskSeverity_M_RiskScore_M" FromRole="RiskSeverity_M" ToRole="RiskScore_M" />
+  </EntityType>
+  <EntityType Name="RiskStatus_M">
+    <Key>
+      <PropertyRef Name="RiskStatusID" />
+    </Key>
+    <Property Name="RiskStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RiskRegisters" Relationship="IRRMModel.FK_RiskRegister_RiskStatus_M" FromRole="RiskStatus_M" ToRole="RiskRegister" />
+  </EntityType>
+  <EntityType Name="RiskStrategy_M">
+    <Key>
+      <PropertyRef Name="RiskStrategyID" />
+    </Key>
+    <Property Name="RiskStrategyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskStrategy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RiskRegisters" Relationship="IRRMModel.FK_RiskRegister_RiskStrategy_M" FromRole="RiskStrategy_M" ToRole="RiskRegister" />
+  </EntityType>
+  <EntityType Name="RiskTemplate_M">
+    <Key>
+      <PropertyRef Name="RiskTemplateID" />
+    </Key>
+    <Property Name="RiskTemplateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskTemplate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Task_Comments">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskID" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="CommentDateTime" Type="DateTime" Precision="0" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Task_T">
+    <Key>
+      <PropertyRef Name="TaskID" />
+    </Key>
+    <Property Name="TaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="Task" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="CreatedUserID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="TaskCategory_M">
+    <Key>
+      <PropertyRef Name="TaskCategoryID" />
+    </Key>
+    <Property Name="TaskCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskCategory" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_TaskCategory_M" FromRole="TaskCategory_M" ToRole="Tasks" />
+    <NavigationProperty Name="TaskSubCategory_M" Relationship="IRRMModel.FK_TaskSubCategory_M_TaskCategory_M" FromRole="TaskCategory_M" ToRole="TaskSubCategory_M" />
+  </EntityType>
+  <EntityType Name="Task_People_T">
+    <Key>
+      <PropertyRef Name="TaskPeopleID" />
+    </Key>
+    <Property Name="TaskPeopleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskID" Type="Int32" />
+    <Property Name="TaskPeopleInvolvedID" Type="Int32" />
+    <Property Name="TaskRelationID" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdentityNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nationality" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CVRNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateUserID" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="TaskPeopleInvolved_M" Relationship="Self.FK_Task_People_T_TaskPeopleInvolved_M" FromRole="Task_People_T" ToRole="TaskPeopleInvolved_M" />
+    <NavigationProperty Name="TaskRelation_M" Relationship="Self.FK_Task_People_T_TaskRelation_M" FromRole="Task_People_T" ToRole="TaskRelation_M" />
+    <NavigationProperty Name="Task" Relationship="Self.FK_Task_People_T_Tasks" FromRole="Task_People_T" ToRole="Tasks" />
+  </EntityType>
+  <EntityType Name="TaskPeopleInvolved_M">
+    <Key>
+      <PropertyRef Name="TaskPeopleInvolvedID" />
+    </Key>
+    <Property Name="TaskPeopleInvolvedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskPeopleInvolved" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Task_People_T" Relationship="Self.FK_Task_People_T_TaskPeopleInvolved_M" FromRole="TaskPeopleInvolved_M" ToRole="Task_People_T" />
+  </EntityType>
+  <EntityType Name="TaskPriorities_M">
+    <Key>
+      <PropertyRef Name="TaskPriorityID" />
+    </Key>
+    <Property Name="TaskPriorityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Priority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InvestigationDays" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_TaskPriorities_M" FromRole="TaskPriorities_M" ToRole="Tasks" />
+  </EntityType>
+  <EntityType Name="TaskRelation_M">
+    <Key>
+      <PropertyRef Name="TaskRelationID" />
+    </Key>
+    <Property Name="TaskRelationID" Type="Int32" Nullable="false" />
+    <Property Name="TaskRelation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SendEmail" Type="Boolean" Nullable="false" />
+    <Property Name="EmailSubject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailHeader" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailFooter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Task_People_T" Relationship="Self.FK_Task_People_T_TaskRelation_M" FromRole="TaskRelation_M" ToRole="Task_People_T" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="TaskID" />
+    </Key>
+    <Property Name="TaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Registered" Type="Boolean" Nullable="false" />
+    <Property Name="Registeredon" Type="DateTime" Precision="0" />
+    <Property Name="CreatedUserID" Type="Int32" />
+    <Property Name="ReferenceID" Type="Int32" />
+    <Property Name="ReferenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaskNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="PriorityID" Type="Int32" />
+    <Property Name="OwnerID" Type="Int32" />
+    <Property Name="AssignedTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="TaskCost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="DueDate" Type="DateTime" Precision="0" />
+    <Property Name="TaskStatusID" Type="Int32" />
+    <Property Name="OwnerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TaskCategory_M" Relationship="Self.FK_Tasks_TaskCategory_M" FromRole="Tasks" ToRole="TaskCategory_M" />
+    <NavigationProperty Name="Task_People_T" Relationship="Self.FK_Task_People_T_Tasks" FromRole="Tasks" ToRole="Task_People_T" />
+    <NavigationProperty Name="TaskPriorities_M" Relationship="Self.FK_Tasks_TaskPriorities_M" FromRole="Tasks" ToRole="TaskPriorities_M" />
+    <Property Name="LocationID" Type="Int32" />
+    <Property Name="SubCategoryID" Type="Int32" />
+    <Property Name="Progress" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="FeedbackType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaskDueDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="TaskStatus_M">
+    <Key>
+      <PropertyRef Name="TaskStatusID" />
+    </Key>
+    <Property Name="TaskStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Task_Status_T">
+    <Key>
+      <PropertyRef Name="Task_StatusID" />
+    </Key>
+    <Property Name="Task_StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskID" Type="Int32" />
+    <Property Name="TaskStatusID" Type="Int32" />
+    <Property Name="CreatedUserID" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="TemplateCategory_M">
+    <Key>
+      <PropertyRef Name="TemplateCategoryID" />
+    </Key>
+    <Property Name="TemplateCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TemplateCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserRole_SM">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users_M" Relationship="IRRMModel.FK_Users_M_UserRole_SM" FromRole="UserRole_SM" ToRole="Users_M" />
+  </EntityType>
+  <EntityType Name="Users_M">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserRoleID" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DepartmentID" Type="Int32" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="LicenseNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmailID" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Branch_M" Relationship="Self.FK_Users_M_Branch_M" FromRole="Users_M" ToRole="Branch_M" />
+    <NavigationProperty Name="Department_M" Relationship="Self.FK_Users_M_Department_M" FromRole="Users_M" ToRole="Department_M" />
+    <NavigationProperty Name="Incident_Interview_T" Relationship="Self.FK_Incident_Interview_T_Users_M" FromRole="Users_M" ToRole="Incident_Interview_T" />
+    <NavigationProperty Name="Incidents" Relationship="Self.FK_Incidents_Users_M" FromRole="Users_M" ToRole="Incidents" />
+    <NavigationProperty Name="RiskAssessors_T" Relationship="IRRMModel.FK_RiskAssessors_T_Users_M" FromRole="Users_M" ToRole="RiskAssessors_T" />
+    <NavigationProperty Name="UserRole_SM" Relationship="IRRMModel.FK_Users_M_UserRole_SM" FromRole="Users_M" ToRole="UserRole_SM" />
+    <NavigationProperty Name="RiskRegisters" Relationship="IRRMModel.FK_RiskRegister_Users_M" FromRole="Users_M" ToRole="RiskRegister" />
+  </EntityType>
+  <EntityType Name="PeopleUser_V">
+    <Key>
+      <PropertyRef Name="TaskPeopleID" />
+    </Key>
+    <Property Name="TaskPeopleID" Type="Int32" Nullable="false" />
+    <Property Name="TaskID" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdentityNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nationality" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CVRNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaskRelation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaskPeopleInvolved" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TaskComment_V">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="Int32" Nullable="false" />
+    <Property Name="TaskID" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="CommentDateTime" Type="DateTime" Precision="0" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TaskIndex_V">
+    <Key>
+      <PropertyRef Name="Expr1" />
+      <PropertyRef Name="Expr2" />
+      <PropertyRef Name="TaskID" />
+      <PropertyRef Name="Registered" />
+    </Key>
+    <Property Name="Expr1" Type="Int32" Nullable="false" />
+    <Property Name="Priority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaskCategory" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="TaskStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="Expr2" Type="Boolean" Nullable="false" />
+    <Property Name="Expr3" Type="DateTime" Precision="0" />
+    <Property Name="Expr4" Type="Int32" />
+    <Property Name="Expr5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Expr6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Expr7" Type="Int32" />
+    <Property Name="Expr8" Type="Int32" />
+    <Property Name="Expr9" Type="Int32" />
+    <Property Name="Expr10" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Expr11" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Expr12" Type="DateTime" Precision="0" />
+    <Property Name="Expr13" Type="DateTime" Precision="0" />
+    <Property Name="Expr14" Type="DateTime" Precision="0" />
+    <Property Name="Expr15" Type="Int32" />
+    <Property Name="Expr16" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Expr17" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TriggeredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Expr18" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Expr19" Type="Int32" />
+    <Property Name="TaskID" Type="Int32" Nullable="false" />
+    <Property Name="Registered" Type="Boolean" Nullable="false" />
+    <Property Name="Registeredon" Type="DateTime" Precision="0" />
+    <Property Name="CreatedUserID" Type="Int32" />
+    <Property Name="ReferenceID" Type="Int32" />
+    <Property Name="ReferenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaskNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="PriorityID" Type="Int32" />
+    <Property Name="OwnerID" Type="Int32" />
+    <Property Name="AssignedTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaskCost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="DueDate" Type="DateTime" Precision="0" />
+    <Property Name="TaskStatusID" Type="Int32" />
+    <Property Name="OwnerNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SubCategoryID" Type="Int32" />
+    <Property Name="SubCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LocationID" Type="Int32" />
+    <Property Name="Progress" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="FeedbackType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaskDueDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="TaskStatusUser_V">
+    <Key>
+      <PropertyRef Name="TaskStatusID" />
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="Task_StatusID" />
+    </Key>
+    <Property Name="TaskStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaskStatusID" Type="Int32" Nullable="false" />
+    <Property Name="TaskID" Type="Int32" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+    <Property Name="Task_StatusID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Department_M_Branch_M">
+    <End Role="Branch_M" Type="Self.Branch_M" Multiplicity="0..1" />
+    <End Role="Department_M" Type="Self.Department_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_M">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Department_M">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incidents_Branch_M">
+    <End Role="Branch_M" Type="Self.Branch_M" Multiplicity="0..1" />
+    <End Role="Incidents" Type="Self.Incident" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_M">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Incidents">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Location_M_Branch_M">
+    <End Role="Branch_M" Type="Self.Branch_M" Multiplicity="0..1" />
+    <End Role="Location_M" Type="Self.Location_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_M">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Location_M">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_M_Branch_M">
+    <End Role="Branch_M" Type="Self.Branch_M" Multiplicity="0..1" />
+    <End Role="Users_M" Type="Self.Users_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch_M">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Users_M">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_M_Department_M">
+    <End Role="Department_M" Type="Self.Department_M" Multiplicity="0..1" />
+    <End Role="Users_M" Type="Self.Users_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department_M">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="Users_M">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DynamicControls_DynamicControlType">
+    <End Role="DynamicControlType" Type="Self.DynamicControlType" Multiplicity="0..1" />
+    <End Role="DynamicControls" Type="Self.DynamicControl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DynamicControlType">
+        <PropertyRef Name="DControlID" />
+      </Principal>
+      <Dependent Role="DynamicControls">
+        <PropertyRef Name="ControlTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DynamicControlValues_DynamicControls">
+    <End Role="DynamicControls" Type="Self.DynamicControl" Multiplicity="0..1" />
+    <End Role="DynamicControlValues" Type="Self.DynamicControlValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DynamicControls">
+        <PropertyRef Name="ControlID" />
+      </Principal>
+      <Dependent Role="DynamicControlValues">
+        <PropertyRef Name="ControlID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DynamicControlValues_DynamicControlType">
+    <End Role="DynamicControlType" Type="Self.DynamicControlType" Multiplicity="0..1" />
+    <End Role="DynamicControlValues" Type="Self.DynamicControlValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DynamicControlType">
+        <PropertyRef Name="DControlID" />
+      </Principal>
+      <Dependent Role="DynamicControlValues">
+        <PropertyRef Name="ControlTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incidents_EventType_T">
+    <End Role="EventType_SM" Type="Self.EventType_SM" Multiplicity="0..1" />
+    <End Role="Incidents" Type="Self.Incident" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventType_SM">
+        <PropertyRef Name="EventTypeID" />
+      </Principal>
+      <Dependent Role="Incidents">
+        <PropertyRef Name="EventTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incidents_IncidentFeedbackType_M">
+    <End Role="IncidentFeedbackType_M" Type="Self.IncidentFeedbackType_M" Multiplicity="0..1" />
+    <End Role="Incidents" Type="Self.Incident" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentFeedbackType_M">
+        <PropertyRef Name="IncidentFeedbackTypeID" />
+      </Principal>
+      <Dependent Role="Incidents">
+        <PropertyRef Name="IncidentFeedbackTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IncidentHarmScore_M_IncidentHarmGroup_M">
+    <End Role="IncidentHarmGroup_M" Type="Self.IncidentHarmGroup_M" Multiplicity="0..1" />
+    <End Role="IncidentHarmScore_M" Type="Self.IncidentHarmScore_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentHarmGroup_M">
+        <PropertyRef Name="IncidentHarmGroupID" />
+      </Principal>
+      <Dependent Role="IncidentHarmScore_M">
+        <PropertyRef Name="IncidentHarmGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incidents_IncidentHarmScore_M">
+    <End Role="IncidentHarmScore_M" Type="Self.IncidentHarmScore_M" Multiplicity="0..1" />
+    <End Role="Incidents" Type="Self.Incident" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentHarmScore_M">
+        <PropertyRef Name="IncidentHarmScoreID" />
+      </Principal>
+      <Dependent Role="Incidents">
+        <PropertyRef Name="HarmScoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incident_Interview_T_Users_M">
+    <End Role="Users_M" Type="Self.Users_M" Multiplicity="0..1" />
+    <End Role="Incident_Interview_T" Type="Self.Incident_Interview_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users_M">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Incident_Interview_T">
+        <PropertyRef Name="InterviewerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IncidentSubOutcome_M_IncidentMainOutcome_M">
+    <End Role="IncidentMainOutcome_M" Type="Self.IncidentMainOutcome_M" Multiplicity="0..1" />
+    <End Role="IncidentSubOutcome_M" Type="Self.IncidentSubOutcome_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentMainOutcome_M">
+        <PropertyRef Name="IncidentMainOutcomeID" />
+      </Principal>
+      <Dependent Role="IncidentSubOutcome_M">
+        <PropertyRef Name="IncidentMainOutcomeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IncidentSubRootCause_M_IncidentMainRootCause_M">
+    <End Role="IncidentMainRootCause_M" Type="Self.IncidentMainRootCause_M" Multiplicity="0..1" />
+    <End Role="IncidentSubRootCause_M" Type="Self.IncidentSubRootCause_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentMainRootCause_M">
+        <PropertyRef Name="IncidentMainRootCauseID" />
+      </Principal>
+      <Dependent Role="IncidentSubRootCause_M">
+        <PropertyRef Name="IncidentMainRootCauseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incident_People_T_IncidentPeopleInvolved_M">
+    <End Role="IncidentPeopleInvolved_M" Type="Self.IncidentPeopleInvolved_M" Multiplicity="0..1" />
+    <End Role="Incident_People_T" Type="Self.Incident_People_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentPeopleInvolved_M">
+        <PropertyRef Name="IncidentPeopleInvolvedID" />
+      </Principal>
+      <Dependent Role="Incident_People_T">
+        <PropertyRef Name="IncidentPeopleInvolvedID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incident_People_T_IncidentRelation_M">
+    <End Role="IncidentRelation_M" Type="Self.IncidentRelation_M" Multiplicity="0..1" />
+    <End Role="Incident_People_T" Type="Self.Incident_People_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentRelation_M">
+        <PropertyRef Name="IncidentRelationID" />
+      </Principal>
+      <Dependent Role="Incident_People_T">
+        <PropertyRef Name="IncidentRelationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incident_People_T_Incidents">
+    <End Role="Incidents" Type="Self.Incident" Multiplicity="0..1" />
+    <End Role="Incident_People_T" Type="Self.Incident_People_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Incidents">
+        <PropertyRef Name="IncidentID" />
+      </Principal>
+      <Dependent Role="Incident_People_T">
+        <PropertyRef Name="IncidentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incidents_IncidentPriorities_M">
+    <End Role="IncidentPriorities_M" Type="Self.IncidentPriorities_M" Multiplicity="0..1" />
+    <End Role="Incidents" Type="Self.Incident" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentPriorities_M">
+        <PropertyRef Name="IncidentPriorityID" />
+      </Principal>
+      <Dependent Role="Incidents">
+        <PropertyRef Name="PriorityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IncidentSubTypes_M_IncidentPriorities_M">
+    <End Role="IncidentPriorities_M" Type="Self.IncidentPriorities_M" Multiplicity="0..1" />
+    <End Role="IncidentSubTypes_M" Type="Self.IncidentSubTypes_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentPriorities_M">
+        <PropertyRef Name="IncidentPriorityID" />
+      </Principal>
+      <Dependent Role="IncidentSubTypes_M">
+        <PropertyRef Name="IncidentPriorityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IncidentTypes_M_IncidentPriorities_M">
+    <End Role="IncidentPriorities_M" Type="Self.IncidentPriorities_M" Multiplicity="0..1" />
+    <End Role="IncidentTypes_M" Type="Self.IncidentTypes_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentPriorities_M">
+        <PropertyRef Name="IncidentPriorityID" />
+      </Principal>
+      <Dependent Role="IncidentTypes_M">
+        <PropertyRef Name="IncidentPriorityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incidents_IncidentStatus_M">
+    <End Role="IncidentStatus_M" Type="Self.IncidentStatus_M" Multiplicity="0..1" />
+    <End Role="Incidents" Type="Self.Incident" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentStatus_M">
+        <PropertyRef Name="IncidentStatusID" />
+      </Principal>
+      <Dependent Role="Incidents">
+        <PropertyRef Name="IncidentStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incidents_Location_M">
+    <End Role="Location_M" Type="Self.Location_M" Multiplicity="0..1" />
+    <End Role="Incidents" Type="Self.Incident" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location_M">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="Incidents">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incidents_Users_M">
+    <End Role="Users_M" Type="Self.Users_M" Multiplicity="0..1" />
+    <End Role="Incidents" Type="Self.Incident" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users_M">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Incidents">
+        <PropertyRef Name="CreatedUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IncidentSubTypes_M_IncidentTypes_M">
+    <End Role="IncidentTypes_M" Type="Self.IncidentTypes_M" Multiplicity="0..1" />
+    <End Role="IncidentSubTypes_M" Type="Self.IncidentSubTypes_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentTypes_M">
+        <PropertyRef Name="IncidentTypeID" />
+      </Principal>
+      <Dependent Role="IncidentSubTypes_M">
+        <PropertyRef Name="IncidentTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RiskSeverity_M_RiskDescriptor_M">
+    <End Role="RiskDescriptor_M" Type="Self.RiskDescriptor_M" Multiplicity="0..1" />
+    <End Role="RiskSeverity_M" Type="Self.RiskSeverity_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RiskDescriptor_M">
+        <PropertyRef Name="RiskDescriptorID" />
+      </Principal>
+      <Dependent Role="RiskSeverity_M">
+        <PropertyRef Name="RiskDescriptorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RiskProbability_M_RiskFrequencyScore_M">
+    <End Role="RiskFrequencyScore_M" Type="Self.RiskFrequencyScore_M" Multiplicity="0..1" />
+    <End Role="RiskProbability_M" Type="Self.RiskProbability_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RiskFrequencyScore_M">
+        <PropertyRef Name="RiskFrequencyScoreID" />
+      </Principal>
+      <Dependent Role="RiskProbability_M">
+        <PropertyRef Name="RiskFrequencyScoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RiskSeverity_M_RiskScore_M">
+    <End Role="RiskScore_M" Type="Self.RiskScore_M" Multiplicity="0..1" />
+    <End Role="RiskSeverity_M" Type="Self.RiskSeverity_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RiskScore_M">
+        <PropertyRef Name="RiskScoreID" />
+      </Principal>
+      <Dependent Role="RiskSeverity_M">
+        <PropertyRef Name="RiskScoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_TaskCategory_M">
+    <End Role="TaskCategory_M" Type="Self.TaskCategory_M" Multiplicity="0..1" />
+    <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskCategory_M">
+        <PropertyRef Name="TaskCategoryID" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_People_T_TaskPeopleInvolved_M">
+    <End Role="TaskPeopleInvolved_M" Type="Self.TaskPeopleInvolved_M" Multiplicity="0..1" />
+    <End Role="Task_People_T" Type="Self.Task_People_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskPeopleInvolved_M">
+        <PropertyRef Name="TaskPeopleInvolvedID" />
+      </Principal>
+      <Dependent Role="Task_People_T">
+        <PropertyRef Name="TaskPeopleInvolvedID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_People_T_TaskRelation_M">
+    <End Role="TaskRelation_M" Type="Self.TaskRelation_M" Multiplicity="0..1" />
+    <End Role="Task_People_T" Type="Self.Task_People_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskRelation_M">
+        <PropertyRef Name="TaskRelationID" />
+      </Principal>
+      <Dependent Role="Task_People_T">
+        <PropertyRef Name="TaskRelationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_People_T_Tasks">
+    <End Role="Tasks" Type="Self.Task" Multiplicity="0..1" />
+    <End Role="Task_People_T" Type="Self.Task_People_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tasks">
+        <PropertyRef Name="TaskID" />
+      </Principal>
+      <Dependent Role="Task_People_T">
+        <PropertyRef Name="TaskID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_TaskPriorities_M">
+    <End Role="TaskPriorities_M" Type="Self.TaskPriorities_M" Multiplicity="0..1" />
+    <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskPriorities_M">
+        <PropertyRef Name="TaskPriorityID" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="PriorityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IRRMEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AnswerType_SM" EntityType="Self.AnswerType_SM" />
+    <EntitySet Name="Branch_M" EntityType="Self.Branch_M" />
+    <EntitySet Name="Department_M" EntityType="Self.Department_M" />
+    <EntitySet Name="Department_M2" EntityType="Self.Department_M2" />
+    <EntitySet Name="DocumentAccessGroup_M" EntityType="Self.DocumentAccessGroup_M" />
+    <EntitySet Name="DocumentCategory_M" EntityType="Self.DocumentCategory_M" />
+    <EntitySet Name="DocumentStakeholder_M" EntityType="Self.DocumentStakeholder_M" />
+    <EntitySet Name="DocumentStatus_SM" EntityType="Self.DocumentStatus_SM" />
+    <EntitySet Name="DocumentStatus_T" EntityType="Self.DocumentStatus_T" />
+    <EntitySet Name="DocumentSubCategory_M" EntityType="Self.DocumentSubCategory_M" />
+    <EntitySet Name="DynamicControls" EntityType="Self.DynamicControl" />
+    <EntitySet Name="DynamicControlTypes" EntityType="Self.DynamicControlType" />
+    <EntitySet Name="DynamicControlValues" EntityType="Self.DynamicControlValue" />
+    <EntitySet Name="DynamicForms" EntityType="Self.DynamicForm" />
+    <EntitySet Name="DynamicForm_Control" EntityType="Self.DynamicForm_Control" />
+    <EntitySet Name="DynamicReports_M" EntityType="Self.DynamicReports_M" />
+    <EntitySet Name="EventType_SM" EntityType="Self.EventType_SM" />
+    <EntitySet Name="Incident_Comments" EntityType="Self.Incident_Comments" />
+    <EntitySet Name="Incident_Status_T" EntityType="Self.Incident_Status_T" />
+    <EntitySet Name="IncidentDocument_T" EntityType="Self.IncidentDocument_T" />
+    <EntitySet Name="IncidentFeedbackType_M" EntityType="Self.IncidentFeedbackType_M" />
+    <EntitySet Name="IncidentHarmGroup_M" EntityType="Self.IncidentHarmGroup_M" />
+    <EntitySet Name="IncidentHarmScore_M" EntityType="Self.IncidentHarmScore_M" />
+    <EntitySet Name="IncidentHistories" EntityType="Self.IncidentHistory" />
+    <EntitySet Name="Incident_Interview_T" EntityType="Self.Incident_Interview_T" />
+    <EntitySet Name="IncidentMainOutcome_M" EntityType="Self.IncidentMainOutcome_M" />
+    <EntitySet Name="IncidentMainRootCause_M" EntityType="Self.IncidentMainRootCause_M" />
+    <EntitySet Name="Incident_People_T" EntityType="Self.Incident_People_T" />
+    <EntitySet Name="IncidentPeopleInvolved_M" EntityType="Self.IncidentPeopleInvolved_M" />
+    <EntitySet Name="IncidentPriorities_M" EntityType="Self.IncidentPriorities_M" />
+    <EntitySet Name="Incident_Recommendation_T" EntityType="Self.Incident_Recommendation_T" />
+    <EntitySet Name="IncidentRegistery_T" EntityType="Self.IncidentRegistery_T" />
+    <EntitySet Name="IncidentRelation_M" EntityType="Self.IncidentRelation_M" />
+    <EntitySet Name="Incidents" EntityType="Self.Incident" />
+    <EntitySet Name="Incidents_MainOutcome_T" EntityType="Self.Incidents_MainOutcome_T" />
+    <EntitySet Name="Incidents_MainRootCause_T" EntityType="Self.Incidents_MainRootCause_T" />
+    <EntitySet Name="IncidentStatus_M" EntityType="Self.IncidentStatus_M" />
+    <EntitySet Name="IncidentSubOutcome_M" EntityType="Self.IncidentSubOutcome_M" />
+    <EntitySet Name="IncidentSubOutcomeAnswer_T" EntityType="Self.IncidentSubOutcomeAnswer_T" />
+    <EntitySet Name="IncidentSubOutcomeAnswerChoice_T" EntityType="Self.IncidentSubOutcomeAnswerChoice_T" />
+    <EntitySet Name="IncidentSubRootCause_M" EntityType="Self.IncidentSubRootCause_M" />
+    <EntitySet Name="IncidentSubRootCauseAnswer_T" EntityType="Self.IncidentSubRootCauseAnswer_T" />
+    <EntitySet Name="IncidentSubRootCauseAnswerChoice_T" EntityType="Self.IncidentSubRootCauseAnswerChoice_T" />
+    <EntitySet Name="IncidentSubTypes_M" EntityType="Self.IncidentSubTypes_M" />
+    <EntitySet Name="IncidentTypes_M" EntityType="Self.IncidentTypes_M" />
+    <EntitySet Name="Location_M" EntityType="Self.Location_M" />
+    <EntitySet Name="Logs" EntityType="Self.Log" />
+    <EntitySet Name="RiskCategory_M" EntityType="Self.RiskCategory_M" />
+    <EntitySet Name="RiskCost_M" EntityType="Self.RiskCost_M" />
+    <EntitySet Name="RiskDescriptor_M" EntityType="Self.RiskDescriptor_M" />
+    <EntitySet Name="RiskFrequencyScore_M" EntityType="Self.RiskFrequencyScore_M" />
+    <EntitySet Name="RiskKeyStatus_T" EntityType="Self.RiskKeyStatus_T" />
+    <EntitySet Name="RiskKeyStatusDates_T" EntityType="Self.RiskKeyStatusDates_T" />
+    <EntitySet Name="RiskLevel_M" EntityType="Self.RiskLevel_M" />
+    <EntitySet Name="RiskLevel_M2" EntityType="Self.RiskLevel_M2" />
+    <EntitySet Name="RiskProbability_M" EntityType="Self.RiskProbability_M" />
+    <EntitySet Name="RiskScore_M" EntityType="Self.RiskScore_M" />
+    <EntitySet Name="RiskSeverity_M" EntityType="Self.RiskSeverity_M" />
+    <EntitySet Name="RiskStatus_M" EntityType="Self.RiskStatus_M" />
+    <EntitySet Name="RiskStrategy_M" EntityType="Self.RiskStrategy_M" />
+    <EntitySet Name="RiskTemplate_M" EntityType="Self.RiskTemplate_M" />
+    <EntitySet Name="Task_Comments" EntityType="Self.Task_Comments" />
+    <EntitySet Name="Task_T" EntityType="Self.Task_T" />
+    <EntitySet Name="TaskCategory_M" EntityType="Self.TaskCategory_M" />
+    <EntitySet Name="Task_People_T" EntityType="Self.Task_People_T" />
+    <EntitySet Name="TaskPeopleInvolved_M" EntityType="Self.TaskPeopleInvolved_M" />
+    <EntitySet Name="TaskPriorities_M" EntityType="Self.TaskPriorities_M" />
+    <EntitySet Name="TaskRelation_M" EntityType="Self.TaskRelation_M" />
+    <EntitySet Name="Tasks" EntityType="Self.Task" />
+    <EntitySet Name="TaskStatus_M" EntityType="Self.TaskStatus_M" />
+    <EntitySet Name="Task_Status_T" EntityType="Self.Task_Status_T" />
+    <EntitySet Name="TemplateCategory_M" EntityType="Self.TemplateCategory_M" />
+    <EntitySet Name="UserRole_SM" EntityType="Self.UserRole_SM" />
+    <EntitySet Name="Users_M" EntityType="Self.Users_M" />
+    <EntitySet Name="PeopleUser_V" EntityType="Self.PeopleUser_V" />
+    <EntitySet Name="TaskComment_V" EntityType="Self.TaskComment_V" />
+    <EntitySet Name="TaskIndex_V" EntityType="Self.TaskIndex_V" />
+    <EntitySet Name="TaskStatusUser_V" EntityType="Self.TaskStatusUser_V" />
+    <AssociationSet Name="FK_Department_M_Branch_M" Association="Self.FK_Department_M_Branch_M">
+      <End Role="Branch_M" EntitySet="Branch_M" />
+      <End Role="Department_M" EntitySet="Department_M" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incidents_Branch_M" Association="Self.FK_Incidents_Branch_M">
+      <End Role="Branch_M" EntitySet="Branch_M" />
+      <End Role="Incidents" EntitySet="Incidents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Location_M_Branch_M" Association="Self.FK_Location_M_Branch_M">
+      <End Role="Branch_M" EntitySet="Branch_M" />
+      <End Role="Location_M" EntitySet="Location_M" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_M_Branch_M" Association="Self.FK_Users_M_Branch_M">
+      <End Role="Branch_M" EntitySet="Branch_M" />
+      <End Role="Users_M" EntitySet="Users_M" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_M_Department_M" Association="Self.FK_Users_M_Department_M">
+      <End Role="Department_M" EntitySet="Department_M" />
+      <End Role="Users_M" EntitySet="Users_M" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DynamicControls_DynamicControlType" Association="Self.FK_DynamicControls_DynamicControlType">
+      <End Role="DynamicControlType" EntitySet="DynamicControlTypes" />
+      <End Role="DynamicControls" EntitySet="DynamicControls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DynamicControlValues_DynamicControls" Association="Self.FK_DynamicControlValues_DynamicControls">
+      <End Role="DynamicControls" EntitySet="DynamicControls" />
+      <End Role="DynamicControlValues" EntitySet="DynamicControlValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DynamicControlValues_DynamicControlType" Association="Self.FK_DynamicControlValues_DynamicControlType">
+      <End Role="DynamicControlType" EntitySet="DynamicControlTypes" />
+      <End Role="DynamicControlValues" EntitySet="DynamicControlValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incidents_EventType_T" Association="Self.FK_Incidents_EventType_T">
+      <End Role="EventType_SM" EntitySet="EventType_SM" />
+      <End Role="Incidents" EntitySet="Incidents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incidents_IncidentFeedbackType_M" Association="Self.FK_Incidents_IncidentFeedbackType_M">
+      <End Role="IncidentFeedbackType_M" EntitySet="IncidentFeedbackType_M" />
+      <End Role="Incidents" EntitySet="Incidents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IncidentHarmScore_M_IncidentHarmGroup_M" Association="Self.FK_IncidentHarmScore_M_IncidentHarmGroup_M">
+      <End Role="IncidentHarmGroup_M" EntitySet="IncidentHarmGroup_M" />
+      <End Role="IncidentHarmScore_M" EntitySet="IncidentHarmScore_M" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incidents_IncidentHarmScore_M" Association="Self.FK_Incidents_IncidentHarmScore_M">
+      <End Role="IncidentHarmScore_M" EntitySet="IncidentHarmScore_M" />
+      <End Role="Incidents" EntitySet="Incidents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incident_Interview_T_Users_M" Association="Self.FK_Incident_Interview_T_Users_M">
+      <End Role="Users_M" EntitySet="Users_M" />
+      <End Role="Incident_Interview_T" EntitySet="Incident_Interview_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IncidentSubOutcome_M_IncidentMainOutcome_M" Association="Self.FK_IncidentSubOutcome_M_IncidentMainOutcome_M">
+      <End Role="IncidentMainOutcome_M" EntitySet="IncidentMainOutcome_M" />
+      <End Role="IncidentSubOutcome_M" EntitySet="IncidentSubOutcome_M" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IncidentSubRootCause_M_IncidentMainRootCause_M" Association="Self.FK_IncidentSubRootCause_M_IncidentMainRootCause_M">
+      <End Role="IncidentMainRootCause_M" EntitySet="IncidentMainRootCause_M" />
+      <End Role="IncidentSubRootCause_M" EntitySet="IncidentSubRootCause_M" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incident_People_T_IncidentPeopleInvolved_M" Association="Self.FK_Incident_People_T_IncidentPeopleInvolved_M">
+      <End Role="IncidentPeopleInvolved_M" EntitySet="IncidentPeopleInvolved_M" />
+      <End Role="Incident_People_T" EntitySet="Incident_People_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incident_People_T_IncidentRelation_M" Association="Self.FK_Incident_People_T_IncidentRelation_M">
+      <End Role="IncidentRelation_M" EntitySet="IncidentRelation_M" />
+      <End Role="Incident_People_T" EntitySet="Incident_People_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incident_People_T_Incidents" Association="Self.FK_Incident_People_T_Incidents">
+      <End Role="Incidents" EntitySet="Incidents" />
+      <End Role="Incident_People_T" EntitySet="Incident_People_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incidents_IncidentPriorities_M" Association="Self.FK_Incidents_IncidentPriorities_M">
+      <End Role="IncidentPriorities_M" EntitySet="IncidentPriorities_M" />
+      <End Role="Incidents" EntitySet="Incidents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IncidentSubTypes_M_IncidentPriorities_M" Association="Self.FK_IncidentSubTypes_M_IncidentPriorities_M">
+      <End Role="IncidentPriorities_M" EntitySet="IncidentPriorities_M" />
+      <End Role="IncidentSubTypes_M" EntitySet="IncidentSubTypes_M" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IncidentTypes_M_IncidentPriorities_M" Association="Self.FK_IncidentTypes_M_IncidentPriorities_M">
+      <End Role="IncidentPriorities_M" EntitySet="IncidentPriorities_M" />
+      <End Role="IncidentTypes_M" EntitySet="IncidentTypes_M" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incidents_IncidentStatus_M" Association="Self.FK_Incidents_IncidentStatus_M">
+      <End Role="IncidentStatus_M" EntitySet="IncidentStatus_M" />
+      <End Role="Incidents" EntitySet="Incidents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incidents_Location_M" Association="Self.FK_Incidents_Location_M">
+      <End Role="Location_M" EntitySet="Location_M" />
+      <End Role="Incidents" EntitySet="Incidents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incidents_Users_M" Association="Self.FK_Incidents_Users_M">
+      <End Role="Users_M" EntitySet="Users_M" />
+      <End Role="Incidents" EntitySet="Incidents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IncidentSubTypes_M_IncidentTypes_M" Association="Self.FK_IncidentSubTypes_M_IncidentTypes_M">
+      <End Role="IncidentTypes_M" EntitySet="IncidentTypes_M" />
+      <End Role="IncidentSubTypes_M" EntitySet="IncidentSubTypes_M" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RiskSeverity_M_RiskDescriptor_M" Association="Self.FK_RiskSeverity_M_RiskDescriptor_M">
+      <End Role="RiskDescriptor_M" EntitySet="RiskDescriptor_M" />
+      <End Role="RiskSeverity_M" EntitySet="RiskSeverity_M" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RiskProbability_M_RiskFrequencyScore_M" Association="Self.FK_RiskProbability_M_RiskFrequencyScore_M">
+      <End Role="RiskFrequencyScore_M" EntitySet="RiskFrequencyScore_M" />
+      <End Role="RiskProbability_M" EntitySet="RiskProbability_M" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RiskSeverity_M_RiskScore_M" Association="Self.FK_RiskSeverity_M_RiskScore_M">
+      <End Role="RiskScore_M" EntitySet="RiskScore_M" />
+      <End Role="RiskSeverity_M" EntitySet="RiskSeverity_M" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_TaskCategory_M" Association="Self.FK_Tasks_TaskCategory_M">
+      <End Role="TaskCategory_M" EntitySet="TaskCategory_M" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_People_T_TaskPeopleInvolved_M" Association="Self.FK_Task_People_T_TaskPeopleInvolved_M">
+      <End Role="TaskPeopleInvolved_M" EntitySet="TaskPeopleInvolved_M" />
+      <End Role="Task_People_T" EntitySet="Task_People_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_People_T_TaskRelation_M" Association="Self.FK_Task_People_T_TaskRelation_M">
+      <End Role="TaskRelation_M" EntitySet="TaskRelation_M" />
+      <End Role="Task_People_T" EntitySet="Task_People_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_People_T_Tasks" Association="Self.FK_Task_People_T_Tasks">
+      <End Role="Tasks" EntitySet="Tasks" />
+      <End Role="Task_People_T" EntitySet="Task_People_T" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_TaskPriorities_M" Association="Self.FK_Tasks_TaskPriorities_M">
+      <End Role="TaskPriorities_M" EntitySet="TaskPriorities_M" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <FunctionImport Name="RegistryNo" ReturnType="Collection(String)">
+      <Parameter Name="Prefix" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spEventIncidentCountreport">
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+      <Parameter Name="RptType" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="DocumentType_SM" EntityType="IRRMModel.DocumentType_SM" />
+    <AssociationSet Name="FK_DocumentSubCategory_M_DocumentCategory_M" Association="IRRMModel.FK_DocumentSubCategory_M_DocumentCategory_M">
+      <End Role="DocumentCategory_M" EntitySet="DocumentCategory_M" />
+      <End Role="DocumentSubCategory_M" EntitySet="DocumentSubCategory_M" />
+    </AssociationSet>
+    <EntitySet Name="RiskAssessors_T" EntityType="IRRMModel.RiskAssessors_T" />
+    <AssociationSet Name="FK_RiskAssessors_T_Users_M" Association="IRRMModel.FK_RiskAssessors_T_Users_M">
+      <End Role="Users_M" EntitySet="Users_M" />
+      <End Role="RiskAssessors_T" EntitySet="RiskAssessors_T" />
+    </AssociationSet>
+    <EntitySet Name="RiskAssessorUser_V" EntityType="IRRMModel.RiskAssessorUser_V" />
+    <AssociationSet Name="FK_Incidents_IncidentSubTypes_M" Association="IRRMModel.FK_Incidents_IncidentSubTypes_M">
+      <End Role="IncidentSubTypes_M" EntitySet="IncidentSubTypes_M" />
+      <End Role="Incident" EntitySet="Incidents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Incidents_IncidentTypes_M" Association="IRRMModel.FK_Incidents_IncidentTypes_M">
+      <End Role="IncidentTypes_M" EntitySet="IncidentTypes_M" />
+      <End Role="Incident" EntitySet="Incidents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_M_UserRole_SM" Association="IRRMModel.FK_Users_M_UserRole_SM">
+      <End Role="UserRole_SM" EntitySet="UserRole_SM" />
+      <End Role="Users_M" EntitySet="Users_M" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="IRRMModel.sysdiagram" />
+    <EntitySet Name="DocumentCopyLocation_T" EntityType="IRRMModel.DocumentCopyLocation_T" />
+    <EntitySet Name="Documents" EntityType="IRRMModel.Document" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(IRRMModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(IRRMModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="DocumentCopyDept_V" EntityType="IRRMModel.DocumentCopyDept_V" />
+    <EntitySet Name="DocumentAccess_T" EntityType="IRRMModel.DocumentAccess_T" />
+    <EntitySet Name="DocumentViewers_V" EntityType="IRRMModel.DocumentViewers_V" />
+    <EntitySet Name="DocumentViewers_T" EntityType="IRRMModel.DocumentViewers_T" />
+    <EntitySet Name="DocumentAccessGroupUsers_V" EntityType="IRRMModel.DocumentAccessGroupUsers_V" />
+    <EntitySet Name="Documents_V" EntityType="IRRMModel.Documents_V" />
+    <EntitySet Name="TaskSubCategory_M" EntityType="IRRMModel.TaskSubCategory_M" />
+    <AssociationSet Name="FK_TaskSubCategory_M_TaskCategory_M" Association="IRRMModel.FK_TaskSubCategory_M_TaskCategory_M">
+      <End Role="TaskCategory_M" EntitySet="TaskCategory_M" />
+      <End Role="TaskSubCategory_M" EntitySet="TaskSubCategory_M" />
+    </AssociationSet>
+    <EntitySet Name="TaskDocument_T" EntityType="IRRMModel.TaskDocument_T" />
+    <EntitySet Name="RiskRegisters" EntityType="IRRMModel.RiskRegister" />
+    <AssociationSet Name="FK_RiskRegister_Incidents" Association="IRRMModel.FK_RiskRegister_Incidents">
+      <End Role="Incident" EntitySet="Incidents" />
+      <End Role="RiskRegister" EntitySet="RiskRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RiskRegister_RiskCategory_M" Association="IRRMModel.FK_RiskRegister_RiskCategory_M">
+      <End Role="RiskCategory_M" EntitySet="RiskCategory_M" />
+      <End Role="RiskRegister" EntitySet="RiskRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RiskRegister_RiskCost_M" Association="IRRMModel.FK_RiskRegister_RiskCost_M">
+      <End Role="RiskCost_M" EntitySet="RiskCost_M" />
+      <End Role="RiskRegister" EntitySet="RiskRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RiskRegister_RiskDescriptor_M" Association="IRRMModel.FK_RiskRegister_RiskDescriptor_M">
+      <End Role="RiskDescriptor_M" EntitySet="RiskDescriptor_M" />
+      <End Role="RiskRegister" EntitySet="RiskRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RiskKeyStatus_T" Association="IRRMModel.FK_RiskKeyStatus_T">
+      <End Role="RiskKeyStatus_T" EntitySet="RiskKeyStatus_T" />
+      <End Role="RiskRegister" EntitySet="RiskRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RiskRegister_RiskProbability_M" Association="IRRMModel.FK_RiskRegister_RiskProbability_M">
+      <End Role="RiskProbability_M" EntitySet="RiskProbability_M" />
+      <End Role="RiskRegister" EntitySet="RiskRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RiskRegister_RiskProbability_M1" Association="IRRMModel.FK_RiskRegister_RiskProbability_M1">
+      <End Role="RiskProbability_M" EntitySet="RiskProbability_M" />
+      <End Role="RiskRegister" EntitySet="RiskRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RiskRegister_RiskStatus_M" Association="IRRMModel.FK_RiskRegister_RiskStatus_M">
+      <End Role="RiskStatus_M" EntitySet="RiskStatus_M" />
+      <End Role="RiskRegister" EntitySet="RiskRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RiskRegister_RiskStrategy_M" Association="IRRMModel.FK_RiskRegister_RiskStrategy_M">
+      <End Role="RiskStrategy_M" EntitySet="RiskStrategy_M" />
+      <End Role="RiskRegister" EntitySet="RiskRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RiskRegister_Users_M" Association="IRRMModel.FK_RiskRegister_Users_M">
+      <End Role="Users_M" EntitySet="Users_M" />
+      <End Role="RiskRegister" EntitySet="RiskRegisters" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="DocumentType_SM">
+    <Key>
+      <PropertyRef Name="DocumentTypeID" />
+    </Key>
+    <Property Name="DocumentTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_DocumentSubCategory_M_DocumentCategory_M">
+    <End Type="IRRMModel.DocumentCategory_M" Role="DocumentCategory_M" Multiplicity="0..1" />
+    <End Type="IRRMModel.DocumentSubCategory_M" Role="DocumentSubCategory_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentCategory_M">
+        <PropertyRef Name="DocCategoryID" />
+      </Principal>
+      <Dependent Role="DocumentSubCategory_M">
+        <PropertyRef Name="DocCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="RiskAssessors_T">
+    <Key>
+      <PropertyRef Name="RiskAssessorID" />
+    </Key>
+    <Property Name="RiskAssessorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RiskID" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <NavigationProperty Name="Users_M" Relationship="IRRMModel.FK_RiskAssessors_T_Users_M" FromRole="RiskAssessors_T" ToRole="Users_M" />
+  </EntityType>
+  <Association Name="FK_RiskAssessors_T_Users_M">
+    <End Type="IRRMModel.Users_M" Role="Users_M" Multiplicity="0..1" />
+    <End Type="IRRMModel.RiskAssessors_T" Role="RiskAssessors_T" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users_M">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="RiskAssessors_T">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="RiskAssessorUser_V">
+    <Key>
+      <PropertyRef Name="RiskAssessorID" />
+    </Key>
+    <Property Name="RiskAssessorID" Type="Int32" Nullable="false" />
+    <Property Name="RiskID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Incidents_IncidentSubTypes_M">
+    <End Type="IRRMModel.IncidentSubTypes_M" Role="IncidentSubTypes_M" Multiplicity="0..1" />
+    <End Type="IRRMModel.Incident" Role="Incident" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentSubTypes_M">
+        <PropertyRef Name="IncidentSubTypeID" />
+      </Principal>
+      <Dependent Role="Incident">
+        <PropertyRef Name="IncidentSubTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Incidents_IncidentTypes_M">
+    <End Type="IRRMModel.IncidentTypes_M" Role="IncidentTypes_M" Multiplicity="0..1" />
+    <End Type="IRRMModel.Incident" Role="Incident" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncidentTypes_M">
+        <PropertyRef Name="IncidentTypeID" />
+      </Principal>
+      <Dependent Role="Incident">
+        <PropertyRef Name="IncidentTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_M_UserRole_SM">
+    <End Type="IRRMModel.UserRole_SM" Role="UserRole_SM" Multiplicity="0..1" />
+    <End Type="IRRMModel.Users_M" Role="Users_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole_SM">
+        <PropertyRef Name="UserRoleID" />
+      </Principal>
+      <Dependent Role="Users_M">
+        <PropertyRef Name="UserRoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="DocumentCopyLocation_T">
+    <Key>
+      <PropertyRef Name="DocCopyLocationID" />
+    </Key>
+    <Property Name="DocCopyLocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentID" Type="Int32" />
+    <Property Name="DepartmentID" Type="Int32" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Document">
+    <Key>
+      <PropertyRef Name="DocumentID" />
+    </Key>
+    <Property Name="DocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RegisteredOn" Type="DateTime" Precision="0" />
+    <Property Name="DocumentRefID" Type="Int32" />
+    <Property Name="ReferenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DocCategoryID" Type="Int32" />
+    <Property Name="DocSubCategoryID" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StakeholderID" Type="Int32" />
+    <Property Name="FileAttached" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ValidFrom" Type="DateTime" Precision="0" />
+    <Property Name="ValidUpto" Type="DateTime" Precision="0" />
+    <Property Name="DocumentManager" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DepartmentID" Type="Int32" />
+    <Property Name="SpecifyLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CurrentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatorID" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+    <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FileExtension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="DocumentCopyDept_V">
+    <Key>
+      <PropertyRef Name="DocCopyLocationID" />
+    </Key>
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DocCopyLocationID" Type="Int32" Nullable="false" />
+    <Property Name="DocumentID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="DocumentAccess_T">
+    <Key>
+      <PropertyRef Name="DocAccessID" />
+    </Key>
+    <Property Name="DocAccessID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentID" Type="Int32" />
+    <Property Name="DocAccessGroupID" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="DocumentViewers_V">
+    <Key>
+      <PropertyRef Name="DocViewersID" />
+    </Key>
+    <Property Name="DocumentID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ViewedOn" Type="DateTime" Precision="0" />
+    <Property Name="DocViewersID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentViewers_T">
+    <Key>
+      <PropertyRef Name="DocViewersID" />
+    </Key>
+    <Property Name="DocViewersID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentID" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="ViewedOn" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="DocumentAccessGroupUsers_V">
+    <Key>
+      <PropertyRef Name="DocAccessID" />
+    </Key>
+    <Property Name="DocAccessID" Type="Int32" Nullable="false" />
+    <Property Name="DocumentID" Type="Int32" />
+    <Property Name="AccessGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Expr1" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Documents_V">
+    <Key>
+      <PropertyRef Name="DocumentID" />
+    </Key>
+    <Property Name="DocumentID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DocCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DocSubCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Stakeholder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReferenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FileAttached" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ValidFrom" Type="DateTime" Precision="0" />
+    <Property Name="ValidUpto" Type="DateTime" Precision="0" />
+    <Property Name="CurrentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RegisteredOn" Type="DateTime" Precision="0" />
+    <Property Name="DocumentManager" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DocCategoryID" Type="Int32" />
+    <Property Name="DocSubCategoryID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="TaskSubCategory_M">
+    <Key>
+      <PropertyRef Name="TaskSubCategoryID" />
+    </Key>
+    <Property Name="TaskSubCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskCategoryID" Type="Int32" />
+    <Property Name="SubCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="TaskCategory_M" Relationship="IRRMModel.FK_TaskSubCategory_M_TaskCategory_M" FromRole="TaskSubCategory_M" ToRole="TaskCategory_M" />
+  </EntityType>
+  <Association Name="FK_TaskSubCategory_M_TaskCategory_M">
+    <End Type="IRRMModel.TaskCategory_M" Role="TaskCategory_M" Multiplicity="0..1" />
+    <End Type="IRRMModel.TaskSubCategory_M" Role="TaskSubCategory_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskCategory_M">
+        <PropertyRef Name="TaskCategoryID" />
+      </Principal>
+      <Dependent Role="TaskSubCategory_M">
+        <PropertyRef Name="TaskCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TaskDocument_T">
+    <Key>
+      <PropertyRef Name="TaskDocumentID" />
+    </Key>
+    <Property Name="TaskDocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskID" Type="Int32" />
+    <Property Name="DocumentTypeID" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DocGUID" Type="Guid" />
+  </EntityType>
+  <EntityType Name="RiskRegister">
+    <Key>
+      <PropertyRef Name="RiskRegisterID" />
+    </Key>
+    <Property Name="RiskRegisterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RRNo" Type="Int32" />
+    <Property Name="RiskRegisterNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedUserID" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+    <Property Name="Proactive" Type="Boolean" Nullable="false" />
+    <Property Name="IncidentID" Type="Int32" />
+    <Property Name="RiskCategoryID" Type="Int32" />
+    <Property Name="RiskCostID" Type="Int32" />
+    <Property Name="RiskDescriptorID" Type="Int32" />
+    <Property Name="RiskStatusID" Type="Int32" />
+    <Property Name="RiskStrategyID" Type="Int32" />
+    <Property Name="Controlsinplace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Adequacy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RARating" Type="Int32" Nullable="false" />
+    <Property Name="RARiskLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RARiskProbabilityID" Type="Int32" />
+    <Property Name="RASeverityID" Type="Int32" />
+    <Property Name="RRRating" Type="Int32" Nullable="false" />
+    <Property Name="RRRiskLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RRRiskProbabilityID" Type="Int32" />
+    <Property Name="RRSeverityID" Type="Int32" />
+    <Property Name="FutureStrategies" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PotentialRiskFactors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RiskAssessedByID" Type="Int32" />
+    <Property Name="RiskOwnerID" Type="Int32" />
+    <Property Name="TaskNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RiskKeyStatusID" Type="Int32" />
+    <Property Name="ReferenceNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="RiskRegisteredDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Incident" Relationship="IRRMModel.FK_RiskRegister_Incidents" FromRole="RiskRegister" ToRole="Incident" />
+    <NavigationProperty Name="RiskCategory_M" Relationship="IRRMModel.FK_RiskRegister_RiskCategory_M" FromRole="RiskRegister" ToRole="RiskCategory_M" />
+    <NavigationProperty Name="RiskCost_M" Relationship="IRRMModel.FK_RiskRegister_RiskCost_M" FromRole="RiskRegister" ToRole="RiskCost_M" />
+    <NavigationProperty Name="RiskDescriptor_M" Relationship="IRRMModel.FK_RiskRegister_RiskDescriptor_M" FromRole="RiskRegister" ToRole="RiskDescriptor_M" />
+    <NavigationProperty Name="RiskKeyStatus_T" Relationship="IRRMModel.FK_RiskKeyStatus_T" FromRole="RiskRegister" ToRole="RiskKeyStatus_T" />
+    <NavigationProperty Name="RiskProbability_M" Relationship="IRRMModel.FK_RiskRegister_RiskProbability_M" FromRole="RiskRegister" ToRole="RiskProbability_M" />
+    <NavigationProperty Name="RiskProbability_M1" Relationship="IRRMModel.FK_RiskRegister_RiskProbability_M1" FromRole="RiskRegister" ToRole="RiskProbability_M" />
+    <NavigationProperty Name="RiskStatus_M" Relationship="IRRMModel.FK_RiskRegister_RiskStatus_M" FromRole="RiskRegister" ToRole="RiskStatus_M" />
+    <NavigationProperty Name="RiskStrategy_M" Relationship="IRRMModel.FK_RiskRegister_RiskStrategy_M" FromRole="RiskRegister" ToRole="RiskStrategy_M" />
+    <NavigationProperty Name="Users_M" Relationship="IRRMModel.FK_RiskRegister_Users_M" FromRole="RiskRegister" ToRole="Users_M" />
+  </EntityType>
+  <Association Name="FK_RiskRegister_Incidents">
+    <End Type="IRRMModel.Incident" Role="Incident" Multiplicity="0..1" />
+    <End Type="IRRMModel.RiskRegister" Role="RiskRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Incident">
+        <PropertyRef Name="IncidentID" />
+      </Principal>
+      <Dependent Role="RiskRegister">
+        <PropertyRef Name="IncidentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RiskRegister_RiskCategory_M">
+    <End Type="IRRMModel.RiskCategory_M" Role="RiskCategory_M" Multiplicity="0..1" />
+    <End Type="IRRMModel.RiskRegister" Role="RiskRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RiskCategory_M">
+        <PropertyRef Name="RiskCategoryID" />
+      </Principal>
+      <Dependent Role="RiskRegister">
+        <PropertyRef Name="RiskCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RiskRegister_RiskCost_M">
+    <End Type="IRRMModel.RiskCost_M" Role="RiskCost_M" Multiplicity="0..1" />
+    <End Type="IRRMModel.RiskRegister" Role="RiskRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RiskCost_M">
+        <PropertyRef Name="RiskCostID" />
+      </Principal>
+      <Dependent Role="RiskRegister">
+        <PropertyRef Name="RiskCostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RiskRegister_RiskDescriptor_M">
+    <End Type="IRRMModel.RiskDescriptor_M" Role="RiskDescriptor_M" Multiplicity="0..1" />
+    <End Type="IRRMModel.RiskRegister" Role="RiskRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RiskDescriptor_M">
+        <PropertyRef Name="RiskDescriptorID" />
+      </Principal>
+      <Dependent Role="RiskRegister">
+        <PropertyRef Name="RiskDescriptorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RiskKeyStatus_T">
+    <End Type="IRRMModel.RiskKeyStatus_T" Role="RiskKeyStatus_T" Multiplicity="0..1" />
+    <End Type="IRRMModel.RiskRegister" Role="RiskRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RiskKeyStatus_T">
+        <PropertyRef Name="RiskKeyStatusID" />
+      </Principal>
+      <Dependent Role="RiskRegister">
+        <PropertyRef Name="RiskKeyStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RiskRegister_RiskProbability_M">
+    <End Type="IRRMModel.RiskProbability_M" Role="RiskProbability_M" Multiplicity="0..1" />
+    <End Type="IRRMModel.RiskRegister" Role="RiskRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RiskProbability_M">
+        <PropertyRef Name="RiskProbabilityID" />
+      </Principal>
+      <Dependent Role="RiskRegister">
+        <PropertyRef Name="RARiskProbabilityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RiskRegister_RiskProbability_M1">
+    <End Type="IRRMModel.RiskProbability_M" Role="RiskProbability_M" Multiplicity="0..1" />
+    <End Type="IRRMModel.RiskRegister" Role="RiskRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RiskProbability_M">
+        <PropertyRef Name="RiskProbabilityID" />
+      </Principal>
+      <Dependent Role="RiskRegister">
+        <PropertyRef Name="RRRiskProbabilityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RiskRegister_RiskStatus_M">
+    <End Type="IRRMModel.RiskStatus_M" Role="RiskStatus_M" Multiplicity="0..1" />
+    <End Type="IRRMModel.RiskRegister" Role="RiskRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RiskStatus_M">
+        <PropertyRef Name="RiskStatusID" />
+      </Principal>
+      <Dependent Role="RiskRegister">
+        <PropertyRef Name="RiskStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RiskRegister_RiskStrategy_M">
+    <End Type="IRRMModel.RiskStrategy_M" Role="RiskStrategy_M" Multiplicity="0..1" />
+    <End Type="IRRMModel.RiskRegister" Role="RiskRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RiskStrategy_M">
+        <PropertyRef Name="RiskStrategyID" />
+      </Principal>
+      <Dependent Role="RiskRegister">
+        <PropertyRef Name="RiskStrategyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RiskRegister_Users_M">
+    <End Type="IRRMModel.Users_M" Role="Users_M" Multiplicity="0..1" />
+    <End Type="IRRMModel.RiskRegister" Role="RiskRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users_M">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="RiskRegister">
+        <PropertyRef Name="CreatedUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,206 @@
+﻿@model IRRM.Models.Task
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+
+<style>
+    .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+</style>
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "editform" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.TaskID)
+    @Html.HiddenFor(model => model.Registered)
+    @Html.HiddenFor(model => model.Registeredon)
+    @Html.HiddenFor(model => model.CreatedUserID)
+    @Html.HiddenFor(model => model.ReferenceID)
+    @Html.HiddenFor(model => model.TaskNo)
+    @Html.HiddenFor(model => model.OwnerID)
+    @Html.HiddenFor(model => model.CreatedDate)
+    @Html.HiddenFor(model => model.StartDate)
+    @Html.HiddenFor(model => model.DueDate)
+    @Html.HiddenFor(model => model.TaskCost)
+    @Html.HiddenFor(model => model.TaskStatusID)
+    @Html.HiddenFor(model => model.OwnerNote)
+    @Html.HiddenFor(model => model.ProviderName)
+    @Html.HiddenFor(model => model.AssignedTo)
+    @Html.HiddenFor(model => model.Progress)
+
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReferenceNo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(model => model.ReferenceNo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ReferenceNo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="control-label col-md-2"><b>Category</b></div>
+        <div class="col-md-10">
+            <select name="CategoryID" id="CategoryID" class="form-control" required onchange="gettasksubcatetory();">
+                <option value="">Select</option>
+                @foreach (var c in ViewBag.Category)
+                {
+                    <option @(c.TaskCategoryID == Model.CategoryID ? "selected" : "") value="@c.TaskCategoryID">@c.TaskCategory</option>
+                }
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="control-label col-md-2"><b>Sub Category</b></div>
+        <div class="col-md-10">
+            <select name="SubCategoryID" id="SubCategoryID" class="form-control" required>
+                <option value="">Select</option>
+                @foreach (var sc in ViewBag.SubCategory)
+                {
+                    <option @(sc.TaskSubCategoryID == Model.SubCategoryID ? "selected" : "") value="@sc.TaskSubCategoryID">@sc.SubCategory</option>
+                }
+            </select>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="control-label col-md-2"><b>Priority</b></div>
+        <div class="col-md-10">
+            @Html.DropDownList("PriorityID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.PriorityID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="control-label col-md-2"><b>Location</b></div>
+        <div class="col-md-10">
+            <select name="LocationID" class="form-control" required>
+                <option value="">Select</option>
+                @foreach (var x in ViewBag.Location)
+                {
+                    <option @(x.LocationID == Model.LocationID ? "selected" : "") value="@x.LocationID">@x.Location</option>
+                }
+            </select>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="form-group">
+        <div class="control-label col-md-2"><b>Details</b></div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-danger" />
+        </div>
+    </div>
+</div>
+}
+
+
+
+
+<script>
+
+    $(document).ready(function () {
+        $("#editform").submit(function (e) {
+            e.preventDefault();
+            var formdata = new FormData(this);
+
+          //  alert($("#DFormID").val());
+            $.ajax({
+                method: "POST",
+                url: "@Url.Content("~/Tasks/Edit")",
+                data: formdata,
+                mimeTypes: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                   // alert('Successfully deleted!');
+                    window.location.reload();
+                },
+                error: function () {
+                    alert('Error');
+                }
+            });
+        });
+    });
+
+
+        function gettasksubcatetory() {
+         $.ajax({
+            method: "GET",
+            url: "@Url.Content("~/GetTaskSubCategory/")" + $('#CategoryID').val(),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                $("#SubCategoryID").children('option:not(:first)').remove();
+              //  $("#LocationID").append("<option value='' >Select</option>");
+                $.each(data, function (key, value) {
+                    $("#SubCategoryID").append("<option value='" + data[key].TaskSubCategoryID + "' >" + data[key].SubCategory + "</option>");
+                });
+
+            },
+            error: function () {
+            }
+        });
+    }
+
+   
+</script>

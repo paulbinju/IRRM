@@ -1,0 +1,78 @@
+﻿@model IRRM.Models.Branch_M
+
+@{
+    Layout = null;
+}
+<style>
+    .dl-horizontal dt {
+        width: 250px;
+        margin-right: 15px;
+    }
+</style>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+ 
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Branch)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Branch)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Active)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Active)
+            </dd>
+
+        </dl>
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "delform-" + Html.DisplayFor(model => model.BranchID) }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        }
+
+
+    </div>
+
+    <script>
+    $(document).ready(function () {
+        $("#delform-"+@Html.DisplayFor(model => model.BranchID)).submit(function (e) {
+            e.preventDefault();
+            var formdata = new FormData(this);
+
+          //  alert($("#DFormID").val());
+            $.ajax({
+                method: "POST",
+                url: "@Url.Content("~/Branch_M/Delete/"+ Html.DisplayFor(model => model.BranchID))",
+                data: formdata,
+                mimeTypes: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                   // alert('Successfully deleted!');
+                    window.location.href = "@Url.Content("~/Branch_M")";
+                },
+                error: function () {
+                    alert('Unable to delete, try editing instead!');
+                }
+            });
+        });
+    });
+    </script>

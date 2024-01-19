@@ -1,0 +1,171 @@
+﻿@model IRRM.Models.RiskRegister
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Risk Analysis Report</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style>
+        body, table {
+            font-family: Arial;
+            font-size: 14px;
+        }
+
+        .clear {
+            clear: both
+        }
+
+        h3 {
+            margin: 2px 0 0 0;
+            float: left
+        }
+
+        .dvalue {
+            margin: 4px 2px 0 2px;
+            float: left
+        }
+
+        .left {
+            float: left
+        }
+    </style>
+    <script>
+        function printme() {
+            window.print();
+        }
+    </script>
+</head>
+<body>
+    <div style="width:600px;text-align:left;margin:0 auto;padding:20px;">
+        <div style="text-align:center"><img style="width:50%;" src="@Url.Content("~/assets/images/MElogo.png")" /></div>
+
+        <div style="float:right"><i class="fa fa-print" onclick="printme()" style="font-size:18px;color:red;cursor:pointer"></i></div>
+        <br class="clear" />
+        <br class="clear" />
+
+        <div style="border:2px solid #1c8390"></div>
+
+        <br class="clear" />
+        <br class="clear" />
+        <h3>RISK IDENTIFICATION</h3> <br class="clear" />
+        <h3>RISK NUMBER : </h3><div class="left dvalue">@Model.RiskRegisterNo</div> <br class="clear" />
+        <h3>RISK CATEGORY :</h3><div class="left dvalue">@Model.RiskCategory_M.RiskCategory</div> <br class="clear" />
+        <h3>RISK LOCATION : </h3><div class="left dvalue">@ViewBag.Location</div> <br class="clear" />
+        <h3>RISK DESCRIPTOR : </h3><div class="left dvalue">@Model.RiskDescriptor_M.RiskDescriptor</div> <br class="clear" />
+        <h3>RISK DESCRIPTION : </h3><br class="clear" />
+        @Model.Description
+
+        <br class="clear" />
+
+        <br class="clear" />
+
+
+        <h3>A) RISK ANALYSIS : </h3><br class="clear" />
+        <b>Consequence: </b> @ViewBag.RASeverity<br class="clear" />
+        <b>Likelihood: </b> @Model.RiskProbability_M.RiskProbability<br class="clear" />
+        <b>Severity: </b> @Model.RARiskLevel<br class="clear" />
+        <b>Risk Rating: </b> @Model.RARating
+        <br class="clear" />
+        <br class="clear" />
+
+        <h3>B) RISK ASSESSMENT</h3>
+        <br class="clear" />
+        <br class="clear" />
+        <b>Current Control : </b>
+        <br class="clear" />
+        @Html.Raw(Model.Controlsinplace.Replace("\n", "<br>"))
+
+        <br class="clear" />
+
+        <b>Control Adequecy : </b> @Model.Adequacy
+
+
+        <br class="clear" />
+        <br class="clear" />
+
+        <h3>C) RESIDUAL RISK : </h3><br class="clear" />
+        <b>Consequence: </b> @ViewBag.RRSeverity<br class="clear" />
+        <b>Likelihood: </b> @Model.RiskProbability_M1.RiskProbability<br class="clear" />
+        <b>Severity: </b> @Model.RRRiskLevel<br class="clear" />
+        <b>Risk Rating: </b> @Model.RRRating<br class="clear" />
+        <br class="clear" />
+
+
+        <h3>D) RISK EVALUATION : </h3><br class="clear" />
+        <b>Cost : </b>@Model.RiskCost_M.RiskCost<br class="clear" />
+        <b>Risk Strategy : </b>@Model.RiskStrategy_M.RiskStrategy
+        <br class="clear" />
+
+
+        <br class="clear" />
+        <h3>E) FUTURE STRATEGIES : </h3>
+        <br class="clear" />
+        @if (Model.FutureStrategies != null) {
+
+        @Html.Raw(Model.FutureStrategies.Replace("\n", "<br>"))
+        }
+        <br class="clear" />
+        <br class="clear" />
+
+        <h3>POTENTIAL RISK FACTORS : </h3>
+        <br class="clear" />
+        @Html.Raw(Model.PotentialRiskFactors.Replace("\n", "<br>"))
+        <br class="clear" />
+        <br class="clear" />
+
+
+        <h3>RISK MONITORING & CONTROL </h3>
+        <br class="clear" />
+
+
+        <br class="clear" />
+        <br class="clear" />
+
+        <h3> RISK ASSESSED BY</h3> <br class="clear" />
+        @foreach (var usr in ViewBag.Assessors)
+        {
+            <p>@usr.Name - @usr.Designation</p>
+        }
+        <br class="clear" />
+
+
+        <br class="clear" />
+        <h3>RISK OWNER </h3>
+        <br class="clear" />
+
+        @ViewBag.RiskOwner 
+        <br class="clear" />
+        <br class="clear" />
+
+        <h3>RISK STATUS : </h3> <div class="dvalue">@Model.RiskKeyStatus_T.RiskKeyStatus</div>
+        <br class="clear" /> <br class="clear" />
+        @if (Model.Comments != null)
+        {
+            <h3>COMMENTS : </h3>
+            <br class="clear" />
+            @Model.Comments.Replace("\n", "<br>")
+        }
+        <br class="clear" />
+
+
+
+
+        <br class="clear" />
+        <p>
+            The risks are evaluated using the Risk Management Plan - MEMF
+        </p>
+
+
+
+
+    </div>
+</body>
+</html>
+@*@if (Model.ReferenceNo != null)
+{
+    <b>Reference No.</b> @Model.ReferenceNo
+    <br class="clear" />
+}*@

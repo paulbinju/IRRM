@@ -1,0 +1,206 @@
+﻿@model IRRM.Models.Task
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<script src="@Url.Content("~/assets/js/jquery.min.js")"></script>
+<link href="@Url.Content("~/assets/plugins/datatables/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/assets/plugins/datatables/buttons.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/assets/plugins/datatables/dataTables.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-6">Create Task</h2>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            @if (ViewBag.Success == null)
+                            {
+                                <div class="panel-body">
+
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="form-horizontal">
+
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+
+                                                    <b>Reference No.</b>
+                                                    <br />
+                                                    <input type="text" class="form-control" name="ReferenceNo" value="@ViewBag.ReferenceNo" />
+                                                    <input type="hidden"   name="ReferenceID" value="@ViewBag.ReferenceID" />
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+
+                                                <div class="col-md-3">
+
+                                                    <b>Category</b>
+                                                    <br />
+
+                                                    <select name="CategoryID" id="CategoryID" class="form-control" required onchange="gettasksubcatetory();">
+                                                        <option value="">Select</option>
+                                                        @foreach (var c in ViewBag.Category)
+                                                        {
+                                                            <option value="@c.TaskCategoryID">@c.TaskCategory</option>
+                                                        }
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-3">
+
+                                                    <b>Sub Category</b>
+                                                    <br />
+
+                                                    <select name="SubCategoryID" id="SubCategoryID" class="form-control" required>
+                                                        <option value="">Select</option>
+                                                         
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <b>Priority</b>
+                                                    <br />
+
+                                                    <select name="PriorityID" class="form-control" required>
+                                                        <option value="">Select</option>
+                                                        @foreach (var c in ViewBag.Priority)
+                                                        {
+                                                            <option value="@c.TaskPriorityID">@c.Priority</option>
+                                                        }
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-3">
+
+                                                    <b>Location</b>
+                                                    <br />
+
+                                                    <select name="LocationID" class="form-control" required>
+                                                        <option value="">Select</option>
+                                                        @foreach (var x in ViewBag.Location)
+                                                        {
+                                                            <option value="@x.LocationID">@x.Location</option>
+                                                        }
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+
+                    
+                                            <div class="form-group">
+
+                                                <div class="col-md-12">
+
+                                                    <b>Description</b>
+                                                    <br />
+                                                    <textarea class="form-control" name="description" rows="3" required></textarea>
+                                                </div>
+
+
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <div class="col-md-12">
+
+                                                    <b></b>
+                                                    <br />
+                                                    <input type="submit" value="Create" class="btn btn-danger" />
+                                                    <input type="button" value="<< Back" class="btn btn-warning" onclick="window.history.back()" />
+                                                </div>
+
+
+
+                                            </div>
+
+
+
+                                        </div>
+                                    }
+
+                                </div>
+
+
+                            }
+                            else
+                            {
+                        <div class="panel-body">
+                            <br />
+                            <br />
+                          
+                            <h4>You've successfully created the task!</h4>
+                        </div>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+        function gettasksubcatetory() {
+         $.ajax({
+            method: "GET",
+            url: "@Url.Content("~/GetTaskSubCategory/")" + $('#CategoryID').val(),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                $("#SubCategoryID").children('option:not(:first)').remove();
+              //  $("#LocationID").append("<option value='' >Select</option>");
+                $.each(data, function (key, value) {
+                    $("#SubCategoryID").append("<option value='" + data[key].TaskSubCategoryID + "' >" + data[key].SubCategory + "</option>");
+                });
+
+            },
+            error: function () {
+            }
+        });
+    }
+</script>

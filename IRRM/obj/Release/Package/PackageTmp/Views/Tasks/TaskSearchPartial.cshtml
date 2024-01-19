@@ -1,0 +1,141 @@
+﻿<link href="@Url.Content("~/assets/css/select2.css")" rel="stylesheet" />
+<script src="@Url.Content("~/assets/js/select2.js")"></script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery.noConflict();
+        jQuery('.searchableselect').select2({
+            tags: true
+        });
+    });
+</script>
+
+@using (Html.BeginForm("Index", "Tasks"))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Start Date From</b></div>
+                        <input type="date" name="RegisteredonFrom" class="form-control" value="@Request["RegisteredonFrom"]" />
+                    </div>
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Start Date To</b></div>
+                        <input type="date" name="RegisteredonTo" class="form-control" value="@Request["RegisteredonTo"]" />
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Assigned To</b></div>
+                        <select name="AssignedTo" class="form-control">
+                            <option value="">Select</option>
+                            <option @(Request["AssignedTo"] == "Internal" ? "selected" : "") value="Internal">Internal</option>
+                <option @(Request["AssignedTo"] == "External" ? "selected" : "") value="External">External</option>
+                        </select>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Category</b></div>
+                        <select name="TaskCategoryID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.CategoryID)
+                            {
+                                <option @(itp.TaskCategoryID == Convert.ToInt32(Request["TaskCategoryID"]) ? "selected" : "") value="@itp.TaskCategoryID">@itp.TaskCategory</option>
+                            }
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Sub Category</b></div>
+                        <select name="TaskSubCategoryID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.SubCategoryID)
+                            {
+                                <option @(itp.TaskCategoryID == Convert.ToInt32(Request["TaskSubCategoryID"]) ? "selected" : "") value="@itp.TaskSubCategoryID">@itp.SubCategory</option>
+                            }
+                        </select>
+
+                    </div>
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Location</b></div>
+                        <select name="LocationID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.Location)
+                            {
+                                <option @(itp.LocationID == Convert.ToInt32(Request["LocationID"]) ? "selected" : "") value="@itp.LocationID">@itp.Location</option>
+                            }
+                        </select>
+
+                    </div>
+                    <br style="clear:both" />
+                    <br />
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Priority</b></div>
+                        <select name="TaskPriorityID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.PriorityID)
+                            {
+                                <option @(itp.TaskPriorityID == Convert.ToInt32(Request["TaskPriorityID"]) ? "selected" : "") value="@itp.TaskPriorityID">@itp.Priority</option>
+                            }
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Status</b></div>
+                        <select name="TaskStatusID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.StatusID)
+                            {
+                                <option @(itp.TaskStatusID == Convert.ToInt32(Request["TaskStatusID"]) ? "selected" : "") value="@itp.TaskStatusID">@itp.TaskStatus</option>
+
+
+
+                            }
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="control-label"><b>Owner</b></div>
+
+                            <select class="searchableselect form-control" style="width:100%;font-family:Arial" name="OwnerID" required>
+                                <option value="0">Select</option>
+
+                                @foreach (var urs in ViewBag.Users)
+                                {
+                                    <option @(urs.UserID == Convert.ToInt32(Request["OwnerID"]) ? "selected" : "") value="@urs.UserID">@urs.Name</option>
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="control-label"><b>&nbsp;&nbsp;</b></div>
+                    <div class="col-md-1">
+                        <input type="submit" class="btn btn-danger" value="SEARCH" />
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-warning" href="@Url.Content("~/Tasks")">CLEAR</a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

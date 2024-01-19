@@ -1,0 +1,209 @@
+﻿
+@{
+    ViewBag.Title = "DynamicReports";
+}
+
+
+
+
+
+<script src="@Url.Content("~/assets/js/jquery.min.js")"></script>
+<link href="@Url.Content("~/assets/plugins/datatables/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/assets/plugins/datatables/buttons.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/assets/plugins/datatables/dataTables.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+@{
+
+    ViewBag.Title = "Index";
+}
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-1">Reports</h2>
+                            <div class="col-md-12">
+
+                                <form method="post" action="@Url.Content("~/DynamicReports")">
+                                    <div class="col-md-1">
+                                        <div class="control-label"><b>Month From</b></div>
+                                        <select name="monthfrom" class="form-control" required>
+                                            <option value="">Select</option>
+                                            <option @(Request["monthfrom"]=="01"?"selected":"") value="01">January</option>
+                                            <option @(Request["monthfrom"]=="02"?"selected":"")  value="02">February</option>
+                                            <option @(Request["monthfrom"]=="03"?"selected":"")  value="03">March</option>
+                                            <option @(Request["monthfrom"]=="04"?"selected":"")  value="04">April</option>
+                                            <option @(Request["monthfrom"]=="05"?"selected":"")  value="05">May</option>
+                                            <option @(Request["monthfrom"]=="06"?"selected":"")  value="06">June</option>
+                                            <option @(Request["monthfrom"]=="07"?"selected":"")  value="07">July</option>
+                                            <option @(Request["monthfrom"]=="08"?"selected":"")  value="08">August</option>
+                                            <option @(Request["monthfrom"]=="09"?"selected":"")  value="09">September</option>
+                                            <option @(Request["monthfrom"]=="10"?"selected":"")  value="10">October</option>
+                                            <option @(Request["monthfrom"]=="11"?"selected":"")  value="11">November</option>
+                                            <option @(Request["monthfrom"]=="12"?"selected":"")  value="12">December</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="control-label"><b>Year From</b></div>
+                                        <select name="yearfrom" class="form-control" required>
+                                            <option value="">Select</option>
+                                            @for (int y = DateTime.Now.Year; y >= 2017; y--)
+                                            {
+                                                <option  @(Request["yearfrom"]== ""+y?"selected":"") value="@y">@y</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="control-label"><b>Month To</b></div>
+                                        <select name="monthto" class="form-control" required>
+                                            <option value="">Select</option>
+                                            <option @(Request["monthto"] == "01" ? "selected" : "") value="01">January</option>
+                                            <option @(Request["monthto"] == "02" ? "selected" : "") value="02">February</option>
+                                            <option @(Request["monthto"] == "03" ? "selected" : "") value="03">March</option>
+                                            <option @(Request["monthto"] == "04" ? "selected" : "") value="04">April</option>
+                                            <option @(Request["monthto"] == "05" ? "selected" : "") value="05">May</option>
+                                            <option @(Request["monthto"] == "06" ? "selected" : "") value="06">June</option>
+                                            <option @(Request["monthto"] == "07" ? "selected" : "") value="07">July</option>
+                                            <option @(Request["monthto"] == "08" ? "selected" : "") value="08">August</option>
+                                            <option @(Request["monthto"] == "09" ? "selected" : "") value="09">September</option>
+                                            <option @(Request["monthto"] == "10" ? "selected" : "") value="10">October</option>
+                                            <option @(Request["monthto"] == "11" ? "selected" : "") value="11">November</option>
+                                            <option @(Request["monthto"] == "12" ? "selected" : "") value="12">December</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="control-label"><b>Year To</b></div>
+                                        <select name="yearto" class="form-control" required>
+                                            <option value="">Select</option>
+                                            @for (int y = DateTime.Now.Year; y >= 2017; y--)
+                                            {
+                                                <option @(Request["yearto"]== ""+y?"selected":"")  value="@y">@y</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="control-label"><b>Report Type</b></div>
+                                        <select name="reporttype" id="reporttype" class="form-control" required>
+                                            <option value="">Select</option>
+                                            @foreach (var rt in ViewBag.Reportypes)
+                                            {
+                                                <option  @(Request["reporttype"] == "" + rt.ReportID ? "selected" : "")  value="@rt.ReportID">@rt.ReportName</option>
+                                            }
+
+                                        </select>
+                                    </div>
+
+
+
+                                    <div class="control-label"><b>&nbsp;&nbsp;</b></div>
+                                    <div class="col-md-1">
+                                        <input type="submit" class="btn btn-danger" value="GENERATE" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="btn btn-warning" href="@Url.Content("~/DynamicReports")">CLEAR</a>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+
+                @{
+                    int count = 0;
+                }
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+                                <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+                                <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+                                <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+                                <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+                                <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
+                                <script>
+
+
+                                    $(document).ready(function () {
+                                        $('#example').DataTable({
+                                            dom: 'Bfrtip',
+                                            buttons: [
+                                                'excel', 'print'
+                                            ]
+                                        });
+                                    });
+                                </script>
+                                <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+                                <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+
+
+                                @if (ViewBag.columns != null)
+                                {
+                                <table id="example" class="table table-bordered" style="font-family:Arial; float:left;border-collapse:collapse" border="1" cellpadding="10" cellspacing="10">
+                                    <thead>
+                                        <tr>
+                                            @foreach (var col in ViewBag.columns)
+                                            {
+                                                <th>@col</th>
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var ro in ViewBag.dynamicreport)
+                                        {
+
+                                            <tr>
+                                                @foreach (var col in ViewBag.columns)
+                                                {
+                                                    <td>@ro[count]</td>
+                                                    count++;
+                                                }
+                                            </tr>
+                                            count = 0;
+                                        }
+                                    </tbody>
+
+
+
+                                </table>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

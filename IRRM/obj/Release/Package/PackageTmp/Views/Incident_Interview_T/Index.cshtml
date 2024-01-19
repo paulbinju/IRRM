@@ -1,0 +1,77 @@
+﻿@model IEnumerable<IRRM.Models.Incident_Interview_T>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IncidentID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InterviewerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IntervieweeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InterviewDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncidentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InterviewerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IntervieweeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InterviewDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.IncidentInterviewID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.IncidentInterviewID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.IncidentInterviewID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "History Report";
+    Layout = null;
+}
+
+ @foreach (var x in ViewBag.HistoryIncidents)
+ {
+    <span>
+        @Html.Raw(x.PageContent)
+    </span>
+ }
+

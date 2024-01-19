@@ -1,0 +1,251 @@
+﻿@model IRRM.Models.Incident_People_T
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+ 
+
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "mainform" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+ 
+         
+
+
+        <div class="form-group">
+ 
+ 
+            <div class="control-label col-md-2"><b>People Involved <span class="red">*</span> </b></div>
+            <div class="col-md-10">
+
+                <select name="IncidentPeopleInvolvedID" id="IncidentPeopleInvolvedID" class="form-control" onchange="loadRelation()" required>
+                    @foreach (var inpinv in ViewBag.IncidentPeopleInvolvedID)
+                    {
+                    <option value="@inpinv.IncidentPeopleInvolvedID">@inpinv.IncidentPeopleInvolved</option>
+                    }
+                </select>
+
+               
+            </div>
+        </div>
+
+        <div class="form-group">
+             
+            <div class="control-label col-md-2"><b>Relation <span class="red">*</span> </b></div>
+            <div class="col-md-10">
+                <select class="form-control" name="IncidentRelationID" id="IncidentRelationID" required onchange="updatecontrols()"></select>
+            </div>
+        </div>
+
+ 
+
+
+ 
+
+
+        <div class="form-group" id="systemuserx">
+            <div class="control-label col-md-2"><b>System User <span class="red">*</span> </b></div>
+            <div class="col-md-10">
+                
+
+                <select class="searchableselect form-control" style="width:100%;font-family:Arial" name="UserID" id="UserID">
+                    @foreach (var urs in ViewBag.Users)
+                    {
+                    <option value="@urs.UserID2">@urs.Name</option>
+                    }
+                </select>
+
+
+            </div>
+        </div>
+        <div id="nonsystemuserx">
+            <div class="form-group">
+                <div class="control-label col-md-2"><b>Name <span class="red">*</span> </b></div>
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.IncidentID, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.IncidentID } })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="control-label col-md-2"><b>Mobile  </b></div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                    @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-2"><b>Identity No.</b></div>
+                <div class="col-md-10">
+                    <input type="text" name="IdentityNo" id="IdentityNo" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="control-label col-md-2"><b>Reg No.   </b></div>
+                <div class="col-md-4">
+                    <input type="text" name="RegNo" id="RegNo" class="form-control" />
+                </div>
+            
+                <div class="control-label col-md-2"><b>CVR No.   </b></div>
+                <div class="col-md-4">
+                    <input type="text" name="CVRNo" id="CVRNo" class="form-control" />
+                </div>
+            </div>
+
+ 
+            <div id="patientx">
+                <div class="form-group">
+                    <div class="control-label col-md-2"><b>Gender <span class="red">*</span> </b></div>
+                    <div class="col-md-10">
+                        <select class="form-control" id="Gender" name="Gender">
+                            <option value="">Select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-md-2"><b>Date of Birth   </b></div>
+                    <div class="col-md-10">
+                        <input type="date" id="Dateofbirth" name="Dateofbirth" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-md-2"><b>Is the patient injured?  </b></div>
+                    <div class="col-md-10">
+                        <input type="checkbox" value="true" id="PatientInjured" name="IsPatientInjured" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-danger" />
+                <input type="button" value="Clear" class="btn btn-warning" onclick="window.location.reload()" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+            jQuery(document).ready(function () {
+
+                jQuery("#mainform").submit(function (e) {
+
+                    if (jQuery('#IncidentPeopleInvolvedID').val() != 3) {
+                        if (jQuery("#Name").val() == "") {
+                            alert('Name is mandatory!');
+                            return false;
+                        }
+                    }
+                    else if (jQuery("#UserID").val() == "") {
+                        alert("Select System User!");
+                        return false;
+                    }
+
+
+                    e.preventDefault();
+                    var formdata = new FormData(this);
+                    jQuery.ajax({
+                        method: "POST",
+                        url: "@Url.Content("~/Incident_People_T/Create")",
+                        data: formdata,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            //  alert('Successfully added!');
+                            jQuery('#IncidentPeopleInvolvedID,#IncidentRelationID,#Name,#Mobile,#UserID').val("");
+
+                          //  jQuery('#AddPeople').modal('toggle');
+
+                            window.location.href = "@Url.Content("~/Incidents/Details/")@Html.ValueFor(model => model.IncidentID)";
+
+                            loadpeople();
+                        },
+                        error: function () {
+                            alert("Couldn't Save, check the input values!");
+                        }
+                    });
+                });
+            });
+
+
+
+ 
+ 
+
+</script>
+ 
+<link href="@Url.Content("~/assets/css/select2.css")" rel="stylesheet" />
+<script src="@Url.Content("~/assets/js/select2.js")"></script>
+<script>
+            jQuery(document).ready(function () {
+                jQuery.noConflict();
+                jQuery('.searchableselect').select2({
+                    tags: true,
+                    dropdownParent: jQuery("#AddPeople")
+                });
+            });
+ 
+            function loadRelation() {
+                jQuery.ajax({
+                    method: "GET",
+                    url: "@Url.Content("~/GetPeopleRelations/"+ ViewBag.IncidentID)/" + jQuery('#IncidentPeopleInvolvedID').val(),
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        jQuery("#IncidentRelationID").children('option').remove();
+                        jQuery.each(data, function (key, value) {
+                            jQuery("#IncidentRelationID").append("<option value='" + data[key].IncidentRelationID + "' >" + data[key].IncidentRelation + "</option>");
+                        });
+
+                    },
+                    error: function () {
+                    }
+                });
+
+                updatecontrols();
+            }
+
+            function updatecontrols() {
+
+                if (jQuery('#IncidentPeopleInvolvedID').val() == 3) { // if staff
+
+                    if (jQuery('#IncidentRelationID').val() == 1 || jQuery('#IncidentRelationID').val() == 2 || jQuery('#IncidentRelationID').val() == 7) {
+                        jQuery("#nonsystemuserx").hide();
+                        jQuery("#systemuserx").show();
+                    }
+                    else {
+                        jQuery("#systemuserx").hide();
+                        jQuery("#nonsystemuserx").show();
+                        jQuery('#patientx').hide();
+                    }
+                }
+                else {
+
+                    if (jQuery('#IncidentRelationID').val() == 8) {
+                        jQuery("#systemuserx").hide();
+                        jQuery('#patientx').show();
+                        jQuery("#nonsystemuserx").show();
+                    }
+                    else {
+                        jQuery("#systemuserx").hide();
+                        jQuery("#nonsystemuserx").show();
+                        jQuery('#patientx').hide();
+                    }
+
+                }
+
+            }
+
+</script>

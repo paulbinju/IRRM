@@ -1,0 +1,135 @@
+﻿@model IRRM.Models.Incident
+
+
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-6">Report Incident</h2>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="col-md-12">
+
+                                    @using (Html.BeginForm())
+                                    {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-horizontal">
+
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2"><b>Confidential</b></div>
+                                            <div class="col-md-4">
+                                                <div class="">
+                                                    @Html.EditorFor(model => model.Confidential, new { @class = "form-control", @required = "required" })
+                                                    @Html.ValidationMessageFor(model => model.Confidential, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                         
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2"><b>People Involved</b></div>
+                                            <div class="col-md-4">
+                                                @Html.DropDownList("IncidentPeopleInvolvedID", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                                                @Html.ValidationMessageFor(model => model.IncidentPeopleInvolvedID, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="control-label col-md-2"><b>Location</b></div>
+                                            <div class="col-md-4">
+                                                @Html.DropDownList("LocationID", null, htmlAttributes: new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2"><b>Incident Type</b></div>
+                                            <div class="col-md-4">
+                                                @Html.DropDownList("IncidentTypeID", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                                                @Html.ValidationMessageFor(model => model.IncidentTypeID, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="control-label col-md-2"><b>Incident Sub Type</b></div>
+                                            <div class="col-md-4">
+                                                @Html.DropDownList("IncidentSubTypeID", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                                                @Html.ValidationMessageFor(model => model.IncidentSubTypeID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Summary, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.TextAreaFor(model => model.Summary, new { @class = "form-control", cols = 35, @rows = 2, @required = "required" })
+                                                @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.TextAreaFor(model => model.Details, new { @class = "form-control", cols = 35, @rows = 4, @required = "required" })
+                                                @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Report" class="btn btn-success" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

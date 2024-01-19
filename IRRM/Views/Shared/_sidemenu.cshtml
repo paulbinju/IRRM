@@ -1,0 +1,135 @@
+﻿<div id="sidebar-menu">
+    <ul>
+        @if (Session["SA"] == null)
+        {
+            if (Convert.ToInt32(Session["RoleID"]) == 1)
+            {
+                <li>
+                    <a href="@Url.Content("~/Home")" class="waves-effect"><i class="ti-dashboard"></i><span> Dashboard </span></a>
+                </li>
+                <li>
+                    <a href="@Url.Content("~/DynamicReports")" class="waves-effect"><i class="fa fa-list-ul"></i><span> Reports </span></a>
+                </li>
+            }
+
+            <li>
+                <a href="@Url.Content("~/Incidents/Create")" class="waves-effect"><i class="fa fa-flag"></i><span>  Report Event</span></a>
+            </li>
+            if (Convert.ToInt32(Session["RoleID"]) == 1)
+            {
+
+                <li>
+                    <a href="@Url.Content("~/RARequest")" class="waves-effect"><i class="fa fa-list-ul"></i><span> RA Requests</span></a>
+                </li>
+
+            }
+            <li>
+                <a href="@Url.Content("~/Incidents")" class="waves-effect"><i class="fa fa-tasks"></i><span> Event Register </span></a>
+            </li>
+            <li>
+                <a href="@Url.Content("~/RiskRegisters")" class="waves-effect"><i class="fa fa-tasks"></i><span> Risk Register</span></a>
+            </li>
+            <li>
+                <a href="@Url.Content("~/Tasks")" class="waves-effect"><i class="fa fa-tasks"></i><span> Task Register </span></a>
+            </li>
+            @*<li>
+                <a href="@Url.Content("~/Documents/Index")" class="waves-effect"><i class="fa fa-tasks"></i><span> Document Register</span></a>
+            </li>
+            <li>
+                <a href="#" class="waves-effect"><i class="fa fa-tasks"></i><span> Training Register</span></a>
+            </li>*@
+            
+            <li>
+                <a href="@Url.Content("~/Help")" class="waves-effect"><i class="fa fa-life-ring"></i><span>Help</span></a>
+
+            </li>
+
+        }
+
+        @if (Session["SA"] != null)
+        {
+
+
+            <li class="has_sub">
+                <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cog"></i><span> Settings </span><span class="pull-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="list-unstyled">
+
+
+
+                    <li><a href="@Url.Content("~/IncidentPriorities_M")">Incident Priorities</a></li>
+                    <li><a href="@Url.Content("~/IncidentTypes_M")">Incident Types</a></li>
+                    <li><a href="@Url.Content("~/IncidentSubTypes_M")">Incident Sub Types</a></li>
+                    <li><a href="@Url.Content("~/IncidentMainRootCause_M")">Inc Main Root Cause</a></li>
+                    <li><a href="@Url.Content("~/IncidentSubRootCause_M")">Inc Sub Root Cause</a></li>
+                    <li><a href="@Url.Content("~/IncidentMainOutcome_M")">Inc Main Outcome</a></li>
+                    <li><a href="@Url.Content("~/IncidentSubOutcome_M")">Inc Sub Outcome</a></li>
+
+                    <li><a href="@Url.Content("~/IncidentPeopleInvolved_M")">Incident People Involved</a></li>
+                    <li><a href="@Url.Content("~/IncidentHarmGroup_M")">Incident Harm Group</a></li>
+                    <li><a href="@Url.Content("~/IncidentHarmScore_M")">Incident Harm Score</a></li>
+                    <li><a href="@Url.Content("~/IncidentFeedbackType_M")">Inc Feedback Type</a></li>
+                    <hr />
+
+
+                    <li><a href="@Url.Content("~/RiskCategory_M")">Risk Category</a></li>
+                    <li><a href="@Url.Content("~/RiskCost_M")">Risk Cost</a></li>
+                    <li><a href="@Url.Content("~/RiskLevel_M")">Risk Level</a></li>
+
+                    <li><a href="@Url.Content("~/RiskDescriptor_M")">Risk Impact Descriptors</a></li>
+                    <li><a href="@Url.Content("~/RiskSeverity_M")">Risk Severity</a></li>
+
+                    <li><a href="@Url.Content("~/RiskProbability_M")">Risk Probability</a></li>
+                   
+                    <li><a href="@Url.Content("~/RiskStrategy_M")">Risk Strategy</a></li>
+                    <hr />
+
+                    <li><a href="@Url.Content("~/TaskStatus_M")">Task Status</a></li>
+                    <li><a href="@Url.Content("~/TaskCategory_M")">Task Category</a></li>
+                    <li><a href="@Url.Content("~/TaskSubCategory_M")">Task Sub Category</a></li>
+                    <li><a href="@Url.Content("~/TaskPriorities_M")">Task Priority</a></li>
+                    <li><a href="@Url.Content("~/TaskRelation_M")">Task Relation</a></li>
+
+
+
+
+                    @*<hr />
+                    <li><a href="@Url.Content("~/DocumentAccessGroup_M")">Document Access Group</a></li>
+                    <li><a href="@Url.Content("~/DocumentCategory_M")">Document Category</a></li>
+                    <li><a href="@Url.Content("~/DocumentSubCategory_M")">Document Sub Category</a></li>
+                    <li><a href="@Url.Content("~/DocumentStakeholder_M")">Document Stakeholder</a></li>
+                    <hr />*@
+
+                    <li><a href="@Url.Content("~/Location_M")">Location</a></li>
+                    <li><a href="@Url.Content("~/Department_M")">Department</a></li>
+                    <li><a href="@Url.Content("~/Branch_M")">Branch</a></li>
+                    <li><a href="@Url.Content("~/Users_M")">Users</a></li>
+                </ul>
+            </li>
+
+            <li class="has_sub">
+                <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cog"></i><span> Configurations </span><span class="pull-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="list-unstyled">
+                    <li><a href="@Url.Content("~/IncidentStatus_M")">Incident Status</a></li>
+                    <li><a href="@Url.Content("~/IncidentRelation_M")">Incident Relation</a></li>
+                    <li><a href="@Url.Content("~/DocumentType_SM")">Document Type</a></li>
+                    <li><a href="@Url.Content("~/RiskScore_M")">Risk Impact Score</a></li>
+                    <li><a href="@Url.Content("~/RiskFrequencyScore_M")">Risk Frequency Score</a></li>
+                    <li><a href="@Url.Content("~/RiskStatus_M")">Risk Status</a></li>
+                    <li><a href="@Url.Content("~/TaskPriorities_M")">Task Priorities</a></li>
+
+                    <li><a href="@Url.Content("~/UserRole_SM")">Role</a></li>
+                    
+                    @*<li><a href="@Url.Content("~/DocumentStatus_SM")">Document Status</a></li>*@
+                </ul>
+            </li>
+
+
+        }
+
+    </ul>
+</div>
+
+
+
+
+

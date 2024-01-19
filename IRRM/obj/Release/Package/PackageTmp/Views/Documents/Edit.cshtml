@@ -1,0 +1,751 @@
+﻿@model IRRM.Models.Document
+
+
+
+
+@{
+
+    ViewBag.Title = "Index";
+}
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-6">Document</h2>
+
+                            <div class="pull-right">
+
+                                @if (Model.RegisteredOn != null)
+                                {
+                                    <h2 class=" text-right">@Model.DocumentNo</h2>
+                                }
+                                else
+                                {
+                                    <a class="btn btn btn-success " onclick="registerdocument()">Register Document</a>
+                                    <a class="btn btn btn-danger " onclick="deletedocument()">Invalid</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="col-md-12">
+                                    <div class="pull-right" style="font-size:20px; color:red;cursor:pointer"><i class="fa fa-edit" data-toggle="modal" data-target="#EditDocument"></i></div>
+                                </div>
+
+                                <div class="col-md-12">
+
+
+
+                                    <div class="form-horizontal">
+
+                                        <div class="form-group">
+
+                                            <div class="col-md-12">
+                                                <b style="margin:6px;font-size:20px;margin:0px;">@Model.Title</b>
+                                                <br style="clear:both" />
+                                                <label class="control-label">Description :</label>
+                                                <p>@Model.Description</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+
+
+
+
+
+                                            <div class="col-md-12"><label class="control-label">Reference No. :@Model.ReferenceNo </label></div>
+
+                                            <div class="col-md-4">
+                                                <label class="control-label">
+                                                    Category:
+                                                </label>
+                                                @foreach (var cat in ViewBag.Category)
+                                                {
+                                                    @(Model.DocCategoryID == cat.DocCategoryID ? "" + cat.DocCategory : "")
+                                                }
+
+                                                <br style="clear:both" />
+                                                <label class="control-label">Sub Category : </label>
+                                                @foreach (var cat in ViewBag.SubCategory)
+                                                {
+                                                    @(Model.DocSubCategoryID == cat.DocSubCategoryID ? "" + cat.DocSubCategory : "")
+                                                }
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label class="control-label">Stakeholder</label>
+
+                                                @foreach (var cat in ViewBag.DocumentStakeholder)
+                                                {
+                                                    @(Model.StakeholderID == cat.StakeholderID ? "" + cat.Stakeholder : "")
+                                                }
+
+                                                <br style="clear:both" />
+
+                                                <label class="control-label">Document Manager : </label>
+                                                @Model.DocumentManager
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label">Location : </label>
+
+                                                @foreach (var cat in ViewBag.Department)
+                                                {
+                                                    @(Model.DepartmentID == cat.DepartmentID ? "" + cat.Department : "")
+                                                }
+                                                <br style="clear:both" />
+                                                <label class="control-label">Specify Location :  </label>
+                                                @Model.SpecifyLocation
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Attached File : </label>
+                                                <a target="_blank" href="@Url.Content("~/DocumentManager/"+Model.DocumentID+"-"+Model.FileName+Model.FileExtension)">@Model.FileAttached</a>
+
+                                            </div>
+
+
+                                            <div class="col-md-4">
+                                                <label class="control-label">Valid From : </label>
+                                                @Model.ValidFrom
+                                            </div>
+
+
+                                            <div class="col-md-4">
+                                                <label class="control-label">Valid Upto : </label>
+                                                @Model.ValidUpto
+
+                                            </div>
+
+
+
+                                        </div>
+
+
+
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+
+                                <h4 class="pull-left">Document Copy Location</h4>
+                                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#DocumentLocation">Add Location</button>
+                                <br style="clear:both" />
+                                <br style="clear:both" />
+                                <table class="table table-bordered">
+                                    @if (ViewBag.DocCopyLoc.Count != 0)
+                                    {
+                                        <tr>
+
+                                            <th>Location</th>
+                                            <th>Modify</th>
+
+                                        </tr>
+                                    }
+                                    @foreach (var dc in ViewBag.DocCopyLoc)
+                                    {
+
+                                        <tr><td>@dc.Department - @dc.Details</td><td><i class="fa fa-trash" style="font-size:16px; color:red;cursor:pointer" onclick="deletedoccopylocation(@dc.DocCopyLocationID)"></i></td></tr>
+
+                                    }
+
+                                </table>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+
+                                <h4 class="pull-left">Document Access</h4>
+                                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#DocumentAccess">Add Access</button>
+                                <br style="clear:both" />
+                                <br style="clear:both" />
+                                <table class="table table-bordered">
+                                    @if (ViewBag.DocumentAccessGroupUsers.Count != 0)
+                                    {
+                                        <tr>
+                                            <th>Access Group</th>
+                                            <th>User</th>
+                                            <th>Modify</th>
+
+                                        </tr>
+                                    }
+                                    @foreach (var dc in ViewBag.DocumentAccessGroupUsers)
+                                    {
+
+                                        <tr><td>@dc.AccessGroup</td><td>@dc.Name - @dc.Designation</td><td><i class="fa fa-trash" style="font-size:16px;cursor:pointer; color:red" onclick="deleteAccess(@dc.DocAccessID)"></i></td></tr>
+
+                                    }
+
+                                </table>
+
+
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+
+                                <h4 class="pull-left">Document Viewers</h4>
+                                <div class="btn btn-info pull-right" id="Viewer">I have viewed this document</div>
+                                <br style="clear:both" />
+                                <br style="clear:both" />
+                                <table class="table table-bordered">
+                                    @if (ViewBag.DocViewers.Count != 0)
+                                    {
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Viewed On</th>
+                                        </tr>
+                                    }
+                                    @foreach (var vw in ViewBag.DocViewers)
+                                    {
+
+                                        <tr>
+                                            <td>@vw.Name - @vw.Designation</td>
+                                            <td>@vw.ViewedOn</td>
+
+                                        </tr>
+                                    }
+                                </table>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+
+    $(document).ready(function () {
+        $("#Viewer").click(function () {
+
+            if (confirm("Are you sure to add View Date?")) {
+
+                jQuery.ajax({
+                    method: "GET",
+                    url: "@Url.Content("~/Documents/DocumentViewer/"+Model.DocumentID)",
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        window.location.reload();
+                    },
+                    error: function () {
+                        alert('Unable to delete!');
+                    }
+                });
+            }
+        });
+    });
+
+
+
+    function getdocumentsubcat() {
+        $.ajax({
+            method: "GET",
+            url: "@Url.Content("~/DocumentSubCategory_M/DocumentSubCategory/")" + $('#DocCategoryID').val(),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                $("#DocSubCategoryID").children().remove();
+                  $("#DocSubCategoryID").append("<option value='' >Select</option>");
+                $.each(data, function (key, value) {
+                    $("#DocSubCategoryID").append("<option value='" + data[key].DocSubCategoryID + "' >" + data[key].DocSubCategory + "</option>");
+                });
+
+            },
+            error: function () {
+            }
+        });
+    }
+
+
+
+    function registerdocument() {
+
+        if (confirm("Make sure all fields  are filled properly, \nOtherwise it will throw error while opening report!\nAre you sure to Register this Document?")) {
+
+            jQuery.ajax({
+                method: "POST",
+                url: "@Url.Content("~/Documents/Register/" + Model.DocumentID)",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    window.location.reload();
+                },
+                error: function () {
+                    alert('Unable to register! ');
+                }
+            });
+        }
+
+
+    }
+
+    function deletedocument() {
+
+        if (confirm("Are you sure to make this Document Invalid?")) {
+
+            jQuery.ajax({
+                method: "GET",
+                url: "@Url.Content("~/Documents/Invalid/" +Model.DocumentID)",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    window.location.href = "@Url.Content("~/Documents/Index")";
+                },
+                error: function () {
+                    alert('Unable to delete!');
+                }
+            });
+        }
+    }
+
+
+
+
+    function deletedoccopylocation(DocCopyLocationID) {
+
+        if (confirm("Are you sure to Delete?")) {
+
+            jQuery.ajax({
+                method: "GET",
+                url: "@Url.Content("~/Documents/DeleteDocCopyLoc/")" + DocCopyLocationID,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    window.location.reload();
+                },
+                error: function () {
+                    alert('Unable to delete!');
+                }
+            });
+        }
+    }
+
+
+    function deleteAccess(DocAccessID) {
+
+        if (confirm("Are you sure to Delete?")) {
+
+            jQuery.ajax({
+                method: "GET",
+                url: "@Url.Content("~/Documents/DeleteDocAccess/")" + DocAccessID,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    window.location.reload();
+                },
+                error: function () {
+                    alert('Unable to delete!');
+                }
+            });
+        }
+    }
+
+
+
+
+
+
+</script>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="EditDocument">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="col-md-12">
+
+                    @using (Html.BeginForm("Edit", "Documents", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.DocumentID)
+                            @Html.HiddenFor(model => model.FileName)
+                            @Html.HiddenFor(model => model.FileExtension)
+                            @Html.HiddenFor(model => model.CurrentStatus)
+
+
+
+                            <input type="hidden" name="FileAttached2" value="@Model.FileAttached" />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label class="control-label">Reference No.</label>
+                                    @Html.EditorFor(model => model.ReferenceNo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ReferenceNo, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="control-label col-md-2">Category </label>
+                                    <select class="form-control" required name="DocCategoryID" id="DocCategoryID" onchange="getdocumentsubcat()">
+                                        <option value="">Select</option>
+                                        @foreach (var cat in ViewBag.Category)
+                                        {
+                                            <option @(Model.DocCategoryID == cat.DocCategoryID ? "selected" : "") value="@cat.DocCategoryID">@cat.DocCategory</option>
+                                        }
+                                    </select>
+
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">Sub Category </label>
+                                    <select class="form-control" required name="DocSubCategoryID" id="DocSubCategoryID">
+                                        <option value="">Select</option>
+                                        @foreach (var cat in ViewBag.SubCategory)
+                                        {
+                                            <option @(Model.DocSubCategoryID == cat.DocSubCategoryID ? "selected" : "") value="@cat.DocSubCategoryID">@cat.DocSubCategory</option>
+                                        }
+                                    </select>
+
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="control-label">Stakeholder</label>
+                                    <select class="form-control" required name="StakeholderID">
+                                        <option value="">Select</option>
+                                        @foreach (var cat in ViewBag.DocumentStakeholder)
+                                        {
+                                            <option @(Model.StakeholderID == cat.StakeholderID ? "selected" : "") value="@cat.StakeholderID">@cat.Stakeholder</option>
+                                        }
+                                    </select>
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <label class="control-label">Document Manager</label>
+                                    @Html.EditorFor(model => model.DocumentManager, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DocumentManager, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+                            <div class="form-group">
+
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @row = "3" } })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label class="control-label">Attach File</label> (@Model.FileAttached)
+
+                                    <input type="file" name="FileAttached" class="form-control" value="@Model.FileAttached" />
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <label class="control-label">Valid From</label>
+                                    <input type="date" class="form-control" name="ValidFrom" value="@(Model.ValidFrom == null ? "" : Convert.ToDateTime(Model.ValidFrom).ToString("yyyy-MM-dd"))" />
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <label class="control-label">Valid Upto</label>
+                                    <input type="date" class="form-control" name="ValidUpto" value="@(Model.ValidUpto == null ? "" : Convert.ToDateTime(Model.ValidUpto).ToString("yyyy-MM-dd"))" />
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <label class="control-label">Location</label>
+                                    <select class="form-control" required name="DepartmentID">
+                                        <option value="">Select</option>
+                                        @foreach (var cat in ViewBag.Department)
+                                        {
+                                            <option @(Model.DepartmentID == cat.DepartmentID ? "selected" : "") value="@cat.DepartmentID">@cat.Department</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="control-label">Specify Location </label>
+                                    @Html.EditorFor(model => model.SpecifyLocation, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SpecifyLocation, "", new { @class = "text-danger" })
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class=" col-md-10">
+                                    <input type="submit" value="Save" class="btn btn-success" />
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                    }
+                </div>
+            </div>
+            <br style="clear:both" />
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="DocumentLocation">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="col-md-12">
+
+                    @using (Html.BeginForm("CopyLocation", "Documents"))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+
+
+                            @Html.HiddenFor(model => model.DocumentID)
+
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <label class="control-label">Location</label>
+                                    <select class="form-control" required name="DepartmentID">
+                                        <option value="">Select</option>
+                                        @foreach (var cat in ViewBag.Department)
+                                        {
+                                            <option value="@cat.DepartmentID">@cat.Department</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="control-label">Details </label>
+                                    <textarea name="Details" class="form-control"></textarea>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class=" col-md-10">
+                                    <input type="submit" value="Save" class="btn btn-success" />
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    }
+                </div>
+            </div>
+            <br style="clear:both" />
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="DocumentAccess">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="col-md-12">
+
+                    @using (Html.BeginForm("GiveAccess", "Documents"))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+
+
+                            @Html.HiddenFor(model => model.DocumentID)
+
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <label class="control-label">Access Group</label>
+                                    <select class="form-control" required name="DocAccessGroupID">
+                                        <option value="">Select</option>
+                                        @foreach (var cat in ViewBag.DocumentAccessGroup)
+                                        {
+                                            <option value="@cat.DocAccessGroupID">@cat.AccessGroup</option>
+                                        }
+                                    </select>
+                                </div>
+                                <link href="@Url.Content("~/assets/css/select2.css")" rel="stylesheet" />
+                                <script src="@Url.Content("~/assets/js/select2.js")"></script>
+                                <script>
+                                    jQuery(document).ready(function () {
+                                        jQuery.noConflict();
+                                        jQuery('.searchableselect').select2({
+                                            tags: true
+                                        });
+                                    });
+
+                                </script>
+                                <div class="col-md-6">
+                                    <label class="control-label">Access Group</label>
+                                    <select class="form-control searchableselect" required name="UserID" style="width:100%;z-index:10">
+                                        <option value="">Select</option>
+                                        @foreach (var cat in ViewBag.Users)
+                                        {
+                                            <option value="@cat.UserID">@cat.Name - @cat.Designation</option>
+                                        }
+                                    </select>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class=" col-md-10">
+                                    <input type="submit" value="Save" class="btn btn-success" />
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    }
+                </div>
+            </div>
+            <br style="clear:both" />
+        </div>
+    </div>
+</div>

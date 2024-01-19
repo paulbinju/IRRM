@@ -1,0 +1,209 @@
+﻿@model IEnumerable<IRRM.Models.Documents_V>
+
+
+<script src="@Url.Content("~/assets/js/jquery.min.js")"></script>
+<link href="@Url.Content("~/assets/plugins/datatables/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/assets/plugins/datatables/buttons.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/assets/plugins/datatables/dataTables.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+@{
+
+    ViewBag.Title = "Index";
+}
+
+
+
+<style>
+    .form-control {
+        width: 100%;
+    }
+
+    td, th {
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+
+    .Triggered {
+        background-color: #ebe0ff;
+    }
+
+    .Registered {
+        background-color: lightyellow;
+    }
+
+    .Assigned {
+        background-color: #e5fedb;
+    }
+
+    .Active {
+        background-color: #b1f8ab;
+    }
+
+    .Completed {
+        background-color: #dbf2f2;
+    }
+
+    .Re-Opened {
+        background-color: #fbc5ad;
+    }
+
+    .Overdue {
+        background-color: red;
+        color: white;
+    }
+</style>
+
+
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-6">Document Register</h2>
+                            <a class="btn btn btn-success pull-right" href="@Url.Content("~/Documents/Create")">Create Document</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+
+                            @{
+                                Html.RenderAction("DocumentSearchPartial");
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body" style="overflow-x:scroll;height:500px;">
+                                <div class="col-md-12">
+
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Triggered">Triggered</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Registered">Registered</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Active">Active</div>
+
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+
+
+                                <table class="table table-bordered" style="font-size:11px;">
+                                    <tr>
+
+                                        <th>
+                                            Document No.
+                                        </th>
+                                        <th>
+                                            Registered On
+                                        </th>
+                                        <th>
+                                            Reference No.
+                                        </th>
+                                        <th style="width:350px">
+                                            Title
+                                        </th>
+
+                                        <th>
+                                            Category
+                                        </th>
+                                        <th>
+                                            Sub Category
+                                        </th>
+
+                                        <th>
+                                            Stakeholder
+                                        </th>
+                                        <th>
+                                            Document Manager
+                                        </th>
+                                        <th>
+                                            Expiry
+                                        </th>
+
+                                    </tr>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+
+                                            <td class="@item.CurrentStatus" onclick="window.location.href='@Url.Content("~/Documents/Edit/" + item.DocumentID)'" style="cursor:pointer">
+                                                @item.DocumentNo
+                                            </td>
+                                            <td class="@item.CurrentStatus" onclick="window.location.href='@Url.Content("~/Documents/Edit/" + item.DocumentID)'" style="cursor:pointer">
+
+                                                @(item.RegisteredOn != null ? Convert.ToDateTime(item.RegisteredOn).ToString("dd-MM-yyyy") : "")
+                                            </td>
+
+                                            <td class="@item.CurrentStatus" onclick="window.location.href='@Url.Content("~/Documents/Edit/" + item.DocumentID)'" style="cursor:pointer">
+                                                @item.ReferenceNo
+                                            </td>
+                                            <td class="@item.CurrentStatus" onclick="window.location.href='@Url.Content("~/Documents/Edit/" + item.DocumentID)'" style="cursor:pointer">
+                                                @item.Title
+                                            </td>
+                                            <td class="@item.CurrentStatus" onclick="window.location.href='@Url.Content("~/Documents/Edit/" + item.DocumentID)'" style="cursor:pointer">
+                                                @item.DocCategory
+                                            </td>
+                                            <td class="@item.CurrentStatus" onclick="window.location.href='@Url.Content("~/Documents/Edit/" + item.DocumentID)'" style="cursor:pointer">
+                                                @item.DocSubCategory
+                                            </td>
+
+
+
+                                            <td class="@item.CurrentStatus" onclick="window.location.href='@Url.Content("~/Documents/Edit/" + item.DocumentID)'" style="cursor:pointer">
+                                                @item.Stakeholder
+                                            </td>
+                                            <td class="@item.CurrentStatus" onclick="window.location.href='@Url.Content("~/Documents/Edit/" + item.DocumentID)'" style="cursor:pointer">
+                                                @item.DocumentManager
+
+                                            </td>
+                                            <td class="@item.CurrentStatus" onclick="window.location.href='@Url.Content("~/Documents/Edit/" + item.DocumentID)'" style="cursor:pointer">
+                                                @(item.ValidUpto != null ? Convert.ToDateTime(item.ValidUpto).ToString("dd-MM-yyyy") : "")
+
+                                            </td>
+
+
+                                        </tr>
+                                    }
+
+                                </table>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

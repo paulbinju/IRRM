@@ -1,0 +1,42 @@
+﻿@model IRRM.Models.DocumentAccessGroup_M
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>DocumentAccessGroup_M</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.AccessGroup)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AccessGroup)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Active)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Active)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.DocAccessGroupID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

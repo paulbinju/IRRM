@@ -1,0 +1,138 @@
+﻿@model IRRM.Models.Task_People_T
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Task_People_T</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.UserID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.UserID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Mobile)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.IdentityNo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.IdentityNo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DateOfBirth)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Gender)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Gender)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Nationality)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Nationality)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.RegNo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.RegNo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CVRNo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CVRNo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateUserID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CreateUserID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CreatedDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TaskPeopleInvolved_M.TaskPeopleInvolved)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TaskPeopleInvolved_M.TaskPeopleInvolved)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TaskRelation_M.TaskRelation)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TaskRelation_M.TaskRelation)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Task.ReferenceNo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Task.ReferenceNo)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.TaskPeopleID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

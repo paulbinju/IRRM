@@ -1,0 +1,39 @@
+﻿@model IEnumerable<IRRM.Models.DynamicControl>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ControlName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DynamicControlType.DControlType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ControlName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DynamicControlType.DControlType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ControlID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ControlID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ControlID })
+        </td>
+    </tr>
+}
+
+</table>

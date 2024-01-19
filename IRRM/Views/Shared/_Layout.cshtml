@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>@ViewBag.PageTitle</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.png")">
+
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="@Url.Content("~/assets/plugins/morris/morris.css")">
+
+    <link href="@Url.Content("~/assets/css/bootstrap.min.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/assets/css/icons.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/assets/css/style.css")?ver=1" rel="stylesheet" type="text/css">
+
+    <script src="@Url.Content("~/Scripts/jquery-3.4.1.js")"></script>
+
+    <style>
+        /*.form-control {
+            width: 100%;
+        }*/
+
+        textarea {
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            color: #888;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- Top Bar Start -->
+        <div class="topbar">
+            <!-- LOGO -->
+            <div class="topbar-left">
+                <!--<a href="index.html" class="logo"><span>Up</span>Bond</a>-->
+                <!--<a href="index.html" class="logo-sm"><span>U</span></a>-->
+                <a href="@Url.Content("~/")" class="logo"><img src="@Url.Content("~/assets/images/MElogo.png")" height="50" alt="logo"></a>
+                <a href="@Url.Content("~/")" class="logo-sm"><img src="@Url.Content("~/assets/images/MElogo.png")" height="30" alt="logo"></a>
+            </div>
+            <!-- Button mobile view to collapse sidebar menu -->
+            <div class="navbar navbar-default" role="navigation">
+                <div class="container">
+                    <div class="">
+                        <div class="pull-left">
+                            <button type="button" class="button-menu-mobile open-left waves-effect waves-light">
+                                <i class="ion-navicon"></i>
+                            </button>
+                            <span class="clearfix"></span>
+                        </div>
+
+
+
+                        @Html.Partial("_header")
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+        <!-- Top Bar End -->
+        <!-- ========== Left Sidebar Start ========== -->
+
+        <div class="left side-menu">
+            <div class="sidebar-inner slimscrollleft">
+
+                @Html.Partial("_sidemenu")
+                <div class="clearfix"></div>
+            </div> <!-- end sidebarinner -->
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- Start right Content here -->
+
+
+
+        @RenderBody()
+
+
+
+
+
+        <!-- End Right content here -->
+        <footer class="footer"></footer>
+    </div>
+    <!-- END wrapper -->
+    <!-- jQuery  -->
+
+    <script src="@Url.Content("~/assets/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/modernizr.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/detect.js")"></script>
+    <script src="@Url.Content("~/assets/js/fastclick.js")"></script>
+    <script src="@Url.Content("~/assets/js/jquery.slimscroll.js")"></script>
+    <script src="@Url.Content("~/assets/js/jquery.blockUI.js")"></script>
+    <script src="@Url.Content("~/assets/js/waves.js")"></script>
+    <script src="@Url.Content("~/assets/js/wow.min.js")"></script>
+    <script src="@Url.Content("~/assets/js/jquery.nicescroll.js")"></script>
+    <script src="@Url.Content("~/assets/js/jquery.scrollTo.min.js")"></script>
+
+
+
+
+    <script src="@Url.Content("~/assets/js/app.js")"></script>
+
+</body>
+</html>

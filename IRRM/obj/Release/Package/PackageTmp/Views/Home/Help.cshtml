@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Help";
+}
+
+@model IEnumerable<IRRM.Models.Location_M>
+
+<script src="@Url.Content("~/assets/js/jquery.min.js")"></script>
+<link href="@Url.Content("~/assets/plugins/datatables/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/assets/plugins/datatables/buttons.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/assets/plugins/datatables/dataTables.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+@{
+
+    ViewBag.Title = "Index";
+}
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-6">Help</h2>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                            <ul>
+                                <li>Masters and Configurations can be set only by System Administrator</li>
+                                <li>User Administrators have access to all Incidents and Risk Analysis.</li>
+                                <li>User Administrator only can register an Incident.</li>
+                                <li>User Administors can assign Incident Investigators.</li>
+                                <li>Investigators and User Administrator can  add Additional Investigators.</li>
+                            </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+ 
+
+
+
+
+
+ 
+
+
+<!-- Datatables-->
+<script src="@Url.Content("~/assets/plugins/datatables/jquery.dataTables.min.js")"></script>
+<script src="@Url.Content("~/assets/plugins/datatables/dataTables.bootstrap.js")"></script>
+<script src="@Url.Content("~/assets/plugins/datatables/dataTables.buttons.min.js")"></script>
+<script src="@Url.Content("~/assets/plugins/datatables/buttons.bootstrap.min.js")"></script>
+<script src="@Url.Content("~/assets/plugins/datatables/jszip.min.js")"></script>
+<script src="@Url.Content("~/assets/plugins/datatables/pdfmake.min.js")"></script>
+<script src="@Url.Content("~/assets/plugins/datatables/vfs_fonts.js")"></script>
+<script src="@Url.Content("~/assets/plugins/datatables/buttons.html5.min.js")"></script>
+<script src="@Url.Content("~/assets/plugins/datatables/buttons.print.min.js")"></script>
+
+
+<script src="@Url.Content("~/assets/pages/datatables.init.js")"></script>
+

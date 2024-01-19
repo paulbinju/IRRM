@@ -1,0 +1,42 @@
+﻿@model IRRM.Models.DynamicControlValue
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DynamicControlValue</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ControlValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ControlValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DynamicControl.ControlName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DynamicControl.ControlName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DynamicControlType.DControlType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DynamicControlType.DControlType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ControlValueID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

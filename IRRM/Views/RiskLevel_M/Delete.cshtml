@@ -1,0 +1,99 @@
+﻿@model IRRM.Models.RiskLevel_M
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+@{
+    Layout = null;
+}
+
+<style>
+    .dl-horizontal dt {
+        width: 250px;
+        margin-right: 15px;
+    }
+</style>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RiskLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiskLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActionTimeScale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActionTimeScale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReviewTimeScale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReviewTimeScale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+    </dl>
+
+  @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "delform-" + Html.DisplayFor(model => model.RiskLevelID) }))
+  {
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </div>
+  }
+
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#delform-"+@Html.DisplayFor(model => model.RiskLevelID)).submit(function (e) {
+            e.preventDefault();
+            var formdata = new FormData(this);
+
+          //  alert($("#DFormID").val());
+            $.ajax({
+                method: "POST",
+                url: "@Url.Content("~/RiskLevel_M/Delete/"+ Html.DisplayFor(model => model.RiskLevelID))",
+                data: formdata,
+                mimeTypes: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                   // alert('Successfully deleted!');
+                    window.location.href = "@Url.Content("~/RiskLevel_M")";
+                },
+                error: function () {
+                    alert('Unable to delete, try editing instead!');
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,2922 @@
+﻿@model IRRM.Models.Incident
+
+@{
+    ViewBag.Title = "Details";
+
+}
+
+
+
+
+@if (ViewBag.roleflag == 0 && Model.IncidentStatusID != 6)
+{
+    <script>
+        jQuery(document).ready(function () {
+            loadAttachmentadmin(@Html.DisplayFor(model => model.IncidentID));
+            loadpeopleadmin();
+            loadinterviewadmin();
+            loadOutcome();
+            loadRootCauseAnalysis();
+            loadRemedialAction();
+            loadInvestigatorReport();
+            loadpatient(@Html.DisplayFor(model => model.IncidentID));
+            jQuery("#feedbackbox").hide();
+            loadtasks();
+        });
+    </script>
+}
+else
+{
+    <script>
+        jQuery(document).ready(function () {
+            loadAttachment(@Html.DisplayFor(model => model.IncidentID));
+            loadpatient(@Html.DisplayFor(model => model.IncidentID));
+
+                loadpeople();
+                loadinterview();
+                loadOutcome();
+                loadRootCauseAnalysis();
+                loadRemedialAction();
+                loadInvestigatorReport();
+                jQuery("#feedbackbox").hide();
+                loadtasks();
+        });
+    </script>
+}
+
+
+
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-6">Event Details</h2>
+
+
+                            @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked"))
+                            {
+                                <h2 class="col-md-6 text-right">@Html.DisplayFor(model => model.IncidentNo)</h2>
+                                if (Model.IncidentStatusID == 6)
+                                {
+                                    //onclick = 'window.open("@Url.Content("~/Incidents/Report/" + Model.IncidentID)", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=-10,left=0,width=900");'
+                                    <div class="pull-right">
+                                        <a class="btn btn btn-danger" href="@Url.Content("~/Incidents/Report/" + Model.IncidentID)" target="_blank">View Report</a>
+                                        @if (ViewBag.roleflag == 0)
+                                        {
+                                            <a href="#" data-toggle="modal" data-target="#EditStatus" class="btn btn-success">Re-Open</a>
+                                        }
+                                    </div>
+                                }
+
+                                if (Model.IncidentStatusID == 5)
+                                {
+                                    <div class="pull-right">
+                                        <a class="btn btn btn-warning" href="@Url.Content("~/Incidents/ReportDraft/" + Model.IncidentID)" target="_blank">View Draft Report</a>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                if (ViewBag.roleflag == 0)
+                                {
+                                    <div class="pull-right">
+                                        <a class="btn btn btn-success " onclick="registerincident()">Register Incident</a>
+                                        <a class="btn btn btn-danger " onclick="deleteincident()">Invalid</a>
+                                    </div>
+                                }
+                            }
+
+                            @if (ViewBag.OverDue == "Yes")
+                            {
+                                <br style="clear:both" />
+                                <div class="col-md-12" style="background-color:red;color:white">
+                                    @ViewBag.OverDueDays day(s) Overdue!
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+
+                                @if (ViewBag.roleflag == 0 && Model.IncidentStatusID != 6)
+                                {
+                                    <div class="col-md-12" style="color:red;cursor:pointer;font-size:20px;"><i title="Edit" data-toggle="modal" data-target="#EditIncident" class="pull-right fa fa-edit"></i></div>
+                                }
+
+
+                                <div class="col-md-4">
+                                    <b>Event Date</b>:  @Html.DisplayFor(model => model.IncidentDate)
+                                </div>
+
+
+
+
+
+
+                                <div class="col-md-4">
+                                    <b>Branch</b>: @Html.DisplayFor(model => model.Branch_M.Branch), @Html.DisplayFor(model => model.Location_M.Location)
+                                </div>
+                                <br />
+
+                                <div class="col-md-4">
+                                    <b>Registered :</b>
+
+                                    @(Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked") ? "Yes" : "No")
+                                </div>
+                                <div class="col-md-4">
+                                    <b>Registered On :</b> @Html.DisplayFor(model => model.RegisteredOn)
+                                </div>
+
+                                <div class="col-md-4">
+                                    <b>Event Status: </b>@Html.DisplayFor(model => model.IncidentStatus_M.IncidentStatus)
+                                </div>
+                                <div class="col-md-4">
+                                    <b>Event Type: </b>
+                                    @Html.DisplayFor(model => model.EventType_SM.EventType)
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <b>Created Date: </b>
+                                    @Html.DisplayFor(model => model.IncidentCreatedDate)
+                                </div>
+                                <div class="col-md-4">
+                                    <b>Incident Type: </b>@Html.DisplayFor(model => model.IncidentTypes_M.IncidentType)
+                                </div>
+
+                                <div class="col-md-4">
+                                    <b> Incident Sub Type: </b>@Html.DisplayFor(model => model.IncidentSubTypes_M.IncidentSubType)
+                                </div>
+
+                                <div class="col-md-4">
+                                    <b> Incident Priorities: </b>@Html.DisplayFor(model => model.IncidentPriorities_M.Priority)
+                                </div>
+                                <div class="col-md-4">
+                                    <b> Incident Due Date: </b>@Html.DisplayFor(model => model.InvestigationDueDate)
+                                </div>
+                                <div class="col-md-4">
+                                    <b> Is Risk Analysis Required? </b>@(Convert.ToString(Html.DisplayFor(model => model.RiskAnalysisRequired)).Contains("checked") ? "Yes" : "No")
+                                </div>
+                                <div class="col-md-4">
+                                    <b> Harm Group: </b>@Html.DisplayFor(model => model.IncidentHarmScore_M.IncidentHarmGroup_M.IncidentHarmGroup)
+                                </div>
+                                <div class="col-md-4">
+                                    <b> Harm Score Code: </b>@Html.DisplayFor(model => model.IncidentHarmScore_M.IncidentHarmScoreCode)
+                                </div>
+                                <div class="col-md-4">
+                                    <b> Harm Score: </b>@Html.DisplayFor(model => model.IncidentHarmScore_M.IncidentHarmScore)
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+
+            <div class="container">
+
+                @if (Model.IncidentStatusID != 6 || ViewBag.roleflag == 0)
+                {
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                @if (ViewBag.roleflag != 0 && Convert.ToString(Html.DisplayFor(model => model.Confidential)).Contains("checked") == true)
+                                {
+                                    <div class="panel-body">
+                                        <h4 class="col-md-12">Anonymous reporter</h4>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="panel-body">
+
+                                        <div class="col-md-4">
+                                            <b>Confidential: </b>   @(Convert.ToString(Html.DisplayFor(model => model.Confidential)).Contains("checked") ? "Yes" : "No")
+                                        </div>
+                                        <div class="col-md-4">
+                                            <b>Reporting Type: </b>
+                                            @(Convert.ToString(Html.DisplayFor(model => model.OnBehalfReporting)).Contains("checked") ? "On Behalf" : "Self")
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <b>Reporter can comment: </b>
+                                            @(Convert.ToString(Html.DisplayFor(model => model.CreatorCanComment)).Contains("checked") ? "Yes" : "No")
+
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <b>Created by: </b>  @Html.DisplayFor(model => model.Users_M.Name)
+                                        </div>
+                                        <div class="col-md-4">
+                                            <b>Designation: </b>  @Html.DisplayFor(model => model.Users_M.Designation)
+                                        </div>
+                                        <div class="col-md-4">
+                                            <b>Email: </b>  @Html.DisplayFor(model => model.Users_M.EmailID)
+                                        </div>
+                                        <div class="col-md-4">
+                                            <b>Phone: </b>  @Html.DisplayFor(model => model.Users_M.Phone)
+                                        </div>
+                                        <div class="col-md-4">
+                                            <b>Branch: </b>  @Html.DisplayFor(model => model.Users_M.Branch_M.Branch)
+                                        </div>
+                                        <br /><br />
+
+
+
+
+                                        @if (Convert.ToString(Html.DisplayFor(model => model.OnBehalfReporting)).Contains("checked"))
+                                        {
+                                            <div class="col-md-4">
+                                                <b> Reporter Name : </b>
+
+                                                @Html.DisplayFor(model => model.ReporterName)
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <b>Reporter Designation</b>
+
+                                                @Html.DisplayFor(model => model.ReporterDesignation)
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <b>Reporter Email: </b>
+
+                                                @Html.DisplayFor(model => model.ReporterEmail)
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <b>Reporter Phone: </b>
+
+                                                @Html.DisplayFor(model => model.ReporterPhone)
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <b>Reporter Branch: </b>
+
+                                                @Html.DisplayFor(model => model.ReporterBranch)
+                                            </div>
+
+
+
+                                        }
+
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+
+                                    <div class="col-md-12">
+                                        <b>Description : </b><br />
+                                        @Html.DisplayFor(model => model.Description)
+
+                                    </div>
+                                    <br style="clear:both" /><br />
+                                    <div class="col-md-12">
+                                        <b>Action Taken: </b><br />
+                                        @Html.DisplayFor(model => model.ActionTaken)
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="col-md-2"><b>Status : </b></div>
+                                    <div class=" pull-right">
+                                        @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked"))
+                                        {
+                                            if (ViewBag.roleflag == 0)
+                                            {
+                                                if (Model.IncidentStatusID != 6)
+                                                {
+                                                    <button class="btn btn-danger" onclick="CloseIncident()">Close</button>
+                                                }
+
+                                            }
+                                        }
+                                    </div>
+
+                                    <br style="clear:both" />
+
+                                    <br style="clear:both" />
+
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th>Status</th>
+                                            <th>Created By</th>
+                                            <th>Create On</th>
+                                        </tr>
+                                        @foreach (var s in ViewBag.Status)
+                                        {
+                                            <tr>
+                                                <td>@s.IncidentStatus</td>
+                                                <td>@s.Name</td>
+                                                <td>@s.RegisteredOn</td>
+                                            </tr>
+                                        }
+                                    </table>
+
+                                    <br style="clear:both" />
+                                    @if (Model.ReOpened == true && ViewBag.roleflag == 0)
+                                    {
+
+                                        <b>ReOpen Remarks</b><br /><br />
+                                        <p>
+                                            @try
+                                            {
+                                                <span>@Html.Raw(Model.ReOpenRemarks.Replace("\n\n", "<br><br>"))</span>
+                                            }
+                                            catch
+                                            {
+                                                <span>@Html.Raw(Model.ReOpenRemarks)</span>
+                                            }
+
+                                        </p>
+
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="col-md-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="col-md-3"><b>Attachments : </b></div>
+                                    <div class=" pull-right">
+                                        @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked"))
+                                        {
+                                            if ((ViewBag.roleflag == 0 || ViewBag.roleflag == 1) && Model.IncidentStatusID != 6)
+                                            {
+                                                <a href="#" data-toggle="modal" data-target="#AddAttachments" class="btn btn-success">Add Attachments</a>
+                                            }
+                                        }
+                                    </div>
+
+                                    <br style="clear:both" />
+
+                                    <br style="clear:both" />
+
+
+                                    <div id="tblAttachments">
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="col-md-3"><b>People Related : </b></div>
+                                    <div class=" pull-right">
+                                        @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked"))
+                                        {
+                                            
+                                                <a href="#" data-toggle="modal" data-target="#AddPeople" class="btn btn-success">Add People</a>
+                                             
+                                        }
+                                    </div>
+
+                                    <br style="clear:both" />
+
+                                    <br style="clear:both" />
+
+
+
+                                    <div id="tblpeoplerelated">
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    @*<div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-primary">
+                                    <div class="panel-body">
+                                        <div class="col-md-3"><b>Patient Involved : </b></div>
+                                        <div class=" pull-right">
+                                            @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked"))
+                                            {
+                                                if (ViewBag.roleflag == 0 || ViewBag.roleflag == 1)
+                                                {
+                                                    <a href="#" data-toggle="modal" data-target="#Addpatient" class="btn btn-success">Add Patient</a>
+                                                }
+                                            }
+                                        </div>
+
+                                        <br style="clear:both" />
+
+                                        <br style="clear:both" />
+
+
+
+                                        <div id="tblpatient">
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>*@
+
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="col-md-3"><b>Interviews: </b></div>
+                                    <div class=" pull-right">
+                                        @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked"))
+                                        {
+                                            if ((ViewBag.roleflag == 0 || ViewBag.roleflag == 1 || ViewBag.roleflag == 2) && Model.IncidentStatusID != 6)
+                                            {
+                                                <a href="#" data-toggle="modal" data-target="#AddInterview" class="btn btn-success">Add Interview</a>
+                                            }
+                                        }
+                                    </div>
+
+                                    <br style="clear:both" />
+
+                                    <br style="clear:both" />
+
+
+
+                                    <div id="tblinterviews">
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="col-md-3"><b>Root Cause Analysis : </b></div>
+                                    <div class=" pull-right">
+                                        @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked"))
+                                        {
+                                            if ((ViewBag.roleflag == 0 || ViewBag.roleflag == 1) && Model.IncidentStatusID != 6)
+                                            {
+                                                <a href="#" data-toggle="modal" data-target="#AddRootCauseAnalysis" class="btn btn-success">Attach Root Cause Analysis Template</a>
+                                                <br style="clear:both" />
+                                                <br style="clear:both" />
+                                            }
+                                        }
+
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        @{
+                                            int IncidentMainRootCauseID = 0;
+                                            int IncidentSubRootCauseID = 0;
+                                        }
+                                        @foreach (var imrcqpM in ViewBag._IncidentRootCauseAnwser)
+                                        {
+                                            if (IncidentMainRootCauseID != imrcqpM.IncidentMainRootCauseID)
+                                            {
+                                                IncidentMainRootCauseID = imrcqpM.IncidentMainRootCauseID;
+                                                <div class="table-bordered col-md-8" style="margin-bottom:20px;background-color:#f5f5f5">
+                                                    <div class="col-md-12">
+                                                        <br style="clear:both" />
+                                                        <b style="font-size:18px;">@imrcqpM.IncidentMainRootCause</b>
+                                                        @if (ViewBag.roleflag == 0 && Model.IncidentStatusID != 6)
+                                                        {
+                                                            <i class='fa fa-trash pull-right' style='color:red;cursor:pointer' onclick='DeleteMainRootCauseAns(@imrcqpM.IncidentMainRootCauseID,@Model.IncidentID)'></i>
+                                                        }
+                                                        @foreach (var imrcqp in ViewBag._IncidentRootCauseAnwser)
+                                                        {
+                                                            if (imrcqpM.IncidentMainRootCauseID == imrcqp.IncidentMainRootCauseID)
+                                                            {
+                                                                if (IncidentSubRootCauseID != imrcqp.IncidentSubRootCauseID)
+                                                                {
+                                                                    <br style="clear:both" />
+                                                                    <br style="clear:both" />
+                                                                    <b>@imrcqp.IncidentSubRootCause</b>
+                                                                    IncidentSubRootCauseID = imrcqp.IncidentSubRootCauseID;
+                                                                }
+                                                                if (imrcqp.AnswerType == 1)
+                                                                {
+                                                                    <br style="clear:both" />
+                                                                    <div class="col-md-8">
+                                                                        <p>@imrcqp.Answer</p>
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <br style="clear:both" />
+                                                                    <div class="col-md-8">
+                                                                        @try
+                                                                        {
+                                                                            if (imrcqp.Answer != null)
+                                                                            {
+                                                                                <p><i class="fa fa-check-square"></i>&nbsp;&nbsp;@Html.Raw(imrcqp.Answer.Replace(",", "<br><i class='fa fa-check-square'></i>&nbsp;&nbsp;"))</p>
+                                                                            }
+                                                                        }
+                                                                        catch (Exception ex)
+                                                                        {
+
+                                                                        }
+                                                                    </div>
+                                                                }
+
+
+                                                            }
+                                                        }
+
+
+                                                    </div>
+                                                </div>
+                                            }
+
+
+                                        }
+
+
+
+
+                                        @{
+                                            IncidentMainRootCauseID = 0;
+                                            IncidentSubRootCauseID = 0;
+                                        }
+
+
+                                        @foreach (var imrcqpM in ViewBag.imrcqp)
+                                        {
+                                            if (IncidentMainRootCauseID != imrcqpM.IncidentMainRootCauseID)
+                                            {
+                                                IncidentMainRootCauseID = imrcqpM.IncidentMainRootCauseID;
+                                                <div class="table-bordered col-md-12" style="margin-bottom:20px;background-color:#f5f5f5">
+                                                    <div class="col-md-12">
+                                                        <form id="IRtemplateform-@IncidentMainRootCauseID" method="post" action="@Url.Content("~/Incidents/MRCtemplatePost")">
+                                                            <input type="hidden" value="@Model.IncidentID" name="IncidentID" />
+                                                            <input type="hidden" value="@imrcqpM.IncidentMainRootCauseID" name="IncidentMainRootCauseID" />
+
+                                                            <br style="clear:both" />
+                                                            <b style="font-size:18px;">@imrcqpM.IncidentMainRootCause</b>
+                                                            @if (ViewBag.roleflag == 0)
+                                                            {
+                                                                <i class='fa fa-trash pull-right' style='color:red;cursor:pointer' onclick='detachMainRootCauseTemplate(@imrcqpM.IncidentMainRootCauseID,@Model.IncidentID)'></i>
+                                                            }
+                                                            @foreach (var imrcqp in ViewBag.imrcqp)
+                                                            {
+                                                                if (imrcqpM.IncidentMainRootCauseID == imrcqp.IncidentMainRootCauseID)
+                                                                {
+                                                                    if (IncidentSubRootCauseID != imrcqp.IncidentSubRootCauseID)
+                                                                    {
+                                                                        <input type="hidden" value="@imrcqp.IncidentSubRootCauseID" name="IncidentSubRootCauseID" />
+                                                                        <input type="hidden" value="@imrcqp.AnswerType" name="AnswerType-@imrcqp.IncidentSubRootCauseID" />
+                                                                        <br style="clear:both" />
+                                                                        <br style="clear:both" />
+                                                                        <b>@imrcqp.IncidentSubRootCause</b>
+                                                                        IncidentSubRootCauseID = imrcqp.IncidentSubRootCauseID;
+                                                                    }
+                                                                    if (imrcqp.AnswerType == 1)
+                                                                    {
+                                                                        <br style="clear:both" />
+                                                                        <div class="col-md-12">
+                                                                            <textarea class="form-control" name="ta-@imrcqp.IncidentSubRootCauseID" cols="10" rows="10"></textarea>
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <br style="clear:both" />
+                                                                        <div class="col-md-12">
+                                                                            <input type="checkbox" name="chk-@imrcqp.IncidentSubRootCauseID" value="@imrcqp.ChoiceAnswer" /> @imrcqp.ChoiceAnswer
+                                                                        </div>
+                                                                    }
+
+
+                                                                }
+                                                            }
+                                                            <br style="clear:both" />
+                                                            <br style="clear:both" />
+                                                            <div class="col-md-8">
+                                                                <input type="submit" class="btn btn-success" />
+                                                            </div>
+                                                            <br style="clear:both" />
+                                                            <br style="clear:both" />
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        }
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="col-md-2"><b>Outcome : </b></div>
+                                    <div class=" pull-right">
+                                        @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked"))
+                                        {
+                                            if ((ViewBag.roleflag == 0 || ViewBag.roleflag == 1) && Model.IncidentStatusID != 6)
+                                            {
+                                                <a href="#" data-toggle="modal" data-target="#AddOutcometemplate" class="btn btn-success">Attach Outcome Template</a>
+                                                <a href="#" data-toggle="modal" data-target="#AddOutcome" class="btn btn-success">Add / Update Outcome</a>
+                                                <br style="clear:both" />
+                                                <br style="clear:both" />
+
+                                            }
+                                        }
+
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        @{
+                                            int IncidentMainOutcomeID = 0;
+                                            int IncidentSubOutcomeID = 0;
+                                        }
+                                        @foreach (var imrcqpM in ViewBag._IncidentOutcomeAnwser)
+                                        {
+                                            if (IncidentMainOutcomeID != imrcqpM.IncidentMainOutcomeID)
+                                            {
+                                                IncidentMainOutcomeID = imrcqpM.IncidentMainOutcomeID;
+                                                <div class="table-bordered col-md-8" style="margin-bottom:20px;background-color:#f5f5f5">
+                                                    <div class="col-md-12">
+                                                        <br style="clear:both" />
+                                                        <b style="font-size:18px;">@imrcqpM.IncidentMainOutcome</b>
+                                                        @if (ViewBag.roleflag == 0 && Model.IncidentStatusID != 6)
+                                                        {
+                                                            <i class='fa fa-trash pull-right' style='color:red;cursor:pointer' onclick='DeleteMainOutcomeAns(@imrcqpM.IncidentMainOutcomeID,@Model.IncidentID)'></i>
+                                                        }
+                                                        @foreach (var imrcqp in ViewBag._IncidentOutcomeAnwser)
+                                                        {
+                                                            if (imrcqpM.IncidentMainOutcomeID == imrcqp.IncidentMainOutcomeID)
+                                                            {
+                                                                if (IncidentSubOutcomeID != imrcqp.IncidentSubOutcomeID)
+                                                                {
+                                                                    <br style="clear:both" />
+                                                                    <br style="clear:both" />
+                                                                    <b>@imrcqp.IncidentSubOutcome</b>
+                                                                    IncidentSubOutcomeID = imrcqp.IncidentSubOutcomeID;
+                                                                }
+                                                                if (imrcqp.AnswerType == 1)
+                                                                {
+                                                                    <br style="clear:both" />
+                                                                    <div class="col-md-8">
+                                                                        <p>@imrcqp.Answer</p>
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <br style="clear:both" />
+                                                                    <div class="col-md-8">
+
+                                                                        @try
+                                                                        {
+                                                                            if (imrcqp.Answer != null)
+                                                                            {
+                                                                                <p><i class="fa fa-check-square"></i>&nbsp;&nbsp;@Html.Raw(imrcqp.Answer.Replace(",", "<br><i class='fa fa-check-square'></i>&nbsp;&nbsp;"))</p>
+                                                                            }
+                                                                        }
+                                                                        catch (Exception ex)
+                                                                        {
+
+                                                                        }
+
+                                                                    </div>
+                                                                }
+
+
+                                                            }
+                                                        }
+
+
+                                                    </div>
+                                                </div>
+                                            }
+
+
+                                        }
+
+
+
+
+                                        @{
+                                            IncidentMainOutcomeID = 0;
+                                            IncidentSubOutcomeID = 0;
+                                        }
+
+
+
+                                        @foreach (var imotqpM in ViewBag.imoqp)
+                                        {
+                                            if (IncidentMainOutcomeID != imotqpM.IncidentMainOutcomeID)
+                                            {
+                                                IncidentMainOutcomeID = imotqpM.IncidentMainOutcomeID;
+                                                <div class="table-bordered col-md-12" style="margin-bottom:20px;background-color:#f5f5f5">
+                                                    <div class="col-md-12">
+                                                        <form id="IRtemplateform-@IncidentMainOutcomeID" method="post" action="@Url.Content("~/Incidents/MOutcometemplatePost")">
+                                                            <input type="hidden" value="@Model.IncidentID" name="IncidentID" />
+                                                            <input type="hidden" value="@imotqpM.IncidentMainOutcomeID" name="IncidentMainOutcomeID" />
+                                                            <br style="clear:both" />
+                                                            <b style="font-size:18px;">@imotqpM.IncidentMainOutcome</b>
+                                                            @if ((ViewBag.roleflag == 0 || ViewBag.roleflag == 1) && Model.IncidentStatusID != 6)
+                                                            {
+                                                                <i class='fa fa-trash pull-right' style='color:red;cursor:pointer' onclick='detachMainOutcomeTemplate(@imotqpM.IncidentMainOutcomeID,@Model.IncidentID)'></i>
+                                                            }
+                                                            @foreach (var imoutqp in ViewBag.imoqp)
+                                                            {
+                                                                if (imotqpM.IncidentMainOutcomeID == imoutqp.IncidentMainOutcomeID)
+                                                                {
+                                                                    if (IncidentSubOutcomeID != imoutqp.IncidentSubOutcomeID)
+                                                                    {
+                                                                        <input type="hidden" value="@imoutqp.IncidentSubOutcomeID" name="IncidentSubOutcomeID" />
+                                                                        <input type="hidden" value="@imoutqp.AnswerType" name="AnswerType-@imoutqp.IncidentSubOutcomeID" />
+                                                                        <br style="clear:both" />
+                                                                        <br style="clear:both" />
+                                                                        <b>@imoutqp.IncidentSubOutcome</b>
+                                                                        IncidentSubOutcomeID = imoutqp.IncidentSubOutcomeID;
+                                                                    }
+                                                                    if (imoutqp.AnswerType == 1)
+                                                                    {
+                                                                        <br style="clear:both" />
+                                                                        <div class="col-md-12">
+                                                                            <textarea class="form-control" name="ta-@imoutqp.IncidentSubOutcomeID" cols="10" rows="10"></textarea>
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <br style="clear:both" />
+                                                                        <div class="col-md-12">
+                                                                            <input type="checkbox" name="chk-@imoutqp.IncidentSubOutcomeID" value="@imoutqp.ChoiceAnswer" /> @imoutqp.ChoiceAnswer
+                                                                        </div>
+                                                                    }
+
+
+                                                                }
+                                                            }
+                                                            <br style="clear:both" />
+                                                            <br style="clear:both" />
+                                                            <div class="col-md-8">
+                                                                <input type="submit" class="btn btn-success" />
+                                                            </div>
+                                                            <br style="clear:both" />
+                                                            <br style="clear:both" />
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        }
+
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div id="tblOutcome"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="col-md-3"><b>Remedial Action : </b></div>
+                                    <div class=" pull-right">
+                                        @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked"))
+                                        {
+                                            if ((ViewBag.roleflag == 0 || ViewBag.roleflag == 1) && Model.IncidentStatusID != 6)
+                                            {
+                                                <a href="#" data-toggle="modal" data-target="#AddRemedialAction" class="btn btn-success">Add / Update Remedial Action</a>
+                                            }
+                                        }
+                                    </div>
+
+                                    <br style="clear:both" />
+
+                                    <br style="clear:both" />
+
+
+                                    <div class="col-md-12" id="tblRemedialAction">
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="col-md-2"><b>Task : </b></div>
+                                    <div class=" pull-right">
+                                        @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked"))
+                                        {
+                                            if ((ViewBag.roleflag == 0 || ViewBag.roleflag == 1) && Model.IncidentStatusID != 6)
+                                            {
+                                                <a href="@Url.Content("~/Tasks/Create/" + Model.IncidentID + "/" + Model.IncidentNo)"   class="btn btn-success">Add  Task</a>
+                                            }
+                                        }
+                                    </div>
+
+                                    <br style="clear:both" />
+
+                                    <br style="clear:both" />
+
+
+                                    <div class="col-md-12" id="tblTask">
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="col-md-2"><b>Investigator Report : </b></div>
+                                    <div class=" pull-right">
+                                        @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked"))
+                                        {
+                                            if ((ViewBag.roleflag == 0 || ViewBag.roleflag == 1) && Model.IncidentStatusID != 6)
+                                            {
+
+                                                <button type="button" class="btn btn-danger" onclick="InvestigationCompleted(@Html.DisplayFor(model => model.IncidentID))">INVESTIGATION COMPLETED</button>
+
+                                                <a href="#" data-toggle="modal" data-target="#AddInvestigatorReport" class="btn btn-success">Add / Update Investigator Report</a>
+
+                                            }
+                                        }
+                                    </div>
+
+                                    <br style="clear:both" />
+
+                                    <br style="clear:both" />
+
+
+                                    <div class="col-md-12" id="tblInvestigatorReport">
+
+                                    </div>
+                                    <br style="clear:both" />
+
+                                    <br style="clear:both" />
+                                    <div class="col-md-2"><b>Recommendations : </b></div>
+                                    <div id="showrecommendations2" class="col-md-12"></div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class=" pull-right">
+                                        @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked"))
+                                        {
+                                            if (ViewBag.roleflag == 0 || ViewBag.roleflag == 1 || ViewBag.roleflag == 2 || ViewBag.roleflag == 7 || (ViewBag.roleflag == 3 && Model.CreatorCanComment == true))
+                                            {
+                                                <a href="#" data-toggle="modal" data-target="#AddComments" class="btn btn-success">Add Comments</a>
+                                            }
+                                        }
+                                    </div>
+                                    <div class="col-md-12">
+                                        <b>Comments</b>
+                                    </div>
+
+
+                                    @if (ViewBag.Comments.Count != 0)
+                                    {
+                                        foreach (var com in ViewBag.Comments)
+                                        {
+                                            <br style="clear:both" />
+
+
+
+
+
+
+                                            <div class="card" style="border:1px solid #ccc;padding:10px">
+
+                                                <table class="col-md-12">
+                                                    <tr>
+                                                        <td class="col-md-1">
+                                                            <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
+                                                                <img src="/assets/images/users/avatar-1.jpg" alt="user-img" class="img-circle pull-left">
+                                                            </a>
+                                                        </td>
+                                                        <td style="padding:10px 0 0 0">
+                                                            <div class="col-md-2 pull-right">@com.CommentDateTime.ToString("dd MMM yyyy HH:mm:ss") <i class="fa fa-comment pull-right" style="color:gray"></i> </div>
+                                                            <b>
+                                                                @com.Name <br />
+                                                                <span style="font-size:11px">@com.Designation</span>
+                                                            </b><br />
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <p class="col-md-12">@com.Comment</p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+
+                                                <br style="clear:both" />
+                                            </div>
+
+
+
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    if (ViewBag.HistoryIncidents.Count != 0)
+                    {
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-primary">
+                                    <div class="panel-body">
+
+                                        <div class="col-md-12">
+                                            <b>Incident History</b>
+                                        </div>
+
+                                        <ul>
+                                            @foreach (var com in ViewBag.HistoryIncidents)
+                                            {
+                                                <li><a target="_blank" href="@Url.Content("~/HistoryReport/" + com.ID)">@com.HistoryDate.ToString("dd MMM yyyy HH:mm:ss")</a></li>
+                                            }
+                                        </ul>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    }
+
+
+
+
+
+                }
+                else
+                {
+                    if (ViewBag.roleflag == 3)
+                    {
+                        using (Html.BeginForm("Feedback", "Incidents"))
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body">
+
+                                            <script>
+
+                                                function showfeedbackedit() {
+                                                    jQuery("#feedbackbox").show();
+                                                }
+                                            </script>
+
+
+                                            <div class="col-md-2"><b>Feedback : </b></div>
+                                            @if (ViewBag.roleflag == 3)
+                                            {
+                                                <div class="pull-right"><i onclick="showfeedbackedit()" style="color:red;cursor:pointer" class="fa fa-edit"></i></div>
+                                            }
+
+                                            <br style="clear:both" />
+                                            <br style="clear:both" />
+                                            <div class="col-md-12">
+                                                <div class="control-label">
+                                                    <b>Feedback Type: </b>
+                                                    @foreach (var fbt in ViewBag.FeedbackType)
+                                                    {
+                                                        @(Model.FeedbackTypeID == fbt.IncidentFeedbackTypeID ? fbt.IncidentFeedbackType : "")
+                                                    }
+                                                </div>
+                                                <div class="control-label">
+                                                    <b>Feedback: </b> @(Model.Feedback)
+                                                </div>
+                                            </div>
+
+
+                                            <div id="feedbackbox">
+
+                                                <br style="clear:both" />
+                                                <br style="clear:both" />
+                                                <br style="clear:both" />
+                                                <br style="clear:both" />
+                                                <div class="col-md-12">
+                                                    <div class="control-label"><b>Feedback Type</b></div>
+                                                    <select class="form-control" name="FeedbackType">
+                                                        @foreach (var fbt in ViewBag.FeedbackType)
+                                                        {
+                                                            <option value="@fbt.IncidentFeedbackTypeID" @(Model.FeedbackTypeID == fbt.IncidentFeedbackTypeID ? "selected" : "")>@fbt.IncidentFeedbackType</option>
+                                                        }
+                                                    </select>
+                                                </div>
+
+                                                <br style="clear:both" />
+                                                <br style="clear:both" />
+                                                <div class="col-md-12">
+                                                    <div class="control-label"><b>Feedback</b></div>
+                                                    <textarea class="form-control" name="Feedback" cols="10">@Model.Feedback</textarea>
+                                                </div>
+                                                <br style="clear:both" /><br />
+                                                <div class="col-md-12">
+
+                                                    <div class="control-label "><b>&nbsp;<input type="hidden" value="@Model.IncidentID" id="IncidentID" name="IncidentID" />  </b></div>
+                                                    <button type="submit" class="btn btn-success">SUBMIT</button>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddAttachments">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <h4 class="modal-title">Add Attachments</h4>
+
+                <br />
+
+                <form id="frmattachment">
+
+
+
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Document Type</b></div>
+                        <select name="DocumentTypeID" id="DocumentTypeID" class="form-control">
+                            <option value="">Select</option>
+
+                            @foreach (var b in ViewBag.DocumentType)
+                            {
+                                <option value="@b.DocumentTypeID">@b.DocumentType</option>
+                            }
+                        </select>
+
+                    </div>
+                    <br style="clear:both" /><br />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Description</b></div>
+                        <input type="text" name="Description" id="Description" class="form-control" />
+
+
+                    </div>
+                    <br style="clear:both" /><br />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Select</b></div>
+                        <input type="file" name="UploadMedia" id="UploadMedia" class="form-control" />
+
+                    </div>
+                    <br style="clear:both" /><br />
+                    <div class="col-md-12">
+
+                        <div class="control-label "><b>&nbsp;<input type="hidden" value="@Html.DisplayFor(model => model.IncidentID)" id="IncidentID" name="IncidentID" />  </b></div>
+                        <button type="submit" class="btn btn-success">SAVE</button>
+
+                    </div>
+                </form>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddRootCauseAnalysis">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h4 class="modal-title">Attach Main Root Cause Template</h4>
+                <form id="frmRootCauseAnalysis">
+                    <br style="clear:both" />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Main Root Cause </b></div>
+
+                        <select class="form-control" name="IncidentMainRootCauseID" required>
+                            <option value="">Select</option>
+                            @foreach (var rc in ViewBag.IncidentMainRootCause)
+                            {
+
+                                <option value="@rc.IncidentMainRootCauseID">@rc.IncidentMainRootCause</option>
+                            }
+                        </select>
+
+
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="control-label "><b>&nbsp;<input type="hidden" value="@Html.DisplayFor(model => model.IncidentID)" id="IncidentID" name="IncidentID" />  </b></div>
+                        <button type="submit" class="btn btn-success">SAVE</button>
+
+                    </div>
+                </form>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddOutcometemplate">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h4 class="modal-title">Attach Main Outcome Template</h4>
+                <form id="frmoutcome">
+                    <br style="clear:both" />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Main Outcome</b></div>
+                        <select class="form-control" name="IncidentMainOutcomeID" required>
+                            <option value="">Select</option>
+                            @foreach (var rc in ViewBag.IncidentMainOutcome)
+                            {
+
+                                <option value="@rc.IncidentMainOutcomeID">@rc.IncidentMainOutcome</option>
+                            }
+                        </select>
+
+
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="control-label "><b>&nbsp;<input type="hidden" value="@Html.DisplayFor(model => model.IncidentID)" id="IncidentID" name="IncidentID" />  </b></div>
+                        <button type="submit" class="btn btn-success">SAVE</button>
+
+                    </div>
+                </form>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddOutcome">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h4 class="modal-title">Update Outcome</h4>
+                <form id="frmoutcomemain">
+                    <br style="clear:both" />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Outcome</b></div>
+                        <textarea id="outcome" name="Outcomex" class="form-control" rows="10"></textarea>
+
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="control-label "><b>&nbsp;<input type="hidden" value="@Html.DisplayFor(model => model.IncidentID)" id="IncidentID" name="IncidentID" />  </b></div>
+                        <button type="submit" class="btn btn-success">SAVE</button>
+
+                    </div>
+                </form>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddRemedialAction">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h4 class="modal-title">Add / Update Remedial Action</h4>
+                <form action="@Url.Content("~/Incidents/UpdateRemedialAction")" method="post">
+                    <br style="clear:both" />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Remedial Action</b></div>
+                        <textarea class="form-control" id="RemedialAction" name="RemedialAction" rows="10"></textarea>
+
+
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="control-label "><b>&nbsp;<input type="hidden" value="@Html.DisplayFor(model => model.IncidentID)" id="IncidentID" name="IncidentID" />  </b></div>
+                        <button type="submit" class="btn btn-success">SAVE</button>
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-warning" onclick="RemedialActionClear()">CLEAR</button>
+
+                        &nbsp;&nbsp;&nbsp;
+
+                    </div>
+                </form>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddTask">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h4 class="modal-title">Add / Update Task</h4>
+                <form id="frmTask">
+                    <br style="clear:both" />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Task</b></div>
+                        <textarea class="form-control" id="Task" name="Task" rows="10"></textarea>
+
+
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="control-label "><b>&nbsp;<input type="hidden" value="@Html.DisplayFor(model => model.IncidentID)" id="IncidentID" name="IncidentID" />  </b></div>
+                        <button type="submit" class="btn btn-success">SAVE</button>
+
+                    </div>
+                </form>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddInvestigatorReport">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h4 class="modal-title">Add / Update Investigator Report</h4>
+                <form id="frmInvestigatorReport">
+                    <br style="clear:both" />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Event Description</b></div>
+                        <textarea class="form-control" id="InvestigatorReport" name="InvestigatorReport" rows="4"></textarea>
+
+
+                    </div>
+
+                    <br style="clear:both" />
+                    <br style="clear:both" />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Investigation Conclusion</b></div>
+                        <textarea class="form-control" id="InvestigationConclusion" name="InvestigationConclusion" rows="3"></textarea>
+                    </div>
+                    <br style="clear:both" />
+                    <br style="clear:both" />
+                    <div class="col-md-12">
+
+                        <div class="control-label "><b>&nbsp;<input type="hidden" value="@Html.DisplayFor(model => model.IncidentID)" id="IncidentID" name="IncidentID" />  </b></div>
+                        <button type="submit" class="btn btn-success">SAVE</button>&nbsp;&nbsp;&nbsp;
+
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-warning" onclick="InvestigationClear()">CLEAR</button>
+
+
+
+                    </div>
+                    <br style="clear:both" />
+                    <br style="clear:both" />
+                    <br style="clear:both" />
+                    <br style="clear:both" />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Recommendations</b></div>
+                        <div class="col-md-11"><input type="text" class="form-control " id="Recommendations" /></div>
+                        <button class="btn btn-danger" type="button" onclick="addrecommendation()">+</button>
+                        <br style="clear:both" />
+                        <br style="clear:both" />
+                        <div id="showrecommendations" class="col-md-12"></div><img id="loading" style="width:30px" src="@Url.Content("~/assets/images/loading.gif")" />
+                        <br style="clear:both" />
+                        <br style="clear:both" /><br style="clear:both" />
+                        <br style="clear:both" />
+                    </div>
+
+                </form>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddComments">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h4 class="modal-title">Add Comment</h4>
+                @using (Html.BeginForm("Comment", "Incidents"))
+                {
+                    <br style="clear:both" />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Comment</b></div>
+                        <textarea class="form-control" name="Comment" rows="5"></textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="control-label "><b>&nbsp;<input type="hidden" value="@Html.DisplayFor(model => model.IncidentID)" id="IncidentID" name="IncidentID" />  </b></div>
+                        <button type="submit" class="btn btn-success">SAVE</button>
+                    </div>
+                }
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddPeople">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <h4 class="modal-title">Add People</h4>
+
+                <br />
+
+                @{
+                    Html.RenderAction("Create", "Incident_People_T", new { IncidentID = ViewBag.IncidentID });
+                }
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="Addpatient">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <h4 class="modal-title">Add Patient</h4>
+
+                <br />
+
+                <div class="col-md-12">
+                    <div class="control-label "><b>Patient Name <span class="red">*</span> </b></div>
+                    <input type="text" id="patientname" class="form-control" required />
+
+                </div>
+                <br style="clear:both" /><br />
+
+                <div class="col-md-12">
+                    <div class="control-label "><b>Patient ID <span class="red">*</span> </b></div>
+                    <input type="text" id="patientidn" class="form-control" required />
+
+                </div>
+                <br style="clear:both" /><br />
+
+                <div class="col-md-12">
+                    <div class="control-label "><b>Gender <span class="red">*</span> </b></div>
+                    <select class="form-control" id="patientgender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+
+                </div>
+                <br style="clear:both" /><br />
+
+                <div class="col-md-12">
+                    <div class="control-label "><b>Date of Birth <span class="red">*</span> </b></div>
+                    <input type="date" id="patientdob" class="form-control" />
+
+                </div>
+
+                <br style="clear:both" /><br />
+                <div class="col-md-12">
+                    <div class="control-label"><b>Contact No. <span class="red">*</span> </b></div>
+                    <input type="number" id="patientphone" class="form-control" required />
+
+                </div>
+                <br style="clear:both" /><br />
+                <div class="col-md-12">
+                    <div class="control-label "><b>&nbsp;</b></div>
+                    <button type="button" class="btn btn-success" id="btnPatient">Add Patient</button>
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddInterview">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <h4 class="modal-title">Add Interview</h4>
+
+                <br />
+
+                @{
+                    Html.RenderAction("Create", "Incident_Interview_T", new { IncidentID = ViewBag.IncidentID });
+                }
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="EditIncident">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <h4 class="modal-title">Edit Event</h4>
+
+                <br />
+                @using (Html.BeginForm("Update", "Incidents"))
+                {
+
+                    <input type="hidden" value="@Model.IncidentID" name="IncidentID" />
+
+                    <div class="form-group">
+
+                        @if (Model.IncidentStatusID == 1)
+                        {
+                            <div class="col-md-12">
+                                <div class="control-label ">
+                                    <b>Event Type <span class="red">*</span> </b>
+                                </div>
+                                <select name="EventTypeID" class="form-control" required>
+                                    <option value="">Select</option>
+                                    @foreach (var et in ViewBag.EventTypeID)
+                                    {
+                                        <option @(Model.EventTypeID == et.EventTypeID ? "selected" : "") value="@et.EventTypeID">@et.EventType</option>
+                                    }
+                                </select>
+
+                            </div>
+                            <br style="clear:both" />
+                            <br style="clear:both" />
+                        }
+                        else
+                        {
+                            <input type="hidden" name="EventTypeID" value="@Model.EventTypeID" />
+                        }
+
+
+                        @*<div class="col-md-6">
+                                <div class="control-label"><b>Branch <span class="red">*</span> </b></div>
+                                <select name="BranchID" id="BranchID" class="form-control" onchange="loadlocations()" required>
+                                    <option value="">Select</option>
+                                    @foreach (var b in ViewBag.BranchID)
+                                    {
+                                        <option @(Model.BranchID == b.BranchID ? "selected" : "") value="@b.BranchID">@b.Branch</option>
+                                    }
+                                </select>
+                            </div>*@
+
+                        <input type="hidden" name="BranchID" id="BranchID" value="1" />
+
+                        <div class="col-md-12">
+                            <div class="control-label"><b>Location <span class="red">*</span> </b></div>
+                            <select name="LocationID" id="LocationID" class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <br style="clear:both" />
+                        <br style="clear:both" />
+
+
+                        <div class="col-md-6">
+                            <div class="control-label"><b>Incident Type</b></div>
+                            <select id="IncidentTypeID" name="IncidentTypeID" class="form-control" onchange="getincidentsubtypes()" required>
+
+                                <option value="">Select</option>
+                                @foreach (var itp in ViewBag.IncidentTypeID)
+                                {
+                                    <option @(Model.IncidentTypeID == itp.IncidentTypeID ? "selected" : "") value="@itp.IncidentTypeID">@itp.IncidentType</option>
+                                }
+                            </select>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="control-label"><b>Incident Sub Type</b></div>
+                            <select name="IncidentSubTypeID" id="IncidentSubTypeID" class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+
+                        </div>
+                        <br style="clear:both" />
+                        <br style="clear:both" />
+
+
+
+                        <div class="col-md-6">
+                            <div class="control-label"><b>Incident Priorities</b></div>
+                            <select id="PriorityID" name="PriorityID" class="form-control" required>
+                                @foreach (var itpx in ViewBag.IncidentPriorities)
+                                {
+                                    <option @(Convert.ToString(Model.PriorityID) == Convert.ToString(itpx.IncidentPriorityID) ? "selected" : "") value="@itpx.IncidentPriorityID">@itpx.Priority</option>
+                                }
+                            </select>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="control-label"><b>Incident Date  </b></div>
+                            <input type="datetime-local" name="IncidentDate" value="@Convert.ToDateTime(Model.IncidentDate).ToString("yyyy-MM-ddThh:mm:ss")" class="form-control" required />
+                        </div>
+
+                        <br style="clear:both" />
+                        <br style="clear:both" />
+
+                        <div class="col-md-12">
+                            <div class="control-label"><b>Description <span class="red">*</span> </b></div>
+                            <textarea name="Description" class="form-control" required cols="8">@Model.Description</textarea>
+                        </div>
+
+                        <br style="clear:both" />
+                        <br style="clear:both" />
+
+                        <div class="col-md-12">
+                            <div class="control-label"><b>Action Taken </b></div>
+                            <textarea name="ActionTaken" class="form-control" cols="5">@Model.ActionTaken</textarea>
+                        </div>
+                        <br style="clear:both" />
+                        <br style="clear:both" />
+                        <div class="col-md-6">
+                            <div class="control-label"><b>Harm Score</b></div>
+                            <select id="HarmScoreID" name="HarmScoreID" class="form-control" required>
+                                @foreach (var itp in ViewBag.IncidentHarmScoreID)
+                                {
+                                    <option @(Convert.ToString(Model.HarmScoreID) == itp.IncidentHarmScoreID ? "selected" : "") value="@itp.IncidentHarmScoreID">@itp.IncidentHarmScore</option>
+                                }
+                            </select>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="control-label"><b>Reporter can comment </b></div>
+                            <input type="checkbox" name="CreatorCanComment" value="true" @(Model.CreatorCanComment == true ? "checked" : "") />
+                        </div>
+                        <div class="col-md-3">
+                            <div class="control-label"><b>Is Risk Analysis Required? </b></div>
+                            <input type="checkbox" name="RiskAnalysisRequired" value="true" @(Model.RiskAnalysisRequired == true ? "checked" : "") />
+                        </div>
+
+                        <div class="col-md-6 text-right">
+                            <div class="control-label"><b>&nbsp;&nbsp;</b></div>
+                            <input type="submit" class="btn btn-danger" value="Update" />
+
+                        </div>
+
+
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="EditStatus">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <h4 class="modal-title">Re-open Incident</h4>
+
+                <br />
+                @using (Html.BeginForm("StatusUpdate", "Incidents"))
+                {
+
+                    <input type="hidden" value="@Model.IncidentID" name="IncidentID" />
+                    <input type="hidden" value="7" name="IncidentStatusID" />
+
+                    <div class="form-group">
+
+                        <div class="col-md-12">
+                            <div class="control-label"><b>Remarks</b></div>
+                            <textarea class="form-control" rows="6" name="ReOpenRemarks"></textarea>
+
+                        </div>
+                        <br style="clear:both" />
+                        <br style="clear:both" />
+                        <div class="col-md-2">
+                            <div class="control-label"><b>&nbsp;&nbsp;</b></div>
+                            <input type="submit" class="btn btn-danger" value="Re-open" />
+
+                        </div>
+                        <br style="clear:both" />
+                        <br style="clear:both" />
+
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    jQuery("#loading").hide();
+    function addrecommendation() {
+        if (jQuery("#Recommendations").val() == '') {
+            alert('Recommendation is mandatory!');
+        }
+        else {
+            jQuery("#loading").show();
+            jQuery.ajax({
+                method: "POST",
+                url: '@Url.Content("~/AddRecommendation/")',
+                data: { IncidentID: @Model.IncidentID, Recommendations: jQuery("#Recommendations").val()},
+                success: function (data) {
+                    jQuery("#Recommendations").val('');
+                    loadrecommendations();
+                    jQuery("#loading").hide();
+                },
+                error: function () {
+                    jQuery("#loading").hide();
+                    alert("Unable to add!");
+                }
+            });
+        }
+    }
+
+    function DeleteRecommendation(RecommendationID) {
+        jQuery("#loading").show();
+        jQuery.ajax({
+            method: "GET",
+            url: '@Url.Content("~/DeleteRecommendation/" + Model.IncidentID +"/")' + RecommendationID,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                loadrecommendations();
+                jQuery("#loading").hide();
+            },
+            error: function () {
+                jQuery("#loading").hide();
+                alert("Unable to delete");
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+    function CloseIncident() {
+        if (confirm("Only completed Incidents can be closed, \nMake sure Incident Type, Subtype, Harm Score etc are filled properly, \nOtherwise it will throw error while opening report!\nAre you sure to Close this Incident?")) {
+            jQuery.ajax({
+                method: "GET",
+                url: '@Url.Content("~/CloseIncident/"+ Model.IncidentID +"/")',
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function () {
+                    window.location.href = "@Url.Content("~/Incidents/Details/")" + @Model.IncidentID;
+                },
+                error: function () {
+                    alert("Unable to close!");
+                }
+            });
+        }
+    }
+
+
+    loadrecommendations();
+    function loadrecommendations() {
+        var recos = '<table>';
+
+        jQuery.ajax({
+            method: "GET",
+            url: "@Url.Content("~/GetRecommendations/"+ Model.IncidentID)",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                jQuery.each(data, function (key, value) {
+                    recos += '<tr><td> - ' + data[key].Recommendation + ' </td><td>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="color:red;cursor:pointer" onclick="DeleteRecommendation(' + data[key].RecommendationID + ')"></i></td></tr>';
+                });
+                recos +='</table>'
+                jQuery("#showrecommendations,#showrecommendations2").html(recos);
+            },
+            error: function () {
+            }
+        });
+    }
+
+
+    function InvestigationCompleted(IncidentID) {
+
+        if (confirm("Are you sure to set the Completed Status?")) {
+
+            jQuery.ajax({
+                method: "GET",
+                url: "@Url.Content("~/SetStatusInvestigationCompleted/")" + IncidentID,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    window.location.href = "@Url.Content("~/Incidents/Details/")" + IncidentID;
+                },
+                error: function () {
+                }
+            });
+
+
+        }
+    }
+
+    function detachMainRootCauseTemplate(IncidentMainRootCauseID, IncidentID) {
+        if (confirm("Are you sure to Detach this Main Root Cause Template?")) {
+            jQuery.ajax({
+                method: "GET",
+                url: "@Url.Content("~/DetachMRCTemplate/")" + IncidentMainRootCauseID + "/" + IncidentID,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    window.location.href = "@Url.Content("~/Incidents/Details/")" + IncidentID;
+                },
+                error: function () {
+                }
+            });
+        }
+    }
+    function detachMainOutcomeTemplate(IncidentMainOutcomeID, IncidentID) {
+        if (confirm("Are you sure to Detach this Main Outcome Template?")) {
+            jQuery.ajax({
+                method: "GET",
+                url: "@Url.Content("~/DetachOutcomeTemplate/")" + IncidentMainOutcomeID + "/" + IncidentID,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    window.location.href = "@Url.Content("~/Incidents/Details/")" + IncidentID;
+                },
+                error: function () {
+                }
+            });
+        }
+    }
+
+
+
+    function DeleteMainRootCauseAns(IncidentMainRootCauseID, IncidentID) {
+        if (confirm("Are you sure to Delete this Main Root Cause Answers?")) {
+            jQuery.ajax({
+                method: "GET",
+                url: "@Url.Content("~/DeleteMRCAns/")" + IncidentMainRootCauseID + "/" + IncidentID,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    window.location.href = "@Url.Content("~/Incidents/Details/")" + IncidentID;
+                },
+                error: function () {
+                }
+            });
+        }
+    }
+    function DeleteMainOutcomeAns(IncidentMainOutcomeID, IncidentID) {
+        if (confirm("Are you sure to Delete this Main Outcome Answers?")) {
+            jQuery.ajax({
+                method: "GET",
+                url: "@Url.Content("~/DeleteMOCAns/")" + IncidentMainOutcomeID + "/" + IncidentID,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    window.location.href = "@Url.Content("~/Incidents/Details/")" + IncidentID;
+                },
+                error: function () {
+                }
+            });
+        }
+    }
+
+
+
+     function loadtasks() {
+         var recos = '';
+
+         jQuery.ajax({
+             method: "GET",
+             url: "@Url.Content("~/GetTasks/"+ Model.IncidentID)",
+             contentType: false,
+             cache: false,
+             processData: false,
+             success: function (data) {
+                 jQuery.each(data, function (key, value) {
+                     recos += '' + data[key].Task + '';
+                 });
+                 jQuery("#tblTask").html(recos);
+                 jQuery("#Task").val(recos);
+             },
+             error: function () {
+             }
+         });
+     }
+
+     jQuery("#frmTask").submit(function (e) {
+         e.preventDefault();
+         var athdata = new FormData(this);
+         jQuery.ajax({
+             method: "POST",
+             url: "@Url.Content("~/AddIncidentTask")",
+             data: athdata,
+             contentType: false,
+             cache: false,
+             processData: false,
+             success: function (data) {
+                 jQuery.each(data, function (key, value) {
+                     window.location.href = "@Url.Content("~/Incidents/Details/" + Model.IncidentID)";
+                 });
+             },
+             error: function () {
+                 alert("Couldn't Save, check the input values!");
+             }
+         });
+     });
+
+
+
+
+    function InvestigationClear() {
+
+        jQuery("#InvestigatorReport,#InvestigationConclusion").val('');
+    }
+
+    function RemedialActionClear() {
+
+        jQuery("#RemedialAction").val('');
+    }
+
+
+    jQuery('#attachfile').bind('change', function () {
+        if (this.files[0].size > 1500000) {
+            alert('File size is too big, attach a smaller file!');
+            jQuery('#attachfile').val("");
+        }
+    });
+
+    loadlocations();
+    function loadlocations() {
+        jQuery.ajax({
+            method: "GET",
+            url: "@Url.Content("~/GetLocations/")" + jQuery('#BranchID').val(),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                jQuery("#LocationID").children('option:not(:first)').remove();
+
+                var curloca = '' +@Model.LocationID+'';
+
+
+                jQuery.each(data, function (key, value) {
+                    if (curloca == data[key].LocationID) {
+                        jQuery("#LocationID").append("<option selected value='" + data[key].LocationID + "' >" + data[key].Location + "</option>");
+                    }
+                    else {
+                        jQuery("#LocationID").append("<option value='" + data[key].LocationID + "' >" + data[key].Location + "</option>");
+
+                    }
+                });
+
+            },
+            error: function () {
+            }
+        });
+    }
+    getincidentsubtypes();
+    function getincidentsubtypes() {
+        jQuery.ajax({
+            method: "GET",
+            url: "@Url.Content("~/GetIncidentSubTypes/")" + jQuery('#IncidentTypeID').val(),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                jQuery("#IncidentSubTypeID").children('option:not(:first)').remove();
+                var cursubtype = '' +@Model.IncidentSubTypeID+'';
+
+                jQuery.each(data, function (key, value) {
+                    if (cursubtype == data[key].IncidentSubTypeID) {
+                        jQuery("#IncidentSubTypeID").append("<option selected value='" + data[key].IncidentSubTypeID + "' >" + data[key].IncidentSubType + "</option>");
+                    }
+                    else {
+                        jQuery("#IncidentSubTypeID").append("<option value='" + data[key].IncidentSubTypeID + "' >" + data[key].IncidentSubType + "</option>");
+                    }
+                });
+
+            },
+            error: function () {
+            }
+        });
+    }
+
+
+            function registerincident() {
+
+                if (confirm("Make sure Incident Type, Subtype, Harm Score etc are filled properly, \nOtherwise it will throw error while opening report!\nAre you sure to Register this Incident?")) {
+
+                    jQuery.ajax({
+                        method: "POST",
+                        url: "@Url.Content("~/Incidents/Register/" + Model.IncidentID + "/" + Model.EventType_SM.Prefix)",
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            window.location.reload();
+
+                            // window.location.href = "@Url.Content("~/Incidents/Details/" + Html.DisplayFor(model => model.IncidentID))";
+                        },
+                        error: function () {
+                            alert('Unable to register! ');
+                        }
+                    });
+                }
+
+
+            }
+
+            function deleteincident() {
+
+                if (confirm("Are you sure to make this Incident Invalid?")) {
+
+                    jQuery.ajax({
+                        method: "GET",
+                        url: "@Url.Content("~/Incidents/Invalid/" + Html.DisplayFor(model => model.IncidentID))",
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            window.location.href = "@Url.Content("~/Incidents")";
+                        },
+                        error: function () {
+                            alert('Unable to delete! ');
+                        }
+                    });
+                }
+            }
+
+
+
+            jQuery(document).ready(function () {
+
+
+                jQuery("#frmattachment").submit(function (e) {
+
+                    e.preventDefault();
+                    var athdata = new FormData(this);
+
+                    if (jQuery("#DocumentTypeID").val() == '' || jQuery("#attachdescription").val() == '' || jQuery("#attachfile").val() == '') {
+                        alert('Document Type / Description / File name are mandatory!');
+                    }
+                    else {
+                        jQuery.ajax({
+                            method: "POST",
+                            url: "@Url.Content("~/AddAttachment")",
+                            data: athdata,
+                            mimeTypes: "multipart/form-data",
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+                                jQuery('#DocumentTypeID').val('');
+                                jQuery('#attachdescription').val('');
+                                jQuery('#attachfile').val('');
+                                jQuery.each(data, function (key, value) {
+                                    loadAttachment(data[key].IncidentID);
+                                });
+                                jQuery('#AddAttachments').modal('toggle');
+                            },
+                            error: function () {
+                                alert("Couldn't Save, check the input values!");
+                            }
+                        });
+                    }
+                });
+
+
+                jQuery("#frmRootCauseAnalysis").submit(function (e) {
+
+                    e.preventDefault();
+                    var athdata = new FormData(this);
+
+                    jQuery.ajax({
+                        method: "POST",
+                        url: "@Url.Content("~/UpdateRootCauseAnalysis")",
+                        data: athdata,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            jQuery.each(data, function (key, value) {
+                                window.location.href = "@Url.Content("~/Incidents/Details/" + Html.DisplayFor(model => model.IncidentID))";
+                            });
+                        },
+                        error: function () {
+                            alert("Couldn't Save, check the input values!");
+                        }
+                    });
+
+                });
+
+
+
+
+                jQuery("#frmoutcome").submit(function (e) {
+
+                    e.preventDefault();
+                    var athdata = new FormData(this);
+
+                        jQuery.ajax({
+                            method: "POST",
+                            url: "@Url.Content("~/UpdateOutcome")",
+                            data: athdata,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+                                jQuery.each(data, function (key, value) {
+                                   window.location.href = "@Url.Content("~/Incidents/Details/" + Html.DisplayFor(model => model.IncidentID))";
+                                });
+                            },
+                            error: function () {
+                                alert("Couldn't Save, check the input values!");
+                            }
+                        });
+
+                });
+
+
+
+                jQuery("#frmoutcomemain").submit(function (e) {
+
+                    e.preventDefault();
+                    var athdata = new FormData(this);
+
+                    jQuery.ajax({
+                        method: "POST",
+                        url: "@Url.Content("~/UpdateOutcomeMain")",
+                        data: athdata,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            jQuery.each(data, function (key, value) {
+                                window.location.href = "@Url.Content("~/Incidents/Details/" + Html.DisplayFor(model => model.IncidentID))";
+                            });
+                        },
+                        error: function () {
+                            alert("Couldn't Save, check the input values!");
+                        }
+                    });
+
+                });
+
+
+                jQuery("#frmInvestigatorReport").submit(function (e) {
+
+                    e.preventDefault();
+                    var athdata = new FormData(this);
+
+                    jQuery.ajax({
+                        method: "POST",
+                        url: "@Url.Content("~/UpdateInvestigatorReport")",
+                        data: athdata,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            jQuery.each(data, function (key, value) {
+                                window.location.href = "@Url.Content("~/Incidents/Details/" + Html.DisplayFor(model => model.IncidentID))";
+                            });
+                        },
+                        error: function () {
+                            alert("Couldn't Save, check the input values!");
+                        }
+                    });
+
+                });
+
+
+                $("#frmRemedialAction").submit(function (e) {
+                    e.preventDefault();
+                    var athdata = new FormData(this);
+                    $.ajax({
+                        method: "POST",
+                        url: "@Url.Content("~/Incidents/UpdateRemedialAction")",
+                        data: athdata,
+                        success: function (data) {
+                            $.each(data, function (key, value) {
+                                window.location.href = "@Url.Content("~/Incidents/Details/" + Html.DisplayFor(model => model.IncidentID))";
+                            });
+                        },
+                        error: function () {
+                            alert("Couldn't Save, check the input values!");
+                        }
+                    });
+
+                });
+
+
+                jQuery("#btnInterview").click(function () {
+
+                    if (jQuery("#witnessname").val() == '' || jQuery("#witnessbranchid").val() == '' || jQuery("#witnessphone").val() == '') {
+                        alert('Name / Branch / Phone are mandatory!');
+                    }
+                    else {
+
+
+
+                        jQuery.ajax({
+                            method: "POST",
+                            url: "@Url.Content("~/AddWitness")",
+                            data: {
+                                Name: jQuery('#witnessname').val(), Email: jQuery('#witnessemail').val(), Phone: jQuery('#witnessphone').val(), BranchID: jQuery('#witnessbranchid').val(), Designation: jQuery('#witnessdesignation').val(), IncidentID: jQuery('#IncidentID').val()
+                            },
+                            success: function (data) {
+                                jQuery('#witnessname').val('');
+                                jQuery('#witnessemail').val('');
+                                jQuery('#witnessphone').val('');
+                                jQuery('#witnessbranchid').val('');
+                                jQuery('#witnessdesignation').val('');
+                                jQuery.each(data, function (key, value) {
+                                    loadwitness(data[key].IncidentID);
+                                });
+                                jQuery('#AddWitness').modal('toggle');
+
+                            },
+                            error: function () {
+                                alert("Couldn't Save, check the input values!");
+                            }
+                        });
+                    }
+                });
+
+
+                jQuery("#btnPatient").click(function () {
+
+                    if (jQuery("#patientname").val() == '' || jQuery("#patientidn").val() == '' || jQuery("#patientphone").val() == '') {
+                        alert('Name / Phone / DOB / Patient ID are mandatory!');
+                    }
+                    else {
+
+                        jQuery.ajax({
+                            method: "POST",
+                            url: "@Url.Content("~/Incidents/AddPatient")",
+                            data: {
+                                patientname: jQuery('#patientname').val(), patientphone: jQuery('#patientphone').val(), patientidn: jQuery('#patientidn').val()
+                                , patientgender: jQuery('#patientgender').val(), patientdob: jQuery('#patientdob').val(), IncidentID: @ViewBag.IncidentID
+                            },
+                            success: function (data) {
+                                jQuery('#patientname').val('');
+                                jQuery('#patientphone').val('');
+                                jQuery('#patientdob,#patientidn').val('');
+                                jQuery.each(data, function (key, value) {
+                                    loadpatient(data[key].IncidentID);
+                                });
+                                jQuery('#Addpatient').modal('toggle');
+
+                            },
+                            error: function () {
+                                alert("Couldn't Save, check the input values!");
+                            }
+                        });
+                    }
+                });
+
+
+
+            });
+
+
+            function loadOutcome() {
+                jQuery.ajax({
+                    method: "GET",
+                    url: "@Url.Content("~/ViewOutcome/")" + @Html.DisplayFor(model => model.IncidentID),
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        jQuery.each(data, function (key, value) {
+                            jQuery("#tblOutcome").html(data[key].Outcome);
+                            jQuery("#outcome").val(data[key].Outcome.split("<br>").join("\n"));
+                        });
+                    },
+                    error: function () {
+                    }
+                });
+            }
+
+
+                function loadRootCauseAnalysis() {
+                jQuery.ajax({
+                    method: "GET",
+                    url: "@Url.Content("~/ViewRootCauseAnalysis/")" + @Html.DisplayFor(model => model.IncidentID),
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        jQuery.each(data, function (key, value) {
+                            jQuery("#tblRootCauseAnalysis").html(data[key].RootCauseAnalysis);
+                            jQuery("#RootCauseAnalysis").val(data[key].RootCauseAnalysis.split("<br>").join("\n"));
+                        });
+                    },
+                    error: function () {
+                    }
+                });
+            }
+
+
+
+
+            function loadRemedialAction() {
+                jQuery.ajax({
+                    method: "GET",
+                    url: "@Url.Content("~/ViewRemedialAction/")" + @Html.DisplayFor(model => model.IncidentID),
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        jQuery.each(data, function (key, value) {
+                            jQuery("#tblRemedialAction").html(data[key].RemedialAction);
+                            jQuery("#RemedialAction").val(data[key].RemedialAction.split("<br>").join("\n"));
+                        });
+                    },
+                    error: function () {
+                    }
+                });
+            }
+
+            function loadInvestigatorReport() {
+                var strg = '';
+                jQuery.ajax({
+                    method: "GET",
+                    url: "@Url.Content("~/ViewInvestigatorReport/")" + @Html.DisplayFor(model => model.IncidentID),
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        jQuery.each(data, function (key, value) {
+
+                            if (data[key].InvestigatorReport != null) {
+                                strg = data[key].InvestigatorReport;
+                            }
+                            if (data[key].InvestigationConclusion != null) {
+                                strg += '<br><br><b>Conclusion:</b><br>' + data[key].InvestigationConclusion;
+                            }
+                            jQuery("#tblInvestigatorReport").html(strg);
+                            jQuery("#InvestigatorReport").val(data[key].InvestigatorReport.split("<br>").join("\n"));
+                            jQuery("#InvestigationConclusion").val(data[key].InvestigationConclusion.split("<br>").join("\n"));
+                        });
+                    },
+                    error: function () {
+                    }
+                });
+            }
+
+
+
+            function delattachment(IncidentAttachmentID, IncidentID) {
+                jQuery.ajax({
+                    method: "GET",
+                    url: "@Url.Content("~/DeleteAttachment/")" + IncidentAttachmentID + "/" + IncidentID,
+                    success: function (data) {
+
+                        loadAttachment(@Html.DisplayFor(model => model.IncidentID));
+
+                    },
+                    error: function () {
+                    }
+                });
+
+            }
+
+
+
+            function loadAttachmentadmin(IncidentID) {
+                jQuery.ajax({
+                    method: "GET",
+                    url: "@Url.Content("~/ViewAttachment/")" + IncidentID,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        jQuery("#tblAttachments").children().remove();
+
+                        var str = "<table  class='table table-bordered col-md-12' >";
+                        str += "<tr><th  class='col-md-2'>Document Type</th><th>Description</th><th>File Name</th><th  class='col-md-1'>Action</th></tr>";
+                        jQuery.each(data, function (key, value) {
+                            str += "<tr>" + "<td>" + data[key].DocumentType + "</td><td>" + data[key].Description + "</td><td><a href='@Url.Content("~/Documents/Incidents/")" + data[key].IncidentID + "/" + data[key].ActualFileName + "' target='_blank'>" + data[key].FileName + "</a></td><td ><i class='fa fa-trash' style='color:red;cursor:pointer' onclick=delattachment(" + data[key].IncidentDocumentID + "," + data[key].IncidentID + ")></i></td></tr>";
+                        });
+                        str += "</table>"
+                        if (data == '') {
+                        }
+                        else {
+                            jQuery("#tblAttachments").append(str);
+                        }
+
+                    },
+                    error: function () {
+                    }
+                });
+            }
+
+
+
+                function loadAttachment(IncidentID) {
+                jQuery.ajax({
+                    method: "GET",
+                    url: "@Url.Content("~/ViewAttachment/")" + IncidentID,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        jQuery("#tblAttachments").children().remove();
+
+                        var str = "<table  class='table table-bordered col-md-12' >";
+                        str += "<tr><th  class='col-md-2'>Document Type</th><th>Description</th><th>File Name</th></tr>";
+                        jQuery.each(data, function (key, value) {
+                            str += "<tr>" + "<td>" + data[key].DocumentType + "</td><td>" + data[key].Description + "</td><td><a href='@Url.Content("~/Documents/Incidents/")" + data[key].IncidentID + "/" + data[key].ActualFileName + "' target='_blank'>" + data[key].FileName + "</a></td></tr>";
+                        });
+                        str += "</table>"
+                        if (data == '') {
+                        }
+                        else {
+                            jQuery("#tblAttachments").append(str);
+                        }
+
+                    },
+                    error: function () {
+                    }
+                });
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                function loadpeopleadmin() {
+                    jQuery.ajax({
+                        method: "GET",
+                        url: "@Url.Content("~/ViewPeople/")" + @ViewBag.IncidentID,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            jQuery("#tblpeoplerelated").children().remove();
+
+                            var str = "<table   class='table table-bordered col-md-12'  >";
+                            str += "<tr><th class='col-md-2'>Incident Relation</th><th class='col-md-2'>People Involved</th><th>Details</th><th>Action</th></tr>";
+                            jQuery.each(data, function (key, value) {
+                                if (data[key].IncidentRelation != 'Vicitim') {
+                                    str += "<tr><td>" + data[key].IncidentRelation + "</td><td>" + data[key].IncidentPeopleInvolved + "</td>";
+                                    str += "<td>";
+                                    str += "<b>Name: </b>" + data[key].Name;
+                                    str += "&nbsp;&nbsp;<b>-Mobile: </b>" + data[key].Mobile;
+                                    if (data[key].UserID != null) {
+                                        if (data[key].IdentityNo != null) {
+                                            str += "&nbsp;&nbsp;<b>-License No.: </b>" + data[key].IdentityNo;
+                                        }
+                                    }
+                                    else {
+                                        if (data[key].IdentityNo != null) {
+                                            str += "&nbsp;&nbsp;<b>-Identity No.: </b>" + data[key].IdentityNo;
+                                            str += "&nbsp;&nbsp;<b>-Reg No.: </b>" + data[key].RegNo;
+                                            str += "&nbsp;&nbsp;<b>-CVR No.: </b>" + data[key].CVRNo;
+                                        }
+                                    }
+                                    str += "</td><td><i class='fa fa-trash' style='color:red;cursor:pointer' onclick=delpeople(" + data[key].IncidentPeopleID + "," + data[key].IncidentID + ")></i></td></tr>";
+                                }
+                                else {
+
+
+                                    str += "<tr><td>" + data[key].IncidentRelation + "</td><td>" + data[key].IncidentPeopleInvolved + "</td>";
+                                    str += "<td>";
+                                    str += "<b>Name: </b>" + data[key].Name;
+                                    str += "&nbsp;&nbsp;<b>-Mobile: </b>" + data[key].Mobile;
+                                    if (data[key].UserID != null) {
+                                        str += "&nbsp;&nbsp;<b>-License No.: </b>" + data[key].IdentityNo;
+                                        str += "&nbsp;&nbsp;<b>-Reg No.: </b>" + data[key].RegNo;
+                                    str += "&nbsp;&nbsp;<b>-CVR No.: </b>" + data[key].CVRNo;
+                                    }
+                                    else {
+                                        str += "&nbsp;&nbsp;<b>-Gender: </b>" + data[key].Gender;
+                                        str += "&nbsp;&nbsp;<b>-Date of Birth: </b>" + ParseJsonDateOnly(data[key].DateOfBirth);
+                                        str += "&nbsp;&nbsp;<b>-Identity No.: </b>" + data[key].IdentityNo;
+                                        if (data[key].IsPatientInjured == true) {
+                                            str += "&nbsp;&nbsp;<b>-Is patient injured?: </b> Yes";
+                                        }
+                                        else {
+                                            str += "&nbsp;&nbsp;<b>-Is patient injured?: </b> No";
+                                        }
+                                    }
+                                    str += "</td><td><i class='fa fa-trash' style='color:red;cursor:pointer' onclick=delpeople(" + data[key].IncidentPeopleID + "," + data[key].IncidentID + ")></i></td></tr>";
+
+
+
+
+                                }
+                            });
+
+                            str += "</table>"
+
+                            if (data == '') {
+                            }
+                            else {
+                                jQuery("#tblpeoplerelated").append(str);
+                            }
+
+
+                        },
+                        error: function () {
+                        }
+                    });
+                }
+
+
+            function loadpeople() {
+                jQuery.ajax({
+                    method: "GET",
+                    url: "@Url.Content("~/ViewPeople/")" + @ViewBag.IncidentID,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        jQuery("#tblpeoplerelated").children().remove();
+                        var str = "<table   class='table table-bordered col-md-12'  >";
+                        str += "<tr><th class='col-md-2'>Incident Relation</th><th class='col-md-2'>People Involved</th><th>Details</th></tr>";
+                        jQuery.each(data, function (key, value) {
+                            if (data[key].IncidentRelation != 'Vicitim') {
+                                str += "<tr><td>" + data[key].IncidentRelation + "</td><td>" + data[key].IncidentPeopleInvolved + "</td>";
+                                str += "<td>";
+                                str += "<b>Name: </b>" + data[key].Name;
+                                str += "&nbsp;&nbsp;<b>-Mobile: </b>" + data[key].Mobile;
+                                if (data[key].UserID != null) {
+                                    str += "&nbsp;&nbsp;<b>-License No.: </b>" + data[key].IdentityNo;
+                                }
+
+                                str += "</td></tr>";
+                            }
+                            else {
+
+                                str += "<tr><td>" + data[key].IncidentRelation + "</td><td>" + data[key].IncidentPeopleInvolved + "</td>";
+                                str += "<td>";
+                                str += "<b>Name: </b>" + data[key].Name;
+                                str += "&nbsp;&nbsp;<b>-Mobile: </b>" + data[key].Mobile;
+                                if (data[key].UserID != null) {
+                                    str += "&nbsp;&nbsp;<b>-License No.: </b>" + data[key].IdentityNo;
+                                    str += "&nbsp;&nbsp;<b>-Reg No.: </b>" + data[key].RegNo;
+                                    str += "&nbsp;&nbsp;<b>-CVR No.: </b>" + data[key].CVRNo;
+                                }
+                                else {
+                                    str += "&nbsp;&nbsp;<b>-Gender: </b>" + data[key].Gender;
+                                    str += "&nbsp;&nbsp;<b>-Date of Birth: </b>" + ParseJsonDateOnly(data[key].DateOfBirth);
+                                    str += "&nbsp;&nbsp;<b>-Identity No.: </b>" + data[key].IdentityNo;
+                                    str += "&nbsp;&nbsp;<b>-Reg No.: </b>" + data[key].RegNo;
+                                    str += "&nbsp;&nbsp;<b>-CVR No.: </b>" + data[key].CVRNo;
+                                    if (data[key].IsPatientInjured == true) {
+                                        str += "&nbsp;&nbsp;<b>-Is patient injured?: </b> Yes";
+                                    }
+                                    else {
+                                        str += "&nbsp;&nbsp;<b>-Is patient injured?: </b> No";
+                                    }
+                                }
+                                str += "</td></tr>";
+
+
+                            }
+                        });
+                        str += "</table>"
+                        if (data == '') {
+                        }
+                        else {
+                            jQuery("#tblpeoplerelated").append(str);
+                        }
+                    },
+                    error: function () {
+                    }
+                });
+            }
+
+                function delpeople(IncidentPeopleID, IncidentID) {
+
+                    if (confirm("Are you sure to delete?")) {
+
+                        jQuery.ajax({
+                            method: "GET",
+                            url: "@Url.Content("~/DeletePeople/")" + IncidentPeopleID + "/" + IncidentID,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+
+                                window.location.href = "@Url.Content("~/Incidents/Details/" + Html.DisplayFor(model => model.IncidentID))";
+
+                            },
+                            error: function () {
+                            }
+                        });
+                    }
+                }
+
+
+
+
+
+
+
+
+    function loadinterviewadmin() {
+        jQuery.ajax({
+            method: "GET",
+            url: "@Url.Content("~/ViewInterviews/")" + @ViewBag.IncidentID,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                jQuery("#tblinterviews").children().remove();
+
+                var str = "<table class='table table-bordered col-md-12'>";
+                str += "<tr><th>Interviewer</th><th>Interviewee</th><th>Details</th><th class='col-md-2'>Interview Date</th><th class='col-md-2'>Created On</th><th class='col-md-1'>Action</th></tr>";
+                jQuery.each(data, function (key, value) {
+                    str += "<tr>" + "<td>" + data[key].Interviewer + "</td><td>" + data[key].Interviewee + "</td><td>" + data[key].Details + "</td><td>" + ParseJsonDate2(data[key].InterviewDate) + "</td><td>" + ParseJsonDate(data[key].CreatedOn) + "</td><td><i class='fa fa-trash' style='color:red;cursor:pointer' onclick=delinterview(" + data[key].IncidentInterviewID + "," + data[key].IncidentID + ")></i></td></tr>";
+                });
+                str += "</table>"
+
+                if (data == '') {
+                }
+                else {
+                    jQuery("#tblinterviews").append(str);
+                }
+            },
+            error: function () {
+            }
+        });
+    }
+
+
+
+
+     function loadpatient(IncidentID) {
+
+
+         jQuery.ajax({
+             method: "GET",
+             url: "@Url.Content("~/ViewPatients/")" + IncidentID,
+             contentType: false,
+             cache: false,
+             processData: false,
+             success: function (data) {
+                 jQuery("#tblpatient").children().remove();
+                 var str = "<table   class='table table-bordered col-md-12'  >";
+                 str += "<tr><th>Name</th><th>Patient ID</th><th>Gender</th><th>DOB</th><th>Phone</th></tr>";
+                 jQuery.each(data, function (key, value) {
+                     str += "<tr><td>" + data[key].Name + "</td><td>" + data[key].PatientIdn + "</td><td>" + data[key].Gender + "</td><td>" + ParseJsonDate(data[key].DOB) + "</td><td>" + data[key].Phone + "</td></tr>";
+                 });
+                 str += "</table>"
+                 if (data == '') {
+                 }
+                 else {
+                     jQuery("#tblpatient").append(str);
+                 }
+             },
+             error: function () {
+             }
+         });
+     }
+
+
+    function loadinterview() {
+        jQuery.ajax({
+            method: "GET",
+            url: "@Url.Content("~/ViewInterviews/")" + @ViewBag.IncidentID,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                jQuery("#tblinterviews").children().remove();
+
+                var str = "<table class='table table-bordered col-md-12'>";
+                str += "<tr><th>Interviewer</th><th>Interviewee</th><th>Details</th><th class='col-md-2'>Interview Date</th><th class='col-md-2'>Created On</th></tr>";
+                jQuery.each(data, function (key, value) {
+                    str += "<tr>" + "<td>" + data[key].Interviewer + "</td><td>" + data[key].Interviewee + "</td><td>" + data[key].Details + "</td><td>" + ParseJsonDate(data[key].InterviewDate) + "</td><td>" + ParseJsonDate(data[key].CreatedOn) + "</td></tr>";
+                });
+                str += "</table>"
+
+                if (data == '') {
+                }
+                else {
+                    jQuery("#tblinterviews").append(str);
+                }
+            },
+            error: function () {
+            }
+        });
+    }
+
+
+
+
+
+                       function delinterview(IncidentInterviewID, IncidentID) {
+                           jQuery.ajax({
+                               method: "GET",
+                               url: "@Url.Content("~/DeleteInterviews/")" + IncidentInterviewID + "/" + IncidentID,
+                               contentType: false,
+                               cache: false,
+                               processData: false,
+                               success: function (data) {
+
+                                   loadinterview();
+
+                               },
+                               error: function () {
+                               }
+                           });
+
+                       }
+
+
+
+    function ParseJsonDate(dateString) {
+        var milli = dateString.replace(/\/Date\((-?\d+)\)\//, '$1');
+        var date = new Date(parseInt(milli));
+        var date2 = String(date).substring(0, 16);
+        return date2;
+    }
+
+        function ParseJsonDate2(dateString) {
+        var milli = dateString.replace(/\/Date\((-?\d+)\)\//, '$1');
+        var date = new Date(parseInt(milli));
+        var date2 = String(date).substring(0, 25);
+        return date2;
+    }
+
+                       function ParseJsonDateOnly(dateString) {
+                           var milli = dateString.replace(/\/Date\((-?\d+)\)\//, '$1');
+                           var date = new Date(parseInt(milli));
+                           var date2 = String(date).substring(3, 16);
+                           return date2;
+                       }
+</script>

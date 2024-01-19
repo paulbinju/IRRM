@@ -1,0 +1,84 @@
+﻿<link href="@Url.Content("~/assets/css/select2.css")" rel="stylesheet" />
+<script src="@Url.Content("~/assets/js/select2.js")"></script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery.noConflict();
+        jQuery('.searchableselect').select2({
+            tags: true
+        });
+    });
+</script>
+
+@using (Html.BeginForm("Index", "Documents/Index"))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+
+                    <div class="col-md-4">
+                        <div class="control-label"><b>Title</b></div>
+                        <input type="text" name="Title" class="form-control" value="@Request["Title"]"/>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Expiry From</b></div>
+                        <input type="date" name="ExpiryFrom" class="form-control" value="@Request["ExpiryFrom"]" />
+                    </div>
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Expiry Upto</b></div>
+                        <input type="date" name="ExpiryTo" class="form-control" value="@Request["ExpiryTo"]" />
+                    </div>
+
+
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Category</b></div>
+                        <select name="DocCategoryID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.DocCategoryID)
+                            {
+                                <option @(itp.DocCategoryID == Convert.ToInt32(Request["DocCategoryID"]) ? "selected" : "") value="@itp.DocCategoryID">@itp.DocCategory</option>
+                            }
+                        </select>
+
+                    </div>
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Sub Category</b></div>
+                        <select name="DocSubCategoryID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.DocSubCategoryID)
+                            {
+                                <option @(itp.DocSubCategoryID == Convert.ToInt32(Request["DocSubCategoryID"]) ? "selected" : "") value="@itp.DocSubCategoryID">@itp.DocSubCategory</option>
+                            }
+                        </select>
+
+                    </div>
+
+
+                    <br style="clear:both" />
+                    <br />
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Status</b></div>
+                        <select name="CurrentStatus" class="form-control">
+                            <option value="">Select</option>
+                            <option @(Request["CurrentStatus"]== "Registered" ? "selected":"") value="Registered">Registered</option>
+                            <option @(Request["CurrentStatus"]== "Active" ? "selected":"")  value="Active">Active</option>
+                        </select>
+
+                    </div>
+                    <div class="control-label"><b>&nbsp;&nbsp;</b></div>
+                    <div class="col-md-1">
+                        <input type="submit" class="btn btn-danger" value="SEARCH" />
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-warning" href="@Url.Content("~/Documents/Index")">CLEAR</a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

@@ -1,0 +1,936 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8B1FA323-ED4E-4849-88EB-055DF5B57C0D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IRRM</RootNamespace>
+    <AssemblyName>IRRM</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Branch_MController.cs" />
+    <Compile Include="Controllers\Department_MController.cs" />
+    <Compile Include="Controllers\DocumentAccessGroup_MController.cs" />
+    <Compile Include="Controllers\DocumentCategory_MController.cs" />
+    <Compile Include="Controllers\DocumentCopyLocation_TController.cs" />
+    <Compile Include="Controllers\DocumentsController.cs" />
+    <Compile Include="Controllers\DocumentStakeholder_MController.cs" />
+    <Compile Include="Controllers\DocumentStatus_TController.cs" />
+    <Compile Include="Controllers\DocumentSubCategory_MController.cs" />
+    <Compile Include="Controllers\DocumentType_SMController.cs" />
+    <Compile Include="Controllers\DynamicControlsController.cs" />
+    <Compile Include="Controllers\DynamicControlTypesController.cs" />
+    <Compile Include="Controllers\DynamicControlValuesController.cs" />
+    <Compile Include="Controllers\DynamicFormsController.cs" />
+    <Compile Include="Controllers\DynamicForm_ControlController.cs" />
+    <Compile Include="Controllers\DynamicReports_MController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncidentFeedbackType_MController.cs" />
+    <Compile Include="Controllers\IncidentHarmGroup_MController.cs" />
+    <Compile Include="Controllers\IncidentHarmScore_MController.cs" />
+    <Compile Include="Controllers\IncidentMainOutcome_MController.cs" />
+    <Compile Include="Controllers\IncidentMainRootCause_MController.cs" />
+    <Compile Include="Controllers\IncidentPeopleInvolved_MController.cs" />
+    <Compile Include="Controllers\IncidentPriorities_MController.cs" />
+    <Compile Include="Controllers\IncidentRelation_MController.cs" />
+    <Compile Include="Controllers\IncidentsController.cs" />
+    <Compile Include="Controllers\IncidentStatus_MController.cs" />
+    <Compile Include="Controllers\IncidentSubOutcome_MController.cs" />
+    <Compile Include="Controllers\IncidentSubRootCause_MController.cs" />
+    <Compile Include="Controllers\IncidentSubTypes_MController.cs" />
+    <Compile Include="Controllers\IncidentTypes_MController.cs" />
+    <Compile Include="Controllers\Incident_Interview_TController.cs" />
+    <Compile Include="Controllers\Incident_People_TController.cs" />
+    <Compile Include="Controllers\Location_MController.cs" />
+    <Compile Include="Controllers\RiskAssessors_TController.cs" />
+    <Compile Include="Controllers\RiskCategory_MController.cs" />
+    <Compile Include="Controllers\RiskCost_MController.cs" />
+    <Compile Include="Controllers\RiskDescriptor_MController.cs" />
+    <Compile Include="Controllers\RiskFrequencyScore_MController.cs" />
+    <Compile Include="Controllers\RiskLevel_MController.cs" />
+    <Compile Include="Controllers\RiskProbability_MController.cs" />
+    <Compile Include="Controllers\RiskRegistersController.cs" />
+    <Compile Include="Controllers\RiskScore_MController.cs" />
+    <Compile Include="Controllers\RiskSeverity_MController.cs" />
+    <Compile Include="Controllers\RiskStatus_MController.cs" />
+    <Compile Include="Controllers\RiskStrategy_MController.cs" />
+    <Compile Include="Controllers\TaskCategory_MController.cs" />
+    <Compile Include="Controllers\TaskPriorities_MController.cs" />
+    <Compile Include="Controllers\TaskRelation_MController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\TaskStatus_MController.cs" />
+    <Compile Include="Controllers\TaskSubCategory_MController.cs" />
+    <Compile Include="Controllers\Task_People_TController.cs" />
+    <Compile Include="Controllers\UserRole_SMController.cs" />
+    <Compile Include="Controllers\Users_MController.cs" />
+    <Compile Include="Controllers\Utility.cs" />
+    <Compile Include="Core\Utility.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AnswerType_SM.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Branch_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModel.cs" />
+    <Compile Include="Models\Department_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Department_M2.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Document.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentAccessGroupUsers_V.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentAccessGroup_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentAccess_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentCategory_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentCopyDept_V.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentCopyLocation_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentStakeholder_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentStatus_SM.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentStatus_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentSubCategory_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Documents_V.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentType_SM.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentViewers_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentViewers_V.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicControl.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicControlType.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicControlValue.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicForm.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicForm_Control.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicReports_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventType_SM.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Incident.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentDocument_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentFeedbackType_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentHarmGroup_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentHarmScore_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentHistory.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentMainOutcome_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentMainRootCause_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentPeopleInvolved_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentPriorities_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentRegistery_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentRelation_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentStatus_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentSubOutcomeAnswerChoice_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentSubOutcomeAnswer_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentSubOutcome_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentSubRootCauseAnswerChoice_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentSubRootCauseAnswer_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentSubRootCause_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentSubTypes_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Incidents_MainOutcome_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Incidents_MainRootCause_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IncidentTypes_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Incident_Comments.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Incident_Interview_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Incident_People_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Incident_Recommendation_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Incident_Status_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IRRM.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IRRM.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IRRM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IRRM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IRRM.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Location_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Log.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PeopleUser_V.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskAssessors_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskAssessorUser_V.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskCategory_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskCost_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskDescriptor_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskFrequencyScore_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskKeyStatusDates_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskKeyStatus_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskLevel_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskLevel_M2.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskProbability_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskRegister.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskScore_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskSeverity_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskStatus_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskStrategy_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiskTemplate_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Task.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskCategory_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskComment_V.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskDocument_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskIndex_V.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskPeopleInvolved_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskPriorities_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskRelation_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskStatusUser_V.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskStatus_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskSubCategory_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Task_Comments.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Task_People_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Task_Status_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Task_T.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TemplateCategory_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserRole_SM.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Users_M.cs">
+      <DependentUpon>IRRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Models\IRRM.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IRRM.edmx</DependentUpon>
+      <LastGenOutput>IRRM.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\IRRM.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IRRM.edmx</DependentUpon>
+      <LastGenOutput>IRRM.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="Models\IRRM.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>IRRM.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\IRRM.edmx.diagram">
+      <DependentUpon>IRRM.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\dboperations.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\DynamicForms\Create.cshtml" />
+    <Content Include="Views\DynamicForms\Delete.cshtml" />
+    <Content Include="Views\DynamicForms\Details.cshtml" />
+    <Content Include="Views\DynamicForms\Edit.cshtml" />
+    <Content Include="Views\DynamicForms\Index.cshtml" />
+    <Content Include="Views\DynamicControlTypes\Create.cshtml" />
+    <Content Include="Views\DynamicControlTypes\Delete.cshtml" />
+    <Content Include="Views\DynamicControlTypes\Details.cshtml" />
+    <Content Include="Views\DynamicControlTypes\Edit.cshtml" />
+    <Content Include="Views\DynamicControlTypes\Index.cshtml" />
+    <Content Include="Views\DynamicControls\Create.cshtml" />
+    <Content Include="Views\DynamicControls\Delete.cshtml" />
+    <Content Include="Views\DynamicControls\Details.cshtml" />
+    <Content Include="Views\DynamicControls\Edit.cshtml" />
+    <Content Include="Views\DynamicControls\Index.cshtml" />
+    <Content Include="Views\DynamicForm_Control\Create.cshtml" />
+    <Content Include="Views\DynamicForm_Control\Delete.cshtml" />
+    <Content Include="Views\DynamicForm_Control\Details.cshtml" />
+    <Content Include="Views\DynamicForm_Control\Edit.cshtml" />
+    <Content Include="Views\DynamicForm_Control\Index.cshtml" />
+    <Content Include="Views\DynamicControlValues\Create.cshtml" />
+    <Content Include="Views\DynamicControlValues\Delete.cshtml" />
+    <Content Include="Views\DynamicControlValues\Details.cshtml" />
+    <Content Include="Views\DynamicControlValues\Edit.cshtml" />
+    <Content Include="Views\DynamicControlValues\Index.cshtml" />
+    <Content Include="Views\DynamicForms\Create - Copy.cshtml" />
+    <Content Include="Views\IncidentTypes_M\Create.cshtml" />
+    <Content Include="Views\IncidentTypes_M\Delete.cshtml" />
+    <Content Include="Views\IncidentTypes_M\Edit.cshtml" />
+    <Content Include="Views\IncidentTypes_M\Index.cshtml" />
+    <Content Include="Views\IncidentPriorities_M\Create.cshtml" />
+    <Content Include="Views\IncidentPriorities_M\Delete.cshtml" />
+    <Content Include="Views\IncidentPriorities_M\Details.cshtml" />
+    <Content Include="Views\IncidentPriorities_M\Edit.cshtml" />
+    <Content Include="Views\IncidentPriorities_M\Index.cshtml" />
+    <Content Include="Views\Shared\_header.cshtml" />
+    <Content Include="Views\Shared\_sidemenu.cshtml" />
+    <Content Include="Views\IncidentMainRootCause_M\Create.cshtml" />
+    <Content Include="Views\IncidentMainRootCause_M\Delete.cshtml" />
+    <Content Include="Views\IncidentMainRootCause_M\Details.cshtml" />
+    <Content Include="Views\IncidentMainRootCause_M\Edit.cshtml" />
+    <Content Include="Views\IncidentMainRootCause_M\Index.cshtml" />
+    <Content Include="Views\IncidentSubRootCause_M\Create.cshtml" />
+    <Content Include="Views\IncidentSubRootCause_M\Delete.cshtml" />
+    <Content Include="Views\IncidentSubRootCause_M\Details.cshtml" />
+    <Content Include="Views\IncidentSubRootCause_M\Edit.cshtml" />
+    <Content Include="Views\IncidentSubRootCause_M\Index.cshtml" />
+    <Content Include="Views\IncidentStatus_M\Create.cshtml" />
+    <Content Include="Views\IncidentStatus_M\Delete.cshtml" />
+    <Content Include="Views\IncidentStatus_M\Details.cshtml" />
+    <Content Include="Views\IncidentStatus_M\Edit.cshtml" />
+    <Content Include="Views\IncidentStatus_M\Index.cshtml" />
+    <Content Include="Views\IncidentRelation_M\Create.cshtml" />
+    <Content Include="Views\IncidentRelation_M\Delete.cshtml" />
+    <Content Include="Views\IncidentRelation_M\Details.cshtml" />
+    <Content Include="Views\IncidentRelation_M\Edit.cshtml" />
+    <Content Include="Views\IncidentRelation_M\Index.cshtml" />
+    <Content Include="Views\IncidentPeopleInvolved_M\Create.cshtml" />
+    <Content Include="Views\IncidentPeopleInvolved_M\Delete.cshtml" />
+    <Content Include="Views\IncidentPeopleInvolved_M\Details.cshtml" />
+    <Content Include="Views\IncidentPeopleInvolved_M\Edit.cshtml" />
+    <Content Include="Views\IncidentPeopleInvolved_M\Index.cshtml" />
+    <Content Include="Views\IncidentHarmGroup_M\Create.cshtml" />
+    <Content Include="Views\IncidentHarmGroup_M\Delete.cshtml" />
+    <Content Include="Views\IncidentHarmGroup_M\Details.cshtml" />
+    <Content Include="Views\IncidentHarmGroup_M\Edit.cshtml" />
+    <Content Include="Views\IncidentHarmGroup_M\Index.cshtml" />
+    <Content Include="Views\IncidentHarmScore_M\Create.cshtml" />
+    <Content Include="Views\IncidentHarmScore_M\Delete.cshtml" />
+    <Content Include="Views\IncidentHarmScore_M\Details.cshtml" />
+    <Content Include="Views\IncidentHarmScore_M\Edit.cshtml" />
+    <Content Include="Views\IncidentHarmScore_M\Index.cshtml" />
+    <Content Include="Views\RiskCategory_M\Create.cshtml" />
+    <Content Include="Views\RiskCategory_M\Delete.cshtml" />
+    <Content Include="Views\RiskCategory_M\Details.cshtml" />
+    <Content Include="Views\RiskCategory_M\Edit.cshtml" />
+    <Content Include="Views\RiskCategory_M\Index.cshtml" />
+    <Content Include="Views\RiskCost_M\Create.cshtml" />
+    <Content Include="Views\RiskCost_M\Delete.cshtml" />
+    <Content Include="Views\RiskCost_M\Edit.cshtml" />
+    <Content Include="Views\RiskCost_M\Index.cshtml" />
+    <Content Include="Views\RiskProbability_M22\Create.cshtml" />
+    <Content Include="Views\RiskProbability_M22\Delete.cshtml" />
+    <Content Include="Views\RiskProbability_M22\Edit.cshtml" />
+    <Content Include="Views\RiskProbability_M22\Index.cshtml" />
+    <Content Include="Views\RiskRating_M\Create.cshtml" />
+    <Content Include="Views\RiskRating_M\Delete.cshtml" />
+    <Content Include="Views\RiskRating_M\Details.cshtml" />
+    <Content Include="Views\RiskRating_M\Edit.cshtml" />
+    <Content Include="Views\RiskRating_M\Index.cshtml" />
+    <Content Include="Views\RiskStatus_M\Create.cshtml" />
+    <Content Include="Views\RiskStatus_M\Delete.cshtml" />
+    <Content Include="Views\RiskStatus_M\Details.cshtml" />
+    <Content Include="Views\RiskStatus_M\Edit.cshtml" />
+    <Content Include="Views\RiskStatus_M\Index.cshtml" />
+    <Content Include="Views\RiskStrategy_M\Create.cshtml" />
+    <Content Include="Views\RiskStrategy_M\Delete.cshtml" />
+    <Content Include="Views\RiskStrategy_M\Details.cshtml" />
+    <Content Include="Views\RiskStrategy_M\Edit.cshtml" />
+    <Content Include="Views\RiskStrategy_M\Index.cshtml" />
+    <Content Include="Views\Location_M\Create.cshtml" />
+    <Content Include="Views\Location_M\Delete.cshtml" />
+    <Content Include="Views\Location_M\Edit.cshtml" />
+    <Content Include="Views\Location_M\Index.cshtml" />
+    <Content Include="Views\IncidentFeedbackType_M\Create.cshtml" />
+    <Content Include="Views\IncidentFeedbackType_M\Delete.cshtml" />
+    <Content Include="Views\IncidentFeedbackType_M\Edit.cshtml" />
+    <Content Include="Views\IncidentFeedbackType_M\Index.cshtml" />
+    <Content Include="Views\Department_M22\Create.cshtml" />
+    <Content Include="Views\Department_M22\Delete.cshtml" />
+    <Content Include="Views\Department_M22\Edit.cshtml" />
+    <Content Include="Views\Department_M22\Index.cshtml" />
+    <Content Include="Views\Users_M22\Create.cshtml" />
+    <Content Include="Views\Users_M22\Delete.cshtml" />
+    <Content Include="Views\Users_M22\Edit.cshtml" />
+    <Content Include="Views\Users_M22\Index.cshtml" />
+    <Content Include="Views\IncidentSubTypes_M\Create.cshtml" />
+    <Content Include="Views\IncidentSubTypes_M\Delete.cshtml" />
+    <Content Include="Views\IncidentSubTypes_M\Edit.cshtml" />
+    <Content Include="Views\IncidentSubTypes_M\Index.cshtml" />
+    <Content Include="Views\RiskDescriptor_M\Create.cshtml" />
+    <Content Include="Views\RiskDescriptor_M\Delete.cshtml" />
+    <Content Include="Views\RiskDescriptor_M\Edit.cshtml" />
+    <Content Include="Views\RiskDescriptor_M\Index.cshtml" />
+    <Content Include="Views\RiskScore_M\Create.cshtml" />
+    <Content Include="Views\RiskScore_M\Delete.cshtml" />
+    <Content Include="Views\RiskScore_M\Edit.cshtml" />
+    <Content Include="Views\RiskScore_M\Index.cshtml" />
+    <Content Include="Views\RiskSeverity_M\Create.cshtml" />
+    <Content Include="Views\RiskSeverity_M\Delete.cshtml" />
+    <Content Include="Views\RiskSeverity_M\Edit.cshtml" />
+    <Content Include="Views\RiskSeverity_M\Index.cshtml" />
+    <Content Include="Views\RiskFrequencyScore_M\Create.cshtml" />
+    <Content Include="Views\RiskFrequencyScore_M\Delete.cshtml" />
+    <Content Include="Views\RiskFrequencyScore_M\Edit.cshtml" />
+    <Content Include="Views\RiskFrequencyScore_M\Index.cshtml" />
+    <Content Include="Views\RiskProbability_M\Create.cshtml" />
+    <Content Include="Views\RiskProbability_M\Delete.cshtml" />
+    <Content Include="Views\RiskProbability_M\Edit.cshtml" />
+    <Content Include="Views\RiskProbability_M\Index.cshtml" />
+    <Content Include="Views\Branch_M\Create.cshtml" />
+    <Content Include="Views\Branch_M\Delete.cshtml" />
+    <Content Include="Views\Branch_M\Edit.cshtml" />
+    <Content Include="Views\Branch_M\Index.cshtml" />
+    <Content Include="Views\Users_M\Create.cshtml" />
+    <Content Include="Views\Users_M\Delete.cshtml" />
+    <Content Include="Views\Users_M\Edit.cshtml" />
+    <Content Include="Views\Users_M\Index.cshtml" />
+    <Content Include="Views\Department_M\Create.cshtml" />
+    <Content Include="Views\Department_M\Delete.cshtml" />
+    <Content Include="Views\Department_M\Edit.cshtml" />
+    <Content Include="Views\Department_M\Index.cshtml" />
+    <Content Include="Views\Incidents2\Create.cshtml" />
+    <Content Include="Views\Incidents2\Delete.cshtml" />
+    <Content Include="Views\Incidents2\Details.cshtml" />
+    <Content Include="Views\Incidents2\Edit.cshtml" />
+    <Content Include="Views\Incidents2\Index.cshtml" />
+    <Content Include="Views\Incidents\Create.cshtml" />
+    <Content Include="Views\Incidents\Delete.cshtml" />
+    <Content Include="Views\Incidents\Details.cshtml" />
+    <Content Include="Views\Incidents\Edit.cshtml" />
+    <Content Include="Views\Incidents\Index2.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Incidents\Index.cshtml" />
+    <Content Include="Views\RiskLevel_M\Create.cshtml" />
+    <Content Include="Views\RiskLevel_M\Delete.cshtml" />
+    <Content Include="Views\RiskLevel_M\Details.cshtml" />
+    <Content Include="Views\RiskLevel_M\Edit.cshtml" />
+    <Content Include="Views\RiskLevel_M\Index.cshtml" />
+    <Content Include="Views\Incidents\Success.cshtml" />
+    <Content Include="Views\Incident_People_T\Create.cshtml" />
+    <Content Include="Views\Incident_People_T\Delete.cshtml" />
+    <Content Include="Views\Incident_People_T\Details.cshtml" />
+    <Content Include="Views\Incident_People_T\Edit.cshtml" />
+    <Content Include="Views\Incident_People_T\Index.cshtml" />
+    <Content Include="Views\Incident_Interview_T\Create.cshtml" />
+    <Content Include="Views\Incident_Interview_T\Delete.cshtml" />
+    <Content Include="Views\Incident_Interview_T\Details.cshtml" />
+    <Content Include="Views\Incident_Interview_T\Edit.cshtml" />
+    <Content Include="Views\Incident_Interview_T\Index.cshtml" />
+    <Content Include="Views\UserRole_SM\Create.cshtml" />
+    <Content Include="Views\UserRole_SM\Delete.cshtml" />
+    <Content Include="Views\UserRole_SM\Details.cshtml" />
+    <Content Include="Views\UserRole_SM\Edit.cshtml" />
+    <Content Include="Views\UserRole_SM\Index.cshtml" />
+    <Content Include="Views\Home\MyAccount.cshtml" />
+    <Content Include="Views\DocumentType_SM\Create.cshtml" />
+    <Content Include="Views\DocumentType_SM\Delete.cshtml" />
+    <Content Include="Views\DocumentType_SM\Details.cshtml" />
+    <Content Include="Views\DocumentType_SM\Edit.cshtml" />
+    <Content Include="Views\DocumentType_SM\Index.cshtml" />
+    <Content Include="Views\Incidents\Report.cshtml" />
+    <Content Include="Views\Incidents\SearchPartial.cshtml" />
+    <Content Include="Views\Incidents\Search.cshtml" />
+    <Content Include="Views\IncidentMainOutcome_M\Create.cshtml" />
+    <Content Include="Views\IncidentMainOutcome_M\Delete.cshtml" />
+    <Content Include="Views\IncidentMainOutcome_M\Details.cshtml" />
+    <Content Include="Views\IncidentMainOutcome_M\Edit.cshtml" />
+    <Content Include="Views\IncidentMainOutcome_M\Index.cshtml" />
+    <Content Include="Views\IncidentSubOutcome_M\Create.cshtml" />
+    <Content Include="Views\IncidentSubOutcome_M\Delete.cshtml" />
+    <Content Include="Views\IncidentSubOutcome_M\Details.cshtml" />
+    <Content Include="Views\IncidentSubOutcome_M\Edit.cshtml" />
+    <Content Include="Views\IncidentSubOutcome_M\Index.cshtml" />
+    <Content Include="Views\Home\Tasks.cshtml" />
+    <Content Include="Views\Home\RARequest.cshtml" />
+    <Content Include="Views\Home\SAloggedin.cshtml" />
+    <Content Include="Views\Home\Help.cshtml" />
+    <Content Include="Views\RiskRegisters\Create.cshtml" />
+    <Content Include="Views\RiskRegisters\Delete.cshtml" />
+    <Content Include="Views\RiskRegisters\Details.cshtml" />
+    <Content Include="Views\RiskRegisters\Edit.cshtml" />
+    <Content Include="Views\RiskRegisters\Index.cshtml" />
+    <Content Include="Views\RiskRegisters\Report.cshtml" />
+    <Content Include="Views\RiskRegisters\Edit - Copy.cshtml" />
+    <Content Include="Views\Home\Report.cshtml" />
+    <Content Include="Views\Incidents\ReportDraft.cshtml" />
+    <Content Include="Views\Home\ReportTrending.cshtml" />
+    <Content Include="Views\RiskRegisters\RiskSearchPartial.cshtml" />
+    <Content Include="Views\Incidents\HistoryReport.cshtml" />
+    <Content Include="Views\TaskCategory_M\Create.cshtml" />
+    <Content Include="Views\TaskCategory_M\Delete.cshtml" />
+    <Content Include="Views\TaskCategory_M\Details.cshtml" />
+    <Content Include="Views\TaskCategory_M\Edit.cshtml" />
+    <Content Include="Views\TaskCategory_M\Index.cshtml" />
+    <Content Include="Views\TaskPriorities_M\Create.cshtml" />
+    <Content Include="Views\TaskPriorities_M\Delete.cshtml" />
+    <Content Include="Views\TaskPriorities_M\Details.cshtml" />
+    <Content Include="Views\TaskPriorities_M\Edit.cshtml" />
+    <Content Include="Views\TaskPriorities_M\Index.cshtml" />
+    <Content Include="Views\TaskStatus_M\Create.cshtml" />
+    <Content Include="Views\TaskStatus_M\Delete.cshtml" />
+    <Content Include="Views\TaskStatus_M\Details.cshtml" />
+    <Content Include="Views\TaskStatus_M\Edit.cshtml" />
+    <Content Include="Views\TaskStatus_M\Index.cshtml" />
+    <Content Include="Views\Tasks\Create.cshtml" />
+    <Content Include="Views\Tasks\Delete.cshtml" />
+    <Content Include="Views\Tasks\Details.cshtml" />
+    <Content Include="Views\Tasks\Edit.cshtml" />
+    <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\Task_People_T\Create.cshtml" />
+    <Content Include="Views\Task_People_T\Delete.cshtml" />
+    <Content Include="Views\Task_People_T\Details.cshtml" />
+    <Content Include="Views\Task_People_T\Edit.cshtml" />
+    <Content Include="Views\Task_People_T\Index.cshtml" />
+    <Content Include="Views\Tasks\TaskSearchPartial.cshtml" />
+    <Content Include="Views\Tasks\Report.cshtml" />
+    <Content Include="Views\Home\DynamicReports.cshtml" />
+    <Content Include="Views\DynamicReports_M\Create.cshtml" />
+    <Content Include="Views\DynamicReports_M\Delete.cshtml" />
+    <Content Include="Views\DynamicReports_M\Details.cshtml" />
+    <Content Include="Views\DynamicReports_M\Edit.cshtml" />
+    <Content Include="Views\DynamicReports_M\Index.cshtml" />
+    <Content Include="Views\DocumentAccessGroup_M\Create.cshtml" />
+    <Content Include="Views\DocumentAccessGroup_M\Delete.cshtml" />
+    <Content Include="Views\DocumentAccessGroup_M\Details.cshtml" />
+    <Content Include="Views\DocumentAccessGroup_M\Edit.cshtml" />
+    <Content Include="Views\DocumentAccessGroup_M\Index.cshtml" />
+    <Content Include="Views\DocumentCategory_M\Create.cshtml" />
+    <Content Include="Views\DocumentCategory_M\Delete.cshtml" />
+    <Content Include="Views\DocumentCategory_M\Edit.cshtml" />
+    <Content Include="Views\DocumentCategory_M\Index.cshtml" />
+    <Content Include="Views\DocumentCopyLocation_T\Create.cshtml" />
+    <Content Include="Views\DocumentCopyLocation_T\Delete.cshtml" />
+    <Content Include="Views\DocumentCopyLocation_T\Details.cshtml" />
+    <Content Include="Views\DocumentCopyLocation_T\Edit.cshtml" />
+    <Content Include="Views\DocumentCopyLocation_T\Index.cshtml" />
+    <Content Include="Views\DocumentStakeholder_M\Create.cshtml" />
+    <Content Include="Views\DocumentStakeholder_M\Delete.cshtml" />
+    <Content Include="Views\DocumentStakeholder_M\Details.cshtml" />
+    <Content Include="Views\DocumentStakeholder_M\Edit.cshtml" />
+    <Content Include="Views\DocumentStakeholder_M\Index.cshtml" />
+    <Content Include="Views\DocumentStatus_T\Create.cshtml" />
+    <Content Include="Views\DocumentStatus_T\Delete.cshtml" />
+    <Content Include="Views\DocumentStatus_T\Details.cshtml" />
+    <Content Include="Views\DocumentStatus_T\Edit.cshtml" />
+    <Content Include="Views\DocumentStatus_T\Index.cshtml" />
+    <Content Include="Views\DocumentSubCategory_M\Create.cshtml" />
+    <Content Include="Views\DocumentSubCategory_M\Delete.cshtml" />
+    <Content Include="Views\DocumentSubCategory_M\Details.cshtml" />
+    <Content Include="Views\DocumentSubCategory_M\Edit.cshtml" />
+    <Content Include="Views\DocumentSubCategory_M\Index.cshtml" />
+    <Content Include="Views\Documents\Create.cshtml" />
+    <Content Include="Views\Documents\Delete.cshtml" />
+    <Content Include="Views\Documents\Details.cshtml" />
+    <Content Include="Views\Documents\Edit.cshtml" />
+    <Content Include="Views\Documents\Index.cshtml" />
+    <Content Include="Views\RiskAssessors_T\Create.cshtml" />
+    <Content Include="Views\RiskAssessors_T\Delete.cshtml" />
+    <Content Include="Views\RiskAssessors_T\Details.cshtml" />
+    <Content Include="Views\RiskAssessors_T\Edit.cshtml" />
+    <Content Include="Views\RiskAssessors_T\Index.cshtml" />
+    <Content Include="Views\Documents\DocumentSearchPartial.cshtml" />
+    <Content Include="Views\TaskSubCategory_M\Create.cshtml" />
+    <Content Include="Views\TaskSubCategory_M\Delete.cshtml" />
+    <Content Include="Views\TaskSubCategory_M\Details.cshtml" />
+    <Content Include="Views\TaskSubCategory_M\Edit.cshtml" />
+    <Content Include="Views\TaskSubCategory_M\Index.cshtml" />
+    <Content Include="Views\TaskRelation_M\Create.cshtml" />
+    <Content Include="Views\TaskRelation_M\Delete.cshtml" />
+    <Content Include="Views\TaskRelation_M\Details.cshtml" />
+    <Content Include="Views\TaskRelation_M\Edit.cshtml" />
+    <Content Include="Views\TaskRelation_M\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61798</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:62000/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

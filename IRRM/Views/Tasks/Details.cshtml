@@ -1,0 +1,1044 @@
+﻿@model IRRM.Models.TaskIndex_V
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<script src="@Url.Content("~/assets/js/jquery.min.js")"></script>
+<link href="@Url.Content("~/assets/plugins/datatables/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/assets/plugins/datatables/buttons.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/assets/plugins/datatables/dataTables.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+<script>
+
+
+
+
+    function registertask() {
+
+        if (confirm("Make sure all required fields are filled properly, \nOtherwise it will throw error while opening report!\nAre you sure to Register this Task?")) {
+
+            jQuery.ajax({
+                method: "POST",
+                url: "@Url.Content("~/RegisterTask/" + Model.TaskID + "/TR")",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    window.location.reload();
+
+
+                },
+                error: function () {
+                    alert('Unable to register!* ');
+                }
+            });
+        }
+    }
+
+    function deletetask() {
+
+        if (confirm("Are you sure to make this Task Invalid?")) {
+
+            jQuery.ajax({
+                method: "GET",
+                url: "@Url.Content("~/InvalidTask/" + Html.DisplayFor(model => model.TaskID))",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    window.location.href = "@Url.Content("~/Tasks")";
+                },
+                error: function () {
+                    alert('Unable to delete! ');
+                }
+            });
+        }
+    }
+
+
+    function DeletePeople(peopleid) {
+
+        if (confirm("Are you sure to make this Task Invalid?")) {
+
+            jQuery.ajax({
+                method: "GET",
+                url: "@Url.Content("~/TaskDeletePeople/")" + peopleid,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    window.location.reload();
+                },
+                error: function () {
+                    alert('Unable to delete! ');
+                }
+            });
+        }
+    }
+
+
+
+    function SaveOwnerNote() {
+
+
+        if ($('#TaskCostx').val() == '' || $('#StartDatex').val() == '' || $('#DueDatex').val() == '' || $('#AssignedTox').val() == '' || $('#ProviderNamex').val() == '' || $('#OwnerNotecontent').val() == '' || jQuery("#myRange").val() == 0) {
+
+            alert('All Owner related fields are mandatory! Please update to mark the Task Completed.');
+
+            return false;
+        }
+        else {
+            jQuery.ajax({
+                method: "POST",
+                url: "@Url.Content("~/Tasks/OwnerNote/")",
+                data: { OwnerNotes: jQuery("#OwnerNotecontent").val(), TaskID: @Model.TaskID , TaskCost: jQuery("#TaskCostx").val(), StartDate: jQuery("#StartDatex").val(), DueDate: jQuery("#DueDatex").val(), AssignedTo: jQuery("#AssignedTox").val(), ProviderName: jQuery("#ProviderNamex").val(), Progress: jQuery("#myRange").val() },
+                success: function (data) {
+                    window.location.reload();
+                },
+                error: function () {
+                    alert('Unable to save!* ');
+                }
+            });
+        }
+    }
+
+        function SaveFeedback() {
+
+
+        jQuery.ajax({
+            method: "POST",
+            url: "@Url.Content("~/Tasks/Feedback/")",
+            data: { FeedbackType:jQuery("#FeedbackType").val(), Feedbackbox: jQuery("#Feedbackbox").val(), TaskID: @Model.TaskID },
+            success: function (data) {
+                window.location.reload();
+            },
+            error: function () {
+                alert('Unable to save!* ');
+            }
+        });
+    }
+
+    function TaskCompleted() {
+
+      
+
+        if ($('#TaskCostx').val() == '' || $('#StartDatex').val() == '' || $('#DueDatex').val() == '' || $('#AssignedTox').val() == '' || $('#ProviderNamex').val() == '' || $('#OwnerNotecontent').val() == ''|| jQuery("#myRange").val() != 100) {
+
+            alert('All Owner related fields are mandatory and Task progress must be 100%! Please update to mark the Task Completed.');
+
+            return false;
+        }
+        else {
+
+            jQuery.ajax({
+                method: "POST",
+                url: "@Url.Content("~/Tasks/TaskCompleted/")",
+                data: { TaskID: @Model.TaskID },
+                success: function (data) {
+                    window.location.reload();
+                },
+                error: function () {
+                    alert('Unable to save!* ');
+                }
+            });
+        }
+    }
+
+    function TaskClosed() {
+
+
+        jQuery.ajax({
+            method: "POST",
+            url: "@Url.Content("~/Tasks/TaskClosed/")",
+            data: { TaskID: @Model.TaskID },
+            success: function (data) {
+                window.location.reload();
+            },
+            error: function () {
+                alert('Unable to save!* ');
+            }
+        });
+    }
+
+
+
+
+</script>
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <div class="form-group">
+
+                                <div class="col-md-4">
+
+                                    <h3>@Model.TaskNo</h3>
+                                    <br />
+
+                                </div>
+                                @if (ViewBag.roleflag == 0 && Model.Registered == false)
+                                {
+                                    <div class="pull-right">
+                                        <a class="btn btn btn-success " onclick="registertask()">Register Task</a>
+                                        <a class="btn btn btn-danger " onclick="deletetask()">Invalid</a>
+
+                                    </div>
+                                }
+                                @if (Model.TaskStatusID >= 5 && ViewBag.roleflag == 0)
+                                {
+
+                                    <div class="pull-right">
+                                        <a target="_blank" class="btn btn btn-danger" href="@Url.Content("~/Tasks/Report/" + Model.TaskID)">Report</a>
+
+                                    </div>
+                                }
+
+                                @if (ViewBag.OverDue == "Yes")
+                                {
+                                    <br style="clear:both" />
+                                    <div class="col-md-12" style="background-color:red;color:white">
+                                        @ViewBag.OverDueDays day(s) Overdue!
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        @if (Model.Registered == true && ViewBag.roleflag == 0 && Model.TaskStatusID < 6)
+                                        {
+                                            <div class="col-md-12"> <a class="pull-right" data-toggle="modal" data-target="#Edit-@Model.TaskID" style="cursor:pointer"><i title="Edit" class="fa fa-edit" style="color:orangered"></i></a></div>
+                                        }
+
+
+
+
+                                        <div class="col-md-2">
+
+                                            <b>Reference No.</b>
+                                            <br />
+                                            @Model.ReferenceNo
+                                        </div>
+
+
+
+
+
+                                        <div class="col-md-2">
+
+                                            <b>Category</b>
+                                            <br />
+                                            @Model.TaskCategory
+                                        </div>
+
+                                        <div class="col-md-2">
+
+                                            <b>Sub Category</b>
+                                            <br />
+                                            @Model.SubCategory
+                                        </div>
+
+                                        <div class="col-md-2">
+
+                                            <b>Priority</b>
+                                            <br />
+                                            @Model.Priority
+
+
+
+                                        </div>
+
+                                        <div class="col-md-2">
+
+                                            <b>Due Date</b>
+                                            <br />
+                                            @Model.TaskDueDate
+
+
+
+                                        </div>
+
+                                        <div class="col-md-12">
+
+                                            <b>Location</b>
+                                            <br />
+                                            @Model.Location
+
+
+
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="form-group">
+
+                                        <div class="col-md-12">
+
+                                            <b>Details</b>
+                                            <br />
+                                            @Model.Description
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="col-md-2"><b>Status : </b></div>
+                                <div class=" pull-right">
+                                    @if (Model.Registered == true && ViewBag.roleflag == 0 && Model.TaskStatusID == 5)
+                                    {
+                                        <button class="btn btn-danger" type="button" onclick="TaskClosed()">Close Task</button>
+                                    }
+                                </div>
+
+                                <br style="clear:both" />
+
+                                <br style="clear:both" />
+
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Created By</th>
+                                        <th>Created On</th>
+                                    </tr>
+                                    @foreach (var s in ViewBag.Status)
+                                    {
+                                        <tr>
+                                            <td>@s.TaskStatus</td>
+                                            <td>@s.Name</td>
+                                            <td>@s.CreatedOn.ToString("dd-MM-yyyy hh:mm:ss")</td>
+                                        </tr>
+                                    }
+                                </table>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="col-md-3"><b>People : </b></div>
+                                <div class=" pull-right">
+
+                                    @if (ViewBag.roleflag == 0 && Model.Registered == true && Model.TaskStatusID >= 2 && Model.TaskStatusID < 6)
+                                    {
+                                        <a href="#" data-toggle="modal" data-target="#AddPeople" class="btn btn-success">Add People</a>
+                                    }
+
+
+
+                                </div>
+
+                                <br style="clear:both" />
+
+                                <br style="clear:both" />
+
+                                <table class="table table-bordered">
+                                    <tr>
+
+                                        <th>Relation</th>
+                                        <th>People Involved</th>
+                                        <th>Details</th>
+                                        @if (ViewBag.roleflag == 0 && Model.TaskStatusID < 6)
+                                        {
+                                            <th>Modify</th>
+                                        }
+                                    </tr>
+
+                                    @foreach (var ppl in ViewBag.people)
+                                    {
+                                        <tr>
+                                            <td>@ppl.TaskRelation</td>
+                                            <td>@ppl.TaskPeopleInvolved.Replace("(Requires Access)", "").Replace("(No Access Required)", "")</td>
+                                            <td>
+                                                @if (ppl.UserID != null)
+                                                {
+                                                    <span>
+                                                        <b>Name: </b>@ppl.Name2<br />
+                                                        <b>Phone: </b>@ppl.Phone<br />
+                                                        <b>Designation: </b>@ppl.Designation<br />
+                                                    </span>
+
+                                                }
+                                                else
+                                                {
+                                                    <b>Name: </b>@ppl.Name<br />
+                                                    <b>Phone: </b>@ppl.Mobile<br />
+                                                    <b>Identity No: </b>@ppl.IdentityNo<br />
+
+                                                }
+                                            </td>
+                                            @if (ViewBag.roleflag == 0 && Model.TaskStatusID < 6)
+                                            {
+                                                <td style="text-align:center"><i class='fa fa-trash' style='color:red;cursor:pointer' onclick='DeletePeople(@ppl.TaskPeopleID)'></i></td>
+                                            }
+                                        </tr>
+                                    }
+
+                                </table>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div><b>Owner : </b></div>
+                                <div class=" pull-right">
+
+                                    @if ((Model.Registered == true && ViewBag.roleflag == 0 || ViewBag.roleflag == 1) && Model.TaskStatusID < 6)
+                                    {
+                                        <a href="#" data-toggle="modal" data-target="#OwnerNotexx" class="btn btn-info">Details</a>
+                                        if (Model.TaskStatusID == 4)
+                                        {
+                                            <button class="btn btn-danger btn-group" type="button" onclick="TaskCompleted()">Task Completed</button>
+                                        }
+                                    }
+
+                                </div>
+
+                                <br style="clear:both" />
+
+                                <br style="clear:both" />
+
+                                <b>Task Cost</b> @Model.TaskCost
+                                <br />
+                                <b>Start Date</b> @Model.StartDate
+                                <br />
+                                <b>End Date</b> @Model.DueDate
+                                <br />
+                                <b>Progress</b> @Model.Progress %
+                                <br />
+                                <b>Assigned To.</b>
+
+                                @Model.AssignedTo
+                                <br />
+
+                                <b>Provider</b>
+
+                                @Model.ProviderName
+                                <br />
+
+                                <b>Owner Note</b><br />
+                                @Model.OwnerNote
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="col-md-3"><b>Attachments : </b></div>
+                                <div class=" pull-right">
+
+                                    @if (Model.TaskStatusID < 6 && Model.Registered == true)
+                                    {
+                                        <a href="#" data-toggle="modal" data-target="#AddAttachments" class="btn btn-success">Add Attachments</a>
+                                    }
+
+                                </div>
+
+                                <br style="clear:both" />
+
+                                <br style="clear:both" />
+
+
+                                <div id="tblAttachments">
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+
+                        <div class="col-md-12">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <b>Comments</b>
+                                    <div class=" pull-right">
+                                        @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked") && Model.TaskStatusID < 6)
+                                        {
+                                            <a href="#" data-toggle="modal" data-target="#AddComments" class="btn btn-success">Add Comments</a>
+                                        }
+                                    </div>
+
+
+
+                                    @if (ViewBag.Comments.Count != 0)
+                                    {
+                                        foreach (var com in ViewBag.Comments)
+                                        {
+                                            <br style="clear:both" />
+
+
+
+
+
+
+                                            <div class="card" style="border:1px solid #ccc;padding:10px">
+
+                                                <table class="col-md-12">
+                                                    <tr>
+                                                        <td class="col-md-1">
+                                                            <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
+                                                                <img src="/assets/images/users/avatar-1.jpg" alt="user-img" class="img-circle pull-left">
+                                                            </a>
+                                                        </td>
+                                                        <td style="padding:10px 0 0 0">
+                                                            <div class="col-md-2 pull-right">@com.CommentDateTime.ToString("dd MMM yyyy HH:mm:ss") <i class="fa fa-comment pull-right" style="color:gray"></i> </div>
+                                                            <b>
+                                                                @com.Name <br />
+                                                                <span style="font-size:11px">@com.Designation</span>
+                                                            </b><br />
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <p class="col-md-12">@com.Comment</p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+
+                                                <br style="clear:both" />
+                                            </div>
+
+
+
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class=" pull-right">
+                                    @if (Convert.ToString(Html.DisplayFor(model => model.Registered)).Contains("checked") && Model.TaskStatusID >= 5)
+                                    {
+                                        if (Convert.ToInt32(Session["UserID"]) == Model.CreatedUserID)
+                                        {
+                                            <a href="#" data-toggle="modal" data-target="#Feedback" class="btn btn-success">Feedback</a>
+                                        }
+                                    }
+                                </div>
+                                <div class="col-md-12">
+                                    <b>Feedback Type : </b>@Model.FeedbackType
+                                </div>
+
+                                <div class="col-md-12">
+                                    <b>Feedback</b>
+                                    <p>@Model.Feedback</p>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div> <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddAttachments">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+
+                    <h4 class="modal-title">Add Attachments</h4>
+
+                    <br />
+
+                    <form id="frmattachment">
+
+
+
+                        <div class="col-md-12">
+                            <div class="control-label"><b>Document Type</b></div>
+                            <select name="DocumentTypeID" id="DocumentTypeID" class="form-control">
+                                <option value="">Select</option>
+
+                                @foreach (var b in ViewBag.DocumentType)
+                                {
+                                    <option value="@b.DocumentTypeID">@b.DocumentType</option>
+                                }
+                            </select>
+
+                        </div>
+                        <br style="clear:both" /><br />
+                        <div class="col-md-12">
+                            <div class="control-label"><b>Description</b></div>
+                            <input type="text" name="Description" id="Description" class="form-control" />
+
+
+                        </div>
+                        <br style="clear:both" /><br />
+                        <div class="col-md-12">
+                            <div class="control-label"><b>Select</b></div>
+                            <input type="file" name="UploadMedia" id="UploadMedia" class="form-control" />
+
+                        </div>
+                        <br style="clear:both" /><br />
+                        <div class="col-md-12">
+
+                            <div class="control-label "><b>&nbsp;<input type="hidden" value="@Model.TaskID" id="TaskID" name="TaskID" />  </b></div>
+                            <button type="submit" class="btn btn-success">SAVE</button>
+
+                        </div>
+                    </form>
+
+                </div>
+
+                @if (ViewBag.roleflag == 0)
+                {
+                    <script>
+                        jQuery(document).ready(function () {
+                            loadAttachmentAdmin(@Model.TaskID);
+                        });
+                    </script>
+                }
+                else
+                {
+
+                    <script>
+                        jQuery(document).ready(function () {
+                            loadAttachment(@Model.TaskID);
+
+                        });
+                    </script>
+                }
+
+                <script>
+                    
+
+                    jQuery("#frmattachment").submit(function (e) {
+
+                        e.preventDefault();
+                        var athdata = new FormData(this);
+
+                        if (jQuery("#DocumentTypeID").val() == '' || jQuery("#attachdescription").val() == '' || jQuery("#attachfile").val() == '') {
+                            alert('Document Type / Description / File name are mandatory!');
+                        }
+                        else {
+                            jQuery.ajax({
+                                method: "POST",
+                                url: "@Url.Content("~/Tasks/AddAttachment")",
+                                data: athdata,
+                                mimeTypes: "multipart/form-data",
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function (data) {
+                                    window.location.reload();
+
+                                },
+                                error: function () {
+                                    alert("Couldn't Save, check the input values!");
+                                }
+                            });
+                        }
+                    });
+
+
+                    function loadAttachment(TaskID) {
+                        jQuery.ajax({
+                            method: "GET",
+                            url: "@Url.Content("~/TaskViewAttachment/")" + TaskID,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                           success: function (data) {
+                                jQuery("#tblAttachments").children().remove();
+
+                                var str = "<table  class='table table-bordered col-md-12' >";
+                                str += "<tr><th  class='col-md-2'>Document Type</th><th>Description</th><th>File Name</th></tr>";
+                                jQuery.each(data, function (key, value) {
+                                    str += "<tr>" + "<td>" + data[key].DocumentType + "</td><td>" + data[key].Description + "</td><td><a href='@Url.Content("~/Documents/Tasks/")" + data[key].TaskID + "/" + data[key].ActualFileName + "' target='_blank'>" + data[key].FileName + "</a></td></tr>";
+                                });
+                                str += "</table>"
+                                if (data == '') {
+                                }
+                                else {
+                                    jQuery("#tblAttachments").append(str);
+                                }
+
+                            },
+                            error: function () {
+                            }
+                        });
+                    }
+
+
+
+                     function loadAttachmentAdmin(TaskID) {
+                        jQuery.ajax({
+                            method: "GET",
+                            url: "@Url.Content("~/TaskViewAttachment/")" + TaskID,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+                                jQuery("#tblAttachments").children().remove();
+
+                                var str = "<table  class='table table-bordered col-md-12' >";
+                                str += "<tr><th  class='col-md-2'>Document Type</th><th>Description</th><th>File Name</th><th  class='col-md-1'>Action</th></tr>";
+                                jQuery.each(data, function (key, value) {
+                                    str += "<tr>" + "<td>" + data[key].DocumentType + "</td><td>" + data[key].Description + "</td><td><a href='@Url.Content("~/Documents/Tasks/")" + data[key].TaskID + "/" + data[key].ActualFileName + "' target='_blank'>" + data[key].FileName + "</a></td><td ><i class='fa fa-trash' style='color:red;cursor:pointer' onclick=delattachment(" + data[key].TaskDocumentID + "," + data[key].TaskID + ")></i></td></tr>";
+                                });
+                                str += "</table>"
+                                if (data == '') {
+                                }
+                                else {
+                                    jQuery("#tblAttachments").append(str);
+                                }
+
+                            },
+                            error: function () {
+                            }
+                        });
+                    }
+
+
+
+          
+                           function delattachment(TaskAttachmentID, TaskID) {
+                           jQuery.ajax({
+                           method: "GET" ,
+                           url: "@Url.Content("~/DeleteAttachementTask/")" + TaskAttachmentID + "/" + TaskID,
+                           success: function (data) {
+                           window.location.reload();
+                           },
+                           error: function () {
+                           }
+                           });
+                           }
+
+                </script>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+ 
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddComments">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h4 class="modal-title">Add Comment</h4>
+                @using (Html.BeginForm("Comment", "Tasks"))
+                {
+                    <br style="clear:both" />
+                    <div class="col-md-12">
+                        <div class="control-label"><b>Comment</b></div>
+                        <textarea class="form-control" name="Comment" rows="5"></textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="control-label "><b>&nbsp;<input type="hidden" value="@Model.TaskID" id="TaskID" name="TaskID" />  </b></div>
+                        <button type="submit" class="btn btn-success">SAVE</button>
+                    </div>
+                }
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="Edit-@Model.TaskID">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Edit Task</h4>
+
+
+            </div>
+            <div class="modal-body">
+
+                @{
+                    Html.RenderAction("Edit", new { id = Model.TaskID });
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="AddPeople">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <h4 class="modal-title">Add People</h4>
+
+                <br />
+
+                @{
+                    Html.RenderAction("Create", "Task_People_T", new { TaskID = Model.TaskID });
+                }
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="OwnerNotexx">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <h4 class="modal-title">Details</h4>
+                <br style="clear:both" />
+
+
+
+                <b>Task Cost <span style="color:red;">*</span></b>
+
+                <input type="text" name="taskcost" id="TaskCostx" value="@Model.TaskCost" class="form-control" required />
+
+
+                <br style="clear:both" />
+                <b>Start Date <span style="color:red;">*</span></b>
+
+
+
+
+                <input type="datetime-local" name="startdate" id="StartDatex" value="@(Model.StartDate != null ? Convert.ToDateTime(Model.StartDate).ToString("yyyy-MM-ddThh:mm:ss"):"")" class="form-control" required />
+                <br style="clear:both" />
+
+
+                <b>End Date <span style="color:red;">*</span></b>
+                <input type="datetime-local" name="duedate" id="DueDatex" value="@(Model.StartDate != null ? Convert.ToDateTime(Model.StartDate).ToString("yyyy-MM-ddThh:mm:ss"):"")" class="form-control" required />
+                <br style="clear:both" />
+
+
+
+                <b>Progress <span style="color:red;">*</span></b>
+
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="100" class="slider" id="myRange" name="myRange" required>
+                    <p><span id="demo"></span> %</p>
+                </div>
+
+
+
+
+
+                <b>Assigned To <span style="color:red;">*</span></b>
+                <select name="assignedto" class="form-control" id="AssignedTox" required>
+                    <option value="">Select</option>
+                    <option @(Model.AssignedTo == "Internal" ? "selected" : "") value="Internal">Internal</option>
+                    <option @(Model.AssignedTo == "External" ? "selected" : "") value="External">External</option>
+                </select>
+
+                <br style="clear:both" />
+                <b>Provider Name <span style="color:red;">*</span></b>
+
+
+                <input type="text" name="providername" id="ProviderNamex" value="@Model.ProviderName" class="form-control" required />
+
+
+
+                <br style="clear:both" />
+                <b>Owner Note <span style="color:red;">*</span></b>
+
+
+                <textarea class="form-control" id="OwnerNotecontent" rows="3" required>@Model.OwnerNote</textarea><br />
+                <button class="btn btn-info" type="button" onclick="SaveOwnerNote()">Save</button>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="Feedback">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <h4 class="modal-title">Feedback</h4>
+
+
+                <label>Feedback Type</label>
+                <select name="FeedbackType" id="FeedbackType" required class="form-control">
+                    <option value="">Select</option>
+                    <option @(Model.FeedbackType == "Satisfactory" ? "selected" : "") value="Satisfactory">Satisfactory</option>
+                    <option  @(Model.FeedbackType == "UnSatisfactory" ? "selected" : "")  value="UnSatisfactory">UnSatisfactory</option>
+                </select>
+                <br />
+                <textarea class="form-control" id="Feedbackbox" rows="3">@Model.Feedback</textarea><br />
+                <button class="btn btn-info" type="button" onclick="SaveFeedback()">Save</button>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@if (Model.Progress == null)
+{
+    <script>
+        document.getElementById("myRange").value = "0";
+    </script>
+
+}
+else
+{
+    <script>
+    document.getElementById("myRange").value = "@Model.Progress";
+    </script>
+}
+
+<script>
+
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    }
+
+
+ 
+
+
+</script>

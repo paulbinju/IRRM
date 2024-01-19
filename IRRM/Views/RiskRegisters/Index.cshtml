@@ -1,0 +1,237 @@
+﻿ 
+
+@{
+    ViewBag.Title = "Index";
+}
+ 
+<style>
+    .form-control {
+        width: 100%;
+    }
+
+    td, th {
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+
+    .Open {
+        background-color: #ebe0ff;
+    }
+
+    .Review {
+        background-color: lightyellow;
+    }
+
+    .Reassessed {
+        background-color: #e5fedb;
+    }
+
+    .Closed {
+        background-color: #ffffff;
+    }
+
+ 
+</style>
+
+ 
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-6">Risk Register - @ViewBag.riskreg.Count</h2>
+                            <a class="btn btn btn-success pull-right" href="@Url.Content("~/RiskRegisters/Create")">Create Proactive Risk Assessment</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            
+                            @{
+                                    Html.RenderAction("RiskSearchPartial");
+                                }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body" style="overflow-x:scroll;height:500px;">
+                                <div class="col-md-12">
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Open">Open</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Review">Review</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Reassessed">Reassessed</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Closed">Closed</div>
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+
+
+                                <table class="table table-bordered" style="font-size:11px;">
+                                    <tr>
+
+                                        <th style="width:150px;">
+                                            Risk Register No
+                                        </th>
+
+                                        <th>
+                                            Proactive 
+                                        </th>
+                                        <th>
+                                            Reference No.
+                                        </th>
+                                        <th>
+                                            Risk Owner
+                                        </th>
+                                        <th>
+                                            Risk Status
+                                        </th>
+                                        <th>
+                                            Risk Descriptor
+                                        </th>
+
+
+                                        <th>
+                                             Adequacy 
+                                        </th>
+                                        <th>
+                                            RA Rating
+                                        </th>
+                                        <th>
+                                            RA Risk Level
+                                        </th>
+                                        <th>
+                                            RR Rating
+                                        </th>
+                                        <th>
+                                            RR Risk Level
+                                        </th>
+
+                                        <th>
+                                            Risk Category
+                                        </th>
+                                        <th>
+                                            Risk Cost
+                                        </th>
+                                        <th>
+                                            Risk Location
+                                        </th>
+                                        <th>
+                                            Risk Strategy
+                                        </th>
+                                      
+                                        <th>
+                                            Date
+                                        </th>
+                                        <th>
+                                            Description
+                                        </th>
+
+                                    </tr>
+
+                                    @foreach (var item in ViewBag.riskreg)
+                                    {
+                                <tr>
+
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.RiskRegisterNo
+                                    </td>
+
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @(item.Proactive == true ? "Yes" : "No")
+                                    </td>
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.ReferenceNo
+                                    </td>
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.RiskOwner
+                                    </td>
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.RiskKeyStatus
+                                    </td>
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.RiskDescriptor
+                                    </td>
+
+
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.Adequacy
+                                    </td>
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.RARating
+                                    </td>
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.RARiskLevel
+                                    </td>
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.RRRating
+                                    </td>
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.RRRiskLevel
+                                    </td>
+
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.RiskCategory
+                                    </td>
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.RiskCost
+                                    </td>
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.Location
+                                    </td>
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.RiskStrategy
+                                    </td>
+
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.RiskRegisteredDate
+                                    </td>
+
+                                    <td class="@item.RiskKeyStatus" onclick="window.location.href='@Url.Content("~/RiskRegisters/Edit/"+ item.RiskRegisterID)'" style="cursor:pointer">
+                                        @item.Description
+                                    </td>
+
+                                </tr>
+                                    }
+
+                                </table>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

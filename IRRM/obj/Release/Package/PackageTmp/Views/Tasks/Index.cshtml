@@ -1,0 +1,214 @@
+﻿ 
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+    <style>
+        .form-control {
+            width: 100%;
+        }
+
+        td, th {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .Triggered {
+            background-color: #ebe0ff;
+        }
+
+        .Registered {
+            background-color: lightyellow;
+        }
+
+        .Assigned {
+            background-color: #e5fedb;
+        }
+
+        .InProgress {
+            background-color: #b1f8ab;
+        }
+
+        .Completed {
+            background-color: #dbf2f2;
+        }
+
+        .Re-Opened {
+            background-color: #fbc5ad;
+        }
+
+        .Overdue {
+            background-color: red;
+            color: white;
+        }
+    </style>
+
+
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-6">Task Register -  @ViewBag.tasks.Count</h2>
+                            <a class="btn btn btn-success pull-right" href="@Url.Content("~/Tasks/Create/0/0")">Create Task</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+
+                            @{
+                                Html.RenderAction("TaskSearchPartial");
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body" style="overflow-x:scroll;height:500px;">
+                                <div class="col-md-12">
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Overdue">Overdue</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Triggered">Triggered</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Registered">Registered</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Assigned">Assigned</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="InProgress">InProgress</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Completed">Completed</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd">Closed</div>
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+
+
+                                <table class="table table-bordered" style="font-size:11px;">
+                                    <tr>
+
+                                        <th style="width:150px;">
+                                            Task Register No
+                                        </th>
+                                        <th>
+                                            Registered On
+                                        </th>
+                                        <th>
+                                            Reference No.
+                                        </th>
+                                        <th>
+                                            Task Owner
+                                        </th>
+                                        <th>
+                                            Assigned To
+                                        </th>
+                                        <th>
+                                            Task Cost
+                                        </th>
+
+                                        <th>
+                                            Category
+                                        </th>
+                                        <th>
+                                            Sub Category
+                                        </th>
+                                        <th>
+                                            Location
+                                        </th>
+                                        <th>
+                                            Priority
+                                        </th>
+                                        <th>
+                                            Created By
+                                        </th>
+
+
+                                    </tr>
+
+
+
+                                    @foreach (var item in ViewBag.tasks)
+                                    {
+                                <tr>
+
+                                    <td class="@item.TaskStatus.Replace(" ","") @(item.TaskStatusID < 5 && item.TaskDueDate <= DateTime.UtcNow.AddHours(3) ? "Overdue" : "")" onclick="window.location.href='@Url.Content("~/Tasks/Details/"+ item.TaskID)'" style="cursor:pointer">
+                                        @item.TaskNo
+                                    </td>
+                                    <td class="@item.TaskStatus.Replace(" ","") " onclick="window.location.href='@Url.Content("~/Tasks/Details/"+ item.TaskID)'" style="cursor:pointer">
+                                        @item.Registeredon
+                                    </td>
+
+                                    <td class="@item.TaskStatus.Replace(" ","") " onclick="window.location.href='@Url.Content("~/Tasks/Details/"+ item.TaskID)'" style="cursor:pointer">
+                                        @item.ReferenceNo
+                                    </td>
+                                    <td class="@item.TaskStatus.Replace(" ","")"  onclick="window.location.href='@Url.Content("~/Tasks/Details/"+ item.TaskID)'" style="cursor:pointer">
+                                        @item.Owner
+                                    </td>
+                                    <td class="@item.TaskStatus.Replace(" ","") " onclick="window.location.href='@Url.Content("~/Tasks/Details/"+ item.TaskID)'" style="cursor:pointer">
+                                        @item.AssignedTo
+                                    </td>
+                                    <td class="@item.TaskStatus.Replace(" ","") " onclick="window.location.href='@Url.Content("~/Tasks/Details/"+ item.TaskID)'" style="cursor:pointer">
+                                        @item.TaskCost
+                                    </td>
+
+
+
+                                    <td class="@item.TaskStatus.Replace(" ","") " onclick="window.location.href='@Url.Content("~/Tasks/Details/"+ item.TaskID)'" style="cursor:pointer">
+                                        @item.TaskCategory
+                                    </td>
+                                    <td class="@item.TaskStatus.Replace(" ","") " onclick="window.location.href='@Url.Content("~/Tasks/Details/"+ item.TaskID)'" style="cursor:pointer">
+                                        @item.SubCategory
+                                    </td>
+                                    <td class="@item.TaskStatus.Replace(" ","") " onclick="window.location.href='@Url.Content("~/Tasks/Details/"+ item.TaskID)'" style="cursor:pointer">
+                                        @item.Location
+                                    </td>
+                                    <td class="@item.TaskStatus.Replace(" ","") " onclick="window.location.href='@Url.Content("~/Tasks/Details/"+ item.TaskID)'" style="cursor:pointer">
+                                        @item.Priority
+
+                                    </td>
+                                    <td class="@item.TaskStatus.Replace(" ","") " onclick="window.location.href='@Url.Content("~/Tasks/Details/"+ item.TaskID)'" style="cursor:pointer">
+                                        @item.TriggeredBy
+                                    </td>
+
+                                </tr>
+                                    }
+
+                                </table>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

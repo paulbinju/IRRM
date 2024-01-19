@@ -1,0 +1,85 @@
+﻿@model IRRM.Models.TaskSubCategory_M
+
+@{
+    Layout = null;
+}
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "editform" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.TaskSubCategoryID)
+
+
+        <div class="form-group">
+            <div class="control-label col-md-2"><b>Category</b></div>
+            <div class="col-md-10">
+                <select name="TaskCategoryID" class="form-control" required>
+                    <option value="">Select</option>
+                    @foreach (var sc in ViewBag.TaskCategory)
+                    {
+                        <option @(sc.TaskCategoryID == Model.TaskCategoryID ? "selected": "") value="@sc.TaskCategoryID">@sc.TaskCategory</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="control-label col-md-2"><b>Sub Category</b></div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubCategory, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubCategory, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class=" ">
+                    @Html.CheckBoxFor(model => model.Active, new { @checked = "checked" })
+                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-danger" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $("#editform").submit(function (e) {
+            e.preventDefault();
+            var formdata = new FormData(this);
+
+          //  alert($("#DFormID").val());
+            $.ajax({
+                method: "POST",
+                url: "@Url.Content("~/TaskSubCategory_M/Edit")",
+                data: formdata,
+                mimeTypes: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                   // alert('Successfully deleted!');
+                    window.location.href = "@Url.Content("~/TaskSubCategory_M")";
+                },
+                error: function () {
+                    alert('Error');
+                }
+            });
+        });
+    });
+</script>

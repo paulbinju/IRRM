@@ -1,0 +1,218 @@
+﻿@model IEnumerable<IRRM.Models.Incident>
+
+ 
+
+<link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<link href="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" rel="stylesheet" type="text/css" />
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+
+
+      @{  ViewBag.Title = "Index";
+
+          }
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-6">Events - @ViewBag.Incidents.Count</h2>
+                            @{
+                                Html.RenderAction("SearchPartial");
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function getincidentsubtypes() {
+                $.ajax({
+                    method: "GET",
+                    url: "@Url.Content("~/GetIncidentSubTypes/")" + $('#IncidentTypeID').val(),
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        $("#IncidentSubTypeID").children('option:not(:first)').remove();
+                        //  $("#LocationID").append("<option value='' >Select</option>");
+                        $.each(data, function (key, value) {
+                            $("#IncidentSubTypeID").append("<option value='" + data[key].IncidentSubTypeID + "' >" + data[key].IncidentSubType + "</option>");
+                        });
+
+                    },
+                    error: function () {
+                    }
+                });
+            }
+        </script>
+
+        <div class="page-content-wrapper ">
+           
+         
+
+            <div class="container">
+                <style>
+                    td, th {
+                        padding: 10px;
+                        border: 1px solid #ccc;
+                    }
+
+                    .Triggered {
+                        background-color: #ebe0ff;
+                    }
+
+                    .Registered {
+                        background-color: lightyellow;
+                    }
+
+                    .Assigned {
+                        background-color: #e5fedb;
+                    }
+
+                    .InProgress {
+                        background-color: #b1f8ab;
+                    }
+
+                    .Completed {
+                        background-color: #dbf2f2;
+                    }
+
+                    .Re-Opened {
+                        background-color: #fbc5ad;
+                    }
+
+                    .Overdue {
+                        background-color: red;
+                        color: white;
+                    }
+                </style>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body" >
+                                <div class="col-md-12">
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Overdue">Overdue</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Triggered">Triggered</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Registered">Registered</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Assigned">Assigned</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="InProgress">InProgress</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Completed">Completed</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd" class="Re-Opened">Reopened</div>
+                                    <div style="float:left;margin-right:5px;font-size:10px;padding:3px 10px;border:1px solid #dddddd">Closed</div>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="col-md-12" style="overflow:scroll;height:500px;">
+
+
+                                    <table style="width:100%;border-width:10px;font-size:11px">
+                                        <thead>
+                                            <tr>
+                                                <th>Event Number</th>
+                                                <th>Regd. Date & Time</th>
+                                                <th>Incident Type</th>
+                                                <th>Incident Sub Type</th>
+                                                
+                                                <th>Location</th>
+                                                <th>Triggered Date & Time</th>
+                                                <th>Registered Date & Time</th>
+                                                <th>Status</th>
+                                                <th>Assigned To</th>
+                                                <th>Assigned By</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.Incidents)
+                                            {
+                                                if (Convert.ToInt32(Session["RoleID"]) == 1)
+                                                {
+                                                    <tr>
+                                                        <td class="@item.IncidentStatus.Replace(" ", "") @(item.IncidentStatusID < 5 && item.InvestigationDueDate <= DateTime.UtcNow.AddHours(3) ? "Overdue" : "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.IncidentNo</td>
+                                                        <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.RegisteredOn</td>
+                                                        <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.IncidentType</td>
+                                                        <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.IncidentSubType</td>
+                                                        <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.Location</td>
+                                                        <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.IncidentCreatedDate</td>
+                                                        <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.RegisteredOn</td>
+                                                        <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.IncidentStatus</td>
+                                                        <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.AssignedTo</td>
+                                                        <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.AssignedBy</td>
+                                                    
+                                                    </tr>
+                                                }
+                                                else // not admin
+                                                {
+                                                    if (((item.incidentrelationid == 1 && item.relationuserid == Convert.ToInt32(Session["UserID"])) || (item.incidentrelationid == 2 && item.relationuserid == Convert.ToInt32(Session["UserID"])) || (item.incidentrelationid == 7 && item.relationuserid == Convert.ToInt32(Session["UserID"]))) || (Convert.ToInt32(Session["UserID"]) == item.CreatedUserID && item.IncidentStatusID == 6)|| (Convert.ToInt32(Session["UserID"]) == item.CreatedUserID && item.CreatorCanComment == true))
+                                                    {
+                                                        <tr>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "") @(item.IncidentStatusID < 5 && item.InvestigationDueDate <= DateTime.UtcNow.AddHours(3) ? "Overdue" : "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.IncidentNo</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.RegisteredOn</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.IncidentType</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.IncidentSubType</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.Location</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.IncidentCreatedDate</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.RegisteredOn</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.IncidentStatus</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.AssignedTo</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" title="Click to view the details" style="cursor:pointer" onclick="window.location.href='@Url.Content("~/Incidents/Details/" + item.IncidentID)'">@item.AssignedBy</td>
+
+                                                        </tr>
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "") @(item.IncidentStatusID < 5 && item.InvestigationDueDate <= DateTime.UtcNow.AddHours(3) ? "Overdue" : "")" >@item.IncidentNo</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" >@item.RegisteredOn</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" >@item.IncidentType</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" >@item.IncidentSubType</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" >@item.Location</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" >@item.IncidentCreatedDate</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" >@item.RegisteredOn</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" >@item.IncidentStatus</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" >@item.AssignedTo</td>
+                                                            <td class="@item.IncidentStatus.Replace(" ", "")" >@item.AssignedBy</td>
+                                                        </tr>
+                                                    }
+
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                    <br />
+                                    <br />
+                                    <br />
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

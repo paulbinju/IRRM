@@ -1,0 +1,90 @@
+﻿@model IRRM.Models.RiskSeverity_M
+
+@{
+    Layout = null;
+}
+ 
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RiskSeverity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiskSeverity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RiskDescriptor_M.RiskDescriptor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiskDescriptor_M.RiskDescriptor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RiskScore_M.RiskScore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiskScore_M.RiskScore)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "delform-" + Html.DisplayFor(model => model.RiskSeverityID) }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    }
+
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#delform-"+@Html.DisplayFor(model => model.RiskSeverityID)).submit(function (e) {
+            e.preventDefault();
+            var formdata = new FormData(this);
+
+          //  alert($("#DFormID").val());
+            $.ajax({
+                method: "POST",
+                url: "@Url.Content("~/RiskSeverity_M/Delete/"+ Html.DisplayFor(model => model.RiskSeverityID))",
+                data: formdata,
+                mimeTypes: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                   // alert('Successfully deleted!');
+                    window.location.href = "@Url.Content("~/RiskSeverity_M")";
+                },
+                error: function () {
+                    alert('Unable to delete, try editing instead!');
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,34 @@
+﻿@model IRRM.Models.DynamicForm_Control
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DynamicForm_Control</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DFormID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DFormID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DControlID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DControlID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DFormControlID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

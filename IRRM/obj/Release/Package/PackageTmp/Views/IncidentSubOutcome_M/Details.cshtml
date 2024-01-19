@@ -1,0 +1,42 @@
+﻿@model IRRM.Models.IncidentSubOutcome_M
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>IncidentSubOutcome_M</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentSubOutcome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentSubOutcome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnswerType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnswerType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentMainOutcome_M.IncidentMainOutcome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncidentMainOutcome_M.IncidentMainOutcome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IncidentSubOutcomeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

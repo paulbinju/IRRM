@@ -1,0 +1,48 @@
+﻿@model IRRM.Models.RiskAssessors_T
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>RiskAssessors_T</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.RiskID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.RiskID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Users_M.UserName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Users_M.UserName)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

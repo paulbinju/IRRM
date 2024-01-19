@@ -1,0 +1,148 @@
+﻿@using (Html.BeginForm("Search", "Incidents"))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+
+                    <div class="col-md-2">
+                        <div class="control-label "><b>Event Type  </b></div>
+                        
+                        <select name="EventTypeID" class="form-control">
+                            <option value="0">Select-all</option>
+                            @foreach (var et in ViewBag.EventTypeID)
+                            {
+                                <option @(et.EventTypeID == Convert.ToInt32(Request["EventTypeID"]) ? "selected" : "") value="@et.EventTypeID">@et.EventType</option>
+                            }
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Incident Date From  </b></div>
+                        <input type="date" name="IncidentDateFrom" class="form-control" value="@Request["IncidentDateFrom"]" />
+                    </div>
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Incident Date To  </b></div>
+                        <input type="date" name="IncidentDateTo" class="form-control"  value="@Request["IncidentDateTo"]"/>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Incident Type</b></div>
+                        <select id="IncidentTypeID" name="IncidentTypeID" class="form-control" onchange="getincidentsubtypes()">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.IncidentTypeID)
+                            {
+                                <option @(itp.IncidentTypeID == Convert.ToInt32(Request["IncidentTypeID"]) ? "selected" : "")  value="@itp.IncidentTypeID">@itp.IncidentType</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Incident Sub Type</b></div>
+                        <select name="IncidentSubTypeID" id="IncidentSubTypeID" class="form-control">
+                            <option value="0">Select</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Status</b></div>
+                        <select name="StatusID" id="StatusID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.StatusID)
+                            {
+                                <option @(itp.IncidentStatusID == Convert.ToInt32(Request["StatusID"]) ? "selected" : "")   value="@itp.IncidentStatusID">@itp.IncidentStatus</option>
+                            }
+                        </select>
+
+                    </div>
+                    <br style="clear:both" />
+                    <br style="clear:both" />
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Main Root Cause</b></div>
+                        <select name="MainRootCauseID" id="MainRootCauseID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.IncidentRootCause)
+                            {
+                                <option @(itp.IncidentMainRootCauseID == Convert.ToInt32(Request["MainRootCauseID"]) ? "selected" : "")    value="@itp.IncidentMainRootCauseID">@itp.IncidentMainRootCause</option>
+                            }
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Sub Root Cause</b></div>
+                        <select name="SubRootCauseID" id="SubRootCauseID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.IncidentSubRootCause)
+                            {
+                                <option  @(itp.IncidentSubRootCauseID == Convert.ToInt32(Request["SubRootCauseID"]) ? "selected" : "")   value="@itp.IncidentSubRootCauseID">@itp.IncidentSubRootCause</option>
+                            }
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>People Involved</b></div>
+                        <select name="IncidentPeopleInvolved" id="IncidentPeopleInvolved" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.IncidentPeopleInvolved)
+                            {
+                                <option @(itp.IncidentPeopleInvolvedID == Convert.ToInt32(Request["IncidentPeopleInvolved"]) ? "selected" : "")    value="@itp.IncidentPeopleInvolvedID">@itp.IncidentPeopleInvolved</option>
+                            }
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Priority</b></div>
+                        <select name="PriorityID" id="PriorityID" class="form-control">
+                            <option value="0">Select</option>
+
+                            @foreach (var itp in ViewBag.IncidentPriority)
+                            {
+                                <option  @(itp.IncidentPriorityID == Convert.ToInt32(Request["PriorityID"]) ? "selected" : "")  value="@itp.IncidentPriorityID">@itp.Priority</option>
+                            }
+                        </select>
+
+                    </div>
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Harm Score</b></div>
+                        <select name="HarmScoreID" id="HarmScoreID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.IncidentHarmScore)
+                            {
+                                <option @(itp.IncidentHarmScoreID == Convert.ToInt32(Request["HarmScoreID"]) ? "selected" : "") value="@itp.IncidentHarmScoreID">@itp.IncidentHarmScore</option>
+                            }
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="col-md-2">
+                        <div class="control-label"><b>Feedback</b></div>
+                        <select name="FeedbackTypeID" id="FeedbackTypeID" class="form-control">
+                            <option value="0">Select</option>
+                            @foreach (var itp in ViewBag.FeedbackTypeID)
+                            {
+                                <option @(itp.IncidentFeedbackTypeID == Convert.ToInt32(Request["FeedbackTypeID"]) ? "selected" : "")  value="@itp.IncidentFeedbackTypeID">@itp.IncidentFeedbackType</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-12"> </div>
+                        <div class="control-label"><b>&nbsp;&nbsp;</b></div>
+                        <div class="col-md-1">
+                            <input type="submit" class="btn btn-danger" value="SEARCH" />
+                        </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-warning" href="@Url.Content("~/Incidents")">CLEAR</a>
+                        </div>
+                   
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

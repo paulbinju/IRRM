@@ -1,0 +1,154 @@
+﻿@model IRRM.Models.Document
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Document</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.DocumentRefID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DocumentRefID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ReferenceNo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ReferenceNo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DocCategoryID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DocCategoryID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DocSubCategoryID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DocSubCategoryID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.StakeholderID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.StakeholderID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FileAttached)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FileAttached)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ValidFrom)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ValidFrom)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ValidUpto)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ValidUpto)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DocumentManager)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DocumentManager)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LocationID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LocationID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SpecifyLocation)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SpecifyLocation)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CurrentStatus)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CurrentStatus)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatorID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CreatorID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.DocumentID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

@@ -1,0 +1,264 @@
+﻿@model IRRM.Models.Incident
+
+
+<style>
+    .form-control {
+        width: 100%;
+    }
+</style>
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h2 class="col-md-6">Report Incident</h2>
+
+                            <a class="btn btn btn-danger pull-right" onclick="registerincident()"  >Register Incident</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function registerincident() {
+
+                if (confirm("Are you sure to Register this Incident?")) {
+
+                    $.ajax({
+                        method: "GET",
+                        url: "@Url.Content("~/Incidents/Register/" + Html.DisplayFor(model => model.IncidentID))",
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            window.location.href = "@Url.Content("~/Incidents/Details/" + Html.DisplayFor(model => model.IncidentID))";
+                        },
+                        error: function () {
+                            alert('Unable to register! ');
+                        }
+                    });
+                }
+            }
+        </script>
+
+        <div class="page-content-wrapper ">
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="col-md-12">
+                                     
+
+                                    <div class="col-md-3">
+                                        <b>Confidential: </b>  @Html.DisplayFor(model => model.Confidential)
+                                    </div>
+
+
+
+                                  
+
+                                    <div class="col-md-3">
+                                        <b>Created On</b>:  @Html.DisplayFor(model => model.IncidentCreatedDate)
+                                    </div>
+
+ 
+                                    <div class="col-md-3">
+                                        <b>Created by :</b>  @Html.DisplayFor(model => model.Users_M.UserName)
+                                    </div>
+
+                              
+
+                                    <div class="col-md-2">
+                                        <b>Location</b>: @Html.DisplayFor(model => model.Location_M.Location)
+                                    </div>
+                                    <br />
+                                    <br />
+
+
+
+
+
+                                     
+
+                                    <div class="col-md-3">
+                                        <b>Registered :</b>  @Html.DisplayFor(model => model.Registered)
+                                    </div>
+
+                               
+
+                                    <div class="col-md-3">
+                                        <b>Registered On :</b> @Html.DisplayFor(model => model.RegisteredOn)
+                                    </div>
+
+                             
+
+                                    <div class="col-md-3">
+                                        <b>Incident No : </b>  
+                                        
+                                       
+                                                                                   
+                                        @(Model.IncidentNo != null? "IR-"+ Html.DisplayFor(model => model.IncidentNo) : "")
+                                    </div>
+                                  
+
+                                
+                                    <br />
+                                    <br />
+
+                                   
+
+                                    <div class="col-md-3">
+                                        <b>Incident Type: </b>@Html.DisplayFor(model => model.IncidentTypes_M.IncidentType)
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <b> Incident Sub Type: </b>@Html.DisplayFor(model => model.IncidentSubTypes_M.IncidentSubType)
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+
+
+
+                                <div class="col-md-12">
+                                    <b>Summary</b>
+                                </div>
+
+                                <div class="col-md-12">
+                                    @Html.DisplayFor(model => model.Description)
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                                <div class="col-md-12">
+                                    <b>Details</b>
+                                </div>
+
+                                <div class="col-md-12">
+                                    @Html.DisplayFor(model => model.ActionTaken)
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+
+                    
+
+                                <div class="col-md-12">
+                                     <b>Investigator Report </b>
+                                </div>
+
+                                <div class="col-md-12">
+                                    @Html.DisplayFor(model => model.InvestigatorReport)
+                                </div>
+                                <br />
+                                <br />
+                                <div class="col-md-12">
+                                    <b>Investigation Comments </b>
+                                </div>
+
+                                <div class="col-md-12">
+                                    @Html.DisplayFor(model => model.InvestigationComments)
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+
+                                <div class="col-md-12">
+                                    <b>Feedback Type</b>
+                                </div>
+
+                                <div class="col-md-12">
+                                    @Html.DisplayFor(model => model.IncidentFeedbackType_M.IncidentFeedbackType)
+                                </div>
+                                <br />
+                                <br />
+                                <div class="col-md-12">
+                                    <b>Feedback Comments</b>
+                                </div>
+
+                                <div class="col-md-12">
+                                    @Html.DisplayFor(model => model.FeedbackComments)
+                                </div>
+
+
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+ 
+
+ 
+
+
+
